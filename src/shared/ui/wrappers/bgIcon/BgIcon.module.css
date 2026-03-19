@@ -1,0 +1,6 @@
+.bg-icon {
+	aspect-ratio: 1/1;
+	border-radius: 6px;
+	padding: 9.5px;
+	background-color: var(--button-shaded);
+}
