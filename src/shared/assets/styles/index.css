@@ -58,13 +58,6 @@
 	--running-text-paragraph-16-reg: 400 var(--fs-running-text-paragraph-16-reg) /
 		1.7143 'Inter';
 }
-.dark {
-	/* content */
-
-	/* backgroung */
-
-	/* shadow  */
-}
 
 /* connect fonts */
 /* Inter */
@@ -106,24 +99,24 @@
 
 /* my reset */
 h1 {
-	font-family: 'Inter';
-	font-size: 28px;
-	font-style: normal;
-	font-weight: 600;
-	line-height: normal;
+	font: var(--heading-36-bold);
+	letter-spacing: -2.2%;
+	color: var(--text-primary);
+}
+h2 {
+	font: var(--heading-24-sb);
+	letter-spacing: -1.9%;
 	color: var(--text-primary);
 }
 h3 {
-	/* font: var(--header-m); */
+	font: var(--heading-18-sb);
+	letter-spacing: -1.4%;
+	color: var(--text-primary);
 }
-h5 {
-	/* color: var(--text-primary);
-
-	font-family: 'Inter';
-	font-size: 1.5rem;
-	font-style: normal;
-	font-weight: 600;
-	line-height: normal; */
+h4 {
+	font: var(--heading-16-sb);
+	letter-spacing: 0.6%;
+	color: var(--text-primary);
 }
 a {
 	cursor: pointer;

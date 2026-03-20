@@ -1,3 +1,6 @@
+import { Link } from 'react-router';
+
+import { ROUTES } from '~~>shared/model/routes';
 import { ButtonBase } from '~~>shared/ui/buttons/inex';
 import {
 	Bell,
@@ -18,7 +21,9 @@ const Header = () => {
 	return (
 		<div className={styles.header}>
 			<div className={styles['logo-wrapper']}>
-				<LogoHeader></LogoHeader>
+				<Link to={ROUTES.HOME}>
+					<LogoHeader></LogoHeader>
+				</Link>
 				<UIText14SB>Сервис осознанного потребления</UIText14SB>
 			</div>
 			<div className={styles.panel}>
@@ -32,7 +37,9 @@ const Header = () => {
 				<Heart />
 				<Bell />
 				<Chat />
-				<Avatar shape="circle" size="medium" src={img}></Avatar>
+				<Link to={ROUTES.PROFILE}>
+					<Avatar shape="circle" size="medium" src={img}></Avatar>
+				</Link>
 			</div>
 		</div>
 	);

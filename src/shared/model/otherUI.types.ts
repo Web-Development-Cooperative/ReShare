@@ -1,8 +1,11 @@
 import type {
 	FC,
+	HTMLAttributes,
 	HtmlHTMLAttributes,
 	ImgHTMLAttributes,
 	PropsWithChildren,
+	ReactNode,
+	RefAttributes,
 } from 'react';
 
 type TagColor = 'white' | 'green' | 'blue';
@@ -24,4 +27,10 @@ type AvatarProps = FC<
 	PropsWithChildren<ImgHTMLAttributes<HTMLImageElement> & OtherAvatarProps>
 >;
 
-export { type TagProps, type AvatarProps };
+type UniListProps<T> = HTMLAttributes<HTMLUListElement> &
+	RefAttributes<HTMLUListElement> & {
+		items: T[];
+		renderItem: (_item: T, _index: number) => ReactNode;
+	};
+
+export { type TagProps, type AvatarProps, type UniListProps };

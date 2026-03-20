@@ -11,3 +11,4 @@ export { Leaves } from './leaves/Leaves';
 export { Turnover } from './turnover/Turnover';
 export { Leaf } from './leaf/Leaf';
 export { Asterisk } from './asterisk/Asterisk';
+export { Star } from './star/Start';
