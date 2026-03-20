@@ -7,7 +7,7 @@ const ButtonBase: ButtonBaseProps = ({
 	className,
 	children,
 	size = 'large',
-	withBorder = true,
+	withBorder = false,
 	color = 'transparent',
 	...props
 }) => {

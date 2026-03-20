@@ -1,0 +1,24 @@
+.header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	column-gap: 16px;
+
+	width: 100%;
+	padding: 12px 32px;
+	border-bottom: 1px solid var(--border-default);
+}
+.logo-wrapper,
+.panel {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-self: flex-start;
+	column-gap: 4px;
+
+	& > * {
+		margin: 0 8px;
+	}
+}

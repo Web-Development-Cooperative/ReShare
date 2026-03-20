@@ -4,6 +4,7 @@ import { createBrowserRouter, Navigate, Outlet } from 'react-router';
 import { ROUTES } from '~~>shared/model/routes';
 import { Limbo } from '~~>shared/ui/wrappers';
 
+const HeaderLayout = lazy(() => import('~~>app/layouts/headerLayout'));
 const LoginPage = lazy(() => import('~~>pages/login'));
 const LandingPage = lazy(() => import('~~>pages/landing'));
 
@@ -28,8 +29,7 @@ const router = createBrowserRouter([
 		path: ROUTES.HOME,
 		element: (
 			<Limbo>
-				<h1>Шапка</h1>
-				<Outlet />
+				<HeaderLayout />
 			</Limbo>
 		),
 		children: [
