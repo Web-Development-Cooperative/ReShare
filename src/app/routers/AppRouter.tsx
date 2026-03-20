@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { createBrowserRouter, Navigate } from 'react-router';
+import { createBrowserRouter, Navigate, Outlet } from 'react-router';
 
 import { ROUTES } from '~~>shared/model/routes';
 import { Limbo } from '~~>shared/ui/wrappers';
@@ -26,7 +26,39 @@ const router = createBrowserRouter([
 	},
 	{
 		path: ROUTES.HOME,
-		element: <Navigate to={ROUTES.LANDING} />,
+		element: (
+			<Limbo>
+				<h1>Шапка</h1>
+				<Outlet />
+			</Limbo>
+		),
+		children: [
+			{
+				index: true,
+				element: <h1>Главная</h1>,
+			},
+			{
+				path: ROUTES.PROFILE,
+				element: (
+					<Limbo>
+						<h1>Это профиль</h1>
+						<Outlet />
+					</Limbo>
+				),
+				children: [
+					{
+						index: true,
+						element: (
+							<Navigate to={ROUTES.PROFILE_MY_ADS} replace />
+						),
+					},
+					{
+						path: ROUTES.PROFILE_MY_ADS,
+						element: <h1>Мои объявления</h1>,
+					},
+				],
+			},
+		],
 	},
 ]);
 
