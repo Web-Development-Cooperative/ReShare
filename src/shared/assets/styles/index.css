@@ -57,6 +57,10 @@
 	);
 	--running-text-paragraph-16-reg: 400 var(--fs-running-text-paragraph-16-reg) /
 		1.7143 'Inter';
+
+	/* effects */
+	--time-to-do: 0.3s;
+	--type-effect: ease-in-out;
 }
 
 /* connect fonts */

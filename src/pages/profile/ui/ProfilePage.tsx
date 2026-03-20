@@ -1,4 +1,5 @@
-import { Link, Outlet } from 'react-router';
+import { clsx } from 'clsx';
+import { Link, NavLink, Outlet } from 'react-router';
 
 import { Avatar, UniList } from '~~>shared/ui/others';
 import img from '~~>shared/assets/img/baseAvatarMale.png';
@@ -6,11 +7,13 @@ import { ButtonBase } from '~~>shared/ui/buttons';
 import { Pencil, Share, StarFull, StarHollow } from '~~>shared/ui/icons';
 import {
 	Paragraph16Reg,
+	UIText14Medium,
 	UIText14Reg,
 	UIText14SB,
 } from '~~>shared/ui/paragraphs';
+import { BgBorderDefault } from '~~>shared/ui/wrappers';
 
-import { LIST_INFO, MAX_RATING, RATING } from '../lib/profilePage.consts';
+import { LIST_INFO, MAX_RATING, NAV, RATING } from '../lib/profilePage.consts';
 import { SecondaryInfoCard } from './secondaryInfoCard/SecondaryInfoCard';
 import styles from './ProfilePage.module.css';
 
@@ -66,7 +69,30 @@ const ProfilePage = () => {
 				items={LIST_INFO}
 				renderItem={(item) => <SecondaryInfoCard typeCard={item.id} />}
 			/>
-			<div className="nav-panel"></div>
+			<BgBorderDefault colorType="surface-1" className="nav-panel">
+				<UniList
+					className={styles['nav-list']}
+					items={NAV}
+					renderItem={(item) => (
+						<NavLink
+							to={item.to}
+							className={({ isActive }) =>
+								clsx(styles['nav-item'], {
+									[styles['activ-link']]: isActive,
+								})
+							}
+						>
+							{({ isActive }) =>
+								isActive ? (
+									<UIText14Medium>{item.text}</UIText14Medium>
+								) : (
+									<UIText14Reg>{item.text}</UIText14Reg>
+								)
+							}
+						</NavLink>
+					)}
+				/>
+			</BgBorderDefault>
 			<Outlet />
 		</div>
 	);
