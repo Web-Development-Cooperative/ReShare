@@ -8,8 +8,23 @@ import type {
 	RefAttributes,
 } from 'react';
 
-type TagColor = 'white' | 'green' | 'blue';
-type OtherTagProps = { withBorder?: boolean; color?: TagColor };
+type TagColor =
+	| 'white'
+	| 'green'
+	| 'blue'
+	| 'red'
+	| 'yellow'
+	| 'purple'
+	| 'teal'
+	| 'black';
+type TagSize = 'large' | 'medium' | 'small';
+type TagStyle = 'subtle' | 'filled' | 'outline';
+type OtherTagProps = {
+	withBorder?: boolean;
+	color?: TagColor;
+	size?: TagSize;
+	tagStyle?: TagStyle;
+};
 type TagProps = FC<
 	PropsWithChildren<HtmlHTMLAttributes<HTMLDivElement>> & OtherTagProps
 >;

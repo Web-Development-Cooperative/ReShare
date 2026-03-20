@@ -18,10 +18,12 @@ import { BasePopup } from '~~>shared/ui/popups';
 import { LIST_INFO, NAV, RATING } from '../lib/profilePage.consts';
 import { SecondaryInfoCard } from './secondaryInfoCard/SecondaryInfoCard';
 import { RatingPopup } from './ratingPopup/RatingPopup';
+import { EditProfile } from './editProfile/EditProfile';
 import styles from './ProfilePage.module.css';
 
 const ProfilePage = () => {
 	const [openReview, setOpenReview] = useState(false);
+	const [openEditProfile, setOpenEditProfile] = useState(false);
 
 	return (
 		<>
@@ -36,7 +38,12 @@ const ProfilePage = () => {
 									<Share />
 									<UIText14SB>Поделиться профилем</UIText14SB>
 								</ButtonBase>
-								<ButtonBase withBorder>
+								<ButtonBase
+									onClick={() =>
+										setOpenEditProfile((cv) => !cv)
+									}
+									withBorder
+								>
 									<Pencil />
 									<UIText14SB>
 										Редактировать профиль
@@ -94,6 +101,11 @@ const ProfilePage = () => {
 			{openReview && (
 				<BasePopup setIsOpen={setOpenReview} withCross>
 					<RatingPopup />
+				</BasePopup>
+			)}
+			{openEditProfile && (
+				<BasePopup setIsOpen={setOpenReview} withCross>
+					<EditProfile />
 				</BasePopup>
 			)}
 		</>

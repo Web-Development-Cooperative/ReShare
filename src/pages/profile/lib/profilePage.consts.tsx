@@ -39,4 +39,17 @@ const BASE_DATA: Record<SecondaryInfoCardType, Record<string, ReactNode>> = {
 	turnover: { icon: <Turnover />, title: 'Не попало на свалку' },
 };
 
-export { BASE_DATA, RATING, LIST_INFO, NAV };
+const PHONES = [
+	{
+		id: 1,
+		phone: '+7 800 555-35-35',
+		status: false,
+	},
+	{
+		id: 1,
+		phone: '+7 800 555-35-35',
+		status: true,
+	},
+];
+
+export { BASE_DATA, RATING, LIST_INFO, NAV, PHONES };

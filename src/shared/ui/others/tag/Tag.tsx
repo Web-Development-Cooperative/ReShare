@@ -7,6 +7,8 @@ const Tag: TagProps = ({
 	className,
 	children,
 	color = 'green',
+	size = 'small',
+	tagStyle = 'filled',
 	withBorder = true,
 	...props
 }) => {
@@ -15,6 +17,8 @@ const Tag: TagProps = ({
 			className={clsx(
 				styles.tag,
 				styles[color],
+				styles[tagStyle],
+				styles[size],
 				{
 					[styles.border]: withBorder,
 				},
