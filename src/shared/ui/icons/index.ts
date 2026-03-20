@@ -13,3 +13,5 @@ export { Leaf } from './leaf/Leaf';
 export { Asterisk } from './asterisk/Asterisk';
 export { StarFull } from './starFull/StarFull';
 export { StarHollow } from './starHollow/StarHollow';
+export { CrossPopup } from './crossPopup/CrossPopup';
+export { DownUp } from './downUp/DownUp';

@@ -1,7 +1,7 @@
 import type { FC, HTMLAttributes, PropsWithChildren } from 'react';
 
 type ButtonSize = 'large';
-type ButtonBgColor = 'transparent';
+type ButtonBgColor = 'transparent' | 'dark';
 type OtherProps = {
 	withBorder?: boolean;
 	size?: ButtonSize;

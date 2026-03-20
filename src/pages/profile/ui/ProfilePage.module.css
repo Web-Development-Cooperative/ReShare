@@ -48,6 +48,9 @@
 .rating {
 	column-gap: 8px;
 }
+.reviews {
+	color: var(--text-colored-brand);
+}
 .secondary-info-container {
 	display: grid;
 	grid-template-columns: repeat(3, auto);

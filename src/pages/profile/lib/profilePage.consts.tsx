@@ -4,7 +4,6 @@ import { ADAPTER_ROUTES_BREADCRUMBS, ROUTES } from '~~>shared/model/routes';
 import type { ReactNode } from 'react';
 import type { SecondaryInfoCardType } from '~~>pages/profile/model/profilePage.types';
 
-const MAX_RATING = 5;
 const RATING = 3.7;
 const LIST_INFO: Array<Record<'id', SecondaryInfoCardType>> = [
 	{ id: 'box' },
@@ -40,4 +39,4 @@ const BASE_DATA: Record<SecondaryInfoCardType, Record<string, ReactNode>> = {
 	turnover: { icon: <Turnover />, title: 'Не попало на свалку' },
 };
 
-export { BASE_DATA, MAX_RATING, RATING, LIST_INFO, NAV };
+export { BASE_DATA, RATING, LIST_INFO, NAV };

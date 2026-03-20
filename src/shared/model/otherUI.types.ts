@@ -33,4 +33,15 @@ type UniListProps<T> = HTMLAttributes<HTMLUListElement> &
 		renderItem: (_item: T, _index: number) => ReactNode;
 	};
 
-export { type TagProps, type AvatarProps, type UniListProps };
+type RatingSize = 'large' | 'medium' | 'small';
+type OtherRatingProps = {
+	left?: boolean;
+	size?: RatingSize;
+	right?: boolean;
+	rating: number;
+};
+type RatingProps = FC<
+	PropsWithChildren<HtmlHTMLAttributes<HTMLDivElement>> & OtherRatingProps
+>;
+
+export { type TagProps, type AvatarProps, type UniListProps, type RatingProps };
