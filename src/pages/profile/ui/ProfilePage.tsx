@@ -2,26 +2,27 @@ import { Link, Outlet } from 'react-router';
 
 import { Avatar, UniList } from '~~>shared/ui/others';
 import img from '~~>shared/assets/img/baseAvatarMale.png';
-import { ButtonBase } from '~~>shared/ui/buttons/inex';
-import { Asterisk, Pencil, Share, Star } from '~~>shared/ui/icons';
+import { ButtonBase } from '~~>shared/ui/buttons';
+import { Pencil, Share, StarFull, StarHollow } from '~~>shared/ui/icons';
 import {
 	Paragraph16Reg,
 	UIText14Reg,
 	UIText14SB,
 } from '~~>shared/ui/paragraphs';
 
-const MAX_RATING = 5;
-const RATING = 3.7;
+import { LIST_INFO, MAX_RATING, RATING } from '../lib/profilePage.consts';
+import { SecondaryInfoCard } from './secondaryInfoCard/SecondaryInfoCard';
+import styles from './ProfilePage.module.css';
 
 const ProfilePage = () => {
 	return (
-		<div className="profile-page">
-			<div className="main-info-container">
+		<div className={styles['profile-page']}>
+			<div className={styles['main-info-container']}>
 				<Avatar shape="square" size="huge" src={img} />
-				<div className="main-info">
-					<div className="row">
+				<div className={styles['main-info']}>
+					<div className={styles['row']}>
 						<h2>Аполлинария Владимировна</h2>
-						<div className="buttons-container">
+						<div className={styles['buttons-container']}>
 							<ButtonBase withBorder>
 								<Share />
 								<UIText14SB>Поделиться профилем</UIText14SB>
@@ -32,10 +33,11 @@ const ProfilePage = () => {
 							</ButtonBase>
 						</div>
 					</div>
-					<div className="row">
-						<div className="rating">
+					<div className={styles['row']}>
+						<div className={styles['rating']}>
 							<UIText14SB>4.9</UIText14SB>
 							<UniList
+								className={styles.stars}
 								items={Array.from(
 									{ length: MAX_RATING },
 									(_, i) => ({
@@ -44,9 +46,9 @@ const ProfilePage = () => {
 								)}
 								renderItem={(item) =>
 									Math.round(RATING) < item.id ? (
-										<Asterisk />
+										<StarHollow />
 									) : (
-										<Star />
+										<StarFull />
 									)
 								}
 							/>
@@ -59,7 +61,11 @@ const ProfilePage = () => {
 					</div>
 				</div>
 			</div>
-			<div className="secondary-info-container"></div>
+			<UniList
+				className={styles['secondary-info-container']}
+				items={LIST_INFO}
+				renderItem={(item) => <SecondaryInfoCard typeCard={item.id} />}
+			/>
 			<div className="nav-panel"></div>
 			<Outlet />
 		</div>
