@@ -11,4 +11,7 @@ export { Leaves } from './leaves/Leaves';
 export { Turnover } from './turnover/Turnover';
 export { Leaf } from './leaf/Leaf';
 export { Asterisk } from './asterisk/Asterisk';
-export { Star } from './star/Start';
+export { StarFull } from './starFull/StarFull';
+export { StarHollow } from './starHollow/StarHollow';
+export { CrossPopup } from './crossPopup/CrossPopup';
+export { DownUp } from './downUp/DownUp';

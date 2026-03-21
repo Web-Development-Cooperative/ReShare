@@ -1,6 +1,8 @@
 .avatar {
 	aspect-ratio: 1/1;
 	border: 1px solid var(--border-default);
+
+	background-color: var(--very-pale-blue);
 }
 .circle {
 	border-radius: 50%;
