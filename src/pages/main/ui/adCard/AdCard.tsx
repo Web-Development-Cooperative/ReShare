@@ -1,22 +1,24 @@
-import React from 'react';
 import styles from './AdCard.module.css';
-import { UIText14Medium } from '~~>shared/ui/paragraphs';
+import { Paragraph14Reg, UIText14Medium } from '~~>shared/ui/paragraphs';
+import { Tag, UniList } from '~~>shared/ui/others';
 
-const AdCard = () => {
+const AdCard = ({ img, title, author, description, tags }) => {
     return (
-        <div>
-            <div>Компонент с лайком</div>
-            <img src="#" alt="Картинка объявления" />
-            <div>
-                <h4>Заголовок объявления</h4>
-                <div>
-                    <img src="#" alt="аватарка автора" />
-                    <p>Имя автора объявления</p>
-                </div>
-                <UIText14Medium className={styles.description}>Описание(расстоние, город, район)</UIText14Medium>
+        <div className={styles.card}>
+            {/* <div>Компонент с лайком</div> */}
+            <div className={styles.cardImageWrapper}>
+                <img src={img} alt="Картинка объявления" className={styles.cardImage} />
             </div>
-            <div>
-                теги
+            <div className={styles.cardInfo}>
+                <h4>{title}</h4>
+                <div className={styles.author}>
+                    <div className={styles.authorAvatar} >
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVRDk6EeQc7RhnJmF4SNjI91DDsfv5JJNRjQ&s" alt="Аватар автора" />
+                    </div>
+                    <Paragraph14Reg className={styles.author}>{author}</Paragraph14Reg>
+                </div>
+                <UIText14Medium className={styles.description}>{description}</UIText14Medium>
+                    <UniList className={styles.tags} items={tags} renderItem={(tag) => <Tag><UIText14Medium>{tag.name}</UIText14Medium></Tag>} />
             </div>
         </div>
     );

@@ -31,6 +31,18 @@
 		fill: var(--text-primary-on-color);
 	}
 }
+.shaded {
+	background-color: var(--button-shaded);
+
+	color: var(--text-primary);
+
+	& > p {
+		color: var(--text-primary);
+	}
+	& > svg > path {
+		fill: var(--text-primary);
+	}
+}
 .border {
 	border: 1px solid var(--border-default);
 }
@@ -40,3 +52,4 @@
 	padding: 8px 10px;
 	border-radius: 6px;
 }
+

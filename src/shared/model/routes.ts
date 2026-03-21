@@ -16,7 +16,7 @@ const ADAPTER_ROUTES_BREADCRUMBS = {
 	'/': 'Главная',
 	'/profile': 'Профиль',
 	'/profile/my-ads': 'Мои объявления',
-	'/ads': 'Объявления'
+	'/ads': 'Объявления',
 	'/profile/my-applications': 'Мои заявки',
 	'/profile/my-eco': 'Эковклад',
 	'/profile/my-archive': 'Архив объявлений',

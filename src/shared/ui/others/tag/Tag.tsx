@@ -9,7 +9,7 @@ const Tag: TagProps = ({
 	color = 'green',
 	size = 'small',
 	tagStyle = 'filled',
-	withBorder = true,
+	withBorder = false,
 	...props
 }) => {
 	return (
