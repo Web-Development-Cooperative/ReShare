@@ -1,4 +1,5 @@
 const ROUTES = {
+	ADS: '/ads',
 	LANDING: '/landing',
 	LOGIN: '/login',
 	HOME: '/',
@@ -12,6 +13,7 @@ const ADAPTER_ROUTES_BREADCRUMBS = {
 	'/': 'Главная',
 	'/profile': 'Профиль',
 	'/profile/my-ads': 'Мои объявления',
+	'/ads': 'Объявления'
 } as const;
 
 export { ROUTES, ADAPTER_ROUTES_BREADCRUMBS };
