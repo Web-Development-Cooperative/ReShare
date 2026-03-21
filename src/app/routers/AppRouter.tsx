@@ -8,6 +8,7 @@ const HeaderLayout = lazy(() => import('~~>app/layouts/headerLayout'));
 const LoginPage = lazy(() => import('~~>pages/login'));
 const LandingPage = lazy(() => import('~~>pages/landing'));
 const ProfilePage = lazy(() => import('~~>pages/profile'));
+const AdsPage = lazy(() => import('~~>pages/main'));
 
 const router = createBrowserRouter([
 	{
@@ -43,6 +44,14 @@ const router = createBrowserRouter([
 					</>
 				),
 			},
+			{
+                path: ROUTES.ADS,
+                element: (
+                    <Limbo>
+                        <AdsPage />
+                    </Limbo>
+                ),
+            },
 			{
 				path: ROUTES.PROFILE,
 				element: (
