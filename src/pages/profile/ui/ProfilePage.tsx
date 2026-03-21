@@ -18,7 +18,7 @@ import { BasePopup } from '~~>shared/ui/popups';
 import { LIST_INFO, NAV, RATING } from '../lib/profilePage.consts';
 import { SecondaryInfoCard } from './secondaryInfoCard/SecondaryInfoCard';
 import { RatingPopup } from './ratingPopup/RatingPopup';
-import { EditProfile } from './editProfile/EditProfile';
+import { EditProfilePopup } from './editProfilePopup/EditProfilePopup';
 import styles from './ProfilePage.module.css';
 
 const ProfilePage = () => {
@@ -104,8 +104,8 @@ const ProfilePage = () => {
 				</BasePopup>
 			)}
 			{openEditProfile && (
-				<BasePopup setIsOpen={setOpenReview} withCross>
-					<EditProfile />
+				<BasePopup setIsOpen={setOpenEditProfile} withCross>
+					<EditProfilePopup />
 				</BasePopup>
 			)}
 		</>

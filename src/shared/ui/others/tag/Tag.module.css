@@ -90,7 +90,7 @@
 		fill: var(--text-brand);
 	}
 }
-.blue.subtle {
+.blue.outline {
 	border-color: var(--border-subtle-blue);
 	background-color: transparent !important;
 
@@ -126,7 +126,7 @@
 		fill: var(--text-negative);
 	}
 }
-.red.subtle {
+.red.outline {
 	border-color: var(--border-subtle-negative);
 	background-color: transparent !important;
 
@@ -162,7 +162,7 @@
 		fill: var(--text-primary);
 	}
 }
-.black.subtle {
+.black.outline {
 	border-color: var(--border-default);
 	background-color: transparent !important;
 
@@ -198,7 +198,7 @@
 		fill: var(--text-teal);
 	}
 }
-.teal.subtle {
+.teal.outline {
 	border-color: var(--border-subtle-teal);
 	background-color: transparent !important;
 
@@ -234,7 +234,7 @@
 		fill: var(--text-violet);
 	}
 }
-.purple.subtle {
+.purple.outline {
 	border-color: var(--border-subtle-violet);
 	background-color: transparent !important;
 

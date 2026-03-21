@@ -5,39 +5,52 @@ import {
 	UIText14Reg,
 	UIText14SB,
 } from '~~>shared/ui/paragraphs';
+import { PaddingWrapper } from '~~>shared/ui/wrappers';
 import img from '~~>shared/assets/img/baseAvatarMale.png';
 
+import styles from './EditProfilePopup.module.css';
 import { PHONES } from '../../lib/profilePage.consts';
 
-const EditProfile = () => {
+const EditProfilePopup = () => {
 	return (
-		<div className="edit-profile">
+		<div className={styles['edit-profile']}>
 			<Avatar shape="circle" size="huge" src={img} />
-			<div className="name-container">
-				<div className="wrapper">
+			<div className={styles['name-container']}>
+				<div className={styles.wrapper}>
 					<h3>Имя</h3>
 					<UIText14Reg>
 						Как вы хотите, чтобы к вам обращались?
 					</UIText14Reg>
 				</div>
 				<input type="text" />
+				{/* TODO... */}
 			</div>
-			<div className="phones-container">
+			<div className={styles['phones-container']}>
 				<h3>Телефоны</h3>
 				<UniList
-					className="phones"
+					className={styles.phones}
 					items={PHONES}
 					renderItem={(item) => (
-						<div className="phone">
+						<div className={styles.phone}>
 							<UIText14Reg>{item.phone}</UIText14Reg>
-							<Tag color="green" size="medium" tagStyle="outline">
-								<UIText14Medium>Подтвержден</UIText14Medium>
+							<Tag
+								color={item.status ? 'green' : 'red'}
+								size="medium"
+								tagStyle="outline"
+							>
+								<UIText14Medium>
+									{item.status
+										? 'Подтвержден'
+										: 'Не подтвержден'}
+								</UIText14Medium>
 							</Tag>
 						</div>
 					)}
 				/>
 				<ButtonBase withBorder>
-					<UIText14SB>Добавить номер</UIText14SB>
+					<PaddingWrapper y={0} x={8}>
+						<UIText14SB>Добавить номер</UIText14SB>
+					</PaddingWrapper>
 				</ButtonBase>
 			</div>
 			<ButtonBase color="primary">
@@ -47,4 +60,4 @@ const EditProfile = () => {
 	);
 };
 
-export { EditProfile };
+export { EditProfilePopup };
