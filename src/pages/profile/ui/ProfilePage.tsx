@@ -1,68 +1,114 @@
-import { Link, Outlet } from 'react-router';
+import { useState } from 'react';
+import { clsx } from 'clsx';
+import { NavLink, Outlet } from 'react-router';
 
-import { Avatar, UniList } from '~~>shared/ui/others';
+import { Avatar, Rating, UniList } from '~~>shared/ui/others';
 import img from '~~>shared/assets/img/baseAvatarMale.png';
-import { ButtonBase } from '~~>shared/ui/buttons/inex';
-import { Asterisk, Pencil, Share, Star } from '~~>shared/ui/icons';
+import { ButtonBase } from '~~>shared/ui/buttons';
+import { Pencil, Share } from '~~>shared/ui/icons';
 import {
 	Paragraph16Reg,
+	UIText14Medium,
 	UIText14Reg,
 	UIText14SB,
 } from '~~>shared/ui/paragraphs';
+import { BgBorderDefault } from '~~>shared/ui/wrappers';
+import { BasePopup } from '~~>shared/ui/popups';
 
-const MAX_RATING = 5;
-const RATING = 3.7;
+import { LIST_INFO, NAV, RATING } from '../lib/profilePage.consts';
+import { SecondaryInfoCard } from './secondaryInfoCard/SecondaryInfoCard';
+import { RatingPopup } from './ratingPopup/RatingPopup';
+import { EditProfilePopup } from './editProfilePopup/EditProfilePopup';
+import styles from './ProfilePage.module.css';
 
 const ProfilePage = () => {
+	const [openReview, setOpenReview] = useState(false);
+	const [openEditProfile, setOpenEditProfile] = useState(false);
+
 	return (
-		<div className="profile-page">
-			<div className="main-info-container">
-				<Avatar shape="square" size="huge" src={img} />
-				<div className="main-info">
-					<div className="row">
-						<h2>Аполлинария Владимировна</h2>
-						<div className="buttons-container">
-							<ButtonBase withBorder>
-								<Share />
-								<UIText14SB>Поделиться профилем</UIText14SB>
-							</ButtonBase>
-							<ButtonBase withBorder>
-								<Pencil />
-								<UIText14SB>Редактировать профиль</UIText14SB>
-							</ButtonBase>
+		<>
+			<div className={styles['profile-page']}>
+				<div className={styles['main-info-container']}>
+					<Avatar shape="square" size="huge" src={img} />
+					<div className={styles['main-info']}>
+						<div className={styles['row']}>
+							<h2>Аполлинария Владимировна</h2>
+							<div className={styles['buttons-container']}>
+								<ButtonBase withBorder>
+									<Share />
+									<UIText14SB>Поделиться профилем</UIText14SB>
+								</ButtonBase>
+								<ButtonBase
+									onClick={() =>
+										setOpenEditProfile((cv) => !cv)
+									}
+									withBorder
+								>
+									<Pencil />
+									<UIText14SB>
+										Редактировать профиль
+									</UIText14SB>
+								</ButtonBase>
+							</div>
 						</div>
-					</div>
-					<div className="row">
-						<div className="rating">
-							<UIText14SB>4.9</UIText14SB>
-							<UniList
-								items={Array.from(
-									{ length: MAX_RATING },
-									(_, i) => ({
-										id: i + 1,
-									})
-								)}
-								renderItem={(item) =>
-									Math.round(RATING) < item.id ? (
-										<Asterisk />
-									) : (
-										<Star />
-									)
-								}
-							/>
+						<div className={styles['row']}>
+							<Rating rating={RATING} left size="medium" />
+							<button onClick={() => setOpenReview((cv) => !cv)}>
+								<UIText14Reg className={styles['reviews']}>
+									24 отзыва
+								</UIText14Reg>
+							</button>
+							<UIText14Reg>•</UIText14Reg>
+							<Paragraph16Reg>На платформе с 2026</Paragraph16Reg>
 						</div>
-						<Link to="#">
-							<UIText14Reg>24 отзыва</UIText14Reg>
-						</Link>
-						<UIText14Reg>•</UIText14Reg>
-						<Paragraph16Reg>На платформе с 2026</Paragraph16Reg>
 					</div>
 				</div>
+				<UniList
+					className={styles['secondary-info-container']}
+					items={LIST_INFO}
+					renderItem={(item) => (
+						<SecondaryInfoCard typeCard={item.id} />
+					)}
+				/>
+				<BgBorderDefault colorType="surface-1" className="nav-panel">
+					<UniList
+						className={styles['nav-list']}
+						items={NAV}
+						renderItem={(item) => (
+							<NavLink
+								to={item.to}
+								className={({ isActive }) =>
+									clsx(styles['nav-item'], {
+										[styles['activ-link']]: isActive,
+									})
+								}
+							>
+								{({ isActive }) =>
+									isActive ? (
+										<UIText14Medium>
+											{item.text}
+										</UIText14Medium>
+									) : (
+										<UIText14Reg>{item.text}</UIText14Reg>
+									)
+								}
+							</NavLink>
+						)}
+					/>
+				</BgBorderDefault>
+				<Outlet />
 			</div>
-			<div className="secondary-info-container"></div>
-			<div className="nav-panel"></div>
-			<Outlet />
-		</div>
+			{openReview && (
+				<BasePopup setIsOpen={setOpenReview} withCross>
+					<RatingPopup />
+				</BasePopup>
+			)}
+			{openEditProfile && (
+				<BasePopup setIsOpen={setOpenEditProfile} withCross>
+					<EditProfilePopup />
+				</BasePopup>
+			)}
+		</>
 	);
 };
 

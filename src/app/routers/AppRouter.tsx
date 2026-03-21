@@ -70,6 +70,18 @@ const router = createBrowserRouter([
 						path: ROUTES.PROFILE_MY_ADS,
 						element: <h1>Мои объявления</h1>,
 					},
+					{
+						path: ROUTES.PROFILE_MY_APPLICATIONS,
+						element: <h1>Мои заявки</h1>,
+					},
+					{
+						path: ROUTES.PROFILE_MY_ECO,
+						element: <h1>Эковклад</h1>,
+					},
+					{
+						path: ROUTES.PROFILE_MY_ARCHIVE,
+						element: <h1>Архив объявлений</h1>,
+					},
 				],
 			},
 		],

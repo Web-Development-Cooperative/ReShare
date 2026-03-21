@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 
 import { ROUTES } from '~~>shared/model/routes';
-import { ButtonBase } from '~~>shared/ui/buttons/inex';
+import { ButtonBase } from '~~>shared/ui/buttons';
 import {
 	Bell,
 	Chat,

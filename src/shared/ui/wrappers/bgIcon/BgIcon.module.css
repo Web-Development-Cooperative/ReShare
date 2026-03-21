@@ -1,6 +1,9 @@
 .bg-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	aspect-ratio: 1/1;
 	border-radius: 6px;
-	padding: 9.5px;
+	padding: 8px;
 	background-color: var(--button-shaded);
 }

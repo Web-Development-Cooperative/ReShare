@@ -8,8 +8,23 @@ import type {
 	RefAttributes,
 } from 'react';
 
-type TagColor = 'white' | 'green' | 'blue';
-type OtherTagProps = { withBorder?: boolean; color?: TagColor };
+type TagColor =
+	| 'white'
+	| 'green'
+	| 'blue'
+	| 'red'
+	| 'yellow'
+	| 'purple'
+	| 'teal'
+	| 'black';
+type TagSize = 'large' | 'medium' | 'small';
+type TagStyle = 'subtle' | 'filled' | 'outline';
+type OtherTagProps = {
+	withBorder?: boolean;
+	color?: TagColor;
+	size?: TagSize;
+	tagStyle?: TagStyle;
+};
 type TagProps = FC<
 	PropsWithChildren<HtmlHTMLAttributes<HTMLDivElement>> & OtherTagProps
 >;
@@ -33,4 +48,15 @@ type UniListProps<T> = HTMLAttributes<HTMLUListElement> &
 		renderItem: (_item: T, _index: number) => ReactNode;
 	};
 
-export { type TagProps, type AvatarProps, type UniListProps };
+type RatingSize = 'large' | 'medium' | 'small';
+type OtherRatingProps = {
+	left?: boolean;
+	size?: RatingSize;
+	right?: boolean;
+	rating: number;
+};
+type RatingProps = FC<
+	PropsWithChildren<HtmlHTMLAttributes<HTMLDivElement>> & OtherRatingProps
+>;
+
+export { type TagProps, type AvatarProps, type UniListProps, type RatingProps };
