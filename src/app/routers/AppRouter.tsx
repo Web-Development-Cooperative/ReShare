@@ -8,6 +8,7 @@ const HeaderLayout = lazy(() => import('~~>app/layouts/headerLayout'));
 const LoginPage = lazy(() => import('~~>pages/login'));
 const LandingPage = lazy(() => import('~~>pages/landing'));
 const ProfilePage = lazy(() => import('~~>pages/profile'));
+const MessagesPage = lazy(() => import('~~>pages/messages'));
 
 const router = createBrowserRouter([
 	{
@@ -74,6 +75,14 @@ const router = createBrowserRouter([
 						element: <h1>Архив объявлений</h1>,
 					},
 				],
+			},
+			{
+				path: ROUTES.MESSAGES,
+				element: (
+					<Limbo>
+						<MessagesPage />
+					</Limbo>
+				),
 			},
 		],
 	},

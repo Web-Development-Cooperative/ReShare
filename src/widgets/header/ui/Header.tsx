@@ -22,7 +22,7 @@ const Header = () => {
 		<div className={styles.header}>
 			<div className={styles['logo-wrapper']}>
 				<Link to={ROUTES.HOME}>
-					<LogoHeader></LogoHeader>
+					<LogoHeader />
 				</Link>
 				<UIText14SB>Сервис осознанного потребления</UIText14SB>
 			</div>
@@ -36,7 +36,9 @@ const Header = () => {
 				<Histogram />
 				<Heart />
 				<Bell />
-				<Chat />
+				<Link to={ROUTES.MESSAGES}>
+					<Chat />
+				</Link>
 				<Link to={ROUTES.PROFILE}>
 					<Avatar shape="circle" size="medium" src={img}></Avatar>
 				</Link>

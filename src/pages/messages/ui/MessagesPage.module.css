@@ -1,0 +1,64 @@
+.messages-page {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	row-gap: 16px;
+
+	height: 100%;
+	padding: 16px 32px;
+}
+.title-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	column-gap: 16px;
+}
+.main {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	column-gap: 16px;
+
+	height: 78vh;
+}
+.sidebar {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	align-self: stretch;
+
+	width: 18vw;
+}
+.chats {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+}
+.chat {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	column-gap: 8px;
+
+	position: relative;
+}
+.content {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	row-gap: 2px;
+}
+.tag {
+	position: absolute;
+	top: 50%;
+	right: 8px;
+
+	transform: translateY(-50%);
+}
