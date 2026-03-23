@@ -1,8 +1,9 @@
-import { Avatar, Tag } from '~~>shared/ui/others';
-import { Paragraph16Reg, UIText14Medium } from '~~>shared/ui/paragraphs';
-import { PaddingWrapper } from '~~>shared/ui/wrappers';
+import { Avatar, Tag } from '@shared/ui/others';
+import { Paragraph16Reg, UIText14Medium } from '@shared/ui/paragraphs';
+import { PaddingWrapper } from '@shared/ui/wrappers';
 
 import styles from './LinkChat.module.css';
+
 import type { FC } from 'react';
 import type { Message } from '../../model/messagesPage.types';
 

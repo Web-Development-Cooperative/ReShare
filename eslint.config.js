@@ -2,13 +2,12 @@ import js from '@eslint/js';
 import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
-// eslint-disable-next-line import/no-unresolved
 import tseslint from 'typescript-eslint';
-// eslint-disable-next-line import/no-unresolved
 import { defineConfig, globalIgnores } from 'eslint/config';
-import importPlugin from 'eslint-plugin-import';
+import importPlugin from 'eslint-plugin-import-x';
 
 export default defineConfig([
+	// eslint-disable-next-line import-x/no-named-as-default-member
 	importPlugin.flatConfigs.recommended,
 	globalIgnores(['dist']),
 	{
@@ -24,29 +23,29 @@ export default defineConfig([
 		},
 		settings: {
 			'import/resolver': {
-				node: {
-					paths: ['node_modules', 'src'],
-					extensions: ['.ts', '.tsx', '.js'],
-				},
-				alias: {
-					map: [
-						['~~>app', './src/app'],
-						['~~>pages', './src/pages'],
-						['~~>widgets', './src/widgets'],
-						['~~>features', './src/features'],
-						['~~>entities', './src/entities'],
-						['~~>shared', './src/shared'],
-					],
-					extensions: ['.ts', '.tsx'],
+				typescript: {
+					alwaysTryTypes: true,
+					project: ['./tsconfig.json', './tsconfig.app.json'],
 				},
 			},
+			'import/internal-regex': '^@/',
+			'import/extensions': [
+				'.js',
+				'.jsx',
+				'.ts',
+				'.tsx',
+				'.css',
+				'.module.css',
+			],
 		},
 		plugins: {
+			import: importPlugin,
 			'react-hooks': reactHooks,
 			'react-refresh': reactRefresh,
 		},
 		rules: {
 			...reactHooks.configs.recommended.rules,
+			'import-x/no-unresolved': 'off',
 			'react-refresh/only-export-components': [
 				'warn',
 				{ allowConstantExport: true },
@@ -73,9 +72,31 @@ export default defineConfig([
 						'builtin',
 						'external',
 						'internal',
-						['parent', 'sibling', 'index', 'type', 'unknown'],
+						['parent', 'sibling', 'index', 'unknown'],
+						'type',
 					],
+
 					'newlines-between': 'always',
+
+					pathGroups: [
+						{
+							pattern: 'react**',
+							group: 'builtin',
+							position: 'before',
+						},
+						{ pattern: '@shared/**', group: 'internal' },
+						{ pattern: '@app/**', group: 'internal' },
+						{ pattern: '@pages/**', group: 'internal' },
+						{ pattern: '@widgets/**', group: 'internal' },
+						{ pattern: '@features/**', group: 'internal' },
+						{ pattern: '@entities/**', group: 'internal' },
+					],
+					pathGroupsExcludedImportTypes: ['type'],
+
+					alphabetize: {
+						// order: 'asc',
+						// caseInsensitive: true,
+					},
 				},
 			],
 		},

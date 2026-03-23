@@ -1,6 +1,6 @@
-import { ButtonBase } from '~~>shared/ui/buttons';
-import { ArrowLeft } from '~~>shared/ui/icons';
-import { UIText14SB } from '~~>shared/ui/paragraphs';
+import { ButtonBase } from '@shared/ui/buttons';
+import { ArrowLeft } from '@shared/ui/icons';
+import { UIText14SB } from '@shared/ui/paragraphs';
 
 import { useBackButton } from '../lib/useBackButton';
 

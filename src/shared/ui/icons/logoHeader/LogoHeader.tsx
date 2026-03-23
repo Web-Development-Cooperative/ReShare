@@ -1,4 +1,4 @@
-import type { SVGIcon } from '~~>shared/model/icon.types';
+import type { SVGIcon } from '@shared/model/icon.types';
 
 const LogoHeader: SVGIcon = (props) => {
 	return (

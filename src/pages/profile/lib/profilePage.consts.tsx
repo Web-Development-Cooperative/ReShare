@@ -1,8 +1,8 @@
-import { Box, Leaves, Turnover } from '~~>shared/ui/icons';
-import { ADAPTER_ROUTES_BREADCRUMBS, ROUTES } from '~~>shared/model/routes';
+import { ADAPTER_ROUTES_BREADCRUMBS, ROUTES } from '@shared/model/routes';
+import { Box, Leaves, Turnover } from '@shared/ui/icons';
 
+import type { SecondaryInfoCardType } from '@pages/profile/model/profilePage.types';
 import type { ReactNode } from 'react';
-import type { SecondaryInfoCardType } from '~~>pages/profile/model/profilePage.types';
 
 const RATING = 3.7;
 const LIST_INFO: Array<Record<'id', SecondaryInfoCardType>> = [

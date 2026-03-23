@@ -1,10 +1,11 @@
 import { clsx } from 'clsx';
 
-import { Heading36, UIText14Reg } from '~~>shared/ui/paragraphs';
-import { BgBorderDefault, BgIcone } from '~~>shared/ui/wrappers';
+import { Heading36, UIText14Reg } from '@shared/ui/paragraphs';
+import { BgBorderDefault, BgIcone } from '@shared/ui/wrappers';
 
-import { BASE_DATA } from '../../lib/profilePage.consts';
 import styles from './SecondaryInfoCard.module.css';
+import { BASE_DATA } from '../../lib/profilePage.consts';
+
 import type { SecondaryInfoCardProps } from '../../model/profilePage.types';
 
 const SecondaryInfoCard: SecondaryInfoCardProps = ({

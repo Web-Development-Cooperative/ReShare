@@ -1,4 +1,4 @@
-import type { SVGIconStar } from '~~>shared/model/icon.types';
+import type { SVGIconStar } from '@shared/model/icon.types';
 
 const StarHollow: SVGIconStar = ({ size = 'large', ...props }) => {
 	switch (size) {

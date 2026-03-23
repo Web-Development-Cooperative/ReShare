@@ -1,10 +1,11 @@
-import { CrossPopup } from '~~>shared/ui/icons';
-import { PaddingWrapper } from '~~>shared/ui/wrappers';
+import { CrossPopup } from '@shared/ui/icons';
+import { PaddingWrapper } from '@shared/ui/wrappers';
 
-import { PopupPortal } from '../popupPortal/PopupPortal';
 import styles from './BasePopup.module.css';
+import { PopupPortal } from '../popupPortal/PopupPortal';
+
+import type { BasePopupProps } from '@shared/model/popup.types';
 import type { FC } from 'react';
-import type { BasePopupProps } from '~~>shared/model/popup.types';
 
 const BasePopup: FC<BasePopupProps> = (props) => {
 	const { setIsOpen, withCross = false, children } = props;

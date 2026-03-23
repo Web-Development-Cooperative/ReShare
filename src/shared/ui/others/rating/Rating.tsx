@@ -1,11 +1,12 @@
 import { clsx } from 'clsx';
 
-import { StarFull, StarHollow } from '~~>shared/ui/icons';
-import { UniList } from '~~>shared/ui/others/uniList/UniList';
-import { Heading24, UIText12SB, UIText14SB } from '~~>shared/ui/paragraphs';
+import { StarFull, StarHollow } from '@shared/ui/icons';
+import { UniList } from '@shared/ui/others/uniList/UniList';
+import { Heading24, UIText12SB, UIText14SB } from '@shared/ui/paragraphs';
 
 import styles from './Rating.module.css';
-import type { RatingProps } from '~~>shared/model/otherUI.types';
+
+import type { RatingProps } from '@shared/model/otherUI.types';
 
 const Rating: RatingProps = ({
 	rating,

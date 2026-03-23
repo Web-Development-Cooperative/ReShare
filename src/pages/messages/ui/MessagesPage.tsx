@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router';
 
-import { BackButton } from '~~>features/backButton';
-import { Loupe } from '~~>shared/ui/icons';
-import { BgBorderDefault, PaddingWrapper } from '~~>shared/ui/wrappers';
-import { UniList } from '~~>shared/ui/others';
-import { InputBase } from '~~>shared/ui/inputs';
+import { BackButton } from '@features/backButton';
+import { Loupe } from '@shared/ui/icons';
+import { InputBase } from '@shared/ui/inputs';
+import { UniList } from '@shared/ui/others';
+import { BgBorderDefault, PaddingWrapper } from '@shared/ui/wrappers';
 
 import { MESSAGE_ARRAY } from '../lib/messagesPage.consts';
 import { LinkChat } from './linkChat/LinkChat';

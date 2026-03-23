@@ -1,12 +1,12 @@
-import { Avatar, Tag, UniList } from '~~>shared/ui/others';
-import { ButtonBase } from '~~>shared/ui/buttons';
+import img from '@shared/assets/img/baseAvatarMale.png';
+import { ButtonBase } from '@shared/ui/buttons';
+import { Avatar, Tag, UniList } from '@shared/ui/others';
 import {
 	UIText14Medium,
 	UIText14Reg,
 	UIText14SB,
-} from '~~>shared/ui/paragraphs';
-import { PaddingWrapper } from '~~>shared/ui/wrappers';
-import img from '~~>shared/assets/img/baseAvatarMale.png';
+} from '@shared/ui/paragraphs';
+import { PaddingWrapper } from '@shared/ui/wrappers';
 
 import styles from './EditProfilePopup.module.css';
 import { PHONES } from '../../lib/profilePage.consts';

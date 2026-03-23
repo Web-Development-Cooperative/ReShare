@@ -1,7 +1,8 @@
 import { clsx } from 'clsx';
 
 import styles from './BgBorderDefault.module.css';
-import type { BgBorderDefaultProps } from '~~>shared/model/wrapper.types';
+
+import type { BgBorderDefaultProps } from '@shared/model/wrapper.types';
 
 const BgBorderDefault: BgBorderDefaultProps = ({
 	colorType,

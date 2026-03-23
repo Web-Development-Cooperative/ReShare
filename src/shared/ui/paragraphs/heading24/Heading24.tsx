@@ -1,7 +1,8 @@
 import { clsx } from 'clsx';
 
 import styles from './Heading24.module.css';
-import type { ParagraphProps } from '~~>shared/model/paragraph.types';
+
+import type { ParagraphProps } from '@shared/model/paragraph.types';
 
 const Heading24: ParagraphProps = ({ className, children, ...props }) => {
 	return (

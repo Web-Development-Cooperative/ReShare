@@ -1,10 +1,10 @@
-import { InputBase } from '~~>shared/ui/inputs';
-import { ButtonBase } from '~~>shared/ui/buttons/buttonBase/ButtonBase';
-import { UniList } from '~~>shared/ui/others';
-import { BgBorderDefault } from '~~>shared/ui/wrappers';
-import { UIText14SB } from '~~>shared/ui/paragraphs';
-import { Settings } from '~~>shared/ui/icons/settings/Settings';
-import { Loupe } from '~~>shared/ui/icons/loupe/Loupe';
+import { ButtonBase } from '@shared/ui/buttons/buttonBase/ButtonBase';
+import { Loupe } from '@shared/ui/icons/loupe/Loupe';
+import { Settings } from '@shared/ui/icons/settings/Settings';
+import { InputBase } from '@shared/ui/inputs/inputBase/InputBase';
+import { UniList } from '@shared/ui/others';
+import { UIText14SB } from '@shared/ui/paragraphs';
+import { BgBorderDefault } from '@shared/ui/wrappers';
 
 import AdCard from './adCard/AdCard';
 import styles from './MainPage.module.css';

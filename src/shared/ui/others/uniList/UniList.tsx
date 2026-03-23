@@ -1,5 +1,5 @@
+import type { UniListProps } from '@shared/model/otherUI.types';
 import type { ReactNode } from 'react';
-import type { UniListProps } from '~~>shared/model/otherUI.types';
 
 const UniList = <T extends { id: number | string }>({
 	items,

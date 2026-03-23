@@ -1,5 +1,5 @@
-import { Paragraph14Reg, UIText14Medium } from '~~>shared/ui/paragraphs';
-import { Tag, UniList } from '~~>shared/ui/others';
+import { Tag, UniList } from '@shared/ui/others';
+import { Paragraph14Reg, UIText14Medium } from '@shared/ui/paragraphs';
 
 import styles from './AdCard.module.css';
 

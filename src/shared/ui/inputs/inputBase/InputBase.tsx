@@ -1,8 +1,9 @@
 import { clsx } from 'clsx';
 
 import styles from './InputBase.module.css';
+
 import type { FC } from 'react';
-import type { BaseInputProps } from '~~>shared/model/input.types';
+import type { BaseInputProps } from '@shared/model/input.types';
 
 const InputBase: FC<BaseInputProps> = ({
 	inputStyle = 'outline',

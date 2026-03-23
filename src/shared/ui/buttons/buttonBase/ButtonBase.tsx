@@ -1,7 +1,8 @@
 import { clsx } from 'clsx';
 
 import styles from './ButtonBase.module.css';
-import type { ButtonBaseProps } from '~~>shared/model/button.types';
+
+import type { ButtonBaseProps } from '@shared/model/button.types';
 
 const ButtonBase: ButtonBaseProps = ({
 	className,

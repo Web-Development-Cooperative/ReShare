@@ -1,10 +1,11 @@
 import { clsx } from 'clsx';
 
-import { StatusDot } from '~~>shared/ui/icons';
+import { StatusDot } from '@shared/ui/icons';
 
-import { useAvatar } from './lib/useAvatar';
 import styles from './Avatar.module.css';
-import type { AvatarProps } from '~~>shared/model/otherUI.types';
+import { useAvatar } from './lib/useAvatar';
+
+import type { AvatarProps } from '@shared/model/otherUI.types';
 
 const Avatar: AvatarProps = ({
 	src,

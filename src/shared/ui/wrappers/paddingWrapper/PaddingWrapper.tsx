@@ -1,4 +1,4 @@
-import type { PaddingWrapperProps } from '~~>shared/model/wrapper.types';
+import type { PaddingWrapperProps } from '@shared/model/wrapper.types';
 
 const PaddingWrapper: PaddingWrapperProps = ({ x, y, children, ...props }) => {
 	return (
