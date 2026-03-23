@@ -37,7 +37,11 @@ type AvatarSize =
 	| 'small'
 	| 'tiny';
 type AvatarShape = 'square' | 'circle';
-type OtherAvatarProps = { size: AvatarSize; shape: AvatarShape };
+type OtherAvatarProps = {
+	size: AvatarSize;
+	shape: AvatarShape;
+	statusDot?: boolean;
+};
 type AvatarProps = FC<
 	PropsWithChildren<ImgHTMLAttributes<HTMLImageElement> & OtherAvatarProps>
 >;

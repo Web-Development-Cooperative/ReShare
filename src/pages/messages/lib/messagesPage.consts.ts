@@ -1,7 +1,9 @@
-const MESSAGE_ARRAY = [
+import type { Message } from '../model/messagesPage.types';
+
+const MESSAGE_ARRAY: Array<Message> = [
 	{
 		id: 1,
-		img: '',
+		img: 'asdf',
 		online: true,
 		fullName: 'Андрей Лампов',
 		descr: 'Большой серый диван',
@@ -9,7 +11,7 @@ const MESSAGE_ARRAY = [
 	},
 	{
 		id: 2,
-		img: '',
+		img: 'xsxx',
 		online: false,
 		fullName: 'Аполлинария В.',
 		descr: 'Большой серый диван',

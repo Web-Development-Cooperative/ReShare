@@ -1,24 +1,23 @@
 .inputContainer {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
 
-    padding: 8px;
-
-    border: 1px solid var(--border-default);
-    border-radius: 8px;
-
-    background-color: var(--surface-1);
-
-    width: 50%;        /* занимает половину родительского блока */
-    flex: 0 0 50%;     /* если родитель — flex-контейнер, гарантирует ровно 50% */
-    max-width: 100%;
+	padding: 8px;
+	border-radius: 8px;
 }
-
-.inputContainer input {
-    flex: 1;
-    min-width: 0;
-    border: none;
-    background: transparent;
-    outline: none;
+.base-input {
+	flex: 1;
+	min-width: 0;
+	border: none;
+	background: transparent;
+	outline: none;
+}
+.outline {
+	border: 1px solid var(--border-default);
+	background-color: var(--bg-input-outlined);
+}
+.shaded {
+	border: 1px solid var(--bg-input-shaded);
+	background-color: var(--bg-input-shaded);
 }

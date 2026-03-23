@@ -1,4 +1,4 @@
-import InputBase from '~~>shared/ui/inputs/inputBase/InputBase';
+import { InputBase } from '~~>shared/ui/inputs';
 import { ButtonBase } from '~~>shared/ui/buttons/buttonBase/ButtonBase';
 import { UniList } from '~~>shared/ui/others';
 import { BgBorderDefault } from '~~>shared/ui/wrappers';
@@ -78,9 +78,10 @@ const MainPage = () => {
 			<h1>Лента объявлений</h1>
 			<div className={styles.finderContainer}>
 				<InputBase
+					className={styles['fat-input']}
 					placeholder="Поиск по доступным обновлениям"
 					leftIcon={<Loupe />}
-				></InputBase>
+				/>
 				<ButtonBase color="shaded">
 					<Settings />
 					<UIText14SB>Фильтры</UIText14SB>

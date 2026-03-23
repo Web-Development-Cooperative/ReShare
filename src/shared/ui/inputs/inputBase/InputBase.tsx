@@ -1,15 +1,35 @@
+import { clsx } from 'clsx';
+
 import styles from './InputBase.module.css';
 import type { FC } from 'react';
 import type { BaseInputProps } from '~~>shared/model/input.types';
 
-const InputBase: FC<BaseInputProps> = ({ leftIcon, rightIcon, ...props }) => {
+const InputBase: FC<BaseInputProps> = ({
+	inputStyle = 'outline',
+	leftIcon,
+	rightIcon,
+	className,
+	...props
+}) => {
 	return (
-		<div className={styles.inputContainer}>
+		<div
+			className={clsx(
+				styles.inputContainer,
+				styles[inputStyle],
+				className
+			)}
+		>
 			{leftIcon && leftIcon}
-			<input type="text" name="" id="" {...props} />
+			<input
+				className={styles['base-input']}
+				type="text"
+				name=""
+				id=""
+				{...props}
+			/>
 			{rightIcon && rightIcon}
 		</div>
 	);
 };
 
-export default InputBase;
+export { InputBase };
