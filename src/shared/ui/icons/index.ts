@@ -18,3 +18,7 @@ export { DownUp } from './downUp/DownUp';
 export { ArrowLeft } from './arrowLeft/ArrowLeft';
 export { Loupe } from './loupe/Loupe';
 export { StatusDot } from './statusDot/StatusDot';
+export { EyeOpen } from './eyeOpen/EyeOpen';
+export { EyeSlash } from './eyeSlash/EyeSlash';
+export { Google } from './google/Google';
+export { Apple } from './apple/Apple';
