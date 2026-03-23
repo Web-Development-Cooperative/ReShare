@@ -1,4 +1,4 @@
-import { RoutProvider } from '~~>app/providers';
+import { RoutProvider } from '@app/providers';
 
 function App() {
 	return (

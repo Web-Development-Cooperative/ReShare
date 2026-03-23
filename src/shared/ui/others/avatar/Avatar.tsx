@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 
 import styles from './Avatar.module.css';
-import type { AvatarProps } from '~~>shared/model/otherUI.types';
+import type { AvatarProps } from '@shared/model/otherUI.types';
 
 const Avatar: AvatarProps = ({ src, alt, size, shape, ...props }) => {
 	return (

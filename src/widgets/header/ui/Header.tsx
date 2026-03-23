@@ -1,7 +1,8 @@
 import { Link } from 'react-router';
 
-import { ROUTES } from '~~>shared/model/routes';
-import { ButtonBase } from '~~>shared/ui/buttons';
+import img from '@shared/assets/img/baseAvatarMale.png';
+import { ROUTES } from '@shared/model/routes';
+import { ButtonBase } from '@shared/ui/buttons';
 import {
 	Bell,
 	Chat,
@@ -9,11 +10,10 @@ import {
 	Histogram,
 	LogoHeader,
 	Plus,
-} from '~~>shared/ui/icons';
-import { Avatar } from '~~>shared/ui/others';
-import { UIText14SB } from '~~>shared/ui/paragraphs';
-import { PaddingWrapper } from '~~>shared/ui/wrappers';
-import img from '~~>shared/assets/img/baseAvatarMale.png';
+} from '@shared/ui/icons';
+import { Avatar } from '@shared/ui/others';
+import { UIText14SB } from '@shared/ui/paragraphs';
+import { PaddingWrapper } from '@shared/ui/wrappers';
 
 import styles from './Header.module.css';
 

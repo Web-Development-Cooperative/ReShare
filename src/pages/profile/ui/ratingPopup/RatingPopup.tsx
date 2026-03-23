@@ -1,13 +1,13 @@
-import { ButtonBase } from '~~>shared/ui/buttons';
-import { Avatar, Rating } from '~~>shared/ui/others';
-import { DownUp } from '~~>shared/ui/icons';
+import img from '@shared/assets/img/baseAvatarMale.png';
+import { ButtonBase } from '@shared/ui/buttons';
+import { DownUp } from '@shared/ui/icons';
+import { Avatar, Rating } from '@shared/ui/others';
 import {
 	Paragraph14Reg,
 	Paragraph16Reg,
 	UIText14Reg,
 	UIText14SB,
-} from '~~>shared/ui/paragraphs';
-import img from '~~>shared/assets/img/baseAvatarMale.png';
+} from '@shared/ui/paragraphs';
 
 import styles from './RatingPopup.module.css';
 import { RATING } from '../../lib/profilePage.consts';

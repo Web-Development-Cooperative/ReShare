@@ -1,9 +1,9 @@
 import { createPortal } from 'react-dom';
 
-import { usePopup } from '~~>shared/lib/popup.hooks';
+import { usePopup } from '@shared/lib/popup.hooks';
 
+import type { PopupPortalProps } from '@shared/model/popup.types';
 import type { FC } from 'react';
-import type { PopupPortalProps } from '~~>shared/model/popup.types';
 
 const PopupPortal: FC<PopupPortalProps> = ({ children }) => {
 	const container = usePopup();

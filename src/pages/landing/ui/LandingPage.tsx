@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-import { ROUTES } from '~~>shared/model/routes';
+import { ROUTES } from '@shared/model/routes';
 
 import styles from './LandingPage.module.css';
 

@@ -1,25 +1,25 @@
-import { useState } from 'react';
 import { clsx } from 'clsx';
+import { useState } from 'react';
 import { NavLink, Outlet } from 'react-router';
 
-import { Avatar, Rating, UniList } from '~~>shared/ui/others';
-import img from '~~>shared/assets/img/baseAvatarMale.png';
-import { ButtonBase } from '~~>shared/ui/buttons';
-import { Pencil, Share } from '~~>shared/ui/icons';
+import img from '@shared/assets/img/baseAvatarMale.png';
+import { ButtonBase } from '@shared/ui/buttons';
+import { Pencil, Share } from '@shared/ui/icons';
+import { Avatar, Rating, UniList } from '@shared/ui/others';
 import {
 	Paragraph16Reg,
 	UIText14Medium,
 	UIText14Reg,
 	UIText14SB,
-} from '~~>shared/ui/paragraphs';
-import { BgBorderDefault } from '~~>shared/ui/wrappers';
-import { BasePopup } from '~~>shared/ui/popups';
+} from '@shared/ui/paragraphs';
+import { BasePopup } from '@shared/ui/popups';
+import { BgBorderDefault } from '@shared/ui/wrappers';
 
 import { LIST_INFO, NAV, RATING } from '../lib/profilePage.consts';
-import { SecondaryInfoCard } from './secondaryInfoCard/SecondaryInfoCard';
-import { RatingPopup } from './ratingPopup/RatingPopup';
 import { EditProfilePopup } from './editProfilePopup/EditProfilePopup';
 import styles from './ProfilePage.module.css';
+import { RatingPopup } from './ratingPopup/RatingPopup';
+import { SecondaryInfoCard } from './secondaryInfoCard/SecondaryInfoCard';
 
 const ProfilePage = () => {
 	const [openReview, setOpenReview] = useState(false);

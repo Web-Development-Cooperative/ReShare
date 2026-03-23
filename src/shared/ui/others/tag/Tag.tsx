@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 
-import type { TagProps } from '~~>shared/model/otherUI.types';
 import styles from './Tag.module.css';
+import type { TagProps } from '@shared/model/otherUI.types';
 
 const Tag: TagProps = ({
 	className,
