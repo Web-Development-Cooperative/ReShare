@@ -1,14 +1,14 @@
 import { lazy } from 'react';
 import { createBrowserRouter, Navigate, NavLink } from 'react-router';
 
-import { ROUTES } from '~~>shared/model/routes';
-import { Limbo } from '~~>shared/ui/wrappers';
+import { ROUTES } from '@shared/model/routes';
+import { Limbo } from '@shared/ui/wrappers';
 
-const HeaderLayout = lazy(() => import('~~>app/layouts/headerLayout'));
-const LoginPage = lazy(() => import('~~>pages/login'));
-const LandingPage = lazy(() => import('~~>pages/landing'));
-const ProfilePage = lazy(() => import('~~>pages/profile'));
-const AdsPage = lazy(() => import('~~>pages/main'));
+const HeaderLayout = lazy(() => import('@app/layouts/headerLayout'));
+const LoginPage = lazy(() => import('@pages/login'));
+const LandingPage = lazy(() => import('@pages/landing'));
+const ProfilePage = lazy(() => import('@pages/profile'));
+const AdsPage = lazy(() => import('@pages/main'));
 
 const router = createBrowserRouter([
 	{

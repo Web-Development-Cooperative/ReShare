@@ -1,6 +1,7 @@
+import { Tag, UniList } from '@shared/ui/others';
+import { Paragraph14Reg, UIText14Medium } from '@shared/ui/paragraphs';
+
 import styles from './AdCard.module.css';
-import { Paragraph14Reg, UIText14Medium } from '~~>shared/ui/paragraphs';
-import { Tag, UniList } from '~~>shared/ui/others';
 
 const AdCard = ({ img, title, author, description, tags }) => {
     return (

@@ -24,22 +24,15 @@ export default defineConfig([
 		},
 		settings: {
 			'import/resolver': {
-				node: {
-					paths: ['node_modules', 'src'],
-					extensions: ['.ts', '.tsx', '.js'],
-				},
-				alias: {
-					map: [
-						['~~>app', './src/app'],
-						['~~>pages', './src/pages'],
-						['~~>widgets', './src/widgets'],
-						['~~>features', './src/features'],
-						['~~>entities', './src/entities'],
-						['~~>shared', './src/shared'],
-					],
-					extensions: ['.ts', '.tsx'],
+				typescript: {
+				alwaysTryTypes: true,
+				project: [
+				'./tsconfig.json',
+				'./tsconfig.app.json'
+				],
 				},
 			},
+			'import/internal-regex': '^@/',
 		},
 		plugins: {
 			'react-hooks': reactHooks,
@@ -76,6 +69,19 @@ export default defineConfig([
 						['parent', 'sibling', 'index', 'type', 'unknown'],
 					],
 					'newlines-between': 'always',
+					// Помечаем @/* как внутренние импорты
+					pathGroups: [
+					{
+						pattern: '@/**',
+						group: 'internal',
+						position: 'after',
+					},
+					],
+						pathGroupsExcludedImportTypes: ['builtin'],
+						alphabetize: {
+						order: 'asc',
+						caseInsensitive: true,
+					},
 				},
 			],
 		},
