@@ -9,6 +9,7 @@ const LoginPage = lazy(() => import('~~>pages/login'));
 const LandingPage = lazy(() => import('~~>pages/landing'));
 const ProfilePage = lazy(() => import('~~>pages/profile'));
 const MessagesPage = lazy(() => import('~~>pages/messages'));
+const AdsPage = lazy(() => import('~~>pages/main'));
 
 const router = createBrowserRouter([
 	{
@@ -42,6 +43,14 @@ const router = createBrowserRouter([
 						<h1>Главная</h1>
 						<NavLink to={ROUTES.PROFILE}>Профиль</NavLink>
 					</>
+				),
+			},
+			{
+				path: ROUTES.ADS,
+				element: (
+					<Limbo>
+						<AdsPage />
+					</Limbo>
 				),
 			},
 			{
