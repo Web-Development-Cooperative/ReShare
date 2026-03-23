@@ -1,13 +1,12 @@
 import InputBase from '~~>shared/ui/inputs/inputBase/InputBase';
+import styles from './MainPage.module.css';
 import { ButtonBase } from '~~>shared/ui/buttons/buttonBase/ButtonBase';
 import { UniList } from '~~>shared/ui/others';
+import AdCard from './adCard/AdCard';
 import { BgBorderDefault } from '~~>shared/ui/wrappers';
 import { UIText14SB } from '~~>shared/ui/paragraphs';
 import { Settings } from '~~>shared/ui/icons/settings/Settings';
 import { Loupe } from '~~>shared/ui/icons/loupe/Loupe';
-
-import AdCard from './adCard/AdCard';
-import styles from './MainPage.module.css';
 
 const mockCards = [
     {
@@ -57,11 +56,11 @@ const MainPage = () => {
         <div className={styles.main}>
             <h1>Лента объявлений</h1>
             <div className={styles.finderContainer}>
-                <InputBase placeholder="Поиск по доступным обновлениям" leftIcon={<Loupe />}></InputBase>
-                <ButtonBase color="shaded"><Settings /><UIText14SB>Фильтры</UIText14SB></ButtonBase>
+                <InputBase placeholder='Поиск по доступным обновлениям' leftIcon={<Loupe />}></InputBase>
+                <ButtonBase color='shaded'><Settings /><UIText14SB>Фильтры</UIText14SB></ButtonBase>
             </div>
-            <BgBorderDefault colorType="surface-1">
-                <UniList className={styles.cardList} items={mockCards} renderItem={(item) => <AdCard img={undefined} title={undefined} author={undefined} description={undefined} tags={undefined} {...item} />}></UniList>
+            <BgBorderDefault colorType='surface-1'>
+                <UniList className={styles.cardList} items={mockCards} renderItem={(item) => <AdCard {...item} />}></UniList>
             </BgBorderDefault>
         </div>
     );

@@ -1,5 +1,4 @@
 import React, { type FC } from 'react';
-
 import styles from './InputBase.module.css';
 import type { BaseInputProps } from '~~>shared/model/input.types';
 
