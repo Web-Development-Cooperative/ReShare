@@ -1,8 +1,10 @@
 import type {
+	ButtonHTMLAttributes,
 	FC,
 	HTMLAttributes,
 	HtmlHTMLAttributes,
 	ImgHTMLAttributes,
+	InputHTMLAttributes,
 	PropsWithChildren,
 	ReactNode,
 	RefAttributes,
@@ -72,10 +74,25 @@ type TextDividerProps = FC<
 		OtherTextDividerProps
 >;
 
+type OtherAuthFormProps = {
+	typeForm: 'login' | 'reg';
+	value: Record<'email' | 'password', string>;
+	onSubmit: Pick<
+		ButtonHTMLAttributes<HTMLButtonElement>,
+		'onClick'
+	>['onClick'];
+};
+type AuthFormProps = FC<
+	Omit<HtmlHTMLAttributes<HTMLDivElement>, 'onChange' | 'onSubmit'> &
+		OtherAuthFormProps &
+		Pick<InputHTMLAttributes<HTMLInputElement>, 'onChange'>
+>;
+
 export {
 	type TagProps,
 	type AvatarProps,
 	type UniListProps,
 	type RatingProps,
 	type TextDividerProps,
+	type AuthFormProps,
 };

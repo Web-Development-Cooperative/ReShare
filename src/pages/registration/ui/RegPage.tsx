@@ -1,16 +1,16 @@
 import { Link } from 'react-router';
 
-import { LoginForm } from '@features/login';
+import { RegForm } from '@features/registration';
 import { LogoHeader } from '@shared/ui/icons';
 import { UIText12Reg } from '@shared/ui/paragraphs';
 
-import styles from './LoginPage.module.css';
+import styles from './RegPage.module.css';
 
-const LoginPage = () => {
+const RegPage = () => {
 	return (
 		<div className={styles['login-page']}>
 			<LogoHeader />
-			<LoginForm />
+			<RegForm />
 			<UIText12Reg className={styles['footer-text']}>
 				Продолжая вход или регистрацию, вы соглашаетесь
 				<Link to={'#'} className={styles['footer-link']}>
@@ -26,4 +26,4 @@ const LoginPage = () => {
 	);
 };
 
-export { LoginPage };
+export { RegPage };
