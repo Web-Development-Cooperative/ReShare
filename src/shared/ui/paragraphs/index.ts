@@ -1,3 +1,4 @@
+export { UIText12Reg } from './uiText12Reg/UIText12Reg';
 export { UIText12SB } from './uiText12SB/UIText12SB';
 export { UIText14SB } from './uiText14SB/UIText14SB';
 export { UIText14Reg } from './uiText14Reg/UIText14Reg';

@@ -63,4 +63,19 @@ type RatingProps = FC<
 	PropsWithChildren<HtmlHTMLAttributes<HTMLDivElement>> & OtherRatingProps
 >;
 
-export { type TagProps, type AvatarProps, type UniListProps, type RatingProps };
+type OtherTextDividerProps = {
+	label?: string;
+	position?: 'left' | 'middle' | 'right';
+};
+type TextDividerProps = FC<
+	PropsWithChildren<HtmlHTMLAttributes<HTMLDivElement>> &
+		OtherTextDividerProps
+>;
+
+export {
+	type TagProps,
+	type AvatarProps,
+	type UniListProps,
+	type RatingProps,
+	type TextDividerProps,
+};
