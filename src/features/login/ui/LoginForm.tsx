@@ -3,7 +3,7 @@ import { AuthForm } from '@shared/ui/others';
 import { useLoginForm } from '../lib/useLoginForm';
 
 const LoginForm = () => {
-	const { data, onChange, onSubmit } = useLoginForm();
+	const { data, onChange, onSubmit, isLoading } = useLoginForm();
 
 	return (
 		<AuthForm
@@ -11,6 +11,7 @@ const LoginForm = () => {
 			value={data}
 			onChange={onChange}
 			onSubmit={onSubmit}
+			isLoading={isLoading}
 		/>
 	);
 };
