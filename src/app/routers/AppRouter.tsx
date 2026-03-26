@@ -6,6 +6,7 @@ import { Limbo } from '@shared/ui/wrappers';
 
 const HeaderLayout = lazy(() => import('@app/layouts/headerLayout'));
 const LoginPage = lazy(() => import('@pages/login'));
+const RegPage = lazy(() => import('@pages/registration'));
 const LandingPage = lazy(() => import('@pages/landing'));
 const ProfilePage = lazy(() => import('@pages/profile'));
 const MessagesPage = lazy(() => import('@pages/messages'));
@@ -25,6 +26,14 @@ const router = createBrowserRouter([
 		element: (
 			<Limbo>
 				<LoginPage />
+			</Limbo>
+		),
+	},
+	{
+		path: ROUTES.REG,
+		element: (
+			<Limbo>
+				<RegPage />
 			</Limbo>
 		),
 	},

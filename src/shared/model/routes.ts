@@ -2,6 +2,7 @@ const ROUTES = {
 	ADS: '/ads',
 	LANDING: '/landing',
 	LOGIN: '/login',
+	REG: '/reg',
 	HOME: '/',
 	PROFILE: '/profile',
 	PROFILE_MY_ADS: '/profile/my-ads',
@@ -14,6 +15,7 @@ const ROUTES = {
 const ADAPTER_ROUTES_BREADCRUMBS = {
 	'/landing': 'Лендинг',
 	'/login': 'Вход',
+	'/reg': 'Регистрация',
 	'/': 'Главная',
 	'/profile': 'Профиль',
 	'/profile/my-ads': 'Мои объявления',
