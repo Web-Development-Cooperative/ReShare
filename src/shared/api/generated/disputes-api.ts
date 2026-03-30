@@ -10,22 +10,57 @@
  * ---------------------------------------------------------------
  */
 
-export interface AddReviewRequest {
-  reviewerName?: string | null;
-  /** @format int32 */
-  rating?: number;
-  comment?: string | null;
+export interface AddEvidenceRequest {
+  description?: string | null;
+  fileUrls?: string[] | null;
 }
 
-export interface EcoStatsDto {
-  /** @format int32 */
-  itemsGifted?: number;
-  /** @format int32 */
-  itemsReceived?: number;
-  /** @format double */
-  co2SavedKg?: number;
-  /** @format double */
-  wasteSavedKg?: number;
+export interface DisputeCreatedDto {
+  /** @format uuid */
+  disputeId?: string;
+}
+
+export interface DisputeDto {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  transactionId?: string;
+  /** @format uuid */
+  initiatorId?: string;
+  /** @format uuid */
+  respondentId?: string;
+  reason?: string | null;
+  status?: string | null;
+  resolution?: string | null;
+  /** @format date-time */
+  createdAt?: string;
+  /** @format date-time */
+  resolvedAt?: string | null;
+  evidences?: EvidenceDto[] | null;
+}
+
+export interface EvidenceCreatedDto {
+  /** @format uuid */
+  evidenceId?: string;
+}
+
+export interface EvidenceDto {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  submittedBy?: string;
+  description?: string | null;
+  fileUrls?: string[] | null;
+  /** @format date-time */
+  submittedAt?: string;
+}
+
+export interface OpenDisputeRequest {
+  /** @format uuid */
+  transactionId?: string;
+  /** @format uuid */
+  respondentId?: string;
+  reason?: string | null;
 }
 
 export interface ProblemDetails {
@@ -38,118 +73,11 @@ export interface ProblemDetails {
   [key: string]: any;
 }
 
-export interface ReviewCreatedDto {
-  /** @format uuid */
-  reviewId?: string;
+export interface ResolveDisputeRequest {
+  resolution?: string | null;
 }
 
-export interface ReviewDto {
-  /** @format uuid */
-  id?: string;
-  /** @format uuid */
-  reviewerId?: string;
-  reviewerName?: string | null;
-  /** @format int32 */
-  rating?: number;
-  comment?: string | null;
-  /** @format date-time */
-  createdAt?: string;
-}
-
-export interface ReviewDtoPagedList {
-  items?: ReviewDto[] | null;
-  /** @format int32 */
-  totalCount?: number;
-  /** @format int32 */
-  pageNumber?: number;
-  /** @format int32 */
-  pageSize?: number;
-  /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
-}
-
-export interface UpdateAvatarRequest {
-  avatarUrl?: string | null;
-}
-
-export interface UpdateProfileRequest {
-  firstName?: string | null;
-  lastName?: string | null;
-  bio?: string | null;
-  city?: string | null;
-}
-
-export interface UserProfileDto {
-  /** @format uuid */
-  id?: string;
-  firstName?: string | null;
-  lastName?: string | null;
-  avatarUrl?: string | null;
-  bio?: string | null;
-  city?: string | null;
-  /** @format double */
-  rating?: number;
-  /** @format int32 */
-  reviewCount?: number;
-  ecoStats?: EcoStatsDto;
-  /** @format date-time */
-  createdAt?: string;
-}
-
-export interface UserProfileDtoPagedList {
-  items?: UserProfileDto[] | null;
-  /** @format int32 */
-  totalCount?: number;
-  /** @format int32 */
-  pageNumber?: number;
-  /** @format int32 */
-  pageSize?: number;
-  /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
-}
-
-export interface UsersDetailParams {
-  /** @format uuid */
-  id: string;
-}
-
-export type UsersDetailData = UserProfileDto;
-
-export type UsersMeListData = UserProfileDto;
-
-export type UsersMeUpdateData = any;
-
-export type UsersMeAvatarUpdateData = any;
-
-export interface UsersReviewsListParams {
-  /**
-   * @format int32
-   * @default 1
-   */
-  pageNumber?: number;
-  /**
-   * @format int32
-   * @default 20
-   */
-  pageSize?: number;
-  /** @format uuid */
-  id: string;
-}
-
-export type UsersReviewsListData = ReviewDtoPagedList;
-
-export interface UsersReviewsCreateParams {
-  /** @format uuid */
-  id: string;
-}
-
-export type UsersReviewsCreateData = ReviewCreatedDto;
-
-export interface UsersLeaderboardListParams {
+export interface DisputesListParams {
   /**
    * @format int32
    * @default 1
@@ -162,7 +90,52 @@ export interface UsersLeaderboardListParams {
   pageSize?: number;
 }
 
-export type UsersLeaderboardListData = UserProfileDtoPagedList;
+export type DisputesListData = any;
+
+export type DisputesCreateData = DisputeCreatedDto;
+
+export interface DisputesDetailParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type DisputesDetailData = DisputeDto;
+
+export interface DisputesOpenListParams {
+  /**
+   * @format int32
+   * @default 1
+   */
+  pageNumber?: number;
+  /**
+   * @format int32
+   * @default 20
+   */
+  pageSize?: number;
+}
+
+export type DisputesOpenListData = any;
+
+export interface DisputesEvidenceCreateParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type DisputesEvidenceCreateData = EvidenceCreatedDto;
+
+export interface DisputesResolveCreateParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type DisputesResolveCreateData = any;
+
+export interface DisputesCloseCreateParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type DisputesCloseCreateData = any;
 
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
@@ -420,7 +393,7 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title ResX Users API
+ * @title ResX Disputes API
  * @version v1
  */
 export class Api<
@@ -430,108 +403,31 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersDetail
-     * @request GET:/api/users/{id}
-     */
-    usersDetail: ({ id }: UsersDetailParams, params: RequestParams = {}) =>
-      this.request<UsersDetailData, ProblemDetails>({
-        path: `/api/users/${id}`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeList
-     * @request GET:/api/users/me
+     * @tags Disputes
+     * @name DisputesList
+     * @request GET:/api/disputes
      * @secure
      */
-    usersMeList: (params: RequestParams = {}) =>
-      this.request<UsersMeListData, ProblemDetails>({
-        path: `/api/users/me`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeUpdate
-     * @request PUT:/api/users/me
-     * @secure
-     */
-    usersMeUpdate: (data: UpdateProfileRequest, params: RequestParams = {}) =>
-      this.request<UsersMeUpdateData, ProblemDetails>({
-        path: `/api/users/me`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeAvatarUpdate
-     * @request PUT:/api/users/me/avatar
-     * @secure
-     */
-    usersMeAvatarUpdate: (
-      data: UpdateAvatarRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<UsersMeAvatarUpdateData, ProblemDetails>({
-        path: `/api/users/me/avatar`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersReviewsList
-     * @request GET:/api/users/{id}/reviews
-     */
-    usersReviewsList: (
-      { id, ...query }: UsersReviewsListParams,
-      params: RequestParams = {},
-    ) =>
-      this.request<UsersReviewsListData, ProblemDetails>({
-        path: `/api/users/${id}/reviews`,
+    disputesList: (query: DisputesListParams, params: RequestParams = {}) =>
+      this.request<DisputesListData, ProblemDetails>({
+        path: `/api/disputes`,
         method: "GET",
         query: query,
-        format: "json",
+        secure: true,
         ...params,
       }),
 
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersReviewsCreate
-     * @request POST:/api/users/{id}/reviews
+     * @tags Disputes
+     * @name DisputesCreate
+     * @request POST:/api/disputes
      * @secure
      */
-    usersReviewsCreate: (
-      { id }: UsersReviewsCreateParams,
-      data: AddReviewRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<UsersReviewsCreateData, ProblemDetails>({
-        path: `/api/users/${id}/reviews`,
+    disputesCreate: (data: OpenDisputeRequest, params: RequestParams = {}) =>
+      this.request<DisputesCreateData, ProblemDetails>({
+        path: `/api/disputes`,
         method: "POST",
         body: data,
         secure: true,
@@ -543,19 +439,104 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersLeaderboardList
-     * @request GET:/api/users/leaderboard
+     * @tags Disputes
+     * @name DisputesDetail
+     * @request GET:/api/disputes/{id}
+     * @secure
      */
-    usersLeaderboardList: (
-      query: UsersLeaderboardListParams,
+    disputesDetail: (
+      { id }: DisputesDetailParams,
       params: RequestParams = {},
     ) =>
-      this.request<UsersLeaderboardListData, any>({
-        path: `/api/users/leaderboard`,
+      this.request<DisputesDetailData, ProblemDetails>({
+        path: `/api/disputes/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Disputes
+     * @name DisputesOpenList
+     * @request GET:/api/disputes/open
+     * @secure
+     */
+    disputesOpenList: (
+      query: DisputesOpenListParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<DisputesOpenListData, ProblemDetails>({
+        path: `/api/disputes/open`,
         method: "GET",
         query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Disputes
+     * @name DisputesEvidenceCreate
+     * @request POST:/api/disputes/{id}/evidence
+     * @secure
+     */
+    disputesEvidenceCreate: (
+      { id }: DisputesEvidenceCreateParams,
+      data: AddEvidenceRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<DisputesEvidenceCreateData, ProblemDetails>({
+        path: `/api/disputes/${id}/evidence`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
         format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Disputes
+     * @name DisputesResolveCreate
+     * @request POST:/api/disputes/{id}/resolve
+     * @secure
+     */
+    disputesResolveCreate: (
+      { id }: DisputesResolveCreateParams,
+      data: ResolveDisputeRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<DisputesResolveCreateData, ProblemDetails>({
+        path: `/api/disputes/${id}/resolve`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Disputes
+     * @name DisputesCloseCreate
+     * @request POST:/api/disputes/{id}/close
+     * @secure
+     */
+    disputesCloseCreate: (
+      { id }: DisputesCloseCreateParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<DisputesCloseCreateData, ProblemDetails>({
+        path: `/api/disputes/${id}/close`,
+        method: "POST",
+        secure: true,
         ...params,
       }),
   };

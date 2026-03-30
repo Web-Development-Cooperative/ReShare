@@ -10,22 +10,26 @@
  * ---------------------------------------------------------------
  */
 
-export interface AddReviewRequest {
-  reviewerName?: string | null;
-  /** @format int32 */
-  rating?: number;
-  comment?: string | null;
+export interface NotificationDto {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  userId?: string;
+  type?: string | null;
+  title?: string | null;
+  body?: string | null;
+  isRead?: boolean;
+  payload?: any;
+  /** @format date-time */
+  createdAt?: string;
+  /** @format date-time */
+  readAt?: string | null;
 }
 
-export interface EcoStatsDto {
+export interface NotificationsPageDto {
+  items?: NotificationDto[] | null;
   /** @format int32 */
-  itemsGifted?: number;
-  /** @format int32 */
-  itemsReceived?: number;
-  /** @format double */
-  co2SavedKg?: number;
-  /** @format double */
-  wasteSavedKg?: number;
+  unreadCount?: number;
 }
 
 export interface ProblemDetails {
@@ -38,94 +42,7 @@ export interface ProblemDetails {
   [key: string]: any;
 }
 
-export interface ReviewCreatedDto {
-  /** @format uuid */
-  reviewId?: string;
-}
-
-export interface ReviewDto {
-  /** @format uuid */
-  id?: string;
-  /** @format uuid */
-  reviewerId?: string;
-  reviewerName?: string | null;
-  /** @format int32 */
-  rating?: number;
-  comment?: string | null;
-  /** @format date-time */
-  createdAt?: string;
-}
-
-export interface ReviewDtoPagedList {
-  items?: ReviewDto[] | null;
-  /** @format int32 */
-  totalCount?: number;
-  /** @format int32 */
-  pageNumber?: number;
-  /** @format int32 */
-  pageSize?: number;
-  /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
-}
-
-export interface UpdateAvatarRequest {
-  avatarUrl?: string | null;
-}
-
-export interface UpdateProfileRequest {
-  firstName?: string | null;
-  lastName?: string | null;
-  bio?: string | null;
-  city?: string | null;
-}
-
-export interface UserProfileDto {
-  /** @format uuid */
-  id?: string;
-  firstName?: string | null;
-  lastName?: string | null;
-  avatarUrl?: string | null;
-  bio?: string | null;
-  city?: string | null;
-  /** @format double */
-  rating?: number;
-  /** @format int32 */
-  reviewCount?: number;
-  ecoStats?: EcoStatsDto;
-  /** @format date-time */
-  createdAt?: string;
-}
-
-export interface UserProfileDtoPagedList {
-  items?: UserProfileDto[] | null;
-  /** @format int32 */
-  totalCount?: number;
-  /** @format int32 */
-  pageNumber?: number;
-  /** @format int32 */
-  pageSize?: number;
-  /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
-}
-
-export interface UsersDetailParams {
-  /** @format uuid */
-  id: string;
-}
-
-export type UsersDetailData = UserProfileDto;
-
-export type UsersMeListData = UserProfileDto;
-
-export type UsersMeUpdateData = any;
-
-export type UsersMeAvatarUpdateData = any;
-
-export interface UsersReviewsListParams {
+export interface NotificationsListParams {
   /**
    * @format int32
    * @default 1
@@ -136,33 +53,20 @@ export interface UsersReviewsListParams {
    * @default 20
    */
   pageSize?: number;
+  /** @default false */
+  onlyUnread?: boolean;
+}
+
+export type NotificationsListData = NotificationsPageDto;
+
+export interface NotificationsReadCreateParams {
   /** @format uuid */
   id: string;
 }
 
-export type UsersReviewsListData = ReviewDtoPagedList;
+export type NotificationsReadCreateData = any;
 
-export interface UsersReviewsCreateParams {
-  /** @format uuid */
-  id: string;
-}
-
-export type UsersReviewsCreateData = ReviewCreatedDto;
-
-export interface UsersLeaderboardListParams {
-  /**
-   * @format int32
-   * @default 1
-   */
-  pageNumber?: number;
-  /**
-   * @format int32
-   * @default 20
-   */
-  pageSize?: number;
-}
-
-export type UsersLeaderboardListData = UserProfileDtoPagedList;
+export type NotificationsReadAllCreateData = any;
 
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
@@ -420,7 +324,7 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title ResX Users API
+ * @title ResX Notifications API
  * @version v1
  */
 export class Api<
@@ -430,89 +334,20 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersDetail
-     * @request GET:/api/users/{id}
-     */
-    usersDetail: ({ id }: UsersDetailParams, params: RequestParams = {}) =>
-      this.request<UsersDetailData, ProblemDetails>({
-        path: `/api/users/${id}`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeList
-     * @request GET:/api/users/me
+     * @tags Notifications
+     * @name NotificationsList
+     * @request GET:/api/notifications
      * @secure
      */
-    usersMeList: (params: RequestParams = {}) =>
-      this.request<UsersMeListData, ProblemDetails>({
-        path: `/api/users/me`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeUpdate
-     * @request PUT:/api/users/me
-     * @secure
-     */
-    usersMeUpdate: (data: UpdateProfileRequest, params: RequestParams = {}) =>
-      this.request<UsersMeUpdateData, ProblemDetails>({
-        path: `/api/users/me`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeAvatarUpdate
-     * @request PUT:/api/users/me/avatar
-     * @secure
-     */
-    usersMeAvatarUpdate: (
-      data: UpdateAvatarRequest,
+    notificationsList: (
+      query: NotificationsListParams,
       params: RequestParams = {},
     ) =>
-      this.request<UsersMeAvatarUpdateData, ProblemDetails>({
-        path: `/api/users/me/avatar`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersReviewsList
-     * @request GET:/api/users/{id}/reviews
-     */
-    usersReviewsList: (
-      { id, ...query }: UsersReviewsListParams,
-      params: RequestParams = {},
-    ) =>
-      this.request<UsersReviewsListData, ProblemDetails>({
-        path: `/api/users/${id}/reviews`,
+      this.request<NotificationsListData, ProblemDetails>({
+        path: `/api/notifications`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params,
       }),
@@ -520,42 +355,35 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersReviewsCreate
-     * @request POST:/api/users/{id}/reviews
+     * @tags Notifications
+     * @name NotificationsReadCreate
+     * @request POST:/api/notifications/{id}/read
      * @secure
      */
-    usersReviewsCreate: (
-      { id }: UsersReviewsCreateParams,
-      data: AddReviewRequest,
+    notificationsReadCreate: (
+      { id }: NotificationsReadCreateParams,
       params: RequestParams = {},
     ) =>
-      this.request<UsersReviewsCreateData, ProblemDetails>({
-        path: `/api/users/${id}/reviews`,
+      this.request<NotificationsReadCreateData, ProblemDetails>({
+        path: `/api/notifications/${id}/read`,
         method: "POST",
-        body: data,
         secure: true,
-        type: ContentType.Json,
-        format: "json",
         ...params,
       }),
 
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersLeaderboardList
-     * @request GET:/api/users/leaderboard
+     * @tags Notifications
+     * @name NotificationsReadAllCreate
+     * @request POST:/api/notifications/read-all
+     * @secure
      */
-    usersLeaderboardList: (
-      query: UsersLeaderboardListParams,
-      params: RequestParams = {},
-    ) =>
-      this.request<UsersLeaderboardListData, any>({
-        path: `/api/users/leaderboard`,
-        method: "GET",
-        query: query,
-        format: "json",
+    notificationsReadAllCreate: (params: RequestParams = {}) =>
+      this.request<NotificationsReadAllCreateData, ProblemDetails>({
+        path: `/api/notifications/read-all`,
+        method: "POST",
+        secure: true,
         ...params,
       }),
   };

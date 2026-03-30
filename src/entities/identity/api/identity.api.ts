@@ -1,5 +1,4 @@
 import { baseApi, apiTags } from '@shared/api';
-import { SERVICE_URLS } from '@shared/api/config';
 
 import type {
 	ChangePasswordRequest,
@@ -14,7 +13,7 @@ export const authApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
 		register: builder.mutation<TokensDto, RegisterUserCommand>({
 			query: (body) => ({
-				url: `${SERVICE_URLS.identity}/api/auth/register`,
+				url: '/auth/register',
 				method: 'POST',
 				body,
 			}),
@@ -24,7 +23,7 @@ export const authApi = baseApi.injectEndpoints({
 			query: (body) => {
 				new Promise((resolve) => setTimeout(resolve, 2000));
 				return {
-					url: `${SERVICE_URLS.identity}/api/auth/login`,
+					url: '/auth/login',
 					method: 'POST',
 					body,
 				};
@@ -33,7 +32,7 @@ export const authApi = baseApi.injectEndpoints({
 		}),
 		refresh: builder.mutation<TokensDto, RefreshTokenCommand>({
 			query: (body) => ({
-				url: `${SERVICE_URLS.identity}/api/auth/refresh`,
+				url: '/auth/refresh',
 				method: 'POST',
 				body,
 			}),
@@ -41,7 +40,7 @@ export const authApi = baseApi.injectEndpoints({
 		}),
 		logout: builder.mutation<void, LogoutCommand>({
 			query: (body) => ({
-				url: `${SERVICE_URLS.identity}/api/auth/logout`,
+				url: '/auth/logout',
 				method: 'POST',
 				body,
 			}),
@@ -49,7 +48,7 @@ export const authApi = baseApi.injectEndpoints({
 		}),
 		changePassword: builder.mutation<void, ChangePasswordRequest>({
 			query: (body) => ({
-				url: `${SERVICE_URLS.identity}/api/auth/change-password`,
+				url: '/auth/change-password',
 				method: 'PUT',
 				body,
 			}),

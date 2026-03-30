@@ -10,159 +10,46 @@
  * ---------------------------------------------------------------
  */
 
-export interface AddReviewRequest {
-  reviewerName?: string | null;
+export interface CategoryStatsDto {
+  /** @format uuid */
+  categoryId?: string;
+  categoryName?: string | null;
   /** @format int32 */
-  rating?: number;
-  comment?: string | null;
+  listingsCount?: number;
+  /** @format int32 */
+  transactionsCount?: number;
 }
 
-export interface EcoStatsDto {
+export interface CityStatsDto {
+  city?: string | null;
   /** @format int32 */
-  itemsGifted?: number;
+  listingsCount?: number;
   /** @format int32 */
-  itemsReceived?: number;
+  usersCount?: number;
   /** @format double */
   co2SavedKg?: number;
+}
+
+export interface EcoPlatformStatsDto {
+  /** @format int64 */
+  totalItemsTransferred?: number;
   /** @format double */
-  wasteSavedKg?: number;
-}
-
-export interface ProblemDetails {
-  type?: string | null;
-  title?: string | null;
-  /** @format int32 */
-  status?: number | null;
-  detail?: string | null;
-  instance?: string | null;
-  [key: string]: any;
-}
-
-export interface ReviewCreatedDto {
-  /** @format uuid */
-  reviewId?: string;
-}
-
-export interface ReviewDto {
-  /** @format uuid */
-  id?: string;
-  /** @format uuid */
-  reviewerId?: string;
-  reviewerName?: string | null;
-  /** @format int32 */
-  rating?: number;
-  comment?: string | null;
-  /** @format date-time */
-  createdAt?: string;
-}
-
-export interface ReviewDtoPagedList {
-  items?: ReviewDto[] | null;
-  /** @format int32 */
-  totalCount?: number;
-  /** @format int32 */
-  pageNumber?: number;
-  /** @format int32 */
-  pageSize?: number;
-  /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
-}
-
-export interface UpdateAvatarRequest {
-  avatarUrl?: string | null;
-}
-
-export interface UpdateProfileRequest {
-  firstName?: string | null;
-  lastName?: string | null;
-  bio?: string | null;
-  city?: string | null;
-}
-
-export interface UserProfileDto {
-  /** @format uuid */
-  id?: string;
-  firstName?: string | null;
-  lastName?: string | null;
-  avatarUrl?: string | null;
-  bio?: string | null;
-  city?: string | null;
+  totalCo2SavedKg?: number;
   /** @format double */
-  rating?: number;
+  totalWasteSavedKg?: number;
   /** @format int32 */
-  reviewCount?: number;
-  ecoStats?: EcoStatsDto;
+  activeListings?: number;
+  /** @format int32 */
+  registeredUsers?: number;
   /** @format date-time */
-  createdAt?: string;
+  lastUpdated?: string;
 }
 
-export interface UserProfileDtoPagedList {
-  items?: UserProfileDto[] | null;
-  /** @format int32 */
-  totalCount?: number;
-  /** @format int32 */
-  pageNumber?: number;
-  /** @format int32 */
-  pageSize?: number;
-  /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
-}
+export type AnalyticsEcoStatsListData = EcoPlatformStatsDto;
 
-export interface UsersDetailParams {
-  /** @format uuid */
-  id: string;
-}
+export type AnalyticsCategoriesListData = CategoryStatsDto[];
 
-export type UsersDetailData = UserProfileDto;
-
-export type UsersMeListData = UserProfileDto;
-
-export type UsersMeUpdateData = any;
-
-export type UsersMeAvatarUpdateData = any;
-
-export interface UsersReviewsListParams {
-  /**
-   * @format int32
-   * @default 1
-   */
-  pageNumber?: number;
-  /**
-   * @format int32
-   * @default 20
-   */
-  pageSize?: number;
-  /** @format uuid */
-  id: string;
-}
-
-export type UsersReviewsListData = ReviewDtoPagedList;
-
-export interface UsersReviewsCreateParams {
-  /** @format uuid */
-  id: string;
-}
-
-export type UsersReviewsCreateData = ReviewCreatedDto;
-
-export interface UsersLeaderboardListParams {
-  /**
-   * @format int32
-   * @default 1
-   */
-  pageNumber?: number;
-  /**
-   * @format int32
-   * @default 20
-   */
-  pageSize?: number;
-}
-
-export type UsersLeaderboardListData = UserProfileDtoPagedList;
+export type AnalyticsCitiesListData = CityStatsDto[];
 
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
@@ -420,8 +307,10 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title ResX Users API
+ * @title ResX Analytics API
  * @version v1
+ *
+ * Агрегированная экологическая аналитика платформы ресурс-кроссинга
  */
 export class Api<
   SecurityDataType extends unknown,
@@ -430,13 +319,13 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersDetail
-     * @request GET:/api/users/{id}
+     * @tags Analytics
+     * @name AnalyticsEcoStatsList
+     * @request GET:/api/Analytics/eco-stats
      */
-    usersDetail: ({ id }: UsersDetailParams, params: RequestParams = {}) =>
-      this.request<UsersDetailData, ProblemDetails>({
-        path: `/api/users/${id}`,
+    analyticsEcoStatsList: (params: RequestParams = {}) =>
+      this.request<AnalyticsEcoStatsListData, any>({
+        path: `/api/Analytics/eco-stats`,
         method: "GET",
         format: "json",
         ...params,
@@ -445,16 +334,14 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersMeList
-     * @request GET:/api/users/me
-     * @secure
+     * @tags Analytics
+     * @name AnalyticsCategoriesList
+     * @request GET:/api/Analytics/categories
      */
-    usersMeList: (params: RequestParams = {}) =>
-      this.request<UsersMeListData, ProblemDetails>({
-        path: `/api/users/me`,
+    analyticsCategoriesList: (params: RequestParams = {}) =>
+      this.request<AnalyticsCategoriesListData, any>({
+        path: `/api/Analytics/categories`,
         method: "GET",
-        secure: true,
         format: "json",
         ...params,
       }),
@@ -462,99 +349,14 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersMeUpdate
-     * @request PUT:/api/users/me
-     * @secure
+     * @tags Analytics
+     * @name AnalyticsCitiesList
+     * @request GET:/api/Analytics/cities
      */
-    usersMeUpdate: (data: UpdateProfileRequest, params: RequestParams = {}) =>
-      this.request<UsersMeUpdateData, ProblemDetails>({
-        path: `/api/users/me`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeAvatarUpdate
-     * @request PUT:/api/users/me/avatar
-     * @secure
-     */
-    usersMeAvatarUpdate: (
-      data: UpdateAvatarRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<UsersMeAvatarUpdateData, ProblemDetails>({
-        path: `/api/users/me/avatar`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersReviewsList
-     * @request GET:/api/users/{id}/reviews
-     */
-    usersReviewsList: (
-      { id, ...query }: UsersReviewsListParams,
-      params: RequestParams = {},
-    ) =>
-      this.request<UsersReviewsListData, ProblemDetails>({
-        path: `/api/users/${id}/reviews`,
+    analyticsCitiesList: (params: RequestParams = {}) =>
+      this.request<AnalyticsCitiesListData, any>({
+        path: `/api/Analytics/cities`,
         method: "GET",
-        query: query,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersReviewsCreate
-     * @request POST:/api/users/{id}/reviews
-     * @secure
-     */
-    usersReviewsCreate: (
-      { id }: UsersReviewsCreateParams,
-      data: AddReviewRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<UsersReviewsCreateData, ProblemDetails>({
-        path: `/api/users/${id}/reviews`,
-        method: "POST",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersLeaderboardList
-     * @request GET:/api/users/leaderboard
-     */
-    usersLeaderboardList: (
-      query: UsersLeaderboardListParams,
-      params: RequestParams = {},
-    ) =>
-      this.request<UsersLeaderboardListData, any>({
-        path: `/api/users/leaderboard`,
-        method: "GET",
-        query: query,
         format: "json",
         ...params,
       }),

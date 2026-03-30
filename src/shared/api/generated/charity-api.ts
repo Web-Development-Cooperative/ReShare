@@ -10,22 +10,74 @@
  * ---------------------------------------------------------------
  */
 
-export interface AddReviewRequest {
-  reviewerName?: string | null;
-  /** @format int32 */
-  rating?: number;
-  comment?: string | null;
+export interface CharityRequestDto {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  organizationId?: string;
+  title?: string | null;
+  description?: string | null;
+  status?: string | null;
+  requestedItems?: RequestedItemDto[] | null;
+  /** @format date-time */
+  deadlineDate?: string | null;
+  /** @format date-time */
+  createdAt?: string;
 }
 
-export interface EcoStatsDto {
+export interface CharityRequestDtoPagedList {
+  items?: CharityRequestDto[] | null;
   /** @format int32 */
-  itemsGifted?: number;
+  totalCount?: number;
   /** @format int32 */
-  itemsReceived?: number;
-  /** @format double */
-  co2SavedKg?: number;
-  /** @format double */
-  wasteSavedKg?: number;
+  pageNumber?: number;
+  /** @format int32 */
+  pageSize?: number;
+  /** @format int32 */
+  totalPages?: number;
+  hasPreviousPage?: boolean;
+  hasNextPage?: boolean;
+}
+
+export interface CreateCharityRequestDto {
+  title?: string | null;
+  description?: string | null;
+  /** @format date-time */
+  deadlineDate?: string | null;
+  items?: CreateRequestedItemDto[] | null;
+}
+
+export interface CreateOrganizationDto {
+  name?: string | null;
+  description?: string | null;
+  legalDocumentUrl?: string | null;
+}
+
+export interface CreateRequestedItemDto {
+  /** @format uuid */
+  categoryId?: string;
+  categoryName?: string | null;
+  /** @format int32 */
+  quantityNeeded?: number;
+  condition?: string | null;
+}
+
+export interface OrganizationCreatedDto {
+  /** @format uuid */
+  orgId?: string;
+}
+
+export interface OrganizationDto {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  userId?: string;
+  name?: string | null;
+  description?: string | null;
+  verificationStatus?: string | null;
+  legalDocumentUrl?: string | null;
+  /** @format date-time */
+  createdAt?: string;
 }
 
 export interface ProblemDetails {
@@ -38,118 +90,20 @@ export interface ProblemDetails {
   [key: string]: any;
 }
 
-export interface ReviewCreatedDto {
-  /** @format uuid */
-  reviewId?: string;
-}
-
-export interface ReviewDto {
+export interface RequestedItemDto {
   /** @format uuid */
   id?: string;
   /** @format uuid */
-  reviewerId?: string;
-  reviewerName?: string | null;
+  categoryId?: string;
+  categoryName?: string | null;
   /** @format int32 */
-  rating?: number;
-  comment?: string | null;
-  /** @format date-time */
-  createdAt?: string;
+  quantityNeeded?: number;
+  /** @format int32 */
+  quantityReceived?: number;
+  condition?: string | null;
 }
 
-export interface ReviewDtoPagedList {
-  items?: ReviewDto[] | null;
-  /** @format int32 */
-  totalCount?: number;
-  /** @format int32 */
-  pageNumber?: number;
-  /** @format int32 */
-  pageSize?: number;
-  /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
-}
-
-export interface UpdateAvatarRequest {
-  avatarUrl?: string | null;
-}
-
-export interface UpdateProfileRequest {
-  firstName?: string | null;
-  lastName?: string | null;
-  bio?: string | null;
-  city?: string | null;
-}
-
-export interface UserProfileDto {
-  /** @format uuid */
-  id?: string;
-  firstName?: string | null;
-  lastName?: string | null;
-  avatarUrl?: string | null;
-  bio?: string | null;
-  city?: string | null;
-  /** @format double */
-  rating?: number;
-  /** @format int32 */
-  reviewCount?: number;
-  ecoStats?: EcoStatsDto;
-  /** @format date-time */
-  createdAt?: string;
-}
-
-export interface UserProfileDtoPagedList {
-  items?: UserProfileDto[] | null;
-  /** @format int32 */
-  totalCount?: number;
-  /** @format int32 */
-  pageNumber?: number;
-  /** @format int32 */
-  pageSize?: number;
-  /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
-}
-
-export interface UsersDetailParams {
-  /** @format uuid */
-  id: string;
-}
-
-export type UsersDetailData = UserProfileDto;
-
-export type UsersMeListData = UserProfileDto;
-
-export type UsersMeUpdateData = any;
-
-export type UsersMeAvatarUpdateData = any;
-
-export interface UsersReviewsListParams {
-  /**
-   * @format int32
-   * @default 1
-   */
-  pageNumber?: number;
-  /**
-   * @format int32
-   * @default 20
-   */
-  pageSize?: number;
-  /** @format uuid */
-  id: string;
-}
-
-export type UsersReviewsListData = ReviewDtoPagedList;
-
-export interface UsersReviewsCreateParams {
-  /** @format uuid */
-  id: string;
-}
-
-export type UsersReviewsCreateData = ReviewCreatedDto;
-
-export interface UsersLeaderboardListParams {
+export interface CharityRequestsListParams {
   /**
    * @format int32
    * @default 1
@@ -162,7 +116,53 @@ export interface UsersLeaderboardListParams {
   pageSize?: number;
 }
 
-export type UsersLeaderboardListData = UserProfileDtoPagedList;
+export type CharityRequestsListData = CharityRequestDtoPagedList;
+
+export type CharityRequestsCreateData = any;
+
+export interface CharityRequestsDetailParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type CharityRequestsDetailData = CharityRequestDto;
+
+export interface CharityOrganizationsDetailParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type CharityOrganizationsDetailData = OrganizationDto;
+
+export type CharityOrganizationsCreateData = OrganizationCreatedDto;
+
+export interface CharityOrganizationsVerifyUpdateParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type CharityOrganizationsVerifyUpdateData = any;
+
+export interface CharityOrganizationsRejectUpdateParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type CharityOrganizationsRejectUpdateData = any;
+
+export interface CharityRequestsCancelCreateParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type CharityRequestsCancelCreateData = any;
+
+export interface CharityRequestsCompleteCreateParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type CharityRequestsCompleteCreateData = any;
 
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
@@ -420,7 +420,7 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title ResX Users API
+ * @title ResX Charity API
  * @version v1
  */
 export class Api<
@@ -430,87 +430,16 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersDetail
-     * @request GET:/api/users/{id}
+     * @tags Charity
+     * @name CharityRequestsList
+     * @request GET:/api/charity/requests
      */
-    usersDetail: ({ id }: UsersDetailParams, params: RequestParams = {}) =>
-      this.request<UsersDetailData, ProblemDetails>({
-        path: `/api/users/${id}`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeList
-     * @request GET:/api/users/me
-     * @secure
-     */
-    usersMeList: (params: RequestParams = {}) =>
-      this.request<UsersMeListData, ProblemDetails>({
-        path: `/api/users/me`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeUpdate
-     * @request PUT:/api/users/me
-     * @secure
-     */
-    usersMeUpdate: (data: UpdateProfileRequest, params: RequestParams = {}) =>
-      this.request<UsersMeUpdateData, ProblemDetails>({
-        path: `/api/users/me`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeAvatarUpdate
-     * @request PUT:/api/users/me/avatar
-     * @secure
-     */
-    usersMeAvatarUpdate: (
-      data: UpdateAvatarRequest,
+    charityRequestsList: (
+      query: CharityRequestsListParams,
       params: RequestParams = {},
     ) =>
-      this.request<UsersMeAvatarUpdateData, ProblemDetails>({
-        path: `/api/users/me/avatar`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersReviewsList
-     * @request GET:/api/users/{id}/reviews
-     */
-    usersReviewsList: (
-      { id, ...query }: UsersReviewsListParams,
-      params: RequestParams = {},
-    ) =>
-      this.request<UsersReviewsListData, ProblemDetails>({
-        path: `/api/users/${id}/reviews`,
+      this.request<CharityRequestsListData, any>({
+        path: `/api/charity/requests`,
         method: "GET",
         query: query,
         format: "json",
@@ -520,18 +449,74 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersReviewsCreate
-     * @request POST:/api/users/{id}/reviews
+     * @tags Charity
+     * @name CharityRequestsCreate
+     * @request POST:/api/charity/requests
      * @secure
      */
-    usersReviewsCreate: (
-      { id }: UsersReviewsCreateParams,
-      data: AddReviewRequest,
+    charityRequestsCreate: (
+      data: CreateCharityRequestDto,
       params: RequestParams = {},
     ) =>
-      this.request<UsersReviewsCreateData, ProblemDetails>({
-        path: `/api/users/${id}/reviews`,
+      this.request<CharityRequestsCreateData, ProblemDetails>({
+        path: `/api/charity/requests`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Charity
+     * @name CharityRequestsDetail
+     * @request GET:/api/charity/requests/{id}
+     */
+    charityRequestsDetail: (
+      { id }: CharityRequestsDetailParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<CharityRequestsDetailData, ProblemDetails>({
+        path: `/api/charity/requests/${id}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Charity
+     * @name CharityOrganizationsDetail
+     * @request GET:/api/charity/organizations/{id}
+     */
+    charityOrganizationsDetail: (
+      { id }: CharityOrganizationsDetailParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<CharityOrganizationsDetailData, ProblemDetails>({
+        path: `/api/charity/organizations/${id}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Charity
+     * @name CharityOrganizationsCreate
+     * @request POST:/api/charity/organizations
+     * @secure
+     */
+    charityOrganizationsCreate: (
+      data: CreateOrganizationDto,
+      params: RequestParams = {},
+    ) =>
+      this.request<CharityOrganizationsCreateData, ProblemDetails>({
+        path: `/api/charity/organizations`,
         method: "POST",
         body: data,
         secure: true,
@@ -543,19 +528,76 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersLeaderboardList
-     * @request GET:/api/users/leaderboard
+     * @tags Charity
+     * @name CharityOrganizationsVerifyUpdate
+     * @request PUT:/api/charity/organizations/{id}/verify
+     * @secure
      */
-    usersLeaderboardList: (
-      query: UsersLeaderboardListParams,
+    charityOrganizationsVerifyUpdate: (
+      { id }: CharityOrganizationsVerifyUpdateParams,
       params: RequestParams = {},
     ) =>
-      this.request<UsersLeaderboardListData, any>({
-        path: `/api/users/leaderboard`,
-        method: "GET",
-        query: query,
-        format: "json",
+      this.request<CharityOrganizationsVerifyUpdateData, ProblemDetails>({
+        path: `/api/charity/organizations/${id}/verify`,
+        method: "PUT",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Charity
+     * @name CharityOrganizationsRejectUpdate
+     * @request PUT:/api/charity/organizations/{id}/reject
+     * @secure
+     */
+    charityOrganizationsRejectUpdate: (
+      { id }: CharityOrganizationsRejectUpdateParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<CharityOrganizationsRejectUpdateData, ProblemDetails>({
+        path: `/api/charity/organizations/${id}/reject`,
+        method: "PUT",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Charity
+     * @name CharityRequestsCancelCreate
+     * @request POST:/api/charity/requests/{id}/cancel
+     * @secure
+     */
+    charityRequestsCancelCreate: (
+      { id }: CharityRequestsCancelCreateParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<CharityRequestsCancelCreateData, ProblemDetails>({
+        path: `/api/charity/requests/${id}/cancel`,
+        method: "POST",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Charity
+     * @name CharityRequestsCompleteCreate
+     * @request POST:/api/charity/requests/{id}/complete
+     * @secure
+     */
+    charityRequestsCompleteCreate: (
+      { id }: CharityRequestsCompleteCreateParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<CharityRequestsCompleteCreateData, ProblemDetails>({
+        path: `/api/charity/requests/${id}/complete`,
+        method: "POST",
+        secure: true,
         ...params,
       }),
   };

@@ -10,22 +10,23 @@
  * ---------------------------------------------------------------
  */
 
-export interface AddReviewRequest {
-  reviewerName?: string | null;
-  /** @format int32 */
-  rating?: number;
-  comment?: string | null;
+export interface FileRecordDto {
+  /** @format uuid */
+  id?: string;
+  originalName?: string | null;
+  storageKey?: string | null;
+  url?: string | null;
+  contentType?: string | null;
+  /** @format int64 */
+  sizeBytes?: number;
+  /** @format uuid */
+  uploadedBy?: string;
+  /** @format date-time */
+  createdAt?: string;
 }
 
-export interface EcoStatsDto {
-  /** @format int32 */
-  itemsGifted?: number;
-  /** @format int32 */
-  itemsReceived?: number;
-  /** @format double */
-  co2SavedKg?: number;
-  /** @format double */
-  wasteSavedKg?: number;
+export interface FileUrlDto {
+  url?: string | null;
 }
 
 export interface ProblemDetails {
@@ -38,131 +39,21 @@ export interface ProblemDetails {
   [key: string]: any;
 }
 
-export interface ReviewCreatedDto {
-  /** @format uuid */
-  reviewId?: string;
-}
+export type FilesUploadCreateData = FileRecordDto;
 
-export interface ReviewDto {
-  /** @format uuid */
-  id?: string;
-  /** @format uuid */
-  reviewerId?: string;
-  reviewerName?: string | null;
-  /** @format int32 */
-  rating?: number;
-  comment?: string | null;
-  /** @format date-time */
-  createdAt?: string;
-}
-
-export interface ReviewDtoPagedList {
-  items?: ReviewDto[] | null;
-  /** @format int32 */
-  totalCount?: number;
-  /** @format int32 */
-  pageNumber?: number;
-  /** @format int32 */
-  pageSize?: number;
-  /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
-}
-
-export interface UpdateAvatarRequest {
-  avatarUrl?: string | null;
-}
-
-export interface UpdateProfileRequest {
-  firstName?: string | null;
-  lastName?: string | null;
-  bio?: string | null;
-  city?: string | null;
-}
-
-export interface UserProfileDto {
-  /** @format uuid */
-  id?: string;
-  firstName?: string | null;
-  lastName?: string | null;
-  avatarUrl?: string | null;
-  bio?: string | null;
-  city?: string | null;
-  /** @format double */
-  rating?: number;
-  /** @format int32 */
-  reviewCount?: number;
-  ecoStats?: EcoStatsDto;
-  /** @format date-time */
-  createdAt?: string;
-}
-
-export interface UserProfileDtoPagedList {
-  items?: UserProfileDto[] | null;
-  /** @format int32 */
-  totalCount?: number;
-  /** @format int32 */
-  pageNumber?: number;
-  /** @format int32 */
-  pageSize?: number;
-  /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
-}
-
-export interface UsersDetailParams {
+export interface FilesDeleteParams {
   /** @format uuid */
   id: string;
 }
 
-export type UsersDetailData = UserProfileDto;
+export type FilesDeleteData = any;
 
-export type UsersMeListData = UserProfileDto;
-
-export type UsersMeUpdateData = any;
-
-export type UsersMeAvatarUpdateData = any;
-
-export interface UsersReviewsListParams {
-  /**
-   * @format int32
-   * @default 1
-   */
-  pageNumber?: number;
-  /**
-   * @format int32
-   * @default 20
-   */
-  pageSize?: number;
+export interface FilesUrlListParams {
   /** @format uuid */
   id: string;
 }
 
-export type UsersReviewsListData = ReviewDtoPagedList;
-
-export interface UsersReviewsCreateParams {
-  /** @format uuid */
-  id: string;
-}
-
-export type UsersReviewsCreateData = ReviewCreatedDto;
-
-export interface UsersLeaderboardListParams {
-  /**
-   * @format int32
-   * @default 1
-   */
-  pageNumber?: number;
-  /**
-   * @format int32
-   * @default 20
-   */
-  pageSize?: number;
-}
-
-export type UsersLeaderboardListData = UserProfileDtoPagedList;
+export type FilesUrlListData = FileUrlDto;
 
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
@@ -420,7 +311,7 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title ResX Users API
+ * @title ResX Files API
  * @version v1
  */
 export class Api<
@@ -430,112 +321,24 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersDetail
-     * @request GET:/api/users/{id}
-     */
-    usersDetail: ({ id }: UsersDetailParams, params: RequestParams = {}) =>
-      this.request<UsersDetailData, ProblemDetails>({
-        path: `/api/users/${id}`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeList
-     * @request GET:/api/users/me
+     * @tags Files
+     * @name FilesUploadCreate
+     * @request POST:/api/files/upload
      * @secure
      */
-    usersMeList: (params: RequestParams = {}) =>
-      this.request<UsersMeListData, ProblemDetails>({
-        path: `/api/users/me`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeUpdate
-     * @request PUT:/api/users/me
-     * @secure
-     */
-    usersMeUpdate: (data: UpdateProfileRequest, params: RequestParams = {}) =>
-      this.request<UsersMeUpdateData, ProblemDetails>({
-        path: `/api/users/me`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeAvatarUpdate
-     * @request PUT:/api/users/me/avatar
-     * @secure
-     */
-    usersMeAvatarUpdate: (
-      data: UpdateAvatarRequest,
+    filesUploadCreate: (
+      data: {
+        /** @format binary */
+        file?: File;
+      },
       params: RequestParams = {},
     ) =>
-      this.request<UsersMeAvatarUpdateData, ProblemDetails>({
-        path: `/api/users/me/avatar`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersReviewsList
-     * @request GET:/api/users/{id}/reviews
-     */
-    usersReviewsList: (
-      { id, ...query }: UsersReviewsListParams,
-      params: RequestParams = {},
-    ) =>
-      this.request<UsersReviewsListData, ProblemDetails>({
-        path: `/api/users/${id}/reviews`,
-        method: "GET",
-        query: query,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersReviewsCreate
-     * @request POST:/api/users/{id}/reviews
-     * @secure
-     */
-    usersReviewsCreate: (
-      { id }: UsersReviewsCreateParams,
-      data: AddReviewRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<UsersReviewsCreateData, ProblemDetails>({
-        path: `/api/users/${id}/reviews`,
+      this.request<FilesUploadCreateData, ProblemDetails>({
+        path: `/api/files/upload`,
         method: "POST",
         body: data,
         secure: true,
-        type: ContentType.Json,
+        type: ContentType.FormData,
         format: "json",
         ...params,
       }),
@@ -543,18 +346,32 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersLeaderboardList
-     * @request GET:/api/users/leaderboard
+     * @tags Files
+     * @name FilesDelete
+     * @request DELETE:/api/files/{id}
+     * @secure
      */
-    usersLeaderboardList: (
-      query: UsersLeaderboardListParams,
-      params: RequestParams = {},
-    ) =>
-      this.request<UsersLeaderboardListData, any>({
-        path: `/api/users/leaderboard`,
+    filesDelete: ({ id }: FilesDeleteParams, params: RequestParams = {}) =>
+      this.request<FilesDeleteData, ProblemDetails>({
+        path: `/api/files/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Files
+     * @name FilesUrlList
+     * @request GET:/api/files/{id}/url
+     * @secure
+     */
+    filesUrlList: ({ id }: FilesUrlListParams, params: RequestParams = {}) =>
+      this.request<FilesUrlListData, ProblemDetails>({
+        path: `/api/files/${id}/url`,
         method: "GET",
-        query: query,
+        secure: true,
         format: "json",
         ...params,
       }),

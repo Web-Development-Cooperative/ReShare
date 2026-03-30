@@ -10,22 +10,157 @@
  * ---------------------------------------------------------------
  */
 
-export interface AddReviewRequest {
-  reviewerName?: string | null;
-  /** @format int32 */
-  rating?: number;
-  comment?: string | null;
+export enum TransferType {
+  Gift = "Gift",
+  Exchange = "Exchange",
+  Charity = "Charity",
 }
 
-export interface EcoStatsDto {
+export enum TransferMethod {
+  InPerson = "InPerson",
+  Delivery = "Delivery",
+  Both = "Both",
+}
+
+export enum ListingStatus {
+  Draft = "Draft",
+  Active = "Active",
+  Reserved = "Reserved",
+  Completed = "Completed",
+  Cancelled = "Cancelled",
+  Moderated = "Moderated",
+}
+
+export enum ItemCondition {
+  New = "New",
+  LikeNew = "LikeNew",
+  Good = "Good",
+  Fair = "Fair",
+  Poor = "Poor",
+}
+
+export interface AddPhotoRequest {
+  url?: string | null;
   /** @format int32 */
-  itemsGifted?: number;
+  displayOrder?: number;
+}
+
+export interface CategoryDto {
+  /** @format uuid */
+  id?: string;
+  name?: string | null;
+  /** @format uuid */
+  parentCategoryId?: string | null;
+}
+
+export interface CategoryResultDto {
+  /** @format uuid */
+  id?: string;
+  name?: string | null;
+  description?: string | null;
+  /** @format uuid */
+  parentCategoryId?: string | null;
   /** @format int32 */
-  itemsReceived?: number;
+  displayOrder?: number;
+}
+
+export interface ChangeStatusRequest {
+  status?: ListingStatus;
+}
+
+export interface CreateListingDto {
+  title?: string | null;
+  description?: string | null;
+  /** @format uuid */
+  categoryId?: string;
+  categoryName?: string | null;
+  /** @format uuid */
+  parentCategoryId?: string | null;
+  condition?: ItemCondition;
+  transferType?: TransferType;
+  transferMethod?: TransferMethod;
+  city?: string | null;
+  district?: string | null;
   /** @format double */
-  co2SavedKg?: number;
+  latitude?: number | null;
   /** @format double */
-  wasteSavedKg?: number;
+  longitude?: number | null;
+  tags?: string[] | null;
+}
+
+export interface ListingDto {
+  /** @format uuid */
+  id?: string;
+  title?: string | null;
+  description?: string | null;
+  category?: CategoryDto;
+  condition?: string | null;
+  transferType?: string | null;
+  transferMethod?: string | null;
+  status?: string | null;
+  location?: LocationDto;
+  /** @format uuid */
+  donorId?: string;
+  photos?: ListingPhotoDto[] | null;
+  tags?: string[] | null;
+  /** @format int32 */
+  viewCount?: number;
+  /** @format date-time */
+  createdAt?: string;
+  /** @format date-time */
+  updatedAt?: string | null;
+}
+
+export interface ListingPhotoDto {
+  /** @format uuid */
+  id?: string;
+  url?: string | null;
+  /** @format int32 */
+  displayOrder?: number;
+}
+
+export interface ListingPreviewDto {
+  /** @format uuid */
+  id?: string;
+  title?: string | null;
+  category?: CategoryDto;
+  condition?: string | null;
+  transferType?: string | null;
+  status?: string | null;
+  city?: string | null;
+  thumbnailUrl?: string | null;
+  /** @format int32 */
+  viewCount?: number;
+  /** @format date-time */
+  createdAt?: string;
+}
+
+export interface ListingPreviewDtoPagedList {
+  items?: ListingPreviewDto[] | null;
+  /** @format int32 */
+  totalCount?: number;
+  /** @format int32 */
+  pageNumber?: number;
+  /** @format int32 */
+  pageSize?: number;
+  /** @format int32 */
+  totalPages?: number;
+  hasPreviousPage?: boolean;
+  hasNextPage?: boolean;
+}
+
+export interface LocationDto {
+  city?: string | null;
+  district?: string | null;
+  /** @format double */
+  latitude?: number | null;
+  /** @format double */
+  longitude?: number | null;
+}
+
+export interface PhotoCreatedDto {
+  /** @format uuid */
+  photoId?: string;
 }
 
 export interface ProblemDetails {
@@ -38,118 +173,15 @@ export interface ProblemDetails {
   [key: string]: any;
 }
 
-export interface ReviewCreatedDto {
+export type CategoriesListData = CategoryResultDto[];
+
+export interface ListingsListParams {
   /** @format uuid */
-  reviewId?: string;
-}
-
-export interface ReviewDto {
-  /** @format uuid */
-  id?: string;
-  /** @format uuid */
-  reviewerId?: string;
-  reviewerName?: string | null;
-  /** @format int32 */
-  rating?: number;
-  comment?: string | null;
-  /** @format date-time */
-  createdAt?: string;
-}
-
-export interface ReviewDtoPagedList {
-  items?: ReviewDto[] | null;
-  /** @format int32 */
-  totalCount?: number;
-  /** @format int32 */
-  pageNumber?: number;
-  /** @format int32 */
-  pageSize?: number;
-  /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
-}
-
-export interface UpdateAvatarRequest {
-  avatarUrl?: string | null;
-}
-
-export interface UpdateProfileRequest {
-  firstName?: string | null;
-  lastName?: string | null;
-  bio?: string | null;
-  city?: string | null;
-}
-
-export interface UserProfileDto {
-  /** @format uuid */
-  id?: string;
-  firstName?: string | null;
-  lastName?: string | null;
-  avatarUrl?: string | null;
-  bio?: string | null;
-  city?: string | null;
-  /** @format double */
-  rating?: number;
-  /** @format int32 */
-  reviewCount?: number;
-  ecoStats?: EcoStatsDto;
-  /** @format date-time */
-  createdAt?: string;
-}
-
-export interface UserProfileDtoPagedList {
-  items?: UserProfileDto[] | null;
-  /** @format int32 */
-  totalCount?: number;
-  /** @format int32 */
-  pageNumber?: number;
-  /** @format int32 */
-  pageSize?: number;
-  /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
-}
-
-export interface UsersDetailParams {
-  /** @format uuid */
-  id: string;
-}
-
-export type UsersDetailData = UserProfileDto;
-
-export type UsersMeListData = UserProfileDto;
-
-export type UsersMeUpdateData = any;
-
-export type UsersMeAvatarUpdateData = any;
-
-export interface UsersReviewsListParams {
-  /**
-   * @format int32
-   * @default 1
-   */
-  pageNumber?: number;
-  /**
-   * @format int32
-   * @default 20
-   */
-  pageSize?: number;
-  /** @format uuid */
-  id: string;
-}
-
-export type UsersReviewsListData = ReviewDtoPagedList;
-
-export interface UsersReviewsCreateParams {
-  /** @format uuid */
-  id: string;
-}
-
-export type UsersReviewsCreateData = ReviewCreatedDto;
-
-export interface UsersLeaderboardListParams {
+  categoryId?: string;
+  condition?: string;
+  transferType?: string;
+  city?: string;
+  searchQuery?: string;
   /**
    * @format int32
    * @default 1
@@ -162,7 +194,59 @@ export interface UsersLeaderboardListParams {
   pageSize?: number;
 }
 
-export type UsersLeaderboardListData = UserProfileDtoPagedList;
+export type ListingsListData = ListingPreviewDtoPagedList;
+
+export type ListingsCreateData = any;
+
+export interface ListingsDetailParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type ListingsDetailData = ListingDto;
+
+export interface ListingsUpdateParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type ListingsUpdateData = any;
+
+export interface ListingsDeleteParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type ListingsDeleteData = any;
+
+export interface ListingsMyListParams {
+  /**
+   * @format int32
+   * @default 1
+   */
+  pageNumber?: number;
+  /**
+   * @format int32
+   * @default 20
+   */
+  pageSize?: number;
+}
+
+export type ListingsMyListData = ListingPreviewDtoPagedList;
+
+export interface ListingsStatusPartialUpdateParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type ListingsStatusPartialUpdateData = any;
+
+export interface ListingsPhotosCreateParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type ListingsPhotosCreateData = PhotoCreatedDto;
 
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
@@ -420,7 +504,7 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title ResX Users API
+ * @title ResX Listings API
  * @version v1
  */
 export class Api<
@@ -430,13 +514,13 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersDetail
-     * @request GET:/api/users/{id}
+     * @tags Categories
+     * @name CategoriesList
+     * @request GET:/api/categories
      */
-    usersDetail: ({ id }: UsersDetailParams, params: RequestParams = {}) =>
-      this.request<UsersDetailData, ProblemDetails>({
-        path: `/api/users/${id}`,
+    categoriesList: (params: RequestParams = {}) =>
+      this.request<CategoriesListData, any>({
+        path: `/api/categories`,
         method: "GET",
         format: "json",
         ...params,
@@ -445,72 +529,13 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersMeList
-     * @request GET:/api/users/me
-     * @secure
+     * @tags Listings
+     * @name ListingsList
+     * @request GET:/api/listings
      */
-    usersMeList: (params: RequestParams = {}) =>
-      this.request<UsersMeListData, ProblemDetails>({
-        path: `/api/users/me`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeUpdate
-     * @request PUT:/api/users/me
-     * @secure
-     */
-    usersMeUpdate: (data: UpdateProfileRequest, params: RequestParams = {}) =>
-      this.request<UsersMeUpdateData, ProblemDetails>({
-        path: `/api/users/me`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeAvatarUpdate
-     * @request PUT:/api/users/me/avatar
-     * @secure
-     */
-    usersMeAvatarUpdate: (
-      data: UpdateAvatarRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<UsersMeAvatarUpdateData, ProblemDetails>({
-        path: `/api/users/me/avatar`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersReviewsList
-     * @request GET:/api/users/{id}/reviews
-     */
-    usersReviewsList: (
-      { id, ...query }: UsersReviewsListParams,
-      params: RequestParams = {},
-    ) =>
-      this.request<UsersReviewsListData, ProblemDetails>({
-        path: `/api/users/${id}/reviews`,
+    listingsList: (query: ListingsListParams, params: RequestParams = {}) =>
+      this.request<ListingsListData, any>({
+        path: `/api/listings`,
         method: "GET",
         query: query,
         format: "json",
@@ -520,22 +545,35 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersReviewsCreate
-     * @request POST:/api/users/{id}/reviews
+     * @tags Listings
+     * @name ListingsCreate
+     * @request POST:/api/listings
      * @secure
      */
-    usersReviewsCreate: (
-      { id }: UsersReviewsCreateParams,
-      data: AddReviewRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<UsersReviewsCreateData, ProblemDetails>({
-        path: `/api/users/${id}/reviews`,
+    listingsCreate: (data: CreateListingDto, params: RequestParams = {}) =>
+      this.request<ListingsCreateData, ProblemDetails>({
+        path: `/api/listings`,
         method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Listings
+     * @name ListingsDetail
+     * @request GET:/api/listings/{id}
+     */
+    listingsDetail: (
+      { id }: ListingsDetailParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<ListingsDetailData, ProblemDetails>({
+        path: `/api/listings/${id}`,
+        method: "GET",
         format: "json",
         ...params,
       }),
@@ -543,18 +581,103 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersLeaderboardList
-     * @request GET:/api/users/leaderboard
+     * @tags Listings
+     * @name ListingsUpdate
+     * @request PUT:/api/listings/{id}
+     * @secure
      */
-    usersLeaderboardList: (
-      query: UsersLeaderboardListParams,
+    listingsUpdate: (
+      { id }: ListingsUpdateParams,
+      data: CreateListingDto,
       params: RequestParams = {},
     ) =>
-      this.request<UsersLeaderboardListData, any>({
-        path: `/api/users/leaderboard`,
+      this.request<ListingsUpdateData, ProblemDetails>({
+        path: `/api/listings/${id}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Listings
+     * @name ListingsDelete
+     * @request DELETE:/api/listings/{id}
+     * @secure
+     */
+    listingsDelete: (
+      { id }: ListingsDeleteParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<ListingsDeleteData, ProblemDetails>({
+        path: `/api/listings/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Listings
+     * @name ListingsMyList
+     * @request GET:/api/listings/my
+     * @secure
+     */
+    listingsMyList: (query: ListingsMyListParams, params: RequestParams = {}) =>
+      this.request<ListingsMyListData, ProblemDetails>({
+        path: `/api/listings/my`,
         method: "GET",
         query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Listings
+     * @name ListingsStatusPartialUpdate
+     * @request PATCH:/api/listings/{id}/status
+     * @secure
+     */
+    listingsStatusPartialUpdate: (
+      { id }: ListingsStatusPartialUpdateParams,
+      data: ChangeStatusRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<ListingsStatusPartialUpdateData, ProblemDetails>({
+        path: `/api/listings/${id}/status`,
+        method: "PATCH",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Listings
+     * @name ListingsPhotosCreate
+     * @request POST:/api/listings/{id}/photos
+     * @secure
+     */
+    listingsPhotosCreate: (
+      { id }: ListingsPhotosCreateParams,
+      data: AddPhotoRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<ListingsPhotosCreateData, ProblemDetails>({
+        path: `/api/listings/${id}/photos`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),

@@ -10,22 +10,73 @@
  * ---------------------------------------------------------------
  */
 
-export interface AddReviewRequest {
-  reviewerName?: string | null;
-  /** @format int32 */
-  rating?: number;
-  comment?: string | null;
+export interface ConversationCreatedDto {
+  /** @format uuid */
+  conversationId?: string;
 }
 
-export interface EcoStatsDto {
+export interface ConversationDto {
+  /** @format uuid */
+  id?: string;
+  participants?: string[] | null;
+  /** @format uuid */
+  listingId?: string | null;
+  lastMessage?: MessageDto;
   /** @format int32 */
-  itemsGifted?: number;
+  unreadCount?: number;
+  /** @format date-time */
+  createdAt?: string;
+  /** @format date-time */
+  lastMessageAt?: string | null;
+}
+
+export interface ConversationDtoPagedList {
+  items?: ConversationDto[] | null;
   /** @format int32 */
-  itemsReceived?: number;
-  /** @format double */
-  co2SavedKg?: number;
-  /** @format double */
-  wasteSavedKg?: number;
+  totalCount?: number;
+  /** @format int32 */
+  pageNumber?: number;
+  /** @format int32 */
+  pageSize?: number;
+  /** @format int32 */
+  totalPages?: number;
+  hasPreviousPage?: boolean;
+  hasNextPage?: boolean;
+}
+
+export interface CreateConversationDto {
+  /** @format uuid */
+  recipientId?: string;
+  /** @format uuid */
+  listingId?: string | null;
+  initialMessage?: string | null;
+}
+
+export interface MessageDto {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  conversationId?: string;
+  /** @format uuid */
+  senderId?: string;
+  content?: string | null;
+  /** @format date-time */
+  sentAt?: string;
+  isRead?: boolean;
+}
+
+export interface MessageDtoPagedList {
+  items?: MessageDto[] | null;
+  /** @format int32 */
+  totalCount?: number;
+  /** @format int32 */
+  pageNumber?: number;
+  /** @format int32 */
+  pageSize?: number;
+  /** @format int32 */
+  totalPages?: number;
+  hasPreviousPage?: boolean;
+  hasNextPage?: boolean;
 }
 
 export interface ProblemDetails {
@@ -38,118 +89,13 @@ export interface ProblemDetails {
   [key: string]: any;
 }
 
-export interface ReviewCreatedDto {
+export interface SendMessageDto {
   /** @format uuid */
-  reviewId?: string;
+  conversationId?: string;
+  content?: string | null;
 }
 
-export interface ReviewDto {
-  /** @format uuid */
-  id?: string;
-  /** @format uuid */
-  reviewerId?: string;
-  reviewerName?: string | null;
-  /** @format int32 */
-  rating?: number;
-  comment?: string | null;
-  /** @format date-time */
-  createdAt?: string;
-}
-
-export interface ReviewDtoPagedList {
-  items?: ReviewDto[] | null;
-  /** @format int32 */
-  totalCount?: number;
-  /** @format int32 */
-  pageNumber?: number;
-  /** @format int32 */
-  pageSize?: number;
-  /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
-}
-
-export interface UpdateAvatarRequest {
-  avatarUrl?: string | null;
-}
-
-export interface UpdateProfileRequest {
-  firstName?: string | null;
-  lastName?: string | null;
-  bio?: string | null;
-  city?: string | null;
-}
-
-export interface UserProfileDto {
-  /** @format uuid */
-  id?: string;
-  firstName?: string | null;
-  lastName?: string | null;
-  avatarUrl?: string | null;
-  bio?: string | null;
-  city?: string | null;
-  /** @format double */
-  rating?: number;
-  /** @format int32 */
-  reviewCount?: number;
-  ecoStats?: EcoStatsDto;
-  /** @format date-time */
-  createdAt?: string;
-}
-
-export interface UserProfileDtoPagedList {
-  items?: UserProfileDto[] | null;
-  /** @format int32 */
-  totalCount?: number;
-  /** @format int32 */
-  pageNumber?: number;
-  /** @format int32 */
-  pageSize?: number;
-  /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
-}
-
-export interface UsersDetailParams {
-  /** @format uuid */
-  id: string;
-}
-
-export type UsersDetailData = UserProfileDto;
-
-export type UsersMeListData = UserProfileDto;
-
-export type UsersMeUpdateData = any;
-
-export type UsersMeAvatarUpdateData = any;
-
-export interface UsersReviewsListParams {
-  /**
-   * @format int32
-   * @default 1
-   */
-  pageNumber?: number;
-  /**
-   * @format int32
-   * @default 20
-   */
-  pageSize?: number;
-  /** @format uuid */
-  id: string;
-}
-
-export type UsersReviewsListData = ReviewDtoPagedList;
-
-export interface UsersReviewsCreateParams {
-  /** @format uuid */
-  id: string;
-}
-
-export type UsersReviewsCreateData = ReviewCreatedDto;
-
-export interface UsersLeaderboardListParams {
+export interface MessagingConversationsListParams {
   /**
    * @format int32
    * @default 1
@@ -162,7 +108,40 @@ export interface UsersLeaderboardListParams {
   pageSize?: number;
 }
 
-export type UsersLeaderboardListData = UserProfileDtoPagedList;
+export type MessagingConversationsListData = ConversationDtoPagedList;
+
+export type MessagingConversationsCreateData = ConversationCreatedDto;
+
+export interface MessagingConversationsMessagesListParams {
+  /**
+   * @format int32
+   * @default 1
+   */
+  pageNumber?: number;
+  /**
+   * @format int32
+   * @default 50
+   */
+  pageSize?: number;
+  /** @format uuid */
+  conversationId: string;
+}
+
+export type MessagingConversationsMessagesListData = MessageDtoPagedList;
+
+export interface MessagingConversationsMessagesCreateParams {
+  /** @format uuid */
+  conversationId: string;
+}
+
+export type MessagingConversationsMessagesCreateData = MessageDto;
+
+export interface MessagingConversationsReadCreateParams {
+  /** @format uuid */
+  conversationId: string;
+}
+
+export type MessagingConversationsReadCreateData = any;
 
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
@@ -420,7 +399,7 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title ResX Users API
+ * @title ResX Messaging API
  * @version v1
  */
 export class Api<
@@ -430,89 +409,20 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersDetail
-     * @request GET:/api/users/{id}
-     */
-    usersDetail: ({ id }: UsersDetailParams, params: RequestParams = {}) =>
-      this.request<UsersDetailData, ProblemDetails>({
-        path: `/api/users/${id}`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeList
-     * @request GET:/api/users/me
+     * @tags Messaging
+     * @name MessagingConversationsList
+     * @request GET:/api/messaging/conversations
      * @secure
      */
-    usersMeList: (params: RequestParams = {}) =>
-      this.request<UsersMeListData, ProblemDetails>({
-        path: `/api/users/me`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeUpdate
-     * @request PUT:/api/users/me
-     * @secure
-     */
-    usersMeUpdate: (data: UpdateProfileRequest, params: RequestParams = {}) =>
-      this.request<UsersMeUpdateData, ProblemDetails>({
-        path: `/api/users/me`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersMeAvatarUpdate
-     * @request PUT:/api/users/me/avatar
-     * @secure
-     */
-    usersMeAvatarUpdate: (
-      data: UpdateAvatarRequest,
+    messagingConversationsList: (
+      query: MessagingConversationsListParams,
       params: RequestParams = {},
     ) =>
-      this.request<UsersMeAvatarUpdateData, ProblemDetails>({
-        path: `/api/users/me/avatar`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UsersReviewsList
-     * @request GET:/api/users/{id}/reviews
-     */
-    usersReviewsList: (
-      { id, ...query }: UsersReviewsListParams,
-      params: RequestParams = {},
-    ) =>
-      this.request<UsersReviewsListData, ProblemDetails>({
-        path: `/api/users/${id}/reviews`,
+      this.request<MessagingConversationsListData, ProblemDetails>({
+        path: `/api/messaging/conversations`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params,
       }),
@@ -520,18 +430,17 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersReviewsCreate
-     * @request POST:/api/users/{id}/reviews
+     * @tags Messaging
+     * @name MessagingConversationsCreate
+     * @request POST:/api/messaging/conversations
      * @secure
      */
-    usersReviewsCreate: (
-      { id }: UsersReviewsCreateParams,
-      data: AddReviewRequest,
+    messagingConversationsCreate: (
+      data: CreateConversationDto,
       params: RequestParams = {},
     ) =>
-      this.request<UsersReviewsCreateData, ProblemDetails>({
-        path: `/api/users/${id}/reviews`,
+      this.request<MessagingConversationsCreateData, ProblemDetails>({
+        path: `/api/messaging/conversations`,
         method: "POST",
         body: data,
         secure: true,
@@ -543,19 +452,63 @@ export class Api<
     /**
      * No description
      *
-     * @tags Users
-     * @name UsersLeaderboardList
-     * @request GET:/api/users/leaderboard
+     * @tags Messaging
+     * @name MessagingConversationsMessagesList
+     * @request GET:/api/messaging/conversations/{conversationId}/messages
+     * @secure
      */
-    usersLeaderboardList: (
-      query: UsersLeaderboardListParams,
+    messagingConversationsMessagesList: (
+      { conversationId, ...query }: MessagingConversationsMessagesListParams,
       params: RequestParams = {},
     ) =>
-      this.request<UsersLeaderboardListData, any>({
-        path: `/api/users/leaderboard`,
+      this.request<MessagingConversationsMessagesListData, ProblemDetails>({
+        path: `/api/messaging/conversations/${conversationId}/messages`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Messaging
+     * @name MessagingConversationsMessagesCreate
+     * @request POST:/api/messaging/conversations/{conversationId}/messages
+     * @secure
+     */
+    messagingConversationsMessagesCreate: (
+      { conversationId }: MessagingConversationsMessagesCreateParams,
+      data: SendMessageDto,
+      params: RequestParams = {},
+    ) =>
+      this.request<MessagingConversationsMessagesCreateData, ProblemDetails>({
+        path: `/api/messaging/conversations/${conversationId}/messages`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Messaging
+     * @name MessagingConversationsReadCreate
+     * @request POST:/api/messaging/conversations/{conversationId}/read
+     * @secure
+     */
+    messagingConversationsReadCreate: (
+      { conversationId }: MessagingConversationsReadCreateParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<MessagingConversationsReadCreateData, ProblemDetails>({
+        path: `/api/messaging/conversations/${conversationId}/read`,
+        method: "POST",
+        secure: true,
         ...params,
       }),
   };
