@@ -1,4 +1,8 @@
 import type {
+	LoginUserCommand,
+	RegisterUserCommand,
+} from '@shared/api/generated/identity-api';
+import type {
 	ButtonHTMLAttributes,
 	FC,
 	HTMLAttributes,
@@ -76,11 +80,13 @@ type TextDividerProps = FC<
 
 type OtherAuthFormProps = {
 	typeForm: 'login' | 'reg';
-	value: Record<'email' | 'password', string>;
+	value: RegisterUserCommand & LoginUserCommand;
 	onSubmit: Pick<
 		ButtonHTMLAttributes<HTMLButtonElement>,
 		'onClick'
 	>['onClick'];
+	isLoading?: boolean;
+	error?: string | null;
 };
 type AuthFormProps = FC<
 	Omit<HtmlHTMLAttributes<HTMLDivElement>, 'onChange' | 'onSubmit'> &

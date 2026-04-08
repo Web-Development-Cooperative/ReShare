@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { createBrowserRouter, Navigate, NavLink } from 'react-router';
+import { createBrowserRouter, Navigate } from 'react-router';
 
 import { ROUTES } from '@shared/model/routes';
 import { Limbo } from '@shared/ui/wrappers';
@@ -47,12 +47,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: (
-					<>
-						<h1>Главная</h1>
-						<NavLink to={ROUTES.PROFILE}>Профиль</NavLink>
-					</>
-				),
+				element: <Navigate to={ROUTES.ADS} replace />,
 			},
 			{
 				path: ROUTES.ADS,

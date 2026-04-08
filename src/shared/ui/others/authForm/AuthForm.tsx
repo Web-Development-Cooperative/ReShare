@@ -40,14 +40,14 @@ const AuthForm: AuthFormProps = ({
 			<TextDivider label="Или" />
 			<div className={styles['inputs-content']}>
 				<InputBase
-					value={value.email}
+					value={value?.login || value?.email || ''}
 					onChange={onChange}
-					name="email"
+					name="login"
 					textLabel="Email"
 					placeholder="Email"
 				/>
 				<InputBase
-					value={value.password}
+					value={value.password || ''}
 					onChange={onChange}
 					type={inputPasswordType}
 					name="password"
