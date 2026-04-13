@@ -1,0 +1,180 @@
+.switch-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 16px;
+
+	cursor: pointer;
+	user-select: none;
+}
+.label-left {
+	flex-direction: row-reverse;
+}
+.label-right {
+	flex-direction: row;
+}
+.switch-input {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+	margin: 0;
+	padding: 0;
+}
+
+/* Track (дорожка) */
+.switch-track {
+	display: inline-block;
+	flex-shrink: 0;
+
+	position: relative;
+	border-radius: 25px;
+	border: 1px solid var(--border-default-contast);
+
+	background-color: transparent;
+
+	transition:
+		background-color var(--time-to-do) var(--type-effect),
+		border-color var(--time-to-do) var(--type-effect);
+
+	/* Размеры track */
+	&.lg {
+		width: 32px;
+		height: 20px;
+	}
+	&.md {
+		width: 28px;
+		height: 16px;
+	}
+}
+
+/* Thumb (кружок) */
+.switch-thumb {
+	position: absolute;
+	top: 50%;
+	left: 2px;
+
+	border-radius: 50%;
+	background-color: var(--icon-primary);
+
+	transition:
+		transform var(--time-to-do) var(--type-effect),
+		background-color var(--time-to-do) var(--type-effect),
+		opacity var(--time-to-do) var(--type-effect);
+	transform: translateY(-50%);
+
+	/* Размеры thumb */
+	&.lg {
+		aspect-ratio: 1/1;
+		width: 16px;
+	}
+	&.md {
+		aspect-ratio: 1/1;
+		width: 12px;
+	}
+}
+
+/* Состояния track */
+/* Default */
+.switch-input:not(:checked) ~ .switch-track:not(.track-error) {
+	background-color: transparent;
+	border-color: var(--border-default-contast);
+
+	&:hover {
+		border-color: var(--border-default-hover);
+	}
+	&:active {
+		border-color: var(--border-default-active);
+	}
+}
+.switch-input:checked ~ .switch-track:not(.track-error) {
+	background-color: var(--button-primary);
+	border-color: var(--button-primary);
+
+	&:hover {
+		background-color: var(--button-primary-hover);
+		border-color: var(--button-primary-hover);
+	}
+	&:active {
+		background-color: var(--button-primary-active);
+		border-color: var(--button-primary-active);
+	}
+}
+/* error */
+.switch-input:not(:checked) ~ .track-error {
+	background-color: transparent;
+	border-color: var(--border-color-negative);
+}
+.switch-input:checked ~ .track-error {
+	background-color: var(--button-destructive);
+	border-color: var(--button-destructive);
+}
+
+/* Состояния Thumb */
+/* Default */
+.switch-input:not(:checked) ~ .switch-track:not(.track-error) > .switch-thumb,
+.switch-input:not(:checked)
+	~ .switch-track:not(.track-error):hover
+	> .switch-thumb,
+.switch-input:not(:checked)
+	~ .switch-track:not(.track-error):active
+	> .switch-thumb {
+	background-color: var(--icon-primary);
+}
+.switch-input:not(:checked) ~ .switch-track:not(.track-error) > .switch-thumb {
+	opacity: 0.5;
+}
+.switch-input:not(:checked)
+	~ .switch-track:not(.track-error):hover
+	> .switch-thumb {
+	opacity: 0.8;
+}
+.switch-input:not(:checked)
+	~ .switch-track:not(.track-error):active
+	> .switch-thumb {
+	opacity: 1;
+}
+.switch-input:checked ~ .switch-track:not(.track-error) > .switch-thumb {
+	background-color: var(--icon-primary-on-color);
+	opacity: 1;
+}
+/* error */
+.switch-input:not(:checked) ~ .track-error > .switch-thumb {
+	background-color: var(--icon-negative);
+}
+.switch-input:checked ~ .track-error > .switch-thumb {
+	background-color: var(--icon-primary-on-color);
+}
+
+/* Позиция thumb */
+.switch-input:checked ~ .switch-track > .switch-thumb.lg {
+	transform: translateY(-50%) translateX(11px);
+}
+.switch-input:checked ~ .switch-track > .switch-thumb.md {
+	transform: translateY(-50%) translateX(11px);
+}
+
+/* Label */
+.switch-label {
+	color: var(--text-black);
+}
+
+/* .label-disabled {
+	color: #9ca3af;
+	cursor: not-allowed;
+} */
+
+/* Focus для всего контейнера */
+/* .switch-container:has(.switch-input:focus-visible) {
+	outline: none;
+} */
+
+/* Disabled cursor */
+/* .switch-input:disabled {
+	cursor: not-allowed;
+}
+
+.switch-container:has(.switch-input:disabled) {
+	cursor: not-allowed;
+} */

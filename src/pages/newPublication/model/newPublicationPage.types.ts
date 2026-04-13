@@ -11,8 +11,9 @@ type ListingFormData = {
 
 	// Шаг 2
 	location: string;
+	contactType: 'messages' | 'calls_and_messages';
 	contact: string;
-	deliveryType: string;
+	deliveryType: 'personal_meeting' | 'delivery';
 };
 type Step = 1 | 2 | 3 | 4;
 
@@ -27,5 +28,6 @@ type RenderStepOneProps = FC<{
 		SetStateAction<Partial<Record<keyof ListingFormData, string>>>
 	>;
 }>;
+type RenderStepTwoProps = RenderStepOneProps;
 
-export type { ListingFormData, Step, RenderStepOneProps };
+export type { ListingFormData, Step, RenderStepOneProps, RenderStepTwoProps };

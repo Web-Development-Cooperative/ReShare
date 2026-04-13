@@ -29,13 +29,17 @@
 
 	/* COLOR-ICON */
 	--icon-primary: rgba(0, 0, 0, 0.8); /* #000000CC */
+	--icon-primary-on-color: rgba(255, 255, 255, 1); /* #FFFFFF */
+	--icon-negative: rgba(239, 68, 68, 1); /* #EF4444 */
 
 	/* COLOR-BORDER */
 	--border-default: rgba(0, 0, 0, 0.1); /* #0000001A */
 	--border-default-inverse: rgba(255, 255, 255, 0.15); /* #FFFFFF26 */
+	--border-default-contast: rgba(0, 0, 0, 0.2); /* #00000033 */
+	--border-default-hover: rgba(0, 0, 0, 0.4); /* #00000066 */
+	--border-default-active: rgba(0, 0, 0, 0.8); /* #000000CC */
 	--border-color-white: rgba(255, 255, 255, 1); /* #FFFFFF  */
 	--border-color-negative: rgba(239, 68, 68, 1); /* #EF4444  */
-	--border-default-contast: rgba(0, 0, 0, 0.2); /* #00000033 */
 	--border-subtle-positive: rgba(134, 239, 172, 1); /* #86EFAC */
 	--border-subtle-blue: rgba(147, 197, 253, 1); /* #93C5FD */
 	--border-subtle-negative: rgba(252, 165, 165, 1); /* #FCA5A5 */
@@ -66,9 +70,14 @@
 
 	/* COLOR-BUTTON */
 	--button-primary: rgba(34, 197, 94, 1); /*#22C55E*/
+	--button-primary-hover: rgba(22, 163, 74, 1); /*#16A34A*/
+	--button-primary-active: rgba(21, 128, 61, 1); /*#15803D*/
+	--button-secondary-hover: rgba(0, 0, 0, 0.05); /*#0000000D*/
+	--button-secondary-active: rgba(0, 0, 0, 0.1); /*#0000001A*/
 	--button-shaded: rgba(0, 0, 0, 0.05); /*#0000000D*/
 	--button-filled: rgba(17, 24, 39, 1); /*#111827*/
 	--button-shaded: rgba(0, 0, 0, 0.05); /* #0000000D */
+	--button-destructive: rgba(239, 68, 68, 1); /* #EF4444 */
 
 	/* SHADOW  */
 	--shadow-1: 0px 1px 2px -1px rgba(0, 0, 0, 0.1);

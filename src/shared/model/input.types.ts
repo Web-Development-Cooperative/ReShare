@@ -18,4 +18,26 @@ type TextareaBaseProps = InputHTMLAttributes<HTMLTextAreaElement> &
 		stateStyle?: 'default' | 'error';
 	};
 
-export type { BaseInputProps, TextareaBaseProps };
+type ToggleProps = Omit<
+	InputHTMLAttributes<HTMLInputElement>,
+	'size' | 'error' | 'label' | 'labelPosition'
+> &
+	RefAttributes<HTMLInputElement> & {
+		size?: 'lg' | 'md';
+		error?: boolean;
+		label?: string;
+		labelPosition?: 'left' | 'right';
+	};
+type RadioProps = Omit<
+	InputHTMLAttributes<HTMLInputElement>,
+	'size' | 'error' | 'label' | 'helper' | 'labelPosition'
+> &
+	RefAttributes<HTMLInputElement> & {
+		size?: 'lg' | 'md';
+		error?: boolean;
+		label?: string;
+		helper?: string;
+		labelPosition?: 'left' | 'right';
+	};
+
+export type { BaseInputProps, TextareaBaseProps, ToggleProps, RadioProps };

@@ -10,6 +10,7 @@ import { ROUTES } from '@shared/model/routes';
 
 import { useNewPublicationPage } from '../lib/useNewPublicationPage';
 import { RenderStepOne } from './renderStepOne/RenderStepOne';
+import { RenderStepTwo } from './renderStepTwo/RenderStepTwo';
 import styles from './NewPublicationPage.module.css';
 
 const NewPublicationPage = () => {
@@ -27,27 +28,6 @@ const NewPublicationPage = () => {
 	} = useNewPublicationPage();
 
 	console.log(formData);
-
-	// const renderStep2 = () => (
-	// 	<div className={styles.stepWrapper}>
-	// 		<h2>Шаг 2: Местоположение и контакт</h2>
-	// 		<InputBase
-	// 			textLabel="Местоположение"
-	// 			value={formData.location || ''}
-	// 			onChange={(e) => updateFormData('location', e.target.value)}
-	// 		/>
-	// 		<InputBase
-	// 			textLabel="Контакт"
-	// 			value={formData.contact || ''}
-	// 			onChange={(e) => updateFormData('contact', e.target.value)}
-	// 		/>
-	// 		<InputBase
-	// 			textLabel="Тип передачи"
-	// 			value={formData.deliveryType || ''}
-	// 			onChange={(e) => updateFormData('deliveryType', e.target.value)}
-	// 		/>
-	// 	</div>
-	// );
 
 	// const renderStep3 = () => (
 	// 	<div className={styles.stepWrapper}>
@@ -98,15 +78,23 @@ const NewPublicationPage = () => {
 					setErrors={setErrors}
 				/>
 			)}
-			{/* {currentStep === 2 && renderStep2()}
-			{currentStep === 3 && renderStep3()} */}
+			{currentStep === 2 && (
+				<RenderStepTwo
+					formData={formData}
+					updateFormData={updateFormData}
+					errors={errors}
+					setErrors={setErrors}
+				/>
+			)}
+			{/* {currentStep === 2 && renderStep2()} */}
+			{/* {currentStep === 3 && renderStep3()} */}
 
 			<div
 				className={clsx(styles['buttons'], {
 					[styles.last]: currentStep === 4,
 				})}
 			>
-				{currentStep > 1 && currentStep < 3 && (
+				{currentStep > 1 && currentStep <= 3 && (
 					<ButtonBase onClick={handleBack} color="outline" withBorder>
 						<UIText14SB>Назад</UIText14SB>
 					</ButtonBase>

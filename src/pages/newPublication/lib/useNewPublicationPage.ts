@@ -44,7 +44,9 @@ const useNewPublicationPage = () => {
 				errorMessages[field] = 'Это поле обязательно для заполнения';
 			});
 			setErrors(errorMessages);
-			notification.error('Пожалуйста, заполните все обязательные поля');
+			notification.error('Пожалуйста, заполните все обязательные поля', {
+				toastId: 'fields-missing',
+			});
 
 			return;
 		}

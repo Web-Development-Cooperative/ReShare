@@ -30,7 +30,9 @@ const useRenderStepOne = ({
 			formData.photos?.length === 4 ||
 			newFilesArray.length + (formData.photos?.length || 0) > 4
 		) {
-			notification.info('Максимум 4 фотографии');
+			notification.info('Максимум 4 фотографии', {
+				toastId: 'overflow-photos',
+			});
 			return;
 		}
 
