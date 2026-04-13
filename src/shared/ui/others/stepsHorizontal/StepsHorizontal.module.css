@@ -1,0 +1,64 @@
+.steps-horizontal {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 0;
+
+	height: 44px;
+}
+.step {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	flex: 1;
+	row-gap: 12px;
+
+	&:last-child {
+		flex: 0;
+	}
+}
+.status {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 2px;
+
+	padding-right: 2px;
+}
+.progressDotUpcoming,
+.progressDotCurrent,
+.progressDotCompleted {
+	aspect-ratio: 1/1;
+	width: 8px;
+	border-radius: 50%;
+	border: 2px solid var(--border-default);
+
+	background-color: transparent;
+}
+.progressDotUpcoming {
+	border-color: var(--border-default);
+}
+.progressDotCurrent {
+	border-color: var(--brand-default);
+}
+.progressDotCompleted {
+	border-color: var(--brand-default);
+}
+.trackUpcoming,
+.trackCurrent,
+.trackCompleted {
+	width: 100%;
+	height: 2px;
+
+	background-color: var(--border-default);
+}
+.trackUpcoming {
+	background-color: var(--border-default);
+}
+.trackCurrent {
+	background-color: var(--border-default);
+	/* background-color: var(--text-colored-brand); */
+}
+.trackCompleted {
+	background-color: var(--brand-default);
+}

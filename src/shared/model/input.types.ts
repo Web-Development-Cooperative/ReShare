@@ -7,6 +7,15 @@ type BaseInputProps = InputHTMLAttributes<HTMLInputElement> &
 		leftIcon?: ReactNode;
 		rightIcon?: ReactNode;
 		inputStyle?: 'outline' | 'shaded';
+		stateStyle?: 'default' | 'error';
 	};
 
-export type { BaseInputProps };
+type TextareaBaseProps = InputHTMLAttributes<HTMLTextAreaElement> &
+	RefAttributes<HTMLTextAreaElement> & {
+		textLabel?: string;
+		helper?: string;
+		inputStyle?: 'outline' | 'shaded';
+		stateStyle?: 'default' | 'error';
+	};
+
+export type { BaseInputProps, TextareaBaseProps };

@@ -19,7 +19,7 @@
 		fill: var(--text-primary-inverse);
 	}
 }
-.primary {
+.brand {
 	background-color: var(--button-primary);
 
 	color: var(--text-primary-on-color);
@@ -43,8 +43,24 @@
 		fill: var(--text-primary);
 	}
 }
+.outline {
+	border: 1px solid var(--border-default);
+	background-color: var(--bg-default);
+
+	color: var(--text-primary);
+
+	& > p {
+		color: var(--text-primary);
+	}
+	& > svg > path {
+		fill: var(--text-primary);
+	}
+}
 .border {
 	border: 1px solid var(--border-default);
+}
+.error {
+	border-color: var(--border-color-negative);
 }
 .large {
 	column-gap: 8px;
@@ -52,4 +68,3 @@
 	padding: 8px 10px;
 	border-radius: 6px;
 }
-

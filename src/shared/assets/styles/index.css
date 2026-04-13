@@ -10,6 +10,7 @@
 	--slate-grey: rgba(106, 114, 130, 1); /* #6A7282 */
 	--very-pale-blue: rgba(238, 239, 242, 1); /* #EEEFF2 */
 	--green-600: rgba(22, 163, 74, 1); /* #16A34A */
+	--brand-default: rgba(34, 197, 94, 1); /* #22C55E */
 
 	/* COLOR-TEXT */
 	--text-primary: rgba(0, 0, 0, 0.8); /* #000000CC */
@@ -33,6 +34,7 @@
 	--border-default: rgba(0, 0, 0, 0.1); /* #0000001A */
 	--border-default-inverse: rgba(255, 255, 255, 0.15); /* #FFFFFF26 */
 	--border-color-white: rgba(255, 255, 255, 1); /* #FFFFFF  */
+	--border-color-negative: rgba(239, 68, 68, 1); /* #EF4444  */
 	--border-default-contast: rgba(0, 0, 0, 0.2); /* #00000033 */
 	--border-subtle-positive: rgba(134, 239, 172, 1); /* #86EFAC */
 	--border-subtle-blue: rgba(147, 197, 253, 1); /* #93C5FD */
@@ -63,7 +65,7 @@
 	--bg-input-shaded: rgba(0, 0, 0, 0.05); /* #0000000D */
 
 	/* COLOR-BUTTON */
-	--button-primary: rgba(59, 130, 246, 1); /*#3B82F6*/
+	--button-primary: rgba(34, 197, 94, 1); /*#22C55E*/
 	--button-shaded: rgba(0, 0, 0, 0.05); /*#0000000D*/
 	--button-filled: rgba(17, 24, 39, 1); /*#111827*/
 	--button-shaded: rgba(0, 0, 0, 0.05); /* #0000000D */

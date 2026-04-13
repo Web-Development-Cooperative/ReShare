@@ -11,6 +11,7 @@ const LandingPage = lazy(() => import('@pages/landing'));
 const ProfilePage = lazy(() => import('@pages/profile'));
 const MessagesPage = lazy(() => import('@pages/messages'));
 const AdsPage = lazy(() => import('@pages/main'));
+const NewPublicationPage = lazy(() => import('@pages/newPublication'));
 
 const router = createBrowserRouter([
 	{
@@ -94,6 +95,14 @@ const router = createBrowserRouter([
 				element: (
 					<Limbo>
 						<MessagesPage />
+					</Limbo>
+				),
+			},
+			{
+				path: ROUTES.NEW_PUBLICATION,
+				element: (
+					<Limbo>
+						<NewPublicationPage />
 					</Limbo>
 				),
 			},

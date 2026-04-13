@@ -94,6 +94,11 @@ type AuthFormProps = FC<
 		Pick<InputHTMLAttributes<HTMLInputElement>, 'onChange'>
 >;
 
+type StepsHorizontalProps = FC<{
+	steps: number;
+	currentStep: number;
+}>;
+
 export {
 	type TagProps,
 	type AvatarProps,
@@ -101,4 +106,5 @@ export {
 	type RatingProps,
 	type TextDividerProps,
 	type AuthFormProps,
+	type StepsHorizontalProps,
 };
