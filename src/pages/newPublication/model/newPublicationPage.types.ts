@@ -17,7 +17,7 @@ type ListingFormData = {
 };
 type Step = 1 | 2 | 3 | 4;
 
-type RenderStepOneProps = FC<{
+type AllProps = {
 	formData: Partial<ListingFormData>;
 	updateFormData: (
 		key: keyof ListingFormData,
@@ -27,7 +27,15 @@ type RenderStepOneProps = FC<{
 	setErrors: Dispatch<
 		SetStateAction<Partial<Record<keyof ListingFormData, string>>>
 	>;
-}>;
+};
+type RenderStepOneProps = FC<AllProps>;
 type RenderStepTwoProps = RenderStepOneProps;
+type RenderStepThreeProps = FC<Pick<AllProps, 'formData'>>;
 
-export type { ListingFormData, Step, RenderStepOneProps, RenderStepTwoProps };
+export type {
+	ListingFormData,
+	Step,
+	RenderStepOneProps,
+	RenderStepTwoProps,
+	RenderStepThreeProps,
+};

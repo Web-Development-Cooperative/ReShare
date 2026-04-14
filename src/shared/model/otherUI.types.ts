@@ -99,6 +99,15 @@ type StepsHorizontalProps = FC<{
 	currentStep: number;
 }>;
 
+type AllAdCardProps = {
+	img: string | File;
+	title: string;
+	author: string;
+	description: string;
+	tags: ({ id: string | number } & Record<string, string | number>)[];
+};
+type IAdCard = FC<AllAdCardProps>;
+
 export {
 	type TagProps,
 	type AvatarProps,
@@ -107,4 +116,5 @@ export {
 	type TextDividerProps,
 	type AuthFormProps,
 	type StepsHorizontalProps,
+	type IAdCard,
 };

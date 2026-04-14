@@ -11,6 +11,8 @@ import { ROUTES } from '@shared/model/routes';
 import { useNewPublicationPage } from '../lib/useNewPublicationPage';
 import { RenderStepOne } from './renderStepOne/RenderStepOne';
 import { RenderStepTwo } from './renderStepTwo/RenderStepTwo';
+import { RenderStepThree } from './renderStepThree/RenderStepThree';
+import { RenderStepFour } from './renderStepFour/RenderStepFour';
 import styles from './NewPublicationPage.module.css';
 
 const NewPublicationPage = () => {
@@ -28,33 +30,6 @@ const NewPublicationPage = () => {
 	} = useNewPublicationPage();
 
 	console.log(formData);
-
-	// const renderStep3 = () => (
-	// 	<div className={styles.stepWrapper}>
-	// 		<h2>Шаг 3: Предпросмотр</h2>
-	// 		<p>Тип: {formData.type}</p>
-	// 		<p>Название: {formData.title}</p>
-	// 		<p>Категория: {formData.category}</p>
-	// 		<p>Состояние: {formData.condition}</p>
-	// 		<p>Описание: {formData.description}</p>
-	// 		<p>Местоположение: {formData.location}</p>
-	// 		<p>Контакт: {formData.contact}</p>
-	// 		<p>Тип передачи: {formData.deliveryType}</p>
-	// 		{formData.photos && formData.photos.length > 0 && (
-	// 			<div>
-	// 				<p>Фото:</p>
-	// 				{formData.photos.map((photo, index) => (
-	// 					<img
-	// 						key={index}
-	// 						src={URL.createObjectURL(photo)}
-	// 						alt={`Фото ${index + 1}`}
-	// 						style={{ width: '100px', height: '100px' }}
-	// 					/>
-	// 				))}
-	// 			</div>
-	// 		)}
-	// 	</div>
-	// );
 
 	return (
 		<div className={styles['new-publication-page']}>
@@ -86,6 +61,8 @@ const NewPublicationPage = () => {
 					setErrors={setErrors}
 				/>
 			)}
+			{currentStep === 3 && <RenderStepThree formData={formData} />}
+			{currentStep === 4 && <RenderStepFour />}
 			{/* {currentStep === 2 && renderStep2()} */}
 			{/* {currentStep === 3 && renderStep3()} */}
 
