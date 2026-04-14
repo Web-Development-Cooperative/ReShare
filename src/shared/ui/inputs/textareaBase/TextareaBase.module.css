@@ -5,20 +5,14 @@
 	justify-content: flex-start;
 	row-gap: 4px;
 }
-.inputContainer {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-
+.base-input {
+	min-height: 40px;
+	max-height: 300px;
+	resize: vertical;
 	padding: 8px;
 	padding-left: 16px;
-	border-radius: 8px;
-}
-.base-input {
-	flex: 1;
-	min-width: 0;
-	border: none;
-	background: transparent;
+	border-radius: 6px;
+
 	outline: none;
 }
 .helper {
@@ -30,14 +24,13 @@
 	background-color: var(--bg-input-outlined);
 }
 .shaded {
-	border: 1px solid var(--bg-input-shaded);
-	background-color: var(--bg-input-shaded) !important;
+	background-color: var(--bg-input-shaded);
 }
 /* state */
 .default {
 	/* default state */
 }
-.inputContainer.error {
+.base-input.error {
 	border-color: var(--border-color-negative);
 	background-color: var(--bg-subtle-negative);
 }

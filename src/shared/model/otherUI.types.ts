@@ -94,6 +94,20 @@ type AuthFormProps = FC<
 		Pick<InputHTMLAttributes<HTMLInputElement>, 'onChange'>
 >;
 
+type StepsHorizontalProps = FC<{
+	steps: number;
+	currentStep: number;
+}>;
+
+type AllAdCardProps = {
+	img: string | File;
+	title: string;
+	author: string;
+	description: string;
+	tags: ({ id: string | number } & Record<string, string | number>)[];
+};
+type IAdCard = FC<AllAdCardProps>;
+
 export {
 	type TagProps,
 	type AvatarProps,
@@ -101,4 +115,6 @@ export {
 	type RatingProps,
 	type TextDividerProps,
 	type AuthFormProps,
+	type StepsHorizontalProps,
+	type IAdCard,
 };

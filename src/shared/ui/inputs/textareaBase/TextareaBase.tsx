@@ -1,20 +1,18 @@
-import { clsx } from 'clsx';
+import clsx from 'clsx';
 
 import { UIText12Reg, UIText14SB } from '@shared/ui/paragraphs';
 
-import styles from './InputBase.module.css';
+import styles from './TextareaBase.module.css';
 
 import type { FC } from 'react';
-import type { BaseInputProps } from '@shared/model/input.types';
+import type { TextareaBaseProps } from '@shared/model/input.types';
 
-const InputBase: FC<BaseInputProps> = ({
-	inputStyle = 'outline',
-	stateStyle = 'default',
+const TextareaBase: FC<TextareaBaseProps> = ({
+	className,
 	textLabel,
 	helper,
-	leftIcon,
-	rightIcon,
-	className,
+	inputStyle = 'outline',
+	stateStyle = 'default',
 	...props
 }) => {
 	return (
@@ -24,17 +22,14 @@ const InputBase: FC<BaseInputProps> = ({
 					<UIText14SB>{textLabel}</UIText14SB>
 				</label>
 			)}
-			<div
+			<textarea
 				className={clsx(
-					styles.inputContainer,
+					styles['base-input'],
 					styles[inputStyle],
 					styles[stateStyle],
 				)}
-			>
-				{leftIcon && leftIcon}
-				<input className={styles['base-input']} {...props} />
-				{rightIcon && rightIcon}
-			</div>
+				{...props}
+			/>
 			{helper && (
 				<UIText12Reg
 					className={clsx(styles.helper, styles[stateStyle])}
@@ -46,4 +41,4 @@ const InputBase: FC<BaseInputProps> = ({
 	);
 };
 
-export { InputBase };
+export { TextareaBase };

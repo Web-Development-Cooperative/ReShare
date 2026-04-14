@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { EyeOpen, EyeSlash } from '@shared/ui/icons';
 
@@ -23,4 +23,24 @@ const useAuthForm = (typeForm: Parameters<AuthFormProps>[0]['typeForm']) => {
 	return { title, textButton, inputPasswordType, iconEye };
 };
 
-export { useAuthForm };
+const useAdCard = (img: string | File) => {
+	const imageSrc = useMemo(() => {
+		if (typeof img === 'string') {
+			return img;
+		}
+
+		return URL.createObjectURL(img);
+	}, [img]);
+
+	useEffect(() => {
+		return () => {
+			if (typeof img !== 'string' && img instanceof File) {
+				URL.revokeObjectURL(imageSrc);
+			}
+		};
+	}, [img, imageSrc]);
+
+	return { imageSrc };
+};
+
+export { useAuthForm, useAdCard };

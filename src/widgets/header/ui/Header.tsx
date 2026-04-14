@@ -28,10 +28,12 @@ const Header = () => {
 			</div>
 			<div className={styles.panel}>
 				<PaddingWrapper y={0} x={12}>
-					<ButtonBase>
-						<Plus />
-						<UIText14SB>Разместить объявление</UIText14SB>
-					</ButtonBase>
+					<Link to={ROUTES.NEW_PUBLICATION}>
+						<ButtonBase>
+							<Plus />
+							<UIText14SB>Разместить объявление</UIText14SB>
+						</ButtonBase>
+					</Link>
 				</PaddingWrapper>
 				<Histogram />
 				<Heart />

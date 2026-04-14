@@ -1,0 +1,89 @@
+.new-publication-page {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	row-gap: 32px;
+
+	width: clamp(21.875rem, 16.989rem + 20.85vw, 35.75rem);
+	margin: 16px auto;
+	padding: 16px 0;
+}
+.header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	column-gap: 16px;
+}
+.header-title {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	row-gap: 4px;
+}
+
+/* 
+
+.photoList {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+
+.uploadIcon {
+	font-size: 24px;
+}
+
+
+
+
+.label {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.select {
+	width: 100%;
+	padding: 12px 14px;
+	border: 1px solid var(--border-default);
+	border-radius: 12px;
+	background: var(--bg-input-outlined);
+	font-size: 14px;
+	outline: none;
+}
+
+.textarea {
+	width: 100%;
+	min-height: 140px;
+	padding: 14px;
+	border: 1px solid var(--border-default);
+	border-radius: 16px;
+	resize: vertical;
+	font-size: 14px;
+	background: var(--bg-input-outlined);
+} */
+
+.buttons {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	column-gap: 16px;
+	row-gap: 8px;
+
+	&.last {
+		flex-direction: column;
+		align-items: stretch;
+
+		padding: 32px;
+	}
+}
+.buttons button {
+	flex: 1;
+}
+.buttons a {
+	display: flex;
+}

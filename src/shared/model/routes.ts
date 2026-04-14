@@ -10,6 +10,7 @@ const ROUTES = {
 	PROFILE_MY_ECO: '/profile/my-eco',
 	PROFILE_MY_ARCHIVE: '/profile/my-archive',
 	MESSAGES: '/messages',
+	NEW_PUBLICATION: '/new-publication',
 } as const;
 
 const ADAPTER_ROUTES_BREADCRUMBS = {
@@ -24,6 +25,7 @@ const ADAPTER_ROUTES_BREADCRUMBS = {
 	'/profile/my-eco': 'Эковклад',
 	'/profile/my-archive': 'Архив объявлений',
 	'/messages': 'Сообщения',
+	'/new-publication': 'Новая публикация',
 } as const;
 
 export { ROUTES, ADAPTER_ROUTES_BREADCRUMBS };

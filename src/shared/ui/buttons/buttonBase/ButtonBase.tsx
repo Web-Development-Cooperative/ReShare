@@ -10,6 +10,7 @@ const ButtonBase: ButtonBaseProps = ({
 	size = 'large',
 	withBorder = false,
 	color = 'transparent',
+	stateStyle = 'default',
 	...props
 }) => {
 	return (
@@ -18,8 +19,9 @@ const ButtonBase: ButtonBaseProps = ({
 				styles.button,
 				styles[size],
 				styles[color],
+				styles[stateStyle],
 				{ [styles.border]: withBorder },
-				className
+				className,
 			)}
 			{...props}
 		>
