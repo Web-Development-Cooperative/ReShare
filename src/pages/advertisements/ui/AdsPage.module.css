@@ -4,19 +4,19 @@
 	gap: 16px;
 	margin: 16px 32px;
 }
-.cardList {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-	gap: 32px 16px;
-	border-radius: 8px;
+.finderContainer {
+	display: flex;
+	gap: 16px;
+	align-items: center;
 }
 .fat-input {
 	width: 50%; /* занимает половину родительского блока */
 	flex: 0 0 50%; /* если родитель — flex-контейнер, гарантирует ровно 50% */
 	max-width: 100%;
 }
-.finderContainer {
-	display: flex;
-	gap: 16px;
-	align-items: center;
+.cardList {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 32px 16px;
+	border-radius: 8px;
 }
