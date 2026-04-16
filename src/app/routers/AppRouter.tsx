@@ -14,6 +14,7 @@ const MessagesPage = lazy(() => import('@pages/messages'));
 const AdsPage = lazy(() => import('@pages/main'));
 const NewPublicationPage = lazy(() => import('@pages/newPublication'));
 const MyAdsPage = lazy(() => import('@pages/myAds'));
+const MyApplicationPage = lazy(() => import('@pages/myApplication'));
 
 const router = createBrowserRouter([
 	{
@@ -87,7 +88,11 @@ const router = createBrowserRouter([
 					},
 					{
 						path: ROUTES.PROFILE_MY_APPLICATIONS,
-						element: <h1>Мои заявки</h1>,
+						element: (
+							<Limbo>
+								<MyApplicationPage />
+							</Limbo>
+						),
 					},
 					{
 						path: ROUTES.PROFILE_MY_ECO,
