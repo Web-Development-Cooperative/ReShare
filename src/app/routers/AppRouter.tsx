@@ -13,6 +13,7 @@ const ProfilePage = lazy(() => import('@pages/profile'));
 const MessagesPage = lazy(() => import('@pages/messages'));
 const AdsPage = lazy(() => import('@pages/main'));
 const NewPublicationPage = lazy(() => import('@pages/newPublication'));
+const MyAdsPage = lazy(() => import('@pages/myAds'));
 
 const router = createBrowserRouter([
 	{
@@ -78,7 +79,11 @@ const router = createBrowserRouter([
 					},
 					{
 						path: ROUTES.PROFILE_MY_ADS,
-						element: <h1>Мои объявления</h1>,
+						element: (
+							<Limbo>
+								<MyAdsPage />
+							</Limbo>
+						),
 					},
 					{
 						path: ROUTES.PROFILE_MY_APPLICATIONS,
