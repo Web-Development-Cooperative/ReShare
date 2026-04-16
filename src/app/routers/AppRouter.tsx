@@ -11,7 +11,7 @@ const RegPage = lazy(() => import('@pages/registration'));
 const LandingPage = lazy(() => import('@pages/landing'));
 const ProfilePage = lazy(() => import('@pages/profile'));
 const MessagesPage = lazy(() => import('@pages/messages'));
-const AdsPage = lazy(() => import('@pages/main'));
+const AdsPage = lazy(() => import('@pages/advertisements'));
 const NewPublicationPage = lazy(() => import('@pages/newPublication'));
 const MyAdsPage = lazy(() => import('@pages/myAds'));
 const MyApplicationPage = lazy(() => import('@pages/myApplication'));
