@@ -2,11 +2,11 @@ import { AdCard, UniList } from '@shared/ui/others';
 import { BgBorderDefault } from '@shared/ui/wrappers';
 import { notification } from '@shared/lib/toast.helper';
 
-import { useMyAdsPage } from '../lib/useMyAdsPage';
-import styles from './MyAdsPage.module.css';
+import { useMyArchivePage } from '../lib/useMyArchivePage.hook';
+import styles from './MyArchivePage.module.css';
 
-const MyAdsPage = () => {
-	const { activeAds, isLoading, isError } = useMyAdsPage();
+const MyArchivePage = () => {
+	const { activeAds, isLoading, isError } = useMyArchivePage();
 	if (isLoading) {
 		return (
 			<BgBorderDefault colorType="surface-1">
@@ -27,12 +27,12 @@ const MyAdsPage = () => {
 	}
 
 	if (!activeAds.length) {
-		notification.info('У вас пока нет объявлений.', {
+		notification.info('У вас пока нет завершенных объявлений.', {
 			toastId: 'no-active-ads',
 		});
 		return (
 			<BgBorderDefault colorType="surface-1">
-				<div>У вас пока нет объявлений.</div>
+				<div>У вас пока нет завершенных объявлений.</div>
 			</BgBorderDefault>
 		);
 	}
@@ -48,4 +48,4 @@ const MyAdsPage = () => {
 	);
 };
 
-export { MyAdsPage };
+export { MyArchivePage };

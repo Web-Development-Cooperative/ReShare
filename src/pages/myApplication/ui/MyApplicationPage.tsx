@@ -10,29 +10,29 @@ const MyApplicationPage = () => {
 	if (isLoading) {
 		return (
 			<BgBorderDefault colorType="surface-1">
-				<div>Загрузка объявлений...</div>
+				<div>Загрузка заявок...</div>
 			</BgBorderDefault>
 		);
 	}
 
 	if (isError) {
-		notification.error('Ошибка загрузки объявлений. Попробуйте снова.', {
+		notification.error('Ошибка загрузки заявок. Попробуйте снова.', {
 			toastId: 'load-ads-error',
 		});
 		return (
 			<BgBorderDefault colorType="surface-1">
-				<div>Не удалось загрузить объявления.</div>
+				<div>Не удалось загрузить заявки.</div>
 			</BgBorderDefault>
 		);
 	}
 
 	if (!activeAds.length) {
-		notification.info('У вас пока нет активных объявлений.', {
+		notification.info('У вас пока нет заявок.', {
 			toastId: 'no-active-ads',
 		});
 		return (
 			<BgBorderDefault colorType="surface-1">
-				<div>У вас пока нет активных объявлений.</div>
+				<div>У вас пока нет заявок.</div>
 			</BgBorderDefault>
 		);
 	}

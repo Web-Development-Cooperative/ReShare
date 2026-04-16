@@ -15,6 +15,7 @@ const AdsPage = lazy(() => import('@pages/main'));
 const NewPublicationPage = lazy(() => import('@pages/newPublication'));
 const MyAdsPage = lazy(() => import('@pages/myAds'));
 const MyApplicationPage = lazy(() => import('@pages/myApplication'));
+const MyArchivePage = lazy(() => import('@pages/myArchive'));
 
 const router = createBrowserRouter([
 	{
@@ -100,7 +101,11 @@ const router = createBrowserRouter([
 					},
 					{
 						path: ROUTES.PROFILE_MY_ARCHIVE,
-						element: <h1>Архив объявлений</h1>,
+						element: (
+							<Limbo>
+								<MyArchivePage />
+							</Limbo>
+						),
 					},
 				],
 			},
