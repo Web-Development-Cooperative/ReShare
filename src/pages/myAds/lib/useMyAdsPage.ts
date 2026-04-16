@@ -22,7 +22,7 @@ const useMyAdsPage = () => {
 		return listingItems
 			.filter(
 				(item) =>
-					item.status === ListingStatus.Active &&
+					item.status !== ListingStatus.Completed &&
 					item.transferType !== TransferType.Charity,
 			)
 			.map((item) => ({

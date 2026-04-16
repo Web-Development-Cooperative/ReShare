@@ -8,9 +8,9 @@ import {
 	TransferType,
 } from '@shared/api/generated/listings-api';
 
-import { items } from '../model/myApplicationPage.consts';
+import { items } from '../model/myArchivePage.consts';
 
-const useMyApplicationPage = () => {
+const useMyArchivePage = () => {
 	const { data, isLoading, isError } = useGetMyListingsQuery({
 		pageNumber: 1,
 		pageSize: 50,
@@ -20,11 +20,7 @@ const useMyApplicationPage = () => {
 		const listingItems = data?.items?.length ? data.items : items;
 
 		return listingItems
-			.filter(
-				(item) =>
-					item.status !== ListingStatus.Completed &&
-					item.transferType === TransferType.Charity,
-			)
+			.filter((item) => item.status === ListingStatus.Completed)
 			.map((item) => ({
 				id:
 					item.id ??
@@ -68,4 +64,4 @@ const useMyApplicationPage = () => {
 	return { activeAds, isLoading, isError };
 };
 
-export { useMyApplicationPage };
+export { useMyArchivePage };
