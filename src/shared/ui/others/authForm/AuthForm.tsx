@@ -57,7 +57,7 @@ const AuthForm: AuthFormProps = ({
 					rightIcon={iconEye}
 				/>
 			</div>
-			<ButtonBase onClick={onSubmit} color="primary" size="large">
+			<ButtonBase onClick={onSubmit} color="brand" size="large">
 				<UIText14SB>{textButton}</UIText14SB>
 			</ButtonBase>
 		</div>

@@ -1,17 +1,19 @@
 import { baseApi, apiTags } from '@shared/api';
 
 import type {
+	AuthChangePasswordUpdateData,
+	AuthLoginCreateData,
+	AuthLogoutCreateData,
+	AuthRefreshCreateData,
+	AuthRegisterCreateData,
 	ChangePasswordRequest,
 	LoginUserCommand,
-	LogoutCommand,
-	RefreshTokenCommand,
 	RegisterUserCommand,
-	TokensDto,
 } from '@shared/api/generated/identity-api';
 
 export const authApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
-		register: builder.mutation<TokensDto, RegisterUserCommand>({
+		register: builder.mutation<AuthRegisterCreateData, RegisterUserCommand>({
 			query: (body) => ({
 				url: '/auth/register',
 				method: 'POST',
@@ -19,7 +21,7 @@ export const authApi = baseApi.injectEndpoints({
 			}),
 			invalidatesTags: [apiTags.Auth],
 		}),
-		login: builder.mutation<TokensDto, LoginUserCommand>({
+		login: builder.mutation<AuthLoginCreateData, LoginUserCommand>({
 			query: (body) => {
 				new Promise((resolve) => setTimeout(resolve, 2000));
 				return {
@@ -30,23 +32,24 @@ export const authApi = baseApi.injectEndpoints({
 			},
 			invalidatesTags: [apiTags.Auth, apiTags.User],
 		}),
-		refresh: builder.mutation<TokensDto, RefreshTokenCommand>({
-			query: (body) => ({
+		refresh: builder.mutation<AuthRefreshCreateData, void>({
+			query: () => ({
 				url: '/auth/refresh',
 				method: 'POST',
-				body,
 			}),
 			invalidatesTags: [apiTags.Auth],
 		}),
-		logout: builder.mutation<void, LogoutCommand>({
-			query: (body) => ({
+		logout: builder.mutation<AuthLogoutCreateData, void>({
+			query: () => ({
 				url: '/auth/logout',
 				method: 'POST',
-				body,
 			}),
 			invalidatesTags: [apiTags.Auth, apiTags.User],
 		}),
-		changePassword: builder.mutation<void, ChangePasswordRequest>({
+		changePassword: builder.mutation<
+			AuthChangePasswordUpdateData,
+			ChangePasswordRequest
+		>({
 			query: (body) => ({
 				url: '/auth/change-password',
 				method: 'PUT',

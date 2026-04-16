@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router';
 
+import { authProvider, guestProvider } from '@app/providers/permissionProvider';
 import { ROUTES } from '@shared/model/routes';
 import { Limbo } from '@shared/ui/wrappers';
 
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: ROUTES.LOGIN,
+		loader: guestProvider,
 		element: (
 			<Limbo>
 				<LoginPage />
@@ -32,6 +34,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: ROUTES.REG,
+		loader: guestProvider,
 		element: (
 			<Limbo>
 				<RegPage />
@@ -40,6 +43,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: ROUTES.HOME,
+		loader: authProvider,
 		element: (
 			<Limbo>
 				<HeaderLayout />
