@@ -28,10 +28,6 @@ export interface LoginUserCommand {
   password?: string | null;
 }
 
-export interface LogoutCommand {
-  refreshToken?: string | null;
-}
-
 export interface ProblemDetails {
   type?: string | null;
   title?: string | null;
@@ -40,10 +36,6 @@ export interface ProblemDetails {
   detail?: string | null;
   instance?: string | null;
   [key: string]: any;
-}
-
-export interface RefreshTokenCommand {
-  refreshToken?: string | null;
 }
 
 export interface RegisterUserCommand {
@@ -55,18 +47,11 @@ export interface RegisterUserCommand {
   role?: UserRole;
 }
 
-export interface TokensDto {
-  accessToken?: string | null;
-  refreshToken?: string | null;
-  /** @format date-time */
-  expiresAt?: string;
-}
+export type AuthRegisterCreateData = any;
 
-export type AuthRegisterCreateData = TokensDto;
+export type AuthLoginCreateData = any;
 
-export type AuthLoginCreateData = TokensDto;
-
-export type AuthRefreshCreateData = TokensDto;
+export type AuthRefreshCreateData = any;
 
 export type AuthLogoutCreateData = any;
 
@@ -353,7 +338,6 @@ export class Api<
         method: "POST",
         body: data,
         type: ContentType.Json,
-        format: "json",
         ...params,
       }),
 
@@ -370,7 +354,6 @@ export class Api<
         method: "POST",
         body: data,
         type: ContentType.Json,
-        format: "json",
         ...params,
       }),
 
@@ -381,16 +364,10 @@ export class Api<
      * @name AuthRefreshCreate
      * @request POST:/api/auth/refresh
      */
-    authRefreshCreate: (
-      data: RefreshTokenCommand,
-      params: RequestParams = {},
-    ) =>
+    authRefreshCreate: (params: RequestParams = {}) =>
       this.request<AuthRefreshCreateData, ProblemDetails>({
         path: `/api/auth/refresh`,
         method: "POST",
-        body: data,
-        type: ContentType.Json,
-        format: "json",
         ...params,
       }),
 
@@ -402,13 +379,11 @@ export class Api<
      * @request POST:/api/auth/logout
      * @secure
      */
-    authLogoutCreate: (data: LogoutCommand, params: RequestParams = {}) =>
+    authLogoutCreate: (params: RequestParams = {}) =>
       this.request<AuthLogoutCreateData, any>({
         path: `/api/auth/logout`,
         method: "POST",
-        body: data,
         secure: true,
-        type: ContentType.Json,
         ...params,
       }),
 
