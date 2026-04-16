@@ -1,3 +1,5 @@
+import { getCookieValue } from '@shared/api';
+
 import {
 	ACCESS_TOKEN_COOKIE_NAME,
 	AUTH_API_BASE_URL,
@@ -11,19 +13,6 @@ type JwtPayload = {
 
 let isRefreshBlockedForMissingToken = false;
 let refreshInFlight: Promise<boolean> | null = null;
-
-const getCookieValue = (cookieName: string): string | null => {
-	const escapedName = cookieName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	const match = document.cookie.match(
-		new RegExp(`(?:^|; )${escapedName}=([^;]*)`),
-	);
-
-	if (!match) {
-		return null;
-	}
-
-	return decodeURIComponent(match[1]);
-};
 
 const decodeBase64Url = (value: string): string | null => {
 	try {
