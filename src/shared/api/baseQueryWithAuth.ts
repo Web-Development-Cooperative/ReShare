@@ -59,19 +59,12 @@ const baseQueryWithAuth: BaseQueryFn<
 			extraOptions,
 		);
 
-		if (refreshResult.data) {
-			// Сохраняем новый токен
-			// const newToken = (refreshResult.data as { token?: string }).token;
-			// if (newToken) {
-			// 	localStorage.setItem('authToken', newToken);
-			// }
-
+		if (refreshResult.meta?.response?.status === 204) {
 			// Повторяем оригинальный запрос с новым токеном
 			result = await baseQueryWithoutAuth(args, api, extraOptions);
 		} else {
-			// Если обновление не удалось, выходим из системы
-			// localStorage.removeItem('authToken');
-			// Здесь можно добавить редирект на страницу входа
+			console.warn('Refresh token failed, logging out');
+			window.location.href = '/login';
 		}
 	}
 
