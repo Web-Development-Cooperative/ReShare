@@ -32,7 +32,7 @@
 .phones-container {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	align-items: stretch;
 	justify-content: flex-start;
 	row-gap: 8px;
 	& > h3 {

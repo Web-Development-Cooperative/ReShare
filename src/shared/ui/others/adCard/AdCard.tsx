@@ -1,16 +1,26 @@
+import clsx from 'clsx';
+
 import { Tag, UniList } from '@shared/ui/others';
 import { Paragraph14Reg, UIText14Medium } from '@shared/ui/paragraphs';
 import { useAdCard } from '@shared/lib/otherUI.hooks';
+import { LinkBase } from '@shared/ui/links';
 
 import styles from './AdCard.module.css';
 
 import type { IAdCard } from '@shared/model/otherUI.types';
 
-const AdCard: IAdCard = ({ img, title, author, description, tags }) => {
+const AdCard: IAdCard = ({
+	img,
+	title,
+	author,
+	description,
+	tags,
+	state = 'default',
+}) => {
 	const { imageSrc } = useAdCard(img);
 
 	return (
-		<div className={styles.card}>
+		<LinkBase to="123" className={clsx(styles.card, styles[state])}>
 			{/* <div>Компонент с лайком</div> */}
 			<div className={styles.cardImageWrapper}>
 				<img
@@ -45,7 +55,7 @@ const AdCard: IAdCard = ({ img, title, author, description, tags }) => {
 					)}
 				/>
 			</div>
-		</div>
+		</LinkBase>
 	);
 };
 

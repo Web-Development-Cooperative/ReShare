@@ -21,6 +21,7 @@ const RenderStepThree: RenderStepThreeProps = ({ formData }) => {
 						},
 						{ id: 2, name: '120ru' },
 					]}
+					state="disabled"
 				/>
 			</div>
 		</>

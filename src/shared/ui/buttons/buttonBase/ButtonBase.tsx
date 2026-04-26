@@ -11,6 +11,7 @@ const ButtonBase: ButtonBaseProps = ({
 	withBorder = false,
 	color = 'transparent',
 	stateStyle = 'default',
+	disabled = false,
 	...props
 }) => {
 	return (
@@ -23,6 +24,7 @@ const ButtonBase: ButtonBaseProps = ({
 				{ [styles.border]: withBorder },
 				className,
 			)}
+			disabled={disabled}
 			{...props}
 		>
 			{children}

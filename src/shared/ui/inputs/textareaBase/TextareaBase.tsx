@@ -13,6 +13,7 @@ const TextareaBase: FC<TextareaBaseProps> = ({
 	helper,
 	inputStyle = 'outline',
 	stateStyle = 'default',
+	disabled,
 	...props
 }) => {
 	return (
@@ -23,11 +24,10 @@ const TextareaBase: FC<TextareaBaseProps> = ({
 				</label>
 			)}
 			<textarea
-				className={clsx(
-					styles['base-input'],
-					styles[inputStyle],
-					styles[stateStyle],
-				)}
+				className={clsx(styles['base-input'], styles[inputStyle], {
+					[styles[stateStyle]]: !disabled,
+				})}
+				disabled={disabled}
 				{...props}
 			/>
 			{helper && (

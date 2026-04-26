@@ -1,4 +1,4 @@
-import type { InputHTMLAttributes, ReactNode, RefAttributes } from 'react';
+import type { ChangeEvent, InputHTMLAttributes, ReactNode, RefAttributes } from 'react';
 
 type BaseInputProps = InputHTMLAttributes<HTMLInputElement> &
 	RefAttributes<HTMLInputElement> & {
@@ -7,7 +7,7 @@ type BaseInputProps = InputHTMLAttributes<HTMLInputElement> &
 		leftIcon?: ReactNode;
 		rightIcon?: ReactNode;
 		inputStyle?: 'outline' | 'shaded';
-		stateStyle?: 'default' | 'error';
+		stateStyle?: 'default' | 'error' | 'success' | 'warning';
 	};
 
 type TextareaBaseProps = InputHTMLAttributes<HTMLTextAreaElement> &
@@ -15,7 +15,7 @@ type TextareaBaseProps = InputHTMLAttributes<HTMLTextAreaElement> &
 		textLabel?: string;
 		helper?: string;
 		inputStyle?: 'outline' | 'shaded';
-		stateStyle?: 'default' | 'error';
+		stateStyle?: 'default' | 'error' | 'success' | 'warning';
 	};
 
 type ToggleProps = Omit<
@@ -40,4 +40,16 @@ type RadioProps = Omit<
 		labelPosition?: 'left' | 'right';
 	};
 
-export type { BaseInputProps, TextareaBaseProps, ToggleProps, RadioProps };
+type InputDropZoneProps = InputHTMLAttributes<HTMLInputElement> &
+	RefAttributes<HTMLInputElement> & {
+		errors?: string;
+		addPhoto: (e: ChangeEvent<HTMLInputElement, Element>) => void;
+	};
+
+export type {
+	BaseInputProps,
+	TextareaBaseProps,
+	ToggleProps,
+	RadioProps,
+	InputDropZoneProps,
+};

@@ -14,21 +14,55 @@
 	border-radius: 6px;
 
 	outline: none;
+
+	color: var(--text-primary);
+
+	transition:
+		border-color var(--time-to-do) var(--type-effect),
+		background-color var(--time-to-do) var(--type-effect);
+
+	&::placeholder {
+		color: var(--text-secondary);
+	}
+
+	&:disabled {
+		color: var(--text-tertiary);
+
+		&::placeholder {
+			color: var(--text-tertiary);
+		}
+	}
 }
 .helper {
 	color: var(--text-secondary);
 }
-/*  */
+/* styles */
 .outline {
 	border: 1px solid var(--border-default);
 	background-color: var(--bg-input-outlined);
 }
 .shaded {
-	background-color: var(--bg-input-shaded);
+	border: 1px solid var(--bg-input-shaded);
+	background-color: var(--bg-input-shaded) !important;
 }
-/* state */
-.default {
-	/* default state */
+/* states */
+.base-input.default {
+	&:hover {
+		border-color: var(--border-default-hover);
+	}
+	&:focus-within,
+	&:active {
+		border-color: var(--border-default-active);
+	}
+}
+.base-input:disabled {
+	background-color: var(--bg-input-disabled) !important;
+}
+.base-input.outline:disabled {
+	border-color: var(--border-default);
+}
+.base-input.shaded:disabled {
+	border-color: var(--bg-input-disabled);
 }
 .base-input.error {
 	border-color: var(--border-color-negative);
@@ -36,4 +70,18 @@
 }
 .helper.error {
 	color: var(--text-negative);
+}
+.base-input.warning {
+	border-color: var(--border-color-warning);
+	background-color: var(--bg-subtle-warning);
+}
+.helper.warning {
+	color: var(--text-warning);
+}
+.base-input.success {
+	border-color: var(--border-color-success);
+	background-color: var(--bg-subtle-positive);
+}
+.helper.success {
+	color: var(--text-positive);
 }

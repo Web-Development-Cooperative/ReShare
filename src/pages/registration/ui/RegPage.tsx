@@ -1,6 +1,5 @@
-import { Link } from 'react-router';
-
 import { RegForm } from '@features/registration';
+import { LinkBase } from '@shared/ui/links';
 import { LogoHeader } from '@shared/ui/icons';
 import { UIText12Reg } from '@shared/ui/paragraphs';
 
@@ -12,14 +11,14 @@ const RegPage = () => {
 			<LogoHeader />
 			<RegForm />
 			<UIText12Reg className={styles['footer-text']}>
-				Продолжая вход или регистрацию, вы соглашаетесь
-				<Link to={'#'} className={styles['footer-link']}>
+				Продолжая вход или регистрацию, вы соглашаетесь{' '}
+				<LinkBase to={'#'} className={styles['footer-link']}>
 					с условиями
-				</Link>
-				сервиса и подтверждаете что ознакомились
-				<Link to={'#'} className={styles['footer-link']}>
+				</LinkBase>{' '}
+				сервиса и подтверждаете что ознакомились{' '}
+				<LinkBase to={'#'} className={styles['footer-link']}>
 					с политикой конфиденциальности
-				</Link>
+				</LinkBase>
 				.
 			</UIText12Reg>
 		</div>

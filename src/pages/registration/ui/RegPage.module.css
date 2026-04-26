@@ -15,5 +15,6 @@
 	margin-bottom: 16px;
 }
 .footer-link {
+	display: inline-block;
 	color: var(--text-colored-brand);
 }

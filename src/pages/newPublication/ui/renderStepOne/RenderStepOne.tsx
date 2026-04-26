@@ -1,14 +1,7 @@
-import clsx from 'clsx';
-
-import { InputBase, TextareaBase } from '@shared/ui/inputs';
+import { InputBase, InputDropZone, TextareaBase } from '@shared/ui/inputs';
 import { ButtonBase } from '@shared/ui/buttons';
-import {
-	Paragraph14Reg,
-	UIText12Reg,
-	UIText14Medium,
-	UIText14SB,
-} from '@shared/ui/paragraphs';
-import { Camera, CrossPopup } from '@shared/ui/icons';
+import { Paragraph14Reg, UIText14SB } from '@shared/ui/paragraphs';
+import { CrossPopup } from '@shared/ui/icons';
 
 import { useRenderStepOne } from '../../lib/useRenderStepOne';
 import { TYPE_OPTIONS } from '../../model/renderStepOne.consts';
@@ -47,6 +40,7 @@ const RenderStepOne: RenderStepOneProps = ({
 							key={type}
 							className={styles.typeButton}
 							color={formData.type === type ? 'brand' : 'outline'}
+							disabled={formData.type === type}
 							stateStyle={errors.type ? 'error' : 'default'}
 							onClick={() => updateType(type)}
 						>
@@ -59,6 +53,7 @@ const RenderStepOne: RenderStepOneProps = ({
 			<div className={styles.section}>
 				<h3>Фотографии</h3>
 				<div className={styles.photosRow}>
+					<InputDropZone errors={errors.photos} addPhoto={addPhoto} />
 					{formData.photos?.map((photo, index) => (
 						<div key={index} className={styles.photoItem}>
 							<img
@@ -75,29 +70,6 @@ const RenderStepOne: RenderStepOneProps = ({
 							</ButtonBase>
 						</div>
 					))}
-
-					<label
-						className={clsx(styles.uploadCard, {
-							[styles.errorPhotos]: errors.photos,
-						})}
-					>
-						<input
-							type="file"
-							accept="image/*"
-							multiple
-							onChange={addPhoto}
-							hidden
-						/>
-						<Camera />
-						<div className={styles.uploadText}>
-							<UIText14Medium>
-								Добавьте фотографию вещи
-							</UIText14Medium>
-							<UIText12Reg className={styles.uploadHint}>
-								JPG, HEIC, не более 5 МБ
-							</UIText12Reg>
-						</div>
-					</label>
 					<Paragraph14Reg>До 4х штук</Paragraph14Reg>
 				</div>
 			</div>

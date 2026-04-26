@@ -1,11 +1,10 @@
-import { Link } from 'react-router';
-
 import { clsx } from 'clsx';
 
 import { ButtonBase } from '@shared/ui/buttons';
 import { ArrowRight, Check, CrossPopup } from '@shared/ui/icons';
 import { Paragraph16Reg, UIText14SB } from '@shared/ui/paragraphs';
 import { StepsHorizontal } from '@shared/ui/others';
+import { LinkBase } from '@shared/ui/links';
 import { ROUTES } from '@shared/model/routes';
 
 import { useNewPublicationPage } from '../lib/useNewPublicationPage';
@@ -63,8 +62,6 @@ const NewPublicationPage = () => {
 			)}
 			{currentStep === 3 && <RenderStepThree formData={formData} />}
 			{currentStep === 4 && <RenderStepFour />}
-			{/* {currentStep === 2 && renderStep2()} */}
-			{/* {currentStep === 3 && renderStep3()} */}
 
 			<div
 				className={clsx(styles['buttons'], {
@@ -72,7 +69,7 @@ const NewPublicationPage = () => {
 				})}
 			>
 				{currentStep > 1 && currentStep <= 3 && (
-					<ButtonBase onClick={handleBack} color="outline" withBorder>
+					<ButtonBase onClick={handleBack} color="outline">
 						<UIText14SB>Назад</UIText14SB>
 					</ButtonBase>
 				)}
@@ -94,11 +91,11 @@ const NewPublicationPage = () => {
 					</ButtonBase>
 				)}
 				{currentStep === 4 && (
-					<Link to={ROUTES.ADS}>
+					<LinkBase to={ROUTES.ADS}>
 						<ButtonBase color="outline">
 							<UIText14SB>К объявлениям</UIText14SB>
 						</ButtonBase>
-					</Link>
+					</LinkBase>
 				)}
 			</div>
 		</div>
