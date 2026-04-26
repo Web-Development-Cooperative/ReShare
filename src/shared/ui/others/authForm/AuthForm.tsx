@@ -28,12 +28,16 @@ const AuthForm: AuthFormProps = ({
 				</Paragraph16Reg>
 			</div>
 			<div className={styles['social-buttons']}>
-				<ButtonBase withBorder>
-					<Google />
+				<ButtonBase color="outline">
+					<div>
+						<Google />
+					</div>
 					<UIText14SB>Войти через Google</UIText14SB>
 				</ButtonBase>
-				<ButtonBase withBorder>
-					<Apple />
+				<ButtonBase color="outline">
+					<div>
+						<Apple />
+					</div>
 					<UIText14SB>Войти через Apple</UIText14SB>
 				</ButtonBase>
 			</div>

@@ -3,14 +3,62 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
+
+	user-select: none;
+	transition:
+		background-color var(--time-to-do) var(--type-effect),
+		color var(--time-to-do) var(--type-effect);
+
+	&:disabled {
+		opacity: 0.5;
+		cursor: default;
+		pointer-events: none;
+	}
+
+	& > p {
+		transition: color var(--time-to-do) var(--type-effect);
+	}
 }
 .transparent {
 	background-color: transparent;
+
+	color: var(--text-primary);
+
+	&:hover {
+		background-color: var(--button-secondary-hover);
+	}
+	&:focus-visible {
+		outline: 2px solid var(--button-focus-ring);
+		outline-offset: 2px;
+		background-color: var(--button-secondary-hover);
+	}
+	&:active {
+		background-color: var(--button-secondary-active);
+	}
+
+	& > p {
+		color: var(--text-primary);
+	}
+	& > svg > path {
+		fill: var(--text-primary);
+	}
 }
-.dark {
+.filled {
 	background-color: var(--button-filled);
 
 	color: var(--text-primary-inverse);
+
+	&:hover {
+		background-color: var(--button-filled-hover);
+	}
+	&:focus-visible {
+		outline: 2px solid var(--button-focus-ring);
+		outline-offset: 2px;
+		background-color: var(--button-filled-hover);
+	}
+	&:active {
+		background-color: var(--button-filled-active);
+	}
 
 	& > p {
 		color: var(--text-primary-inverse);
@@ -24,6 +72,18 @@
 
 	color: var(--text-primary-on-color);
 
+	&:hover {
+		background-color: var(--button-primary-hover);
+	}
+	&:focus-visible {
+		outline: 2px solid var(--button-focus-ring);
+		outline-offset: 2px;
+		background-color: var(--button-primary-hover);
+	}
+	&:active {
+		background-color: var(--button-primary-active);
+	}
+
 	& > p {
 		color: var(--text-primary-on-color);
 	}
@@ -35,6 +95,18 @@
 	background-color: var(--button-shaded);
 
 	color: var(--text-primary);
+
+	&:hover {
+		background-color: var(--button-shaded-hover);
+	}
+	&:focus-visible {
+		outline: 2px solid var(--button-focus-ring);
+		outline-offset: 2px;
+		background-color: var(--button-shaded-hover);
+	}
+	&:active {
+		background-color: var(--button-shaded-active);
+	}
 
 	& > p {
 		color: var(--text-primary);
@@ -48,6 +120,18 @@
 	background-color: var(--bg-default);
 
 	color: var(--text-primary);
+
+	&:hover {
+		background-color: var(--button-secondary-hover);
+	}
+	&:focus-visible {
+		outline: 2px solid var(--button-focus-ring);
+		outline-offset: 2px;
+		background-color: var(--button-secondary-hover);
+	}
+	&:active {
+		background-color: var(--button-secondary-active);
+	}
 
 	& > p {
 		color: var(--text-primary);

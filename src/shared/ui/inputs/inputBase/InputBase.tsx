@@ -15,6 +15,7 @@ const InputBase: FC<BaseInputProps> = ({
 	leftIcon,
 	rightIcon,
 	className,
+	disabled,
 	...props
 }) => {
 	return (
@@ -27,12 +28,17 @@ const InputBase: FC<BaseInputProps> = ({
 			<div
 				className={clsx(
 					styles.inputContainer,
+					{ [styles.disabled]: disabled },
 					styles[inputStyle],
-					styles[stateStyle],
+					{ [styles[stateStyle]]: !disabled },
 				)}
 			>
 				{leftIcon && leftIcon}
-				<input className={styles['base-input']} {...props} />
+				<input
+					className={styles['base-input']}
+					disabled={disabled}
+					{...props}
+				/>
 				{rightIcon && rightIcon}
 			</div>
 			{helper && (

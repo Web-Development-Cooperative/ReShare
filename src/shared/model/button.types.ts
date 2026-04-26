@@ -1,9 +1,16 @@
 import type { FC, HTMLAttributes, PropsWithChildren } from 'react';
 
 type ButtonSize = 'large';
-type ButtonBgColor = 'transparent' | 'dark' | 'shaded' | 'brand' | 'outline';
+type ButtonBgColor =
+	| 'transparent'
+	| 'filled'
+	| 'shaded'
+	| 'brand'
+	| 'outline'
+	| 'destructive';
 type ButtonStateStyle = 'default' | 'error';
 type OtherProps = {
+	disabled?: boolean;
 	withBorder?: boolean;
 	size?: ButtonSize;
 	color?: ButtonBgColor;

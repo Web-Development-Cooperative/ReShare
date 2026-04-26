@@ -1,5 +1,3 @@
-import { Link } from 'react-router';
-
 import img from '@shared/assets/img/baseAvatarMale.png';
 import { ROUTES } from '@shared/model/routes';
 import { ButtonBase } from '@shared/ui/buttons';
@@ -11,6 +9,7 @@ import {
 	LogoHeader,
 	Plus,
 } from '@shared/ui/icons';
+import { LinkBase } from '@shared/ui/links';
 import { Avatar } from '@shared/ui/others';
 import { UIText14SB } from '@shared/ui/paragraphs';
 import { PaddingWrapper } from '@shared/ui/wrappers';
@@ -21,29 +20,29 @@ const Header = () => {
 	return (
 		<div className={styles.header}>
 			<div className={styles['logo-wrapper']}>
-				<Link to={ROUTES.HOME}>
+				<LinkBase to={ROUTES.HOME}>
 					<LogoHeader />
-				</Link>
+				</LinkBase>
 				<UIText14SB>Сервис осознанного потребления</UIText14SB>
 			</div>
 			<div className={styles.panel}>
 				<PaddingWrapper y={0} x={12}>
-					<Link to={ROUTES.NEW_PUBLICATION}>
-						<ButtonBase>
+					<LinkBase to={ROUTES.NEW_PUBLICATION}>
+						<ButtonBase tabIndex={-1}>
 							<Plus />
 							<UIText14SB>Разместить объявление</UIText14SB>
 						</ButtonBase>
-					</Link>
+					</LinkBase>
 				</PaddingWrapper>
 				<Histogram />
 				<Heart />
 				<Bell />
-				<Link to={ROUTES.MESSAGES}>
+				<LinkBase to={ROUTES.MESSAGES}>
 					<Chat />
-				</Link>
-				<Link to={ROUTES.PROFILE}>
+				</LinkBase>
+				<LinkBase to={ROUTES.PROFILE}>
 					<Avatar shape="circle" size="medium" src={img}></Avatar>
-				</Link>
+				</LinkBase>
 			</div>
 		</div>
 	);

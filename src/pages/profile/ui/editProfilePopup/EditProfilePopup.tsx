@@ -1,12 +1,9 @@
 import img from '@shared/assets/img/baseAvatarMale.png';
 import { ButtonBase } from '@shared/ui/buttons';
 import { Avatar, Tag, UniList } from '@shared/ui/others';
-import {
-	UIText14Medium,
-	UIText14Reg,
-	UIText14SB,
-} from '@shared/ui/paragraphs';
+import { UIText14Medium, UIText14Reg, UIText14SB } from '@shared/ui/paragraphs';
 import { PaddingWrapper } from '@shared/ui/wrappers';
+import { InputBase } from '@shared/ui/inputs';
 
 import styles from './EditProfilePopup.module.css';
 import { PHONES } from '../../lib/profilePage.consts';
@@ -22,8 +19,7 @@ const EditProfilePopup = () => {
 						Как вы хотите, чтобы к вам обращались?
 					</UIText14Reg>
 				</div>
-				<input type="text" />
-				{/* TODO... */}
+				<InputBase placeholder="Введите имя" />
 			</div>
 			<div className={styles['phones-container']}>
 				<h3>Телефоны</h3>
@@ -47,13 +43,13 @@ const EditProfilePopup = () => {
 						</div>
 					)}
 				/>
-				<ButtonBase withBorder>
+				<ButtonBase color="outline">
 					<PaddingWrapper y={0} x={8}>
 						<UIText14SB>Добавить номер</UIText14SB>
 					</PaddingWrapper>
 				</ButtonBase>
 			</div>
-			<ButtonBase color="primary">
+			<ButtonBase color="brand">
 				<UIText14SB>Сохранить</UIText14SB>
 			</ButtonBase>
 		</div>

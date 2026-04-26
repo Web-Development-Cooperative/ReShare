@@ -4,6 +4,8 @@
 	align-items: stretch;
 	justify-content: flex-start;
 	row-gap: 4px;
+
+	border-radius: 8px;
 }
 .inputContainer {
 	display: flex;
@@ -13,6 +15,10 @@
 	padding: 8px;
 	padding-left: 16px;
 	border-radius: 8px;
+
+	transition:
+		border-color var(--time-to-do) var(--type-effect),
+		background-color var(--time-to-do) var(--type-effect);
 }
 .base-input {
 	flex: 1;
@@ -20,11 +26,22 @@
 	border: none;
 	background: transparent;
 	outline: none;
+
+	color: var(--text-primary);
+
+	&::placeholder {
+		color: var(--text-secondary);
+	}
+
+	.disabled > &,
+	.disabled > &::placeholder {
+		color: var(--text-tertiary);
+	}
 }
 .helper {
 	color: var(--text-secondary);
 }
-/*  */
+/* styles */
 .outline {
 	border: 1px solid var(--border-default);
 	background-color: var(--bg-input-outlined);
@@ -33,9 +50,24 @@
 	border: 1px solid var(--bg-input-shaded);
 	background-color: var(--bg-input-shaded) !important;
 }
-/* state */
-.default {
-	/* default state */
+/* states */
+.inputContainer.default {
+	&:hover {
+		border-color: var(--border-default-hover);
+	}
+	&:focus-within,
+	&:active {
+		border-color: var(--border-default-active);
+	}
+}
+.inputContainer.disabled {
+	background-color: var(--bg-input-disabled) !important;
+}
+.inputContainer.outline.disabled {
+	border-color: var(--border-default);
+}
+.inputContainer.shaded.disabled {
+	border-color: var(--bg-input-disabled);
 }
 .inputContainer.error {
 	border-color: var(--border-color-negative);
@@ -43,4 +75,18 @@
 }
 .helper.error {
 	color: var(--text-negative);
+}
+.inputContainer.warning {
+	border-color: var(--border-color-warning);
+	background-color: var(--bg-subtle-warning);
+}
+.helper.warning {
+	color: var(--text-warning);
+}
+.inputContainer.success {
+	border-color: var(--border-color-success);
+	background-color: var(--bg-subtle-positive);
+}
+.helper.success {
+	color: var(--text-positive);
 }

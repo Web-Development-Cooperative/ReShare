@@ -26,20 +26,43 @@ const useRenderStepOne = ({
 		if (!selectedFiles) return;
 
 		const newFilesArray = Array.from(selectedFiles);
-		if (
-			formData.photos?.length === 4 ||
-			newFilesArray.length + (formData.photos?.length || 0) > 4
-		) {
-			notification.info('Максимум 4 фотографии', {
-				toastId: 'overflow-photos',
-			});
+
+		const validFiles = newFilesArray.filter((file) =>
+			file.type.startsWith('image/'),
+		);
+
+		if (validFiles.length === 0) {
+			notification.info(
+				'Можно загружать только изображения в формате JPG или PNG',
+				{
+					toastId: 'invalid-files',
+				},
+			);
 			return;
 		}
 
-		updateFormData('photos', [
-			...(formData.photos || []),
-			...newFilesArray,
-		]);
+		const invalidCount = newFilesArray.length - validFiles.length;
+		if (invalidCount > 0) {
+			notification.info(
+				`Отфильтровано ${invalidCount} недопустимых файла`,
+				{
+					toastId: 'filtered-files',
+				},
+			);
+		}
+
+		const remainingSlots = 4 - (formData.photos?.length || 0);
+		const filesToAdd = validFiles.slice(0, remainingSlots);
+		if (validFiles.length > remainingSlots) {
+			notification.info(
+				`Добавлено ${remainingSlots} фото, в связи с ограничением в 4 фото на объявление`,
+				{
+					toastId: 'overflow-photos',
+				},
+			);
+		}
+
+		updateFormData('photos', [...(formData.photos || []), ...filesToAdd]);
 		e.target.value = '';
 		if (errors.photos) {
 			setErrors((prev) => ({ ...prev, photos: undefined }));

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, Outlet } from 'react-router';
+import { Outlet } from 'react-router';
 
 import { clsx } from 'clsx';
 
@@ -13,6 +13,7 @@ import {
 	UIText14Reg,
 	UIText14SB,
 } from '@shared/ui/paragraphs';
+import { NavLinkBase } from '@shared/ui/links';
 import { BasePopup } from '@shared/ui/popups';
 import { BgBorderDefault } from '@shared/ui/wrappers';
 
@@ -35,7 +36,7 @@ const ProfilePage = () => {
 						<div className={styles['row']}>
 							<h2>Аполлинария Владимировна</h2>
 							<div className={styles['buttons-container']}>
-								<ButtonBase withBorder>
+								<ButtonBase color="outline">
 									<Share />
 									<UIText14SB>Поделиться профилем</UIText14SB>
 								</ButtonBase>
@@ -43,7 +44,7 @@ const ProfilePage = () => {
 									onClick={() =>
 										setOpenEditProfile((cv) => !cv)
 									}
-									withBorder
+									color="outline"
 								>
 									<Pencil />
 									<UIText14SB>
@@ -76,7 +77,7 @@ const ProfilePage = () => {
 						className={styles['nav-list']}
 						items={NAV}
 						renderItem={(item) => (
-							<NavLink
+							<NavLinkBase
 								to={item.to}
 								className={({ isActive }) =>
 									clsx(styles['nav-item'], {
@@ -93,7 +94,7 @@ const ProfilePage = () => {
 										<UIText14Reg>{item.text}</UIText14Reg>
 									)
 								}
-							</NavLink>
+							</NavLinkBase>
 						)}
 					/>
 				</BgBorderDefault>
