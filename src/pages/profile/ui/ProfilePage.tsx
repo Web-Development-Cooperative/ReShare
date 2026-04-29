@@ -33,7 +33,7 @@ const ProfilePage = () => {
 				<div className={styles['main-info-container']}>
 					<Avatar shape="square" size="huge" src={img} />
 					<div className={styles['main-info']}>
-						<div className={styles['row']}>
+						<div className={styles['row-top']}>
 							<h2>Аполлинария Владимировна</h2>
 							<div className={styles['buttons-container']}>
 								<ButtonBase color="outline">
@@ -53,7 +53,7 @@ const ProfilePage = () => {
 								</ButtonBase>
 							</div>
 						</div>
-						<div className={styles['row']}>
+						<div className={styles['row-bottom']}>
 							<Rating rating={RATING} left size="medium" />
 							<button onClick={() => setOpenReview((cv) => !cv)}>
 								<UIText14Reg className={styles['reviews']}>
@@ -64,6 +64,16 @@ const ProfilePage = () => {
 							<Paragraph16Reg>На платформе с 2026</Paragraph16Reg>
 						</div>
 					</div>
+				</div>
+				<div className={styles['row-bottom-two']}>
+					<Rating rating={RATING} left size="medium" />
+					<button onClick={() => setOpenReview((cv) => !cv)}>
+						<UIText14Reg className={styles['reviews']}>
+							24 отзыва
+						</UIText14Reg>
+					</button>
+					<UIText14Reg>•</UIText14Reg>
+					<Paragraph16Reg>На платформе с 2026</Paragraph16Reg>
 				</div>
 				<UniList
 					className={styles['secondary-info-container']}
