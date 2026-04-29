@@ -22,7 +22,7 @@ const MessagesPage = () => {
 					className={styles.sidebar}
 					colorType="surface-1"
 				>
-					<PaddingWrapper y={16} x={12}>
+					<PaddingWrapper y={0} x={0} className={styles.wrapper}>
 						<InputBase
 							placeholder="Поиск по чатам"
 							leftIcon={<Loupe />}

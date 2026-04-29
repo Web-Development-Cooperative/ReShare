@@ -6,7 +6,7 @@
 	row-gap: 16px;
 
 	height: 100%;
-	padding: 16px 32px;
+	padding: 16px clamp(0.313rem, -0.793rem + 3.72vw, 2rem);
 }
 .title-container {
 	display: flex;
@@ -31,7 +31,11 @@
 	justify-content: flex-start;
 	align-self: stretch;
 
-	width: 18vw;
+	width: clamp(10.938rem, 7.813rem + 13.33vw, 17.813rem);
+}
+.wrapper {
+	padding: clamp(0.5rem, 0.273rem + 0.97vw, 1rem)
+		clamp(0.25rem, 0.023rem + 0.97vw, 0.75rem) !important;
 }
 .chats {
 	display: flex;
