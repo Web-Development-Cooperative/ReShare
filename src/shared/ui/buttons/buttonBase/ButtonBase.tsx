@@ -10,6 +10,8 @@ const ButtonBase: ButtonBaseProps = ({
 	size = 'large',
 	withBorder = false,
 	color = 'transparent',
+	stateStyle = 'default',
+	disabled = false,
 	...props
 }) => {
 	return (
@@ -18,9 +20,11 @@ const ButtonBase: ButtonBaseProps = ({
 				styles.button,
 				styles[size],
 				styles[color],
+				styles[stateStyle],
 				{ [styles.border]: withBorder },
-				className
+				className,
 			)}
+			disabled={disabled}
 			{...props}
 		>
 			{children}

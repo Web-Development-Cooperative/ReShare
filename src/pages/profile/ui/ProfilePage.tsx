@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, Outlet } from 'react-router';
+import { Outlet } from 'react-router';
 
 import { clsx } from 'clsx';
 
@@ -13,6 +13,7 @@ import {
 	UIText14Reg,
 	UIText14SB,
 } from '@shared/ui/paragraphs';
+import { NavLinkBase } from '@shared/ui/links';
 import { BasePopup } from '@shared/ui/popups';
 import { BgBorderDefault } from '@shared/ui/wrappers';
 
@@ -32,10 +33,10 @@ const ProfilePage = () => {
 				<div className={styles['main-info-container']}>
 					<Avatar shape="square" size="huge" src={img} />
 					<div className={styles['main-info']}>
-						<div className={styles['row']}>
+						<div className={styles['row-top']}>
 							<h2>Аполлинария Владимировна</h2>
 							<div className={styles['buttons-container']}>
-								<ButtonBase withBorder>
+								<ButtonBase color="outline">
 									<Share />
 									<UIText14SB>Поделиться профилем</UIText14SB>
 								</ButtonBase>
@@ -43,7 +44,7 @@ const ProfilePage = () => {
 									onClick={() =>
 										setOpenEditProfile((cv) => !cv)
 									}
-									withBorder
+									color="outline"
 								>
 									<Pencil />
 									<UIText14SB>
@@ -52,7 +53,7 @@ const ProfilePage = () => {
 								</ButtonBase>
 							</div>
 						</div>
-						<div className={styles['row']}>
+						<div className={styles['row-bottom']}>
 							<Rating rating={RATING} left size="medium" />
 							<button onClick={() => setOpenReview((cv) => !cv)}>
 								<UIText14Reg className={styles['reviews']}>
@@ -63,6 +64,16 @@ const ProfilePage = () => {
 							<Paragraph16Reg>На платформе с 2026</Paragraph16Reg>
 						</div>
 					</div>
+				</div>
+				<div className={styles['row-bottom-two']}>
+					<Rating rating={RATING} left size="medium" />
+					<button onClick={() => setOpenReview((cv) => !cv)}>
+						<UIText14Reg className={styles['reviews']}>
+							24 отзыва
+						</UIText14Reg>
+					</button>
+					<UIText14Reg>•</UIText14Reg>
+					<Paragraph16Reg>На платформе с 2026</Paragraph16Reg>
 				</div>
 				<UniList
 					className={styles['secondary-info-container']}
@@ -76,7 +87,7 @@ const ProfilePage = () => {
 						className={styles['nav-list']}
 						items={NAV}
 						renderItem={(item) => (
-							<NavLink
+							<NavLinkBase
 								to={item.to}
 								className={({ isActive }) =>
 									clsx(styles['nav-item'], {
@@ -93,7 +104,7 @@ const ProfilePage = () => {
 										<UIText14Reg>{item.text}</UIText14Reg>
 									)
 								}
-							</NavLink>
+							</NavLinkBase>
 						)}
 					/>
 				</BgBorderDefault>

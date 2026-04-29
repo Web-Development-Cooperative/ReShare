@@ -1,4 +1,6 @@
-import { Link } from 'react-router';
+import { useState } from 'react';
+
+import clsx from 'clsx';
 
 import img from '@shared/assets/img/baseAvatarMale.png';
 import { ROUTES } from '@shared/model/routes';
@@ -11,6 +13,7 @@ import {
 	LogoHeader,
 	Plus,
 } from '@shared/ui/icons';
+import { LinkBase } from '@shared/ui/links';
 import { Avatar } from '@shared/ui/others';
 import { UIText14SB } from '@shared/ui/paragraphs';
 import { PaddingWrapper } from '@shared/ui/wrappers';
@@ -18,30 +21,113 @@ import { PaddingWrapper } from '@shared/ui/wrappers';
 import styles from './Header.module.css';
 
 const Header = () => {
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+	const toggleMenu = () => {
+		setIsMobileMenuOpen((prev) => !prev);
+	};
+
+	// Функция для закрытия меню при клике на ссылку (удобно для UX)
+	const handleLinkClick = () => {
+		setIsMobileMenuOpen(false);
+	};
+
 	return (
 		<div className={styles.header}>
 			<div className={styles['logo-wrapper']}>
-				<Link to={ROUTES.HOME}>
+				<LinkBase to={ROUTES.HOME}>
 					<LogoHeader />
-				</Link>
-				<UIText14SB>Сервис осознанного потребления</UIText14SB>
+				</LinkBase>
+				<UIText14SB className={styles['logo-text']}>
+					Сервис осознанного потребления
+				</UIText14SB>
 			</div>
-			<div className={styles.panel}>
+			<div className={styles['desktop-panel']}>
 				<PaddingWrapper y={0} x={12}>
-					<ButtonBase>
-						<Plus />
-						<UIText14SB>Разместить объявление</UIText14SB>
-					</ButtonBase>
+					<LinkBase to={ROUTES.NEW_PUBLICATION}>
+						<ButtonBase tabIndex={-1}>
+							<Plus />
+							<UIText14SB>Разместить объявление</UIText14SB>
+						</ButtonBase>
+					</LinkBase>
 				</PaddingWrapper>
 				<Histogram />
 				<Heart />
 				<Bell />
-				<Link to={ROUTES.MESSAGES}>
+				<LinkBase to={ROUTES.MESSAGES}>
 					<Chat />
-				</Link>
-				<Link to={ROUTES.PROFILE}>
+				</LinkBase>
+				<LinkBase to={ROUTES.PROFILE}>
 					<Avatar shape="circle" size="medium" src={img}></Avatar>
-				</Link>
+				</LinkBase>
+			</div>
+			<div className={styles['mobile-menu']}>
+				<PaddingWrapper y={0} x={4}>
+					<LinkBase to={ROUTES.NEW_PUBLICATION}>
+						<ButtonBase tabIndex={-1}>
+							<Plus />
+							<UIText14SB>Разместить объявление</UIText14SB>
+						</ButtonBase>
+					</LinkBase>
+				</PaddingWrapper>
+				<button
+					className={styles['burger-button']}
+					onClick={toggleMenu}
+					aria-label="Открыть меню"
+				>
+					{isMobileMenuOpen ? 'X' : ':::'}
+				</button>
+			</div>
+			<div
+				className={clsx(styles['burger-menu'], {
+					[styles['mobile-menu--open']]: isMobileMenuOpen,
+				})}
+			>
+				<div className={styles['mobile-menu-content']}>
+					<nav className={styles['mobile-nav']}>
+						<LinkBase
+							to="#"
+							onClick={handleLinkClick}
+							className={styles['mobile-link']}
+						>
+							<Histogram /> Статистика
+						</LinkBase>
+						<LinkBase
+							to="#"
+							onClick={handleLinkClick}
+							className={styles['mobile-link']}
+						>
+							<Heart /> Избранное
+						</LinkBase>
+						<LinkBase
+							to="#"
+							onClick={handleLinkClick}
+							className={styles['mobile-link']}
+						>
+							<Bell /> Уведомления
+						</LinkBase>
+						<LinkBase
+							to={ROUTES.MESSAGES}
+							onClick={handleLinkClick}
+							className={styles['mobile-link']}
+						>
+							<Chat /> Сообщения
+						</LinkBase>
+						<LinkBase
+							to={ROUTES.PROFILE}
+							onClick={handleLinkClick}
+							className={styles['mobile-link']}
+						>
+							<Avatar
+								shape="circle"
+								size="small"
+								src={img}
+								alt="Profile"
+							/>{' '}
+							Профиль
+						</LinkBase>
+					</nav>
+				</div>
 			</div>
 		</div>
 	);

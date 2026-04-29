@@ -1,7 +1,7 @@
 :root {
 	font-size: 1em;
 
-	/* color */
+	/* COLOR-BASE */
 	--black-25a: rgba(0, 0, 0, 0.25);
 	--black-50a: rgba(0, 0, 0, 0.5);
 
@@ -10,8 +10,10 @@
 	--slate-grey: rgba(106, 114, 130, 1); /* #6A7282 */
 	--very-pale-blue: rgba(238, 239, 242, 1); /* #EEEFF2 */
 	--green-600: rgba(22, 163, 74, 1); /* #16A34A */
+	--green-200: rgba(187, 247, 208, 1); /* #BBF7D0 */
+	--brand-default: rgba(34, 197, 94, 1); /* #22C55E */
 
-	/* text */
+	/* COLOR-TEXT */
 	--text-primary: rgba(0, 0, 0, 0.8); /* #000000CC */
 	--text-black: rgba(0, 0, 0, 1); /* #000000 */
 	--text-primary-on-color: rgba(255, 255, 255, 1); /* #FFFFFF */
@@ -26,14 +28,22 @@
 	--text-violet: rgba(124, 58, 237, 1); /* #7C3AED */
 	--text-warning: rgba(217, 119, 6, 1); /* #D97706 */
 
-	/* icon */
+	/* COLOR-ICON */
 	--icon-primary: rgba(0, 0, 0, 0.8); /* #000000CC */
+	--icon-primary-on-color: rgba(255, 255, 255, 1); /* #FFFFFF */
+	--icon-negative: rgba(239, 68, 68, 1); /* #EF4444 */
 
-	/* border */
+	/* COLOR-BORDER */
 	--border-default: rgba(0, 0, 0, 0.1); /* #0000001A */
 	--border-default-inverse: rgba(255, 255, 255, 0.15); /* #FFFFFF26 */
-	--border-color-white: rgba(255, 255, 255, 1); /* #FFFFFF  */
 	--border-default-contast: rgba(0, 0, 0, 0.2); /* #00000033 */
+	--border-default-hover: rgba(0, 0, 0, 0.4); /* #00000066 */
+	--border-default-active: rgba(0, 0, 0, 0.8); /* #000000CC */
+	--border-color-white: rgba(255, 255, 255, 1); /* #FFFFFF  */
+	--border-color-negative: rgba(239, 68, 68, 1); /* #EF4444  */
+	--border-color-warning: rgba(245, 158, 11, 1); /* #F59E0B  */
+	--border-color-success: rgba(34, 197, 94, 1); /* #22C55E  */
+	--border-color-blue: rgba(59, 130, 246, 1); /* #3B82F6  */
 	--border-subtle-positive: rgba(134, 239, 172, 1); /* #86EFAC */
 	--border-subtle-blue: rgba(147, 197, 253, 1); /* #93C5FD */
 	--border-subtle-negative: rgba(252, 165, 165, 1); /* #FCA5A5 */
@@ -41,8 +51,9 @@
 	--border-subtle-violet: rgba(196, 181, 253, 1); /* #C4B5FD */
 	--border-subtle-warning: rgba(255, 251, 235, 1); /* #FFFBEB  */
 
-	/* bg */
+	/* COLOR-BG */
 	--bg-default: rgba(255, 255, 255, 1); /* #FFFFFF */
+	--bg-input-disabled: rgba(0, 0, 0, 0.03); /* #00000008 */
 	--bg-surface-1: rgba(0, 0, 0, 0.03); /* #00000008 */
 	--bg-color-positive: rgba(34, 197, 94, 1); /* #22C55E */
 	--bg-subtle-positive: rgba(240, 253, 244, 1); /* #F0FDF4 */
@@ -62,17 +73,31 @@
 	--bg-input-outlined: rgba(255, 255, 255, 1); /* #FFFFFF */
 	--bg-input-shaded: rgba(0, 0, 0, 0.05); /* #0000000D */
 
-	/* button */
-	--button-primary: rgba(59, 130, 246, 1); /*#3B82F6*/
-	--button-shaded: rgba(0, 0, 0, 0.05); /*#0000000D*/
-	--button-filled: rgba(17, 24, 39, 1); /*#111827*/
+	/* COLOR-BUTTON */
+	--button-primary: rgba(34, 197, 94, 1); /*#22C55E*/
+	--button-primary-hover: rgba(22, 163, 74, 1); /*#16A34A*/
+	--button-primary-active: rgba(21, 128, 61, 1); /*#15803D*/
+	--button-secondary-hover: rgba(0, 0, 0, 0.05); /*#0000000D*/
+	--button-secondary-active: rgba(0, 0, 0, 0.1); /*#0000001A*/
 	--button-shaded: rgba(0, 0, 0, 0.05); /* #0000000D */
+	--button-shaded-hover: rgba(0, 0, 0, 0.1); /* #0000001A */
+	--button-shaded-active: rgba(0, 0, 0, 0.15); /* #00000026 */
+	--button-filled: rgba(17, 24, 39, 1); /* #111827 */
+	--button-filled-hover: rgba(31, 41, 55, 1); /* #1F2937 */
+	--button-filled-active: rgba(55, 65, 81, 1); /* #374151 */
+	--button-shaded: rgba(0, 0, 0, 0.05); /* #0000000D */
+	--button-destructive: rgba(239, 68, 68, 1); /* #EF4444 */
+	--button-focus-ring: rgba(0, 85, 255, 1); /* #0055ff */
 
-	/* shadow  */
+	/* SHADOW  */
 	--shadow-1: 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
 	--shadow-2: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+	--shadow-1-hover: 0px 1px 2px -1px rgba(0, 0, 0, 0.2);
+	--shadow-2-hover: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+	--shadow-1-active: 0px 1px 2px -1px rgba(0, 0, 0, 0.35);
+	--shadow-2-active: 0px 1px 3px 0px rgba(0, 0, 0, 0.35);
 
-	/* style fonts */
+	/* STYLE-FONTS */
 	--fs-heading-36-bold: clamp(1.5rem, 1.089rem + 1.55vw, 2.25rem);
 	--heading-36-bold: 700 var(--fs-heading-36-bold) / 1.3333 'Inter';
 	--fs-heading-24-sb: clamp(1.125rem, 0.919rem + 0.77vw, 1.5rem);
@@ -89,22 +114,24 @@
 	--UI-text-14-reg: 400 var(--fs-UI-text-14-reg) / 1.7143 'Inter';
 	--fs-UI-text-12-sb: clamp(0.375rem, 0.169rem + 0.77vw, 0.75rem);
 	--UI-text-12-sb: 600 var(--fs-UI-text-12-sb) / 1.3333 'Inter';
+	--fs-UI-text-12-reg: clamp(0.5rem, 0.363rem + 0.52vw, 0.75rem);
+	--UI-text-12-reg: 400 var(--fs-UI-text-12-reg) / 1.3333 'Inter';
 	--fs-running-text-paragraph-16-reg: clamp(
 		0.75rem,
 		0.681rem + 0.26vw,
 		0.875rem
 	);
-	--running-text-paragraph-16-reg: 400 var(--fs-running-text-paragraph-16-reg) /
-		1.7143 'Inter';
+	--running-text-paragraph-16-reg: 400
+		var(--fs-running-text-paragraph-16-reg) / 1.7143 'Inter';
 	--fs-running-text-paragraph-14-reg: clamp(
 		0.5rem,
 		0.294rem + 0.77vw,
 		0.875rem
 	);
-	--running-text-paragraph-14-reg: 400 var(--fs-running-text-paragraph-14-reg) /
-		1.428 'Inter';
+	--running-text-paragraph-14-reg: 400
+		var(--fs-running-text-paragraph-14-reg) / 1.428 'Inter';
 
-	/* effects */
+	/* EFFECTS */
 	--time-to-do: 0.3s;
 	--type-effect: ease-in-out;
 }
@@ -113,35 +140,40 @@
 /* Inter */
 @font-face {
 	font-family: 'Inter';
-	src: url('../fonts/Inter/Inter_24pt-Regular.woff2') format('woff2'),
+	src:
+		url('../fonts/Inter/Inter_24pt-Regular.woff2') format('woff2'),
 		url('../fonts/Inter/Inter_24pt-Regular.woff') format('woff');
 	font-weight: 400;
 	font-style: normal;
 }
 @font-face {
 	font-family: 'Inter';
-	src: url('../fonts/Inter/Inter_24pt-Medium.woff2') format('woff2'),
+	src:
+		url('../fonts/Inter/Inter_24pt-Medium.woff2') format('woff2'),
 		url('../fonts/Inter/Inter_24pt-Medium.woff') format('woff');
 	font-weight: 500;
 	font-style: normal;
 }
 @font-face {
 	font-family: 'Inter';
-	src: url('../fonts/Inter/Inter_28pt-SemiBold.woff2') format('woff2'),
+	src:
+		url('../fonts/Inter/Inter_28pt-SemiBold.woff2') format('woff2'),
 		url('../fonts/Inter/Inter_28pt-SemiBold.woff') format('woff');
 	font-weight: 600;
 	font-style: normal;
 }
 @font-face {
 	font-family: 'Inter';
-	src: url('../fonts/Inter/Inter_28pt-Bold.woff2') format('woff2'),
+	src:
+		url('../fonts/Inter/Inter_28pt-Bold.woff2') format('woff2'),
 		url('../fonts/Inter/Inter_28pt-Bold.woff') format('woff');
 	font-weight: 700;
 	font-style: normal;
 }
 @font-face {
 	font-family: 'Inter';
-	src: url('../fonts/Inter/Inter_28pt-ExtraBold.woff2') format('woff2'),
+	src:
+		url('../fonts/Inter/Inter_28pt-ExtraBold.woff2') format('woff2'),
 		url('../fonts/Inter/Inter_28pt-ExtraBold.woff') format('woff');
 	font-weight: 800;
 	font-style: normal;

@@ -1,5 +1,5 @@
 .bg-border {
-	padding: 16px;
+	padding: clamp(0.5rem, 0.273rem + 0.97vw, 1rem);
 	border-radius: 8px;
 	border: 1px solid var(--border-default);
 }

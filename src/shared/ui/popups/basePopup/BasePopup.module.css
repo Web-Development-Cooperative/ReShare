@@ -18,9 +18,9 @@
 	justify-content: flex-start;
 
 	position: relative;
-	min-width: 425px;
+	min-width: clamp(18.75rem, 14.236rem + 19.26vw, 26.563rem);
 	min-height: 85px;
-	padding: 32px;
+	padding: clamp(0.875rem, 0.803rem + 0.31vw, 1rem);
 	border-radius: 6px;
 	background-color: var(--bg-popover);
 

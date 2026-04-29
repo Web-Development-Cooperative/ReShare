@@ -1,0 +1,5 @@
+.paragraph {
+	font: var(--UI-text-12-reg);
+	letter-spacing: -1.1%;
+	color: var(--text-primary);
+}

@@ -1,0 +1,32 @@
+.container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	column-gap: 0;
+}
+.divider {
+	flex: 1;
+
+	height: 1px;
+
+	background-color: var(--border-default);
+}
+.text {
+	color: var(--text-secondary);
+}
+.left {
+	order: -1;
+
+	margin-right: 12px;
+}
+.middle {
+	order: 0;
+
+	margin: 0 12px;
+}
+.rigth {
+	order: 1;
+
+	margin-left: 12px;
+}

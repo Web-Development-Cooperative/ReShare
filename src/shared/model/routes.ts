@@ -2,6 +2,7 @@ const ROUTES = {
 	ADS: '/ads',
 	LANDING: '/landing',
 	LOGIN: '/login',
+	REG: '/reg',
 	HOME: '/',
 	PROFILE: '/profile',
 	PROFILE_MY_ADS: '/profile/my-ads',
@@ -9,11 +10,13 @@ const ROUTES = {
 	PROFILE_MY_ECO: '/profile/my-eco',
 	PROFILE_MY_ARCHIVE: '/profile/my-archive',
 	MESSAGES: '/messages',
+	NEW_PUBLICATION: '/new-publication',
 } as const;
 
 const ADAPTER_ROUTES_BREADCRUMBS = {
 	'/landing': 'Лендинг',
 	'/login': 'Вход',
+	'/reg': 'Регистрация',
 	'/': 'Главная',
 	'/profile': 'Профиль',
 	'/profile/my-ads': 'Мои объявления',
@@ -22,6 +25,7 @@ const ADAPTER_ROUTES_BREADCRUMBS = {
 	'/profile/my-eco': 'Эковклад',
 	'/profile/my-archive': 'Архив объявлений',
 	'/messages': 'Сообщения',
+	'/new-publication': 'Новая публикация',
 } as const;
 
 export { ROUTES, ADAPTER_ROUTES_BREADCRUMBS };

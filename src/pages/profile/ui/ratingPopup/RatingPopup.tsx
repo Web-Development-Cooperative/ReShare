@@ -29,7 +29,7 @@ const RatingPopup = () => {
 							24 отзыва за 12 завершенных сделок
 						</Paragraph16Reg>
 					</div>
-					<ButtonBase color="dark">
+					<ButtonBase color="filled">
 						<UIText14SB>Сначала новые</UIText14SB>
 						<DownUp />
 					</ButtonBase>

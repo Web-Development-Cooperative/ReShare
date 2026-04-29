@@ -1,15 +1,21 @@
 import { lazy } from 'react';
-import { createBrowserRouter, Navigate, NavLink } from 'react-router';
+import { createBrowserRouter, Navigate } from 'react-router';
 
+import { authProvider, guestProvider } from '@app/providers/permissionProvider';
 import { ROUTES } from '@shared/model/routes';
 import { Limbo } from '@shared/ui/wrappers';
 
 const HeaderLayout = lazy(() => import('@app/layouts/headerLayout'));
 const LoginPage = lazy(() => import('@pages/login'));
+const RegPage = lazy(() => import('@pages/registration'));
 const LandingPage = lazy(() => import('@pages/landing'));
 const ProfilePage = lazy(() => import('@pages/profile'));
 const MessagesPage = lazy(() => import('@pages/messages'));
-const AdsPage = lazy(() => import('@pages/main'));
+const AdsPage = lazy(() => import('@pages/advertisements'));
+const NewPublicationPage = lazy(() => import('@pages/newPublication'));
+const MyAdsPage = lazy(() => import('@pages/myAds'));
+const MyApplicationPage = lazy(() => import('@pages/myApplication'));
+const MyArchivePage = lazy(() => import('@pages/myArchive'));
 
 const router = createBrowserRouter([
 	{
@@ -22,6 +28,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: ROUTES.LOGIN,
+		loader: guestProvider,
 		element: (
 			<Limbo>
 				<LoginPage />
@@ -29,7 +36,17 @@ const router = createBrowserRouter([
 		),
 	},
 	{
+		path: ROUTES.REG,
+		loader: guestProvider,
+		element: (
+			<Limbo>
+				<RegPage />
+			</Limbo>
+		),
+	},
+	{
 		path: ROUTES.HOME,
+		loader: authProvider,
 		element: (
 			<Limbo>
 				<HeaderLayout />
@@ -38,12 +55,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: (
-					<>
-						<h1>Главная</h1>
-						<NavLink to={ROUTES.PROFILE}>Профиль</NavLink>
-					</>
-				),
+				element: <Navigate to={ROUTES.ADS} replace />,
 			},
 			{
 				path: ROUTES.ADS,
@@ -69,11 +81,19 @@ const router = createBrowserRouter([
 					},
 					{
 						path: ROUTES.PROFILE_MY_ADS,
-						element: <h1>Мои объявления</h1>,
+						element: (
+							<Limbo>
+								<MyAdsPage />
+							</Limbo>
+						),
 					},
 					{
 						path: ROUTES.PROFILE_MY_APPLICATIONS,
-						element: <h1>Мои заявки</h1>,
+						element: (
+							<Limbo>
+								<MyApplicationPage />
+							</Limbo>
+						),
 					},
 					{
 						path: ROUTES.PROFILE_MY_ECO,
@@ -81,7 +101,11 @@ const router = createBrowserRouter([
 					},
 					{
 						path: ROUTES.PROFILE_MY_ARCHIVE,
-						element: <h1>Архив объявлений</h1>,
+						element: (
+							<Limbo>
+								<MyArchivePage />
+							</Limbo>
+						),
 					},
 				],
 			},
@@ -90,6 +114,14 @@ const router = createBrowserRouter([
 				element: (
 					<Limbo>
 						<MessagesPage />
+					</Limbo>
+				),
+			},
+			{
+				path: ROUTES.NEW_PUBLICATION,
+				element: (
+					<Limbo>
+						<NewPublicationPage />
 					</Limbo>
 				),
 			},

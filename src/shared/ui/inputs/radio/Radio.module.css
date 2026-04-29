@@ -1,0 +1,106 @@
+.radio-container {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: flex-start;
+
+	cursor: pointer;
+	user-select: none;
+
+	&.lg {
+		column-gap: 12px;
+	}
+	&.md {
+		column-gap: 8px;
+	}
+}
+.label-left {
+	flex-direction: row-reverse;
+}
+.label-right {
+	flex-direction: row;
+}
+.radio-input {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+	margin: 0;
+	padding: 0;
+}
+
+/* Thumb (кружок) */
+.radio-thumb {
+	border-radius: 50%;
+
+	background-color: transparent;
+
+	transition:
+		background-color var(--time-to-do) var(--type-effect),
+		border-color var(--time-to-do) var(--type-effect),
+		border-width var(--time-to-do) var(--type-effect);
+
+	/* Размеры thumb */
+	&.lg {
+		aspect-ratio: 1/1;
+		width: 20px;
+		margin-top: 2px;
+	}
+	&.md {
+		aspect-ratio: 1/1;
+		width: 16px;
+		margin-top: 4px;
+	}
+}
+
+/* Состояния Thumb */
+/* Default */
+.radio-input:not(:checked):not(.radio-error) ~ .radio-thumb {
+	background-color: transparent;
+	border: 1px solid var(--border-default-contast);
+
+	&:hover {
+		border-color: var(--border-default-hover);
+
+		background-color: var(--button-secondary-hover);
+	}
+	&:active {
+		border-color: var(--border-default-active);
+
+		background-color: var(--button-secondary-active);
+	}
+}
+.radio-input:checked:not(.radio-error) ~ .radio-thumb {
+	border: 6px solid var(--button-primary);
+
+	&:hover {
+		border-color: var(--button-primary-hover);
+	}
+	&:active {
+		border-color: var(--button-primary-active);
+	}
+}
+/* error */
+.radio-input:not(:checked).radio-error ~ .radio-thumb {
+	border: 1px solid var(--border-color-negative);
+	background-color: var(--bg-subtle-negative);
+}
+.radio-input:checked.radio-error ~ .radio-thumb {
+	border: 6px solid var(--border-color-negative);
+	background-color: var(--icon-primary-on-color);
+}
+
+/* Label */
+.label-helper {
+	display: flex;
+	flex-direction: column;
+}
+.radio-label {
+	color: var(--text-primary);
+}
+.radio-helper {
+	color: var(--text-secondary);
+}
+.radio-error-text {
+	color: var(--text-negative);
+}

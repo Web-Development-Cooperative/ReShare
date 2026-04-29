@@ -1,5 +1,6 @@
 import { CrossPopup } from '@shared/ui/icons';
 import { PaddingWrapper } from '@shared/ui/wrappers';
+import { ButtonBase } from '@shared/ui/buttons';
 
 import styles from './BasePopup.module.css';
 import { PopupPortal } from '../popupPortal/PopupPortal';
@@ -27,7 +28,9 @@ const BasePopup: FC<BasePopupProps> = (props) => {
 							className={styles.cross}
 							onClick={() => setIsOpen(false)}
 						>
-							<CrossPopup />
+							<ButtonBase>
+								<CrossPopup />
+							</ButtonBase>
 						</PaddingWrapper>
 					)}
 					{children}
