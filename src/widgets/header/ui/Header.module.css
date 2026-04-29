@@ -4,14 +4,15 @@
 	align-items: center;
 	justify-content: space-between;
 	flex-wrap: nowrap;
-	column-gap: 16px;
+	column-gap: 6px;
 
 	width: 100%;
-	padding: 12px 32px;
+	padding: 12px clamp(0.125rem, -1.103rem + 4.14vw, 2rem);
 	border-bottom: 1px solid var(--border-default);
 }
 .logo-wrapper,
-.panel {
+.desktop-panel,
+.mobile-menu {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -19,6 +20,78 @@
 	column-gap: 4px;
 
 	& > * {
-		margin: 0 8px;
+		margin: 0 clamp(0rem, -0.879rem + 1.84vw, 0.5rem);
+	}
+}
+.mobile-menu {
+	display: none;
+}
+.burger-button {
+	z-index: 16;
+}
+.burger-menu {
+	position: fixed;
+	top: 0;
+	right: -100%; /* Спрятано за правым краем экрана */
+	width: 80%; /* Ширина шторки */
+	max-width: 300px;
+	height: 100vh;
+	background-color: var(--bg-default);
+	box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+	transition: right 0.3s ease-in-out;
+	z-index: 15;
+	overflow-y: auto;
+	padding-top: 60px; /* Отступ под шапку, если нужно */
+}
+
+.mobile-menu--open {
+	right: 0; /* Выезжает */
+}
+
+.mobile-menu-content {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 20px;
+}
+
+.mobile-btn-full {
+	width: 100%;
+	justify-content: center;
+}
+
+.mobile-nav {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.mobile-link {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	font-size: 16px;
+	color: var(--text-primary);
+	text-decoration: none;
+	padding: 10px;
+	border-radius: 8px;
+	transition: background-color 0.2s;
+}
+
+.mobile-link:hover {
+	background-color: var(--bg-secondary);
+}
+
+@media (max-width: 1024px) {
+	.logo-text {
+		display: none;
+	}
+}
+@media (max-width: 768px) {
+	.desktop-panel {
+		display: none;
+	}
+	.mobile-menu {
+		display: flex;
 	}
 }
