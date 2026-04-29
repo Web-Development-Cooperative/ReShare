@@ -70,5 +70,70 @@ const items = [
 		transferType: TransferType.Exchange,
 	},
 ];
+const filters = [
+	{
+		id: 'category',
+		options: [
+			{
+				value: 'furniture',
+				label: 'Мебель',
+				bgColor: 'var(--bg-color-positive)',
+				textColor: 'var(--text-primary-on-color)',
+			},
+			{
+				value: 'electronics',
+				label: 'Электроника',
+				bgColor: '#e6f7d6',
+				textColor: 'var(--text-primary-on-color)',
+			},
+			{
+				value: 'clothes',
+				label: 'Одежда',
+				bgColor: '#ffe6e6',
+				textColor: 'var(--text-primary-on-color)',
+			},
+		],
+		placeholder: 'Все категории',
+	},
+	{
+		id: 'type',
+		options: [
+			{
+				value: 'Дарение',
+				label: 'Дарение',
+				bgColor: 'var(--bg-color-positive)',
+				textColor: 'var(--text-primary-on-color)',
+			},
+			{
+				value: 'Запрос',
+				label: 'Запрос',
+				bgColor: 'var(--bg-color-blue)',
+				textColor: 'var(--text-primary-on-color)',
+			},
+			{
+				value: 'Обмен',
+				label: 'Обмен',
+				bgColor: 'var(--bg-color-teal)',
+				textColor: 'var(--text-primary-on-color)',
+			},
+			{
+				value: 'Сбор НКО',
+				label: 'Сбор НКО',
+				bgColor: 'var(--bg-color-violet)',
+				textColor: 'var(--text-primary-on-color)',
+			},
+		],
+		placeholder: 'Тип объявления',
+	},
+	{
+		id: 'condition',
+		options: [
+			{ value: 'any', label: 'Любое' },
+			{ value: 'new', label: 'Новое' },
+			{ value: 'used', label: 'Б/У' },
+		],
+		placeholder: 'Состояние',
+	},
+];
 
-export { items };
+export { items, filters };

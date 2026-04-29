@@ -20,6 +20,15 @@
 	gap: 32px 16px;
 	border-radius: 8px;
 }
+.filtersPanel {
+	display: flex;
+	gap: 16px;
+	flex-wrap: wrap;
+	background-color: var(--bg-surface-1);
+	border: 1px solid var(--border-default);
+	border-radius: 8px;
+	padding: 16px;
+}
 
 @media (max-width: 700px) {
 	.finderContainer {

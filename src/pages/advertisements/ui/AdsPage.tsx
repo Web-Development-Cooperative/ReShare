@@ -6,12 +6,22 @@ import { UniList, AdCard } from '@shared/ui/others';
 import { UIText14SB } from '@shared/ui/paragraphs';
 import { BgBorderDefault } from '@shared/ui/wrappers';
 import { notification } from '@shared/lib/toast.helper';
+import { Dropdown } from '@shared/ui/others/dropdown/Dropdown';
 
 import styles from './AdsPage.module.css';
 import { useAdsPage } from '../lib/useAdsPage.hook';
+import { filters } from '../model/adsPage.consts';
 
 const AdsPage = () => {
-	const { allAds, isLoading, isError } = useAdsPage();
+	const {
+		allAds,
+		isLoading,
+		isError,
+		showFilters,
+		setShowFilters,
+		filterState,
+		onChangeOption,
+	} = useAdsPage();
 
 	let content = (
 		<UniList
@@ -48,11 +58,32 @@ const AdsPage = () => {
 					placeholder="Поиск по доступным обновлениям"
 					leftIcon={<Loupe />}
 				/>
-				<ButtonBase color="shaded">
+				<ButtonBase
+					color="shaded"
+					onClick={() => setShowFilters((s) => !s)}
+					aria-expanded={showFilters}
+				>
 					<Settings />
 					<UIText14SB>Фильтры</UIText14SB>
 				</ButtonBase>
 			</div>
+			{showFilters && (
+				<UniList
+					className={styles.filtersPanel}
+					role="region"
+					aria-label="Фильтры"
+					items={filters}
+					renderItem={(filterType) => (
+						<Dropdown
+							options={filterType.options}
+							multiple={filterType.id === 'tags'}
+							value={filterState[filterType.id]}
+							placeholder={filterType.placeholder}
+							onChange={(val) => onChangeOption(val, filterType)}
+						/>
+					)}
+				/>
+			)}
 			<BgBorderDefault colorType="surface-1">{content}</BgBorderDefault>
 		</div>
 	);

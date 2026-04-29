@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { useGetListingsQuery } from '@entities/listings';
 import { notification } from '@shared/lib/toast.helper';
@@ -15,6 +15,15 @@ const useAdsPage = () => {
 		pageNumber: 1,
 		pageSize: 50,
 	});
+
+	const [showFilters, setShowFilters] = useState(false);
+	const [filterState, setFilterState] = useState<Record<string, string>>({});
+
+	const onChangeOption = (val: string, filterType: Record<'id', string>) =>
+		setFilterState((s) => ({
+			...s,
+			[filterType.id]: val,
+		}));
 
 	const allAds = useMemo(() => {
 		const listingItems = data?.items?.length ? data.items : items;
@@ -61,7 +70,15 @@ const useAdsPage = () => {
 		}
 	}, [isLoading]);
 
-	return { allAds, isLoading, isError };
+	return {
+		allAds,
+		isLoading,
+		isError,
+		showFilters,
+		setShowFilters,
+		filterState,
+		onChangeOption,
+	};
 };
 
 export { useAdsPage };
