@@ -69,7 +69,7 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: flex-start;
-	column-gap: 24px;
+	column-gap: clamp(0.75rem, 0.409rem + 1.45vw, 1.5rem);
 
 	width: fit-content;
 	padding: 7px 0;
