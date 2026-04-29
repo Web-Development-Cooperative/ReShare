@@ -11,12 +11,22 @@
 	border-radius: 8px;
 }
 .fat-input {
-	width: 50%; /* занимает половину родительского блока */
-	flex: 0 0 50%; /* если родитель — flex-контейнер, гарантирует ровно 50% */
+	width: 50%;
+	flex: 0 0 50%;
 	max-width: 100%;
 }
 .finderContainer {
 	display: flex;
 	gap: 16px;
 	align-items: center;
+}
+
+.filtersPanel {
+	display: flex;
+	gap: 16px;
+	flex-wrap: wrap;
+	background-color: var(--bg-surface-1);
+	border: 1px solid var(--border-default);
+	border-radius: 8px;
+	padding: 16px;
 }
