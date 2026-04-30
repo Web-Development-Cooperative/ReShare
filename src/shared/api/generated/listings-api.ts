@@ -45,6 +45,23 @@ export interface AddPhotoRequest {
   displayOrder?: number;
 }
 
+export interface CategoryDetailsDto {
+  /** @format uuid */
+  id?: string;
+  name?: string | null;
+  description?: string | null;
+  /** @format uuid */
+  parentCategoryId?: string | null;
+  iconUrl?: string | null;
+  isActive?: boolean;
+  /** @format int32 */
+  displayOrder?: number;
+  /** @format date-time */
+  createdAt?: string;
+  /** @format date-time */
+  updatedAt?: string | null;
+}
+
 export interface CategoryDto {
   /** @format uuid */
   id?: string;
@@ -53,19 +70,32 @@ export interface CategoryDto {
   parentCategoryId?: string | null;
 }
 
-export interface CategoryResultDto {
+export interface CategoryHistoryEntryDto {
   /** @format uuid */
   id?: string;
-  name?: string | null;
-  description?: string | null;
   /** @format uuid */
-  parentCategoryId?: string | null;
-  /** @format int32 */
-  displayOrder?: number;
+  categoryId?: string;
+  /** @format uuid */
+  changedByUserId?: string;
+  changeType?: string | null;
+  oldValuesJson?: string | null;
+  newValuesJson?: string | null;
+  /** @format date-time */
+  changedAt?: string;
 }
 
 export interface ChangeStatusRequest {
   status?: ListingStatus;
+}
+
+export interface CreateCategoryRequest {
+  name?: string | null;
+  description?: string | null;
+  /** @format uuid */
+  parentCategoryId?: string | null;
+  iconUrl?: string | null;
+  /** @format int32 */
+  displayOrder?: number;
 }
 
 export interface CreateListingDto {
@@ -73,9 +103,6 @@ export interface CreateListingDto {
   description?: string | null;
   /** @format uuid */
   categoryId?: string;
-  categoryName?: string | null;
-  /** @format uuid */
-  parentCategoryId?: string | null;
   condition?: ItemCondition;
   transferType?: TransferType;
   transferMethod?: TransferMethod;
@@ -86,6 +113,18 @@ export interface CreateListingDto {
   /** @format double */
   longitude?: number | null;
   tags?: string[] | null;
+}
+
+export interface DonorDto {
+  /** @format uuid */
+  id?: string;
+  firstName?: string | null;
+  lastName?: string | null;
+  avatarUrl?: string | null;
+  /** @format double */
+  rating?: number;
+  /** @format int32 */
+  reviewCount?: number;
 }
 
 export interface ListingDto {
@@ -99,8 +138,7 @@ export interface ListingDto {
   transferMethod?: string | null;
   status?: string | null;
   location?: LocationDto;
-  /** @format uuid */
-  donorId?: string;
+  donor?: DonorDto;
   photos?: ListingPhotoDto[] | null;
   tags?: string[] | null;
   /** @format int32 */
@@ -129,6 +167,7 @@ export interface ListingPreviewDto {
   status?: string | null;
   city?: string | null;
   thumbnailUrl?: string | null;
+  donor?: DonorDto;
   /** @format int32 */
   viewCount?: number;
   /** @format date-time */
@@ -173,7 +212,40 @@ export interface ProblemDetails {
   [key: string]: any;
 }
 
-export type CategoriesListData = CategoryResultDto[];
+export interface UpdateCategoryRequest {
+  name?: string | null;
+  description?: string | null;
+  /** @format uuid */
+  parentCategoryId?: string | null;
+  iconUrl?: string | null;
+  /** @format int32 */
+  displayOrder?: number;
+}
+
+export type CategoriesListData = CategoryDetailsDto[];
+
+export type CategoriesCreateData = any;
+
+export interface CategoriesUpdateParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type CategoriesUpdateData = any;
+
+export interface CategoriesDeleteParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type CategoriesDeleteData = any;
+
+export interface CategoriesHistoryListParams {
+  /** @format uuid */
+  id: string;
+}
+
+export type CategoriesHistoryListData = CategoryHistoryEntryDto[];
 
 export interface ListingsListParams {
   /** @format uuid */
@@ -522,6 +594,88 @@ export class Api<
       this.request<CategoriesListData, any>({
         path: `/api/categories`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Categories
+     * @name CategoriesCreate
+     * @request POST:/api/categories
+     * @secure
+     */
+    categoriesCreate: (
+      data: CreateCategoryRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<CategoriesCreateData, ProblemDetails>({
+        path: `/api/categories`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Categories
+     * @name CategoriesUpdate
+     * @request PUT:/api/categories/{id}
+     * @secure
+     */
+    categoriesUpdate: (
+      { id }: CategoriesUpdateParams,
+      data: UpdateCategoryRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<CategoriesUpdateData, ProblemDetails>({
+        path: `/api/categories/${id}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Categories
+     * @name CategoriesDelete
+     * @request DELETE:/api/categories/{id}
+     * @secure
+     */
+    categoriesDelete: (
+      { id }: CategoriesDeleteParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<CategoriesDeleteData, ProblemDetails>({
+        path: `/api/categories/${id}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Categories
+     * @name CategoriesHistoryList
+     * @request GET:/api/categories/{id}/history
+     * @secure
+     */
+    categoriesHistoryList: (
+      { id }: CategoriesHistoryListParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<CategoriesHistoryListData, ProblemDetails>({
+        path: `/api/categories/${id}/history`,
+        method: "GET",
+        secure: true,
         format: "json",
         ...params,
       }),

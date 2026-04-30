@@ -1,19 +1,26 @@
 import type { FC, SetStateAction, Dispatch } from 'react';
+import type {
+	TransferType,
+	ItemCondition,
+	TransferMethod,
+} from '@shared/api/generated/listings-api';
 
 type ListingFormData = {
 	// Шаг 1
-	type: string;
+	transferType: TransferType;
 	photos: File[];
 	title: string;
-	category: string;
-	condition: string;
+	categoryId: string;
+	condition: ItemCondition;
 	description: string;
+	tags: string[];
 
 	// Шаг 2
 	location: string;
-	contactType: 'messages' | 'calls_and_messages';
-	contact: string;
-	deliveryType: 'personal_meeting' | 'delivery';
+	district: string;
+	latitude: number | null;
+	longitude: number | null;
+	transferMethod: TransferMethod;
 };
 type Step = 1 | 2 | 3 | 4;
 
@@ -21,7 +28,7 @@ type AllProps = {
 	formData: Partial<ListingFormData>;
 	updateFormData: (
 		key: keyof ListingFormData,
-		value: string | File[],
+		value: string | File[] | string[] | number | null,
 	) => void;
 	errors: Partial<Record<keyof ListingFormData, string>>;
 	setErrors: Dispatch<
@@ -38,4 +45,5 @@ export type {
 	RenderStepOneProps,
 	RenderStepTwoProps,
 	RenderStepThreeProps,
+	AllProps,
 };
