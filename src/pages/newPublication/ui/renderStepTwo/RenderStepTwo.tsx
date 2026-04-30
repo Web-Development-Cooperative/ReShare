@@ -1,4 +1,5 @@
 import { InputBase, Radio, Toggle } from '@shared/ui/inputs';
+import { TransferMethod } from '@shared/api/generated/listings-api';
 
 import { useRenderStepTwo } from '../../lib/useRenderStepTwo';
 import styles from './RenderStepTwo.module.css';
@@ -14,9 +15,9 @@ const RenderStepTwo: RenderStepTwoProps = ({
 	const {
 		savedAddress,
 		toggleSavedAddress,
-		toggleContactType,
+		// toggleContactType,
 		updateAddress,
-		updateContact,
+		// updateContact,
 		toggleDeliveryType,
 	} = useRenderStepTwo({
 		formData,
@@ -48,20 +49,20 @@ const RenderStepTwo: RenderStepTwoProps = ({
 				<Radio
 					name="contactType"
 					value="messages"
-					checked={formData.contactType === 'messages'}
-					onChange={toggleContactType}
-					error={!!errors.contactType}
+					// checked={formData.contactType === 'messages'}
+					// onChange={toggleContactType}
+					// error={!!errors.contactType}
 					label="Только сообщения"
 				/>
 				<Radio
 					name="contactType"
-					checked={formData.contactType === 'calls_and_messages'}
+					// checked={formData.contactType === 'calls_and_messages'}
 					value="calls_and_messages"
-					onChange={toggleContactType}
-					error={!!errors.contactType}
+					// onChange={toggleContactType}
+					// error={!!errors.contactType}
 					label="Звонки и сообщения"
 				/>
-				{formData.contactType == 'calls_and_messages' && (
+				{/* {formData.contactType == 'calls_and_messages' && (
 					<InputBase
 						type="tel"
 						name="phone"
@@ -71,24 +72,33 @@ const RenderStepTwo: RenderStepTwoProps = ({
 						helper={errors.contact}
 						onChange={updateContact}
 					/>
-				)}
+				)} */}
 			</div>
 
 			<div className={styles.section}>
 				<h3>Способы передачи</h3>
 				<Toggle
 					label="Личная встреча"
-					value="personal_meeting"
-					checked={formData.deliveryType === 'personal_meeting'}
+					value={TransferMethod.InPerson}
+					checked={formData.transferMethod == TransferMethod.InPerson}
 					onChange={toggleDeliveryType}
-					error={!!errors.deliveryType}
+					error={!!errors.transferMethod}
 				/>
 				<Toggle
 					label="Доставка"
-					value="delivery"
-					checked={formData.deliveryType === 'delivery'}
+					value={TransferMethod.Delivery}
+					checked={
+						formData.transferMethod === TransferMethod.Delivery
+					}
 					onChange={toggleDeliveryType}
-					error={!!errors.deliveryType}
+					error={!!errors.transferMethod}
+				/>
+				<Toggle
+					label="Оба способа"
+					value={TransferMethod.Both}
+					checked={formData.transferMethod === TransferMethod.Both}
+					onChange={toggleDeliveryType}
+					error={!!errors.transferMethod}
 				/>
 			</div>
 		</>

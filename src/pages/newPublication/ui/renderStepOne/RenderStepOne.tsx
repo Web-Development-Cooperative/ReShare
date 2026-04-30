@@ -2,9 +2,14 @@ import { InputBase, InputDropZone, TextareaBase } from '@shared/ui/inputs';
 import { ButtonBase } from '@shared/ui/buttons';
 import { Paragraph14Reg, UIText14SB } from '@shared/ui/paragraphs';
 import { CrossPopup } from '@shared/ui/icons';
+import { Dropdown } from '@shared/ui/others/dropdown/Dropdown';
 
 import { useRenderStepOne } from '../../lib/useRenderStepOne';
-import { TYPE_OPTIONS } from '../../model/renderStepOne.consts';
+import {
+	CONDITION_OPTIONS,
+	TYPE_OPTIONS,
+	TYPE_OPTIONS_EN,
+} from '../../model/renderStepOne.consts';
 import styles from './RenderStepOne.module.css';
 
 import type { RenderStepOneProps } from '../../model/newPublicationPage.types';
@@ -20,6 +25,7 @@ const RenderStepOne: RenderStepOneProps = ({
 		removePhoto,
 		addPhoto,
 		updateTitle,
+		optionsCategory,
 		updateCategory,
 		updateCondition,
 		updateDescription,
@@ -39,10 +45,18 @@ const RenderStepOne: RenderStepOneProps = ({
 						<ButtonBase
 							key={type}
 							className={styles.typeButton}
-							color={formData.type === type ? 'brand' : 'outline'}
-							disabled={formData.type === type}
-							stateStyle={errors.type ? 'error' : 'default'}
-							onClick={() => updateType(type)}
+							color={
+								formData.transferType === TYPE_OPTIONS_EN[type]
+									? 'brand'
+									: 'outline'
+							}
+							disabled={
+								formData.transferType === TYPE_OPTIONS_EN[type]
+							}
+							stateStyle={
+								errors.transferType ? 'error' : 'default'
+							}
+							onClick={() => updateType(TYPE_OPTIONS_EN[type])}
 						>
 							<UIText14SB>{type}</UIText14SB>
 						</ButtonBase>
@@ -88,22 +102,36 @@ const RenderStepOne: RenderStepOneProps = ({
 			<div className={styles.gridRow}>
 				<div className={styles.section}>
 					<h3>Категория *</h3>
-					<InputBase
+					{/* <InputBase
 						placeholder="Выберите категорию"
-						value={formData.category || ''}
+						value={formData.categoryId || ''}
 						onChange={updateCategory}
 						stateStyle={errors.category ? 'error' : 'default'}
 						helper={errors.category}
+					/> */}
+					{/* TODO - добавить хелперы в дропдаун */}
+					<Dropdown
+						value={formData.categoryId}
+						options={optionsCategory || []}
+						onChange={updateCategory}
+						placeholder="Выберите категорию"
 					/>
 				</div>
 				<div className={styles.section}>
 					<h3>Состояние вещи</h3>
-					<InputBase
+					{/* <InputBase
 						placeholder="Выберите состояние вещи"
 						value={formData.condition || ''}
 						onChange={updateCondition}
 						stateStyle={errors.condition ? 'error' : 'default'}
 						helper={errors.condition}
+						/> */}
+					{/* TODO - добавить хелперы в дропдаун */}
+					<Dropdown
+						value={formData.condition}
+						options={CONDITION_OPTIONS || []}
+						onChange={updateCondition}
+						placeholder="Выберите состояние вещи"
 					/>
 				</div>
 			</div>

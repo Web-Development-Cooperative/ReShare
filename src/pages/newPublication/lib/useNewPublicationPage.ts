@@ -1,19 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
+import { useCreateListingMutation } from '@entities/listings';
 import { notification } from '@shared/lib/toast.helper';
 
 import { STEP_VALIDATION } from '../model/newPublicationPage.consts';
 
-import type { ListingFormData, Step } from '../model/newPublicationPage.types';
+import type {
+	AllProps,
+	ListingFormData,
+	Step,
+} from '../model/newPublicationPage.types';
+import type { CreateListingDto } from '@shared/api/generated/listings-api';
 
 const useNewPublicationPage = () => {
+	const [createListing, { isLoading: isPublishing }] =
+		useCreateListingMutation();
 	const [currentStep, setCurrentStep] = useState<Step>(1);
 	const [formData, setFormData] = useState<Partial<ListingFormData>>({});
 	const [errors, setErrors] = useState<
 		Partial<Record<keyof ListingFormData, string>>
 	>({});
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (isPublishing) {
+			notification.loading('Публикация объявления...', {
+				autoClose: false,
+				toastId: 'publishing-listing',
+			});
+
+			return () => notification.dismiss('publishing-listing');
+		}
+	}, [isPublishing]);
 
 	const validateStep = (
 		step: Step,
@@ -61,9 +80,30 @@ const useNewPublicationPage = () => {
 			setCurrentStep((prev) => (prev - 1) as Step);
 		}
 	};
-	const handlePublish = () => {
+	const handlePublish = async () => {
 		handleNext();
-		alert('Объявление опубликовано!');
+
+		const dto: CreateListingDto = {
+			title: formData.title,
+			description: formData.description,
+			categoryId: formData.categoryId,
+			condition: formData.condition,
+			transferType: formData.transferType,
+			transferMethod: formData.transferMethod,
+			city: formData.location?.split(',')[0] || null,
+			district: formData.district,
+			latitude: formData.latitude ?? null,
+			longitude: formData.longitude ?? null,
+			tags: formData.tags,
+		};
+
+		try {
+			await createListing(dto).unwrap();
+			// TODO: загрузить formData.photos в хранилище и вызвать addListingPhoto для каждого
+			notification.success('Объявление опубликовано!');
+		} catch {
+			notification.error('Не удалось опубликовать объявление');
+		}
 	};
 	const handleCreateAnother = () => {
 		setFormData({});
@@ -71,7 +111,7 @@ const useNewPublicationPage = () => {
 	};
 	const updateFormData = (
 		key: keyof ListingFormData,
-		value: string | File[],
+		value: Parameters<AllProps['updateFormData']>[1],
 	) => {
 		setFormData((prev) => ({ ...prev, [key]: value }));
 	};

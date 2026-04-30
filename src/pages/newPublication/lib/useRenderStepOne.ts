@@ -1,3 +1,4 @@
+import { useGetCategoriesQuery } from '@entities/listings';
 import { notification } from '@shared/lib/toast.helper';
 
 import type { ChangeEvent, ComponentProps } from 'react';
@@ -9,10 +10,15 @@ const useRenderStepOne = ({
 	errors,
 	setErrors,
 }: ComponentProps<RenderStepOneProps>) => {
+	const { data } = useGetCategoriesQuery();
+	const optionsCategory = data?.map((c) => ({
+		value: c.id || '',
+		label: c.name || '',
+	}));
 	const updateType = (type: string) => {
-		updateFormData('type', type);
-		if (errors.type) {
-			setErrors((prev) => ({ ...prev, type: undefined }));
+		updateFormData('transferType', type);
+		if (errors.transferType) {
+			setErrors((prev) => ({ ...prev, transferType: undefined }));
 		}
 	};
 	const removePhoto = (index: number) => {
@@ -74,14 +80,14 @@ const useRenderStepOne = ({
 			setErrors((prev) => ({ ...prev, title: undefined }));
 		}
 	};
-	const updateCategory = (e: ChangeEvent<HTMLInputElement>) => {
-		updateFormData('category', e.target.value);
-		if (errors.category) {
-			setErrors((prev) => ({ ...prev, category: undefined }));
+	const updateCategory = (val: string | number) => {
+		updateFormData('categoryId', val.toString());
+		if (errors.categoryId) {
+			setErrors((prev) => ({ ...prev, categoryId: undefined }));
 		}
 	};
-	const updateCondition = (e: ChangeEvent<HTMLInputElement>) => {
-		updateFormData('condition', e.target.value);
+	const updateCondition = (val: string | number) => {
+		updateFormData('condition', val.toString());
 		if (errors.condition) {
 			setErrors((prev) => ({ ...prev, condition: undefined }));
 		}
@@ -94,6 +100,7 @@ const useRenderStepOne = ({
 	};
 
 	return {
+		optionsCategory,
 		updateType,
 		removePhoto,
 		addPhoto,
