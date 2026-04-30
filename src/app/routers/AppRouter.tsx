@@ -12,6 +12,7 @@ const LandingPage = lazy(() => import('@pages/landing'));
 const ProfilePage = lazy(() => import('@pages/profile'));
 const MessagesPage = lazy(() => import('@pages/messages'));
 const AdsPage = lazy(() => import('@pages/advertisements'));
+const AdPage = lazy(() => import('@pages/ad'));
 const NewPublicationPage = lazy(() => import('@pages/newPublication'));
 const MyAdsPage = lazy(() => import('@pages/myAds'));
 const MyApplicationPage = lazy(() => import('@pages/myApplication'));
@@ -62,6 +63,14 @@ const router = createBrowserRouter([
 				element: (
 					<Limbo>
 						<AdsPage />
+					</Limbo>
+				),
+			},
+			{
+				path: ROUTES.AD,
+				element: (
+					<Limbo>
+						<AdPage />
 					</Limbo>
 				),
 			},
