@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
-import { useCreateListingMutation, useUpdateListingStatusMutation } from '@entities/listings';
+import {
+	useCreateListingMutation,
+	useUpdateListingStatusMutation,
+} from '@entities/listings';
 import { ListingStatus } from '@shared/api/generated/listings-api';
 import { notification } from '@shared/lib/toast.helper';
 
@@ -83,6 +86,20 @@ const useNewPublicationPage = () => {
 		}
 	};
 	const handlePublish = async () => {
+		if (
+			!formData.title ||
+			!formData.description ||
+			!formData.categoryId ||
+			!formData.condition ||
+			!formData.transferType ||
+			!formData.transferMethod
+		) {
+			notification.error(
+				'Пожалуйста, заполните все обязательные поля',
+				{},
+			);
+			return;
+		}
 		handleNext();
 
 		const dto: CreateListingDto = {
@@ -92,7 +109,7 @@ const useNewPublicationPage = () => {
 			condition: formData.condition,
 			transferType: formData.transferType,
 			transferMethod: formData.transferMethod,
-			city: formData.location?.split(',')[0] || null,
+			city: formData.location?.split(',')[0] || '',
 			district: formData.district,
 			latitude: formData.latitude ?? null,
 			longitude: formData.longitude ?? null,
@@ -101,7 +118,10 @@ const useNewPublicationPage = () => {
 
 		try {
 			const { id } = await createListing(dto).unwrap();
-			await updateListingStatus({ id, status: { status: ListingStatus.Active } }).unwrap();
+			await updateListingStatus({
+				id,
+				status: { status: ListingStatus.Active },
+			}).unwrap();
 			// TODO: загрузить formData.photos в хранилище и вызвать addListingPhoto для каждого
 			notification.success('Объявление опубликовано!');
 		} catch {

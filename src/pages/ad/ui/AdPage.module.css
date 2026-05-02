@@ -89,7 +89,7 @@
 }
 .goal-metrics-container {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: repeat(auto-fill, minmax(233px, 1fr));
 	gap: 8px;
 }
 .metrics-container {
@@ -116,7 +116,9 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: flex-start;
+	flex-wrap: wrap;
 	column-gap: 16px;
+	row-gap: 8px;
 
 	& > li:last-of-type > .tag-container > p:last-of-type {
 		display: none;
@@ -174,7 +176,7 @@
 }
 .settings-buttons {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: repeat(auto-fill, minmax(221px, 1fr));
 	column-gap: 16px;
 	row-gap: 10px;
 }
@@ -198,4 +200,20 @@
 	align-items: center;
 	justify-content: flex-start;
 	column-gap: 16px;
+}
+
+@media (max-width: 1024px) {
+	.main-info-wrapper {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(395px, 1fr));
+		row-gap: 8px;
+	}
+}
+@media (max-width: 425px) {
+	.main-info-wrapper {
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	}
+	.topButtons > button:not(:first-of-type) > p {
+		display: none;
+	}
 }
