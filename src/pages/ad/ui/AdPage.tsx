@@ -174,7 +174,11 @@ const AdPage = () => {
 					</BgBorderDefault>
 					<div className={styles['settings-buttons']}>
 						{settingsButtons.map((button) => (
-							<ButtonBase key={button.id} color={button.color}>
+							<ButtonBase
+								key={button.id}
+								color={button.color}
+								onClick={button.onClick}
+							>
 								<UIText14SB>{button.text}</UIText14SB>
 							</ButtonBase>
 						))}

@@ -1,6 +1,11 @@
 import { useParams } from 'react-router';
 
-import { useGetListingQuery } from '@entities/listings';
+import {
+	useGetListingQuery,
+	useUpdateListingStatusMutation,
+} from '@entities/listings';
+import { notification } from '@shared/lib/toast.helper';
+import { ListingStatus } from '@shared/api/generated/listings-api';
 import { getCookieValue } from '@shared/api';
 
 import type { SettingsButtonsType } from '../model/adPage.types';
@@ -30,6 +35,7 @@ const getMyId = () => {
 };
 
 const useAdPage = () => {
+	const [updateListingStatus] = useUpdateListingStatusMutation();
 	const { adId } = useParams<{ adId: string }>();
 
 	const { data, isLoading } = useGetListingQuery(adId || '123');
@@ -37,13 +43,61 @@ const useAdPage = () => {
 	const isMyAd = data?.donor?.id === getMyId().myId;
 	const settingsButtons: SettingsButtonsType = isMyAd
 		? [
-				{ id: 1, color: 'brand', text: 'Снять с публикации' },
-				{ id: 2, color: 'shaded', text: 'Редактировать объявление' },
+				{
+					id: 1,
+					color: 'brand',
+					text: 'Снять с публикации',
+					onClick: async () => {
+						try {
+							await updateListingStatus({
+								id: adId || '123',
+								status: { status: ListingStatus.Reserved },
+							})
+								.unwrap()
+								.then(() => {
+									updateListingStatus({
+										id: adId || '123',
+										status: {
+											status: ListingStatus.Completed,
+										},
+									});
+								});
+							notification.success(
+								'Объявление снято с публикации!',
+							);
+						} catch {
+							notification.error(
+								'Не удалось снять объявление с публикации',
+							);
+						}
+					},
+				},
+				{
+					id: 2,
+					color: 'shaded',
+					text: 'Редактировать объявление',
+					onClick: () => {},
+				},
 			]
 		: [
-				{ id: 1, color: 'brand', text: 'Написать сообщение' },
-				{ id: 2, color: 'shaded', text: 'запросить бронь' },
-				{ id: 3, color: 'shaded', text: 'Пожаловаться на объявление' },
+				{
+					id: 1,
+					color: 'brand',
+					text: 'Написать сообщение',
+					onClick: () => {},
+				},
+				{
+					id: 2,
+					color: 'shaded',
+					text: 'запросить бронь',
+					onClick: () => {},
+				},
+				{
+					id: 3,
+					color: 'shaded',
+					text: 'Пожаловаться на объявление',
+					onClick: () => {},
+				},
 			];
 
 	return {

@@ -4,6 +4,7 @@ type SettingsButtonType = {
 	id: number;
 	color: Parameters<typeof ButtonBase>[0]['color'];
 	text: string;
+	onClick: () => void;
 };
 type SettingsButtonsType = Array<SettingsButtonType>;
 
