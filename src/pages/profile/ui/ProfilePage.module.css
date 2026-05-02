@@ -58,7 +58,7 @@
 }
 .secondary-info-container {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(333px, 1fr));
 	column-gap: 16px;
 	row-gap: 10px;
 
@@ -128,5 +128,8 @@
 	}
 	.row-bottom-two > p:first-of-type {
 		display: none;
+	}
+	.secondary-info-container {
+		grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
 	}
 }

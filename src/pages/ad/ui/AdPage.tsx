@@ -1,3 +1,4 @@
+import { BackButton } from '@features/backButton';
 import { ButtonBase } from '@shared/ui/buttons';
 import {
 	Heading24,
@@ -7,7 +8,7 @@ import {
 	UIText14Reg,
 	UIText14SB,
 } from '@shared/ui/paragraphs';
-import { ArrowLeft, Heart, Leaf, Share } from '@shared/ui/icons';
+import { Heart, Leaf, Share } from '@shared/ui/icons';
 import { Avatar, Rating, UniList } from '@shared/ui/others';
 import { BgBorderDefault, BgIcone } from '@shared/ui/wrappers';
 import map from '@shared/assets/img/Map.jpg';
@@ -38,10 +39,7 @@ const AdPage = () => {
 	return (
 		<div className={styles.ad}>
 			<div className={styles.topButtons}>
-				<ButtonBase color="shaded">
-					<ArrowLeft />
-					<UIText14SB>Вернуться назад</UIText14SB>
-				</ButtonBase>
+				<BackButton />
 				<ButtonBase color="outline">
 					<Share />
 					<UIText14SB>Поделиться</UIText14SB>
