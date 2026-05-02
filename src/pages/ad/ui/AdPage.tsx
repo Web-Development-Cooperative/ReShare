@@ -56,7 +56,8 @@ const AdPage = () => {
 					<div className={styles['photos-wrapper']}>
 						<img
 							className={styles['main-photo']}
-							src={data?.photos?.[0]?.url || img}
+							// src={data?.photos?.[0]?.url || img}
+							src={img}
 							alt={data?.title || imgAlt}
 						/>
 						{/* TODO - Добавить остальные фото */}
