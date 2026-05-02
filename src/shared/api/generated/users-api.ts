@@ -11,21 +11,21 @@
  */
 
 export interface AddReviewRequest {
-  reviewerName?: string | null;
+  reviewerName: string;
   /** @format int32 */
-  rating?: number;
-  comment?: string | null;
+  rating: number;
+  comment: string;
 }
 
 export interface EcoStatsDto {
   /** @format int32 */
-  itemsGifted?: number;
+  itemsGifted: number;
   /** @format int32 */
-  itemsReceived?: number;
+  itemsReceived: number;
   /** @format double */
-  co2SavedKg?: number;
+  co2SavedKg: number;
   /** @format double */
-  wasteSavedKg?: number;
+  wasteSavedKg: number;
 }
 
 export interface ProblemDetails {
@@ -40,76 +40,76 @@ export interface ProblemDetails {
 
 export interface ReviewCreatedDto {
   /** @format uuid */
-  reviewId?: string;
+  reviewId: string;
 }
 
 export interface ReviewDto {
   /** @format uuid */
-  id?: string;
+  id: string;
   /** @format uuid */
-  reviewerId?: string;
-  reviewerName?: string | null;
+  reviewerId: string;
+  reviewerName: string;
   /** @format int32 */
-  rating?: number;
-  comment?: string | null;
+  rating: number;
+  comment: string;
   /** @format date-time */
-  createdAt?: string;
+  createdAt: string;
 }
 
 export interface ReviewDtoPagedList {
-  items?: ReviewDto[] | null;
+  items: ReviewDto[];
   /** @format int32 */
-  totalCount?: number;
+  totalCount: number;
   /** @format int32 */
-  pageNumber?: number;
+  pageNumber: number;
   /** @format int32 */
-  pageSize?: number;
+  pageSize: number;
   /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
+  totalPages: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
 }
 
 export interface UpdateAvatarRequest {
-  avatarUrl?: string | null;
+  avatarUrl: string;
 }
 
 export interface UpdateProfileRequest {
-  firstName?: string | null;
-  lastName?: string | null;
+  firstName: string;
+  lastName: string;
   bio?: string | null;
   city?: string | null;
 }
 
 export interface UserProfileDto {
   /** @format uuid */
-  id?: string;
-  firstName?: string | null;
-  lastName?: string | null;
+  id: string;
+  firstName: string;
+  lastName: string;
   avatarUrl?: string | null;
   bio?: string | null;
   city?: string | null;
   /** @format double */
-  rating?: number;
+  rating: number;
   /** @format int32 */
-  reviewCount?: number;
-  ecoStats?: EcoStatsDto;
+  reviewCount: number;
+  ecoStats: EcoStatsDto;
   /** @format date-time */
-  createdAt?: string;
+  createdAt: string;
 }
 
 export interface UserProfileDtoPagedList {
-  items?: UserProfileDto[] | null;
+  items: UserProfileDto[];
   /** @format int32 */
-  totalCount?: number;
+  totalCount: number;
   /** @format int32 */
-  pageNumber?: number;
+  pageNumber: number;
   /** @format int32 */
-  pageSize?: number;
+  pageSize: number;
   /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
+  totalPages: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
 }
 
 export interface UsersDetailParams {

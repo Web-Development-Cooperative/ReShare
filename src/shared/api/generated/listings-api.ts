@@ -40,73 +40,73 @@ export enum ItemCondition {
 }
 
 export interface AddPhotoRequest {
-  url?: string | null;
+  url: string;
   /** @format int32 */
-  displayOrder?: number;
+  displayOrder: number;
 }
 
 export interface CategoryDetailsDto {
   /** @format uuid */
-  id?: string;
-  name?: string | null;
+  id: string;
+  name: string;
   description?: string | null;
   /** @format uuid */
   parentCategoryId?: string | null;
   iconUrl?: string | null;
-  isActive?: boolean;
+  isActive: boolean;
   /** @format int32 */
-  displayOrder?: number;
+  displayOrder: number;
   /** @format date-time */
-  createdAt?: string;
+  createdAt: string;
   /** @format date-time */
   updatedAt?: string | null;
 }
 
 export interface CategoryDto {
   /** @format uuid */
-  id?: string;
-  name?: string | null;
+  id: string;
+  name: string;
   /** @format uuid */
   parentCategoryId?: string | null;
 }
 
 export interface CategoryHistoryEntryDto {
   /** @format uuid */
-  id?: string;
+  id: string;
   /** @format uuid */
-  categoryId?: string;
+  categoryId: string;
   /** @format uuid */
-  changedByUserId?: string;
-  changeType?: string | null;
+  changedByUserId: string;
+  changeType: string;
   oldValuesJson?: string | null;
   newValuesJson?: string | null;
   /** @format date-time */
-  changedAt?: string;
+  changedAt: string;
 }
 
 export interface ChangeStatusRequest {
-  status?: ListingStatus;
+  status: ListingStatus;
 }
 
 export interface CreateCategoryRequest {
-  name?: string | null;
+  name: string;
   description?: string | null;
   /** @format uuid */
   parentCategoryId?: string | null;
   iconUrl?: string | null;
   /** @format int32 */
-  displayOrder?: number;
+  displayOrder: number;
 }
 
 export interface CreateListingDto {
-  title?: string | null;
-  description?: string | null;
+  title: string;
+  description: string;
   /** @format uuid */
-  categoryId?: string;
-  condition?: ItemCondition;
-  transferType?: TransferType;
-  transferMethod?: TransferMethod;
-  city?: string | null;
+  categoryId: string;
+  condition: ItemCondition;
+  transferType: TransferType;
+  transferMethod: TransferMethod;
+  city: string;
   district?: string | null;
   /** @format double */
   latitude?: number | null;
@@ -117,79 +117,79 @@ export interface CreateListingDto {
 
 export interface DonorDto {
   /** @format uuid */
-  id?: string;
-  firstName?: string | null;
-  lastName?: string | null;
+  id: string;
+  firstName: string;
+  lastName: string;
   avatarUrl?: string | null;
   /** @format double */
-  rating?: number;
+  rating: number;
   /** @format int32 */
-  reviewCount?: number;
+  reviewCount: number;
 }
 
 export interface ListingDto {
   /** @format uuid */
-  id?: string;
-  title?: string | null;
-  description?: string | null;
-  category?: CategoryDto;
-  condition?: string | null;
-  transferType?: string | null;
-  transferMethod?: string | null;
-  status?: string | null;
-  location?: LocationDto;
-  donor?: DonorDto;
-  photos?: ListingPhotoDto[] | null;
-  tags?: string[] | null;
+  id: string;
+  title: string;
+  description: string;
+  category: CategoryDto;
+  condition: string;
+  transferType: string;
+  transferMethod: string;
+  status: string;
+  location: LocationDto;
+  donor: DonorDto;
+  photos: ListingPhotoDto[];
+  tags: string[];
   /** @format int32 */
-  viewCount?: number;
+  viewCount: number;
   /** @format date-time */
-  createdAt?: string;
+  createdAt: string;
   /** @format date-time */
   updatedAt?: string | null;
 }
 
 export interface ListingPhotoDto {
   /** @format uuid */
-  id?: string;
-  url?: string | null;
+  id: string;
+  url: string;
   /** @format int32 */
-  displayOrder?: number;
+  displayOrder: number;
 }
 
 export interface ListingPreviewDto {
   /** @format uuid */
-  id?: string;
-  title?: string | null;
-  category?: CategoryDto;
-  condition?: string | null;
-  transferType?: string | null;
-  status?: string | null;
-  city?: string | null;
+  id: string;
+  title: string;
+  category: CategoryDto;
+  condition: string;
+  transferType: string;
+  status: string;
+  city: string;
   thumbnailUrl?: string | null;
-  donor?: DonorDto;
+  donor?: DonorDto | null;
   /** @format int32 */
-  viewCount?: number;
+  viewCount: number;
   /** @format date-time */
-  createdAt?: string;
+  createdAt: string;
 }
 
 export interface ListingPreviewDtoPagedList {
-  items?: ListingPreviewDto[] | null;
+  items: ListingPreviewDto[];
   /** @format int32 */
-  totalCount?: number;
+  totalCount: number;
   /** @format int32 */
-  pageNumber?: number;
+  pageNumber: number;
   /** @format int32 */
-  pageSize?: number;
+  pageSize: number;
   /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
+  totalPages: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
 }
 
 export interface LocationDto {
-  city?: string | null;
+  city: string;
   district?: string | null;
   /** @format double */
   latitude?: number | null;
@@ -199,7 +199,7 @@ export interface LocationDto {
 
 export interface PhotoCreatedDto {
   /** @format uuid */
-  photoId?: string;
+  photoId: string;
 }
 
 export interface ProblemDetails {
@@ -213,13 +213,13 @@ export interface ProblemDetails {
 }
 
 export interface UpdateCategoryRequest {
-  name?: string | null;
+  name: string;
   description?: string | null;
   /** @format uuid */
   parentCategoryId?: string | null;
   iconUrl?: string | null;
   /** @format int32 */
-  displayOrder?: number;
+  displayOrder: number;
 }
 
 export type CategoriesListData = CategoryDetailsDto[];

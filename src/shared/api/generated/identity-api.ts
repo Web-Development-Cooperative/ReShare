@@ -19,13 +19,13 @@ export enum UserRole {
 }
 
 export interface ChangePasswordRequest {
-  oldPassword?: string | null;
-  newPassword?: string | null;
+  oldPassword: string;
+  newPassword: string;
 }
 
 export interface LoginUserCommand {
-  login?: string | null;
-  password?: string | null;
+  login: string;
+  password: string;
 }
 
 export interface ProblemDetails {
@@ -39,12 +39,12 @@ export interface ProblemDetails {
 }
 
 export interface RegisterUserCommand {
-  email?: string | null;
+  email: string;
   phone?: string | null;
-  password?: string | null;
-  firstName?: string | null;
-  lastName?: string | null;
-  role?: UserRole;
+  password: string;
+  firstName: string;
+  lastName: string;
+  role: UserRole;
 }
 
 export type AuthRegisterCreateData = any;
