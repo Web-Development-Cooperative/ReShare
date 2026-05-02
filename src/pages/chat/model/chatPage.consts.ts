@@ -1,6 +1,6 @@
 import img from '@shared/assets/img/baseAvatarMale.png';
 
-import type { Message } from './chatPage.types';
+import type { MessageDto } from '@shared/api/generated/messaging-api';
 
 const CHAT_INTERLOCUTOR = {
 	id: 1,
@@ -13,62 +13,64 @@ const CHAT_INTERLOCUTOR = {
 
 const CURRENT_USER_ID = 2;
 
-const CHAT_MESSAGES: Array<Message> = [
+const CHAT_MESSAGES: Array<MessageDto> = [
 	{
-		id: 1,
-		senderId: 1,
-		senderName: 'Андрей Лампов',
-		senderAvatar: img,
-		time: '09:10',
-		text: 'Здравствуйте! Еще актуально?',
+		id: '1',
+		conversationId: '1',
+		senderId: '1',
+		content: 'Ы',
+		sentAt: '09:10',
+		isRead: false,
 	},
 	{
-		id: 2,
-		senderId: 2,
-		senderName: 'Белобрысый чепух',
-		senderAvatar: img,
-		time: '09:14',
-		text: 'Доброе утро, да',
+		id: '2',
+		conversationId: '1',
+		senderId: 'fb73d692-25e4-47f2-9939-78c2afca9a37',
+		content: 'Доброе утро, да',
+		sentAt: '09:10',
+		isRead: false,
 	},
 	{
-		id: 3,
-		senderId: 1,
-		senderName: 'Андрей Лампов',
-		senderAvatar: img,
-		time: '09:18',
-		text: 'Когда можно будет забрать?',
+		id: '3',
+		conversationId: '1',
+		senderId: '1',
+		content: 'Когда можно будет забрать?',
+		sentAt: '09:10',
+		isRead: false,
 	},
 	{
-		id: 4,
-		senderId: 1,
-		senderName: 'Андрей Лампов',
-		senderAvatar: img,
-		time: '09:19',
-		text: 'Адрес актуальный?',
+		id: '4',
+		conversationId: '1',
+		senderId: '1',
+		content: 'Адрес актуальный?',
+		sentAt: '09:10',
+		isRead: false,
 	},
 	{
-		id: 5,
-		senderId: 2,
-		senderName: 'Белобрысый чепух',
-		senderAvatar: img,
-		time: '09:20',
-		text: 'Можно будет после 19:00, адрес правильный. Мой телефон +7 800 555 35 35',
+		id: '5',
+		conversationId: '1',
+		senderId: 'fb73d692-25e4-47f2-9939-78c2afca9a37',
+		content:
+			'Можно будет после 19:00, адрес правильный. Мой телефон +7 800 555 35 35',
+		sentAt: '09:10',
+		isRead: false,
 	},
 	{
-		id: 6,
-		senderId: 1,
-		senderName: 'Андрей Лампов',
-		senderAvatar: img,
-		time: '09:22',
-		text: 'Отлично, давайте тогда зарезервирую, подтвердите запрос, пожалуйста. Вызову газель к этому времени и подъеду',
+		id: '6',
+		conversationId: '1',
+		senderId: '1',
+		content:
+			'Отлично, давайте тогда зарезервирую, подтвердите запрос, пожалуйста. Вызову газель к этому времени и подъеду',
+		sentAt: '09:10',
+		isRead: false,
 	},
 	{
-		id: 7,
-		senderId: 2,
-		senderName: 'Белобрысый чепух',
-		senderAvatar: img,
-		time: '09:28',
-		text: 'Добро, жду',
+		id: '7',
+		conversationId: '1',
+		senderId: 'fb73d692-25e4-47f2-9939-78c2afca9a37',
+		content: 'Добро, жду',
+		sentAt: '09:10',
+		isRead: false,
 	},
 ];
 

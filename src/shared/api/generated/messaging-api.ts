@@ -12,41 +12,41 @@
 
 export interface ConversationCreatedDto {
   /** @format uuid */
-  conversationId?: string;
+  conversationId: string;
 }
 
 export interface ConversationDto {
   /** @format uuid */
-  id?: string;
-  participants?: string[] | null;
+  id: string;
+  participants: string[];
   /** @format uuid */
   listingId?: string | null;
-  lastMessage?: MessageDto;
+  lastMessage?: MessageDto | null;
   /** @format int32 */
-  unreadCount?: number;
+  unreadCount: number;
   /** @format date-time */
-  createdAt?: string;
+  createdAt: string;
   /** @format date-time */
   lastMessageAt?: string | null;
 }
 
 export interface ConversationDtoPagedList {
-  items?: ConversationDto[] | null;
+  items: ConversationDto[];
   /** @format int32 */
-  totalCount?: number;
+  totalCount: number;
   /** @format int32 */
-  pageNumber?: number;
+  pageNumber: number;
   /** @format int32 */
-  pageSize?: number;
+  pageSize: number;
   /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
+  totalPages: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
 }
 
 export interface CreateConversationDto {
   /** @format uuid */
-  recipientId?: string;
+  recipientId: string;
   /** @format uuid */
   listingId?: string | null;
   initialMessage?: string | null;
@@ -54,29 +54,29 @@ export interface CreateConversationDto {
 
 export interface MessageDto {
   /** @format uuid */
-  id?: string;
+  id: string;
   /** @format uuid */
-  conversationId?: string;
+  conversationId: string;
   /** @format uuid */
-  senderId?: string;
-  content?: string | null;
+  senderId: string;
+  content: string;
   /** @format date-time */
-  sentAt?: string;
-  isRead?: boolean;
+  sentAt: string;
+  isRead: boolean;
 }
 
 export interface MessageDtoPagedList {
-  items?: MessageDto[] | null;
+  items: MessageDto[];
   /** @format int32 */
-  totalCount?: number;
+  totalCount: number;
   /** @format int32 */
-  pageNumber?: number;
+  pageNumber: number;
   /** @format int32 */
-  pageSize?: number;
+  pageSize: number;
   /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
+  totalPages: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
 }
 
 export interface ProblemDetails {
@@ -90,9 +90,7 @@ export interface ProblemDetails {
 }
 
 export interface SendMessageDto {
-  /** @format uuid */
-  conversationId?: string;
-  content?: string | null;
+  content: string;
 }
 
 export interface MessagingConversationsListParams {

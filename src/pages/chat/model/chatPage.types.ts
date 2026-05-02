@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 
 type Message = {
-	id: number;
-	senderId: number;
+	id: string;
+	senderId: string;
 	senderName: string;
 	senderAvatar: string;
 	time: string;
