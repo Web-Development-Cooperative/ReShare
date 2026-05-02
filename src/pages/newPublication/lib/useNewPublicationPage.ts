@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
-import { useCreateListingMutation } from '@entities/listings';
+import { useCreateListingMutation, useUpdateListingStatusMutation } from '@entities/listings';
+import { ListingStatus } from '@shared/api/generated/listings-api';
 import { notification } from '@shared/lib/toast.helper';
 
 import { STEP_VALIDATION } from '../model/newPublicationPage.consts';
@@ -16,6 +17,7 @@ import type { CreateListingDto } from '@shared/api/generated/listings-api';
 const useNewPublicationPage = () => {
 	const [createListing, { isLoading: isPublishing }] =
 		useCreateListingMutation();
+	const [updateListingStatus] = useUpdateListingStatusMutation();
 	const [currentStep, setCurrentStep] = useState<Step>(1);
 	const [formData, setFormData] = useState<Partial<ListingFormData>>({});
 	const [errors, setErrors] = useState<
@@ -98,7 +100,8 @@ const useNewPublicationPage = () => {
 		};
 
 		try {
-			await createListing(dto).unwrap();
+			const { id } = await createListing(dto).unwrap();
+			await updateListingStatus({ id, status: { status: ListingStatus.Active } }).unwrap();
 			// TODO: загрузить formData.photos в хранилище и вызвать addListingPhoto для каждого
 			notification.success('Объявление опубликовано!');
 		} catch {
