@@ -35,7 +35,7 @@ export const listingsApi = baseApi.injectEndpoints({
 		}),
 
 		// Создание объявления
-		createListing: builder.mutation<void, CreateListingDto>({
+		createListing: builder.mutation<{ id: string }, CreateListingDto>({
 			query: (body) => ({
 				url: '/listings',
 				method: 'POST',

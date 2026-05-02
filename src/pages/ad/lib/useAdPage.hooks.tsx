@@ -1,0 +1,110 @@
+import { useParams } from 'react-router';
+
+import {
+	useGetListingQuery,
+	useUpdateListingStatusMutation,
+} from '@entities/listings';
+import { notification } from '@shared/lib/toast.helper';
+import { ListingStatus } from '@shared/api/generated/listings-api';
+import { getCookieValue } from '@shared/api';
+
+import type { SettingsButtonsType } from '../model/adPage.types';
+
+const getMyId = () => {
+	const token = getCookieValue('accessToken');
+	const myId = { id: '123' };
+	if (token) {
+		const base64Url = token.split('.')[1];
+		const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+		const jsonPayload = decodeURIComponent(
+			atob(base64)
+				.split('')
+				.map(
+					(c) =>
+						'%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2),
+				)
+				.join(''),
+		);
+
+		myId.id =
+			JSON.parse(jsonPayload)[
+				'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+			];
+	}
+	return { myId: myId.id };
+};
+
+const useAdPage = () => {
+	const [updateListingStatus] = useUpdateListingStatusMutation();
+	const { adId } = useParams<{ adId: string }>();
+
+	const { data, isLoading } = useGetListingQuery(adId || '123');
+
+	const isMyAd = data?.donor?.id === getMyId().myId;
+	const settingsButtons: SettingsButtonsType = isMyAd
+		? [
+				{
+					id: 1,
+					color: 'brand',
+					text: 'Снять с публикации',
+					onClick: async () => {
+						try {
+							await updateListingStatus({
+								id: adId || '123',
+								status: { status: ListingStatus.Reserved },
+							})
+								.unwrap()
+								.then(() => {
+									updateListingStatus({
+										id: adId || '123',
+										status: {
+											status: ListingStatus.Completed,
+										},
+									});
+								});
+							notification.success(
+								'Объявление снято с публикации!',
+							);
+						} catch {
+							notification.error(
+								'Не удалось снять объявление с публикации',
+							);
+						}
+					},
+				},
+				{
+					id: 2,
+					color: 'shaded',
+					text: 'Редактировать объявление',
+					onClick: () => {},
+				},
+			]
+		: [
+				{
+					id: 1,
+					color: 'brand',
+					text: 'Написать сообщение',
+					onClick: () => {},
+				},
+				{
+					id: 2,
+					color: 'shaded',
+					text: 'запросить бронь',
+					onClick: () => {},
+				},
+				{
+					id: 3,
+					color: 'shaded',
+					text: 'Пожаловаться на объявление',
+					onClick: () => {},
+				},
+			];
+
+	return {
+		ad: data,
+		isLoading,
+		settingsButtons,
+	};
+};
+
+export { useAdPage };
