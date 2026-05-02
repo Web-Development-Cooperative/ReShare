@@ -1,6 +1,6 @@
 const ROUTES = {
 	ADS: '/ads',
-	AD: '/ads/:id',
+	AD: '/ads/:adId',
 	LANDING: '/landing',
 	LOGIN: '/login',
 	REG: '/reg',
@@ -21,7 +21,7 @@ const ADAPTER_ROUTES_BREADCRUMBS = {
 	'/': 'Главная',
 	'/profile': 'Профиль',
 	'/profile/my-ads': 'Мои объявления',
-	'/ads/:id': 'Объявление',
+	'/ads/:adId': 'Объявление',
 	'/profile/my-applications': 'Мои заявки',
 	'/profile/my-eco': 'Эковклад',
 	'/profile/my-archive': 'Архив объявлений',

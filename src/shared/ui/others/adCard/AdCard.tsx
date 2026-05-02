@@ -10,6 +10,7 @@ import styles from './AdCard.module.css';
 import type { IAdCard } from '@shared/model/otherUI.types';
 
 const AdCard: IAdCard = ({
+	id = 123,
 	img,
 	title,
 	author,
@@ -20,7 +21,10 @@ const AdCard: IAdCard = ({
 	const { imageSrc } = useAdCard(img);
 
 	return (
-		<LinkBase to="123" className={clsx(styles.card, styles[state])}>
+		<LinkBase
+			to={id.toString()}
+			className={clsx(styles.card, styles[state])}
+		>
 			{/* <div>Компонент с лайком</div> */}
 			<div className={styles.cardImageWrapper}>
 				<img

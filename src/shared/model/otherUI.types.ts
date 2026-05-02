@@ -101,7 +101,7 @@ type StepsHorizontalProps = FC<{
 
 type AllAdCardProps = {
 	state?: 'default' | 'disabled';
-	id: string | number;
+	id?: string | number;
 	img: string | File;
 	title: string;
 	author: string;
