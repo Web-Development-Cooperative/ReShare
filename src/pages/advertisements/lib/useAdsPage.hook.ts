@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router';
 
-import { useGetListingsQuery } from '@entities/listings';
+import { useGetListingsQuery, useGetCategoriesQuery } from '@entities/listings';
 import { notification } from '@shared/lib/toast.helper';
 import { TransferTypeRu } from '@shared/model/translates.consts';
 import {
@@ -8,22 +9,56 @@ import {
 	TransferType,
 } from '@shared/api/generated/listings-api';
 
-import { items } from '../model/adsPage.consts';
+import { items, filters } from '../model/adsPage.consts';
 
 const useAdsPage = () => {
+	const [showFilters, setShowFilters] = useState(false);
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	const filterState = useMemo<Record<string, string>>(() => {
+		const result: Record<string, string> = {};
+		searchParams.forEach((value, key) => {
+			result[key] = value;
+		});
+		return result;
+	}, [searchParams]);
+
 	const { data, isLoading, isError } = useGetListingsQuery({
+		categoryId: filterState['category'] ?? '',
+		condition: filterState['condition'] ?? '',
+		transferType: filterState['type'] ?? '',
 		pageNumber: 1,
 		pageSize: 50,
 	});
+	const { data: categoriesData } = useGetCategoriesQuery();
 
-	const [showFilters, setShowFilters] = useState(false);
-	const [filterState, setFilterState] = useState<Record<string, string>>({});
+	const onChangeOption = (val: string, filterType: Record<'id', string>) => {
+		setSearchParams((prev) => {
+			const next = new URLSearchParams(prev);
+			if (val) {
+				next.set(filterType.id, val);
+			} else {
+				next.delete(filterType.id);
+			}
+			return next;
+		});
+	};
 
-	const onChangeOption = (val: string, filterType: Record<'id', string>) =>
-		setFilterState((s) => ({
-			...s,
-			[filterType.id]: val,
-		}));
+	const allFilters = useMemo(() => {
+		return filters.map((filter) => {
+			if (filter.id === 'category') {
+				return {
+					...filter,
+					options:
+						categoriesData?.map((cat) => ({
+							value: cat.id,
+							label: cat.name,
+						})) ?? [],
+				};
+			}
+			return filter;
+		});
+	}, [categoriesData]);
 
 	const allAds = useMemo(() => {
 		const listingItems = data?.items?.length ? data.items : items;
@@ -57,7 +92,7 @@ const useAdsPage = () => {
 					},
 				],
 			}));
-	}, [data?.items]);
+	}, [data]);
 
 	useEffect(() => {
 		if (isLoading) {
@@ -76,6 +111,7 @@ const useAdsPage = () => {
 		isError,
 		showFilters,
 		setShowFilters,
+		allFilters,
 		filterState,
 		onChangeOption,
 	};

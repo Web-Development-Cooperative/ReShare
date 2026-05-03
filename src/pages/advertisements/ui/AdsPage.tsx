@@ -10,7 +10,6 @@ import { Dropdown } from '@shared/ui/others/dropdown/Dropdown';
 
 import styles from './AdsPage.module.css';
 import { useAdsPage } from '../lib/useAdsPage.hook';
-import { filters } from '../model/adsPage.consts';
 
 const AdsPage = () => {
 	const {
@@ -19,6 +18,7 @@ const AdsPage = () => {
 		isError,
 		showFilters,
 		setShowFilters,
+		allFilters,
 		filterState,
 		onChangeOption,
 	} = useAdsPage();
@@ -72,7 +72,7 @@ const AdsPage = () => {
 					className={styles.filtersPanel}
 					role="region"
 					aria-label="Фильтры"
-					items={filters}
+					items={allFilters}
 					renderItem={(filterType) => (
 						<Dropdown
 							options={filterType.options}
