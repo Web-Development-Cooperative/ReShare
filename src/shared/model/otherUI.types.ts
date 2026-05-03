@@ -1,8 +1,4 @@
 import type {
-	LoginUserCommand,
-	RegisterUserCommand,
-} from '@shared/api/generated/identity-api';
-import type {
 	ButtonHTMLAttributes,
 	FC,
 	HTMLAttributes,
@@ -13,6 +9,10 @@ import type {
 	ReactNode,
 	RefAttributes,
 } from 'react';
+import type {
+	LoginUserCommand,
+	RegisterUserCommand,
+} from '@shared/api/generated/identity-api';
 
 type TagColor =
 	| 'white'
@@ -86,7 +86,9 @@ type OtherAuthFormProps = {
 		'onClick'
 	>['onClick'];
 	isLoading?: boolean;
-	error?: string | null;
+	errors?: Partial<
+		Record<keyof RegisterUserCommand | keyof LoginUserCommand, string>
+	>;
 };
 type AuthFormProps = FC<
 	Omit<HtmlHTMLAttributes<HTMLDivElement>, 'onChange' | 'onSubmit'> &

@@ -2,15 +2,21 @@ import { AuthForm } from '@shared/ui/others';
 
 import { useRegForm } from '../lib/useRegForm';
 
+import type {
+	LoginUserCommand,
+	RegisterUserCommand,
+} from '@shared/api/generated/identity-api';
+
 const RegForm = () => {
-	const { data, onChange, onSubmit } = useRegForm();
+	const { data, errors, onChange, onSubmit } = useRegForm();
 
 	return (
 		<AuthForm
 			typeForm="reg"
-			value={data}
+			value={data as unknown as RegisterUserCommand & LoginUserCommand}
 			onChange={onChange}
 			onSubmit={onSubmit}
+			errors={errors}
 		/>
 	);
 };
