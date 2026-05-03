@@ -2,8 +2,9 @@ import clsx from 'clsx';
 
 import { Tag, UniList } from '@shared/ui/others';
 import { Paragraph14Reg, UIText14Medium } from '@shared/ui/paragraphs';
-import { useAdCard } from '@shared/lib/otherUI.hooks';
 import { LinkBase } from '@shared/ui/links';
+import { useAdCard } from '@shared/lib/otherUI.hooks';
+import { ROUTES } from '@shared/model/routes';
 
 import styles from './AdCard.module.css';
 
@@ -22,7 +23,7 @@ const AdCard: IAdCard = ({
 
 	return (
 		<LinkBase
-			to={id.toString()}
+			to={ROUTES.AD.replace(':adId', id.toString())}
 			className={clsx(styles.card, styles[state])}
 		>
 			{/* <div>Компонент с лайком</div> */}

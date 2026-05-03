@@ -5,7 +5,7 @@ import { clsx } from 'clsx';
 
 import img from '@shared/assets/img/baseAvatarMale.png';
 import { ButtonBase } from '@shared/ui/buttons';
-import { Pencil, Share } from '@shared/ui/icons';
+import { Pencil, VectorShare } from '@shared/ui/icons';
 import { Avatar, Rating, UniList } from '@shared/ui/others';
 import {
 	Paragraph16Reg,
@@ -36,20 +36,20 @@ const ProfilePage = () => {
 						<div className={styles['row-top']}>
 							<h2>Аполлинария Владимировна</h2>
 							<div className={styles['buttons-container']}>
-								<ButtonBase color="outline">
-									<Share />
-									<UIText14SB>Поделиться профилем</UIText14SB>
-								</ButtonBase>
 								<ButtonBase
+									color="brand"
 									onClick={() =>
 										setOpenEditProfile((cv) => !cv)
 									}
-									color="outline"
 								>
 									<Pencil />
 									<UIText14SB>
 										Редактировать профиль
 									</UIText14SB>
+								</ButtonBase>
+								<ButtonBase color="outline">
+									<VectorShare />
+									{/* <UIText14SB>Поделиться профилем</UIText14SB> */}
 								</ButtonBase>
 							</div>
 						</div>
