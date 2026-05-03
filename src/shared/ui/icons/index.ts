@@ -25,3 +25,4 @@ export { Google } from './google/Google';
 export { Apple } from './apple/Apple';
 export { Check } from './check/Check';
 export { Camera } from './camera/Camera';
+export { VectorShare } from './vectorShare/VectorShare';

@@ -1,6 +1,7 @@
 import { Avatar, Tag } from '@shared/ui/others';
 import { Paragraph16Reg, UIText14Medium } from '@shared/ui/paragraphs';
-import { PaddingWrapper } from '@shared/ui/wrappers';
+import { LinkBase } from '@shared/ui/links';
+import { ROUTES } from '@shared/model/routes';
 
 import styles from './LinkChat.module.css';
 
@@ -9,7 +10,10 @@ import type { Message } from '../../model/messagesPage.types';
 
 const LinkChat: FC<Record<'item', Message>> = ({ item }) => {
 	return (
-		<PaddingWrapper y={8} x={12} className={styles.chat}>
+		<LinkBase
+			to={ROUTES.CHAT.replace(':userId', item.id.toString())}
+			className={styles.chat}
+		>
 			<Avatar
 				shape="square"
 				size="large"
@@ -28,7 +32,7 @@ const LinkChat: FC<Record<'item', Message>> = ({ item }) => {
 			>
 				<UIText14Medium>{item.missed}</UIText14Medium>
 			</Tag>
-		</PaddingWrapper>
+		</LinkBase>
 	);
 };
 

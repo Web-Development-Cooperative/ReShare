@@ -21,11 +21,11 @@ const NAV = [
 		text: ADAPTER_ROUTES_BREADCRUMBS['/profile/my-applications'],
 		to: ROUTES.PROFILE_MY_APPLICATIONS,
 	},
-	{
-		id: 3,
-		text: ADAPTER_ROUTES_BREADCRUMBS['/profile/my-eco'],
-		to: ROUTES.PROFILE_MY_ECO,
-	},
+	// {
+	// 	id: 3,
+	// 	text: ADAPTER_ROUTES_BREADCRUMBS['/profile/my-eco'],
+	// 	to: ROUTES.PROFILE_MY_ECO,
+	// },
 	{
 		id: 4,
 		text: ADAPTER_ROUTES_BREADCRUMBS['/profile/my-archive'],

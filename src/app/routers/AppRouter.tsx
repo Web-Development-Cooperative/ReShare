@@ -105,10 +105,10 @@ const router = createBrowserRouter([
 							</Limbo>
 						),
 					},
-					{
-						path: ROUTES.PROFILE_MY_ECO,
-						element: <h1>Эковклад</h1>,
-					},
+					// {
+					// 	path: ROUTES.PROFILE_MY_ECO,
+					// 	element: <h1>Эковклад</h1>,
+					// },
 					{
 						path: ROUTES.PROFILE_MY_ARCHIVE,
 						element: (
