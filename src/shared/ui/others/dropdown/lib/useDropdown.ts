@@ -22,17 +22,13 @@ export const useDropdown = ({
 	options,
 	multiple = false,
 	value,
-	defaultValue,
 	onChange,
 	disabled = false,
 }: Params) => {
 	const controlled = value !== undefined;
 	const [open, setOpen] = useState(false);
-	const [internal, setInternal] = useState<Array<string | number>>(
-		toArray(defaultValue),
-	);
 	const ref = useRef<HTMLDivElement | null>(null);
-	const selected = controlled ? toArray(value) : internal;
+	const selected = controlled ? toArray(value) : toArray(value);
 
 	useEffect(() => {
 		const onDoc = (e: MouseEvent) => {
@@ -54,8 +50,6 @@ export const useDropdown = ({
 		} else {
 			next = exists ? [] : [opt.value.toString()];
 		}
-
-		if (!controlled) setInternal(next);
 		onChange?.(next[0]);
 		if (!multiple) setOpen(false);
 	};
