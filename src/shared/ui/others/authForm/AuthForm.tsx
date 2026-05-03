@@ -28,21 +28,6 @@ const AuthForm: AuthFormProps = ({
 					владельцев, а полезные ресурсы не превращаются в отходы.
 				</Paragraph16Reg>
 			</div>
-			<div className={styles['social-buttons']}>
-				<ButtonBase color="outline">
-					<div>
-						<Google />
-					</div>
-					<UIText14SB>Войти через Google</UIText14SB>
-				</ButtonBase>
-				<ButtonBase color="outline">
-					<div>
-						<Apple />
-					</div>
-					<UIText14SB>Войти через Apple</UIText14SB>
-				</ButtonBase>
-			</div>
-			<TextDivider label="Или" />
 			<div className={styles['inputs-content']}>
 				<InputBase
 					value={value?.login || value?.email || ''}
@@ -101,6 +86,23 @@ const AuthForm: AuthFormProps = ({
 			<ButtonBase onClick={onSubmit} color="brand" size="large">
 				<UIText14SB>{textButton}</UIText14SB>
 			</ButtonBase>
+
+			<TextDivider label="Или" />
+
+			<div className={styles['social-buttons']}>
+				<ButtonBase color="outline">
+					<div>
+						<Google />
+					</div>
+					<UIText14SB>Войти через Google</UIText14SB>
+				</ButtonBase>
+				<ButtonBase color="outline">
+					<div>
+						<Apple />
+					</div>
+					<UIText14SB>Войти через Apple</UIText14SB>
+				</ButtonBase>
+			</div>
 		</div>
 	);
 };
