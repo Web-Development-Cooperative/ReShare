@@ -1,12 +1,14 @@
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 import {
 	useGetListingQuery,
 	useUpdateListingStatusMutation,
 } from '@entities/listings';
+import { useCreateConversationMutation } from '@entities/messages';
 import { notification } from '@shared/lib/toast.helper';
 import { ListingStatus } from '@shared/api/generated/listings-api';
 import { getCookieValue } from '@shared/api';
+import { ROUTES } from '@shared/model/routes';
 
 import type { SettingsButtonsType } from '../model/adPage.types';
 
@@ -36,7 +38,9 @@ const getMyId = () => {
 
 const useAdPage = () => {
 	const [updateListingStatus] = useUpdateListingStatusMutation();
+	const [createConversation] = useCreateConversationMutation();
 	const { adId } = useParams<{ adId: string }>();
+	const navigate = useNavigate();
 
 	const { data, isLoading } = useGetListingQuery(adId || '123');
 
@@ -84,12 +88,43 @@ const useAdPage = () => {
 					id: 1,
 					color: 'brand',
 					text: 'Написать сообщение',
-					onClick: () => {},
+					onClick: async () => {
+						if (!data?.donor?.id || !adId) {
+							notification.error(
+								`Не удалось отправить сообщение. ID ${!data?.donor?.id ? 'автора' : 'объявления'} не найден.`,
+							);
+							return;
+						}
+						try {
+							await createConversation({
+								recipientId: data?.donor?.id,
+								listingId: adId,
+								initialMessage: '',
+							})
+								.unwrap()
+								.then(({ conversationId }) => {
+									if (!conversationId) {
+										throw new Error(
+											'Не удалось получить ID созданного чата',
+										);
+									}
+									navigate(
+										ROUTES.CHAT.replace(
+											':conversationId',
+											conversationId,
+										),
+									);
+								});
+							notification.success('Чат создан!');
+						} catch {
+							notification.error('Не удалось создать чат!');
+						}
+					},
 				},
 				{
 					id: 2,
 					color: 'shaded',
-					text: 'запросить бронь',
+					text: 'Запросить бронь',
 					onClick: () => {},
 				},
 				{
