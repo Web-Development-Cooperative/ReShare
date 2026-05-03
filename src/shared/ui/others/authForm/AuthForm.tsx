@@ -12,6 +12,7 @@ import type { AuthFormProps } from '@shared/model/otherUI.types';
 const AuthForm: AuthFormProps = ({
 	typeForm,
 	value,
+	errors,
 	onChange,
 	onSubmit,
 	...props
@@ -46,16 +47,52 @@ const AuthForm: AuthFormProps = ({
 				<InputBase
 					value={value?.login || value?.email || ''}
 					onChange={onChange}
-					name="login"
+					name={typeForm === 'login' ? 'login' : 'email'}
 					textLabel="Email"
 					placeholder="Email"
+					stateStyle={
+						errors?.login || errors?.email ? 'error' : 'default'
+					}
+					helper={errors?.login || errors?.email}
 				/>
+				{typeForm === 'reg' && (
+					<>
+						<InputBase
+							value={value?.firstName || ''}
+							onChange={onChange}
+							name="firstName"
+							textLabel="Имя"
+							placeholder="Имя"
+							stateStyle={errors?.firstName ? 'error' : 'default'}
+							helper={errors?.firstName}
+						/>
+						<InputBase
+							value={value?.lastName || ''}
+							onChange={onChange}
+							name="lastName"
+							textLabel="Фамилия"
+							placeholder="Фамилия"
+							stateStyle={errors?.lastName ? 'error' : 'default'}
+							helper={errors?.lastName}
+						/>
+						<InputBase
+							value={value?.phone || ''}
+							onChange={onChange}
+							name="phone"
+							textLabel="Телефон"
+							placeholder="Телефон"
+							stateStyle={errors?.phone ? 'error' : 'default'}
+							helper={errors?.phone}
+						/>
+					</>
+				)}
 				<InputBase
 					value={value.password || ''}
 					onChange={onChange}
 					type={inputPasswordType}
 					name="password"
-					helper="Как минимум 8 символов"
+					stateStyle={errors?.password ? 'error' : 'default'}
+					helper={errors?.password || 'Как минимум 8 символов'}
 					placeholder="Пароль"
 					textLabel="Пароль"
 					rightIcon={iconEye}
