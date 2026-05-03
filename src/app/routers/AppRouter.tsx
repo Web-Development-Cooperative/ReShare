@@ -11,6 +11,7 @@ const RegPage = lazy(() => import('@pages/registration'));
 const LandingPage = lazy(() => import('@pages/landing'));
 const ProfilePage = lazy(() => import('@pages/profile'));
 const MessagesPage = lazy(() => import('@pages/messages'));
+const ChatPage = lazy(() => import('@pages/chat'));
 const AdsPage = lazy(() => import('@pages/advertisements'));
 const AdPage = lazy(() => import('@pages/ad'));
 const NewPublicationPage = lazy(() => import('@pages/newPublication'));
@@ -125,6 +126,16 @@ const router = createBrowserRouter([
 						<MessagesPage />
 					</Limbo>
 				),
+				children: [
+					{
+						path: ROUTES.CHAT,
+						element: (
+							<Limbo>
+								<ChatPage />
+							</Limbo>
+						),
+					},
+				],
 			},
 			{
 				path: ROUTES.NEW_PUBLICATION,
