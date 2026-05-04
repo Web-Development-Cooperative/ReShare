@@ -9,10 +9,15 @@ import {
 	UIText14SB,
 } from '@shared/ui/paragraphs';
 
+import { useRatingPopup } from '../../lib/useRatingPopup.hook';
 import styles from './RatingPopup.module.css';
-import { RATING } from '../../lib/profilePage.consts';
 
-const RatingPopup = () => {
+import type { RatingPopupProps } from '../../model/ratingPopup.types';
+
+const RatingPopup: RatingPopupProps = ({ rating, countItems, reviewCount }) => {
+	const { reviewsData } = useRatingPopup();
+	console.log(reviewsData);
+	// TODO: удалить моковые данные и юзать реальные из хука
 	return (
 		<div className={styles['rating-popup']}>
 			<div className={styles.header}>
@@ -24,9 +29,10 @@ const RatingPopup = () => {
 			<div className={styles.body}>
 				<div className={styles.data}>
 					<div className={styles['overall-rating-descr']}>
-						<Rating rating={RATING} size="large" right />
+						<Rating rating={rating} size="large" right />
 						<Paragraph16Reg className={styles['rating-descr']}>
-							24 отзыва за 12 завершенных сделок
+							{reviewCount} отзыва за {countItems} завершенных
+							сделок
 						</Paragraph16Reg>
 					</div>
 					<ButtonBase color="filled">

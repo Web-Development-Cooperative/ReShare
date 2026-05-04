@@ -6,7 +6,7 @@ import { PaddingWrapper } from '@shared/ui/wrappers';
 import { InputBase } from '@shared/ui/inputs';
 
 import styles from './EditProfilePopup.module.css';
-import { PHONES } from '../../lib/profilePage.consts';
+import { PHONES } from '../../model/profilePage.consts';
 
 const EditProfilePopup = () => {
 	return (
