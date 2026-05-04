@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Outlet } from 'react-router';
 
 import { clsx } from 'clsx';
@@ -17,15 +16,22 @@ import { NavLinkBase } from '@shared/ui/links';
 import { BasePopup } from '@shared/ui/popups';
 import { BgBorderDefault } from '@shared/ui/wrappers';
 
-import { LIST_INFO, NAV, RATING } from '../lib/profilePage.consts';
+import { NAV } from '../model/profilePage.consts';
 import { EditProfilePopup } from './editProfilePopup/EditProfilePopup';
-import styles from './ProfilePage.module.css';
 import { RatingPopup } from './ratingPopup/RatingPopup';
 import { SecondaryInfoCard } from './secondaryInfoCard/SecondaryInfoCard';
+import { useProfilePage } from '../lib/useProfilePage.hook';
+import styles from './ProfilePage.module.css';
 
 const ProfilePage = () => {
-	const [openReview, setOpenReview] = useState(false);
-	const [openEditProfile, setOpenEditProfile] = useState(false);
+	const {
+		data,
+		openReview,
+		openEditProfile,
+		ecoMetrics,
+		setOpenEditProfile,
+		setOpenReview,
+	} = useProfilePage();
 
 	return (
 		<>
@@ -34,7 +40,11 @@ const ProfilePage = () => {
 					<Avatar shape="square" size="huge" src={img} />
 					<div className={styles['main-info']}>
 						<div className={styles['row-top']}>
-							<h2>Аполлинария Владимировна</h2>
+							<h2>
+								{data
+									? `${data.firstName} ${data.lastName}`
+									: 'Аполлинария Владимировна'}
+							</h2>
 							<div className={styles['buttons-container']}>
 								<ButtonBase
 									color="brand"
@@ -49,38 +59,47 @@ const ProfilePage = () => {
 								</ButtonBase>
 								<ButtonBase color="outline">
 									<VectorShare />
-									{/* <UIText14SB>Поделиться профилем</UIText14SB> */}
 								</ButtonBase>
 							</div>
 						</div>
 						<div className={styles['row-bottom']}>
-							<Rating rating={RATING} left size="medium" />
+							<Rating
+								rating={data?.rating ?? 0}
+								left
+								size="medium"
+							/>
 							<button onClick={() => setOpenReview((cv) => !cv)}>
 								<UIText14Reg className={styles['reviews']}>
-									24 отзыва
+									{data ? `${data.reviewCount}` : 0} отзыва
 								</UIText14Reg>
 							</button>
 							<UIText14Reg>•</UIText14Reg>
-							<Paragraph16Reg>На платформе с 2026</Paragraph16Reg>
+							<Paragraph16Reg>
+								На платформе с{' '}
+								{data
+									? `${data.createdAt.split('-')[0]}`
+									: '2026'}
+							</Paragraph16Reg>
 						</div>
 					</div>
 				</div>
 				<div className={styles['row-bottom-two']}>
-					<Rating rating={RATING} left size="medium" />
+					<Rating rating={data?.rating ?? 0} left size="medium" />
 					<button onClick={() => setOpenReview((cv) => !cv)}>
 						<UIText14Reg className={styles['reviews']}>
-							24 отзыва
+							{data ? `${data.reviewCount}` : 0} отзыва
 						</UIText14Reg>
 					</button>
 					<UIText14Reg>•</UIText14Reg>
-					<Paragraph16Reg>На платформе с 2026</Paragraph16Reg>
+					<Paragraph16Reg>
+						На платформе с{' '}
+						{data ? `${data.createdAt.split('-')[0]}` : '2026'}
+					</Paragraph16Reg>
 				</div>
 				<UniList
 					className={styles['secondary-info-container']}
-					items={LIST_INFO}
-					renderItem={(item) => (
-						<SecondaryInfoCard typeCard={item.id} />
-					)}
+					items={ecoMetrics}
+					renderItem={(item) => <SecondaryInfoCard metric={item} />}
 				/>
 				<BgBorderDefault colorType="surface-1" className="nav-panel">
 					<UniList
@@ -112,7 +131,11 @@ const ProfilePage = () => {
 			</div>
 			{openReview && (
 				<BasePopup setIsOpen={setOpenReview} withCross>
-					<RatingPopup />
+					<RatingPopup
+						rating={data?.rating ?? 0}
+						countItems={+ecoMetrics[1].data}
+						reviewCount={data?.reviewCount ?? 0}
+					/>
 				</BasePopup>
 			)}
 			{openEditProfile && (
