@@ -18,9 +18,11 @@ export interface ConversationCreatedDto {
 export interface ConversationDto {
   /** @format uuid */
   id: string;
-  participants: string[];
+  participants: ParticipantSummaryDto[];
+  counterparty?: ParticipantSummaryDto | null;
   /** @format uuid */
   listingId?: string | null;
+  listing?: ListingSummaryDto | null;
   lastMessage?: MessageDto | null;
   /** @format int32 */
   unreadCount: number;
@@ -52,6 +54,12 @@ export interface CreateConversationDto {
   initialMessage?: string | null;
 }
 
+export interface ListingSummaryDto {
+  /** @format uuid */
+  id: string;
+  title: string;
+}
+
 export interface MessageDto {
   /** @format uuid */
   id: string;
@@ -77,6 +85,14 @@ export interface MessageDtoPagedList {
   totalPages: number;
   hasPreviousPage: boolean;
   hasNextPage: boolean;
+}
+
+export interface ParticipantSummaryDto {
+  /** @format uuid */
+  id: string;
+  firstName: string;
+  lastName: string;
+  avatarUrl?: string | null;
 }
 
 export interface ProblemDetails {

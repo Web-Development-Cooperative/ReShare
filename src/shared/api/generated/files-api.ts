@@ -12,21 +12,21 @@
 
 export interface FileRecordDto {
   /** @format uuid */
-  id?: string;
-  originalName?: string | null;
-  storageKey?: string | null;
-  url?: string | null;
-  contentType?: string | null;
+  id: string;
+  originalName: string;
+  storageKey: string;
+  url: string;
+  contentType: string;
   /** @format int64 */
-  sizeBytes?: number;
+  sizeBytes: number;
   /** @format uuid */
-  uploadedBy?: string;
+  uploadedBy: string;
   /** @format date-time */
-  createdAt?: string;
+  createdAt: string;
 }
 
 export interface FileUrlDto {
-  url?: string | null;
+  url: string;
 }
 
 export interface ProblemDetails {

@@ -110,7 +110,7 @@ const useAdPage = () => {
 									}
 									navigate(
 										ROUTES.CHAT.replace(
-											':conversationId',
+											':chatId',
 											conversationId,
 										),
 									);

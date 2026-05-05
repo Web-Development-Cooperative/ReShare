@@ -21,16 +21,15 @@ const LinkChat: FC<Record<'item', ConversationDto>> = ({ item }) => {
 				size="large"
 				statusDot={true}
 				src={
-					// item.participants.find((p) => p.id !== user?.id)
-					// 	?.avatarUrl || 'asdf'
-					item.participants.find((p) => p !== user?.id) || 'asdf'
+					item.participants.find((p) => p.id !== user?.id)
+						?.avatarUrl || 'asdf'
 				}
 			/>
 			<div className={styles.content}>
 				<h3>
-					{item.participants.find((p) => p !== user?.id) || 'Unknown'}
+					{`${item.participants.find((p) => p.id !== user?.id)?.firstName} ${item.participants.find((p) => p.id !== user?.id)?.lastName}`}
 				</h3>
-				<Paragraph16Reg>{item.listingId}</Paragraph16Reg>
+				<Paragraph16Reg>{item.listing?.title}</Paragraph16Reg>
 			</div>
 			<Tag
 				tagStyle="subtle"

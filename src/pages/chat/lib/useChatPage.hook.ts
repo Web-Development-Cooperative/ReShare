@@ -29,7 +29,7 @@ const useChatPage = () => {
 	const { data: otherProfile } = useGetUserProfileQuery(
 		allMessage?.items
 			.find((item) => item.id === chatId)
-			?.participants.find((p) => p !== myProfile?.id) || '42',
+			?.participants.find((p) => p.id !== myProfile?.id)?.id || '42',
 		{
 			skip: !myProfile?.id || !chatId || !allMessage?.items?.length,
 		},
@@ -43,7 +43,8 @@ const useChatPage = () => {
 
 	const listing = useMemo(() => {
 		if (!allMessage?.items?.length) return '';
-		return allMessage.items.find((chat) => chat.id === chatId)?.listingId;
+		return allMessage.items.find((chat) => chat.id === chatId)?.listing
+			?.title;
 	}, [allMessage, chatId]);
 
 	const messages: Array<Message> = useMemo(() => {
@@ -130,7 +131,10 @@ const useChatPage = () => {
 		hub.onMessageReceived(onMessage);
 
 		return () => {
-			hub.offHandler('messagereceived', onMessage as (...args: unknown[]) => void);
+			hub.offHandler(
+				'messagereceived',
+				onMessage as (...args: unknown[]) => void,
+			);
 			hub.leaveConversation(chatId);
 		};
 	}, [chatId, dispatch, markAsRead, myProfile?.id]);

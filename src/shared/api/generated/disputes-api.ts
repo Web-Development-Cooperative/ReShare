@@ -11,56 +11,56 @@
  */
 
 export interface AddEvidenceRequest {
-  description?: string | null;
+  description: string;
   fileUrls?: string[] | null;
 }
 
 export interface DisputeCreatedDto {
   /** @format uuid */
-  disputeId?: string;
+  disputeId: string;
 }
 
 export interface DisputeDto {
   /** @format uuid */
-  id?: string;
+  id: string;
   /** @format uuid */
-  transactionId?: string;
+  transactionId: string;
   /** @format uuid */
-  initiatorId?: string;
+  initiatorId: string;
   /** @format uuid */
-  respondentId?: string;
-  reason?: string | null;
-  status?: string | null;
+  respondentId: string;
+  reason: string;
+  status: string;
   resolution?: string | null;
   /** @format date-time */
-  createdAt?: string;
+  createdAt: string;
   /** @format date-time */
   resolvedAt?: string | null;
-  evidences?: EvidenceDto[] | null;
+  evidences: EvidenceDto[];
 }
 
 export interface EvidenceCreatedDto {
   /** @format uuid */
-  evidenceId?: string;
+  evidenceId: string;
 }
 
 export interface EvidenceDto {
   /** @format uuid */
-  id?: string;
+  id: string;
   /** @format uuid */
-  submittedBy?: string;
-  description?: string | null;
-  fileUrls?: string[] | null;
+  submittedBy: string;
+  description: string;
+  fileUrls: string[];
   /** @format date-time */
-  submittedAt?: string;
+  submittedAt: string;
 }
 
 export interface OpenDisputeRequest {
   /** @format uuid */
-  transactionId?: string;
+  transactionId: string;
   /** @format uuid */
-  respondentId?: string;
-  reason?: string | null;
+  respondentId: string;
+  reason: string;
 }
 
 export interface ProblemDetails {
@@ -74,7 +74,7 @@ export interface ProblemDetails {
 }
 
 export interface ResolveDisputeRequest {
-  resolution?: string | null;
+  resolution: string;
 }
 
 export interface DisputesListParams {

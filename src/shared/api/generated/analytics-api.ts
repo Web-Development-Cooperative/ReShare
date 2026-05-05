@@ -12,37 +12,37 @@
 
 export interface CategoryStatsDto {
   /** @format uuid */
-  categoryId?: string;
-  categoryName?: string | null;
+  categoryId: string;
+  categoryName: string;
   /** @format int32 */
-  listingsCount?: number;
+  listingsCount: number;
   /** @format int32 */
-  transactionsCount?: number;
+  transactionsCount: number;
 }
 
 export interface CityStatsDto {
-  city?: string | null;
+  city: string;
   /** @format int32 */
-  listingsCount?: number;
+  listingsCount: number;
   /** @format int32 */
-  usersCount?: number;
+  usersCount: number;
   /** @format double */
-  co2SavedKg?: number;
+  co2SavedKg: number;
 }
 
 export interface EcoPlatformStatsDto {
   /** @format int64 */
-  totalItemsTransferred?: number;
+  totalItemsTransferred: number;
   /** @format double */
-  totalCo2SavedKg?: number;
+  totalCo2SavedKg: number;
   /** @format double */
-  totalWasteSavedKg?: number;
+  totalWasteSavedKg: number;
   /** @format int32 */
-  activeListings?: number;
+  activeListings: number;
   /** @format int32 */
-  registeredUsers?: number;
+  registeredUsers: number;
   /** @format date-time */
-  lastUpdated?: string;
+  lastUpdated: string;
 }
 
 export type AnalyticsEcoStatsListData = EcoPlatformStatsDto;

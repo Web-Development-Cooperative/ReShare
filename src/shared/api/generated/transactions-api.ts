@@ -18,10 +18,10 @@ export enum TransactionType {
 
 export interface CreateTransactionRequest {
   /** @format uuid */
-  listingId?: string;
+  listingId: string;
   /** @format uuid */
-  donorId?: string;
-  type?: TransactionType;
+  donorId: string;
+  type: TransactionType;
   notes?: string | null;
 }
 
@@ -37,18 +37,18 @@ export interface ProblemDetails {
 
 export interface TransactionDto {
   /** @format uuid */
-  id?: string;
+  id: string;
   /** @format uuid */
-  listingId?: string;
+  listingId: string;
   /** @format uuid */
-  donorId?: string;
+  donorId: string;
   /** @format uuid */
-  recipientId?: string;
-  type?: string | null;
-  status?: string | null;
+  recipientId: string;
+  type: string;
+  status: string;
   notes?: string | null;
   /** @format date-time */
-  createdAt?: string;
+  createdAt: string;
   /** @format date-time */
   updatedAt?: string | null;
   /** @format date-time */
@@ -56,17 +56,17 @@ export interface TransactionDto {
 }
 
 export interface TransactionDtoPagedList {
-  items?: TransactionDto[] | null;
+  items: TransactionDto[];
   /** @format int32 */
-  totalCount?: number;
+  totalCount: number;
   /** @format int32 */
-  pageNumber?: number;
+  pageNumber: number;
   /** @format int32 */
-  pageSize?: number;
+  pageSize: number;
   /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
+  totalPages: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
 }
 
 export interface TransactionsListParams {
