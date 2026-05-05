@@ -42,6 +42,8 @@
 	align-items: stretch;
 	justify-content: flex-start;
 	row-gap: 16px;
+
+	margin-top: auto;
 }
 .footer-actions {
 	display: flex;

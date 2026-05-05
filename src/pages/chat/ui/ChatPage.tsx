@@ -14,6 +14,8 @@ const ChatPage = () => {
 	const {
 		messages,
 		inputValue,
+		otherProfile,
+		listing,
 		changeValue,
 		handleKeyDown,
 		handleSend,
@@ -25,12 +27,18 @@ const ChatPage = () => {
 				<Avatar
 					shape="square"
 					size="large"
-					statusDot={CHAT_INTERLOCUTOR.online}
-					src={CHAT_INTERLOCUTOR.img}
+					src={otherProfile?.avatarUrl || CHAT_INTERLOCUTOR.img}
+					statusDot
 				/>
 				<div className={styles['header-info']}>
-					<UIText14SB>{CHAT_INTERLOCUTOR.fullName}</UIText14SB>
-					<UIText12Reg>{CHAT_INTERLOCUTOR.subject}</UIText12Reg>
+					<UIText14SB>
+						{otherProfile?.firstName && otherProfile.lastName
+							? `${otherProfile?.firstName} ${otherProfile?.lastName}`
+							: CHAT_INTERLOCUTOR.fullName}
+					</UIText14SB>
+					<UIText12Reg>
+						{listing || CHAT_INTERLOCUTOR.subject}
+					</UIText12Reg>
 				</div>
 				<Tag
 					tagStyle="filled"

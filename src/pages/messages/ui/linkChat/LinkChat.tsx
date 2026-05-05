@@ -13,7 +13,7 @@ const LinkChat: FC<Record<'item', ConversationDto>> = ({ item }) => {
 	const { user } = useMessagesPage();
 	return (
 		<LinkBase
-			to={ROUTES.CHAT.replace(':userId', item.id.toString())}
+			to={ROUTES.CHAT.replace(':chatId', item.id.toString())}
 			className={styles.chat}
 		>
 			<Avatar
