@@ -1,4 +1,5 @@
 export {
+	messagesApi,
 	useGetConversationsQuery,
 	useCreateConversationMutation,
 	useGetMessagesQuery,
