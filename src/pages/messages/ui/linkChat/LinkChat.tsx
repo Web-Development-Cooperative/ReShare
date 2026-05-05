@@ -3,26 +3,33 @@ import { Paragraph16Reg, UIText14Medium } from '@shared/ui/paragraphs';
 import { LinkBase } from '@shared/ui/links';
 import { ROUTES } from '@shared/model/routes';
 
+import { useMessagesPage } from '../../lib/useMessagesPage.hook';
 import styles from './LinkChat.module.css';
 
 import type { FC } from 'react';
-import type { Message } from '../../model/messagesPage.types';
+import type { ConversationDto } from '@shared/api/generated/messaging-api';
 
-const LinkChat: FC<Record<'item', Message>> = ({ item }) => {
+const LinkChat: FC<Record<'item', ConversationDto>> = ({ item }) => {
+	const { user } = useMessagesPage();
 	return (
 		<LinkBase
-			to={ROUTES.CHAT.replace(':userId', item.id.toString())}
+			to={ROUTES.CHAT.replace(':chatId', item.id.toString())}
 			className={styles.chat}
 		>
 			<Avatar
 				shape="square"
 				size="large"
 				statusDot={true}
-				src={item.img}
+				src={
+					item.participants.find((p) => p.id !== user?.id)
+						?.avatarUrl || 'asdf'
+				}
 			/>
 			<div className={styles.content}>
-				<h3>{item.fullName}</h3>
-				<Paragraph16Reg>{item.descr}</Paragraph16Reg>
+				<h3>
+					{`${item.participants.find((p) => p.id !== user?.id)?.firstName} ${item.participants.find((p) => p.id !== user?.id)?.lastName}`}
+				</h3>
+				<Paragraph16Reg>{item.listing?.title}</Paragraph16Reg>
 			</div>
 			<Tag
 				tagStyle="subtle"
@@ -30,7 +37,7 @@ const LinkChat: FC<Record<'item', Message>> = ({ item }) => {
 				size="medium"
 				className={styles.tag}
 			>
-				<UIText14Medium>{item.missed}</UIText14Medium>
+				<UIText14Medium>{item.unreadCount}</UIText14Medium>
 			</Tag>
 		</LinkBase>
 	);

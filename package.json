@@ -13,6 +13,7 @@
 		"prepare": "husky"
 	},
 	"dependencies": {
+		"@microsoft/signalr": "^10.0.0",
 		"@reduxjs/toolkit": "^2.11.2",
 		"clsx": "^2.1.1",
 		"react": "^19.2.0",

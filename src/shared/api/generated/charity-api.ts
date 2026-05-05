@@ -12,72 +12,72 @@
 
 export interface CharityRequestDto {
   /** @format uuid */
-  id?: string;
+  id: string;
   /** @format uuid */
-  organizationId?: string;
-  title?: string | null;
-  description?: string | null;
-  status?: string | null;
-  requestedItems?: RequestedItemDto[] | null;
+  organizationId: string;
+  title: string;
+  description: string;
+  status: string;
+  requestedItems: RequestedItemDto[];
   /** @format date-time */
   deadlineDate?: string | null;
   /** @format date-time */
-  createdAt?: string;
+  createdAt: string;
 }
 
 export interface CharityRequestDtoPagedList {
-  items?: CharityRequestDto[] | null;
+  items: CharityRequestDto[];
   /** @format int32 */
-  totalCount?: number;
+  totalCount: number;
   /** @format int32 */
-  pageNumber?: number;
+  pageNumber: number;
   /** @format int32 */
-  pageSize?: number;
+  pageSize: number;
   /** @format int32 */
-  totalPages?: number;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
+  totalPages: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
 }
 
 export interface CreateCharityRequestDto {
-  title?: string | null;
-  description?: string | null;
+  title: string;
+  description: string;
   /** @format date-time */
   deadlineDate?: string | null;
-  items?: CreateRequestedItemDto[] | null;
+  items: CreateRequestedItemDto[];
 }
 
 export interface CreateOrganizationDto {
-  name?: string | null;
-  description?: string | null;
+  name: string;
+  description: string;
   legalDocumentUrl?: string | null;
 }
 
 export interface CreateRequestedItemDto {
   /** @format uuid */
-  categoryId?: string;
-  categoryName?: string | null;
+  categoryId: string;
+  categoryName: string;
   /** @format int32 */
-  quantityNeeded?: number;
-  condition?: string | null;
+  quantityNeeded: number;
+  condition: string;
 }
 
 export interface OrganizationCreatedDto {
   /** @format uuid */
-  orgId?: string;
+  orgId: string;
 }
 
 export interface OrganizationDto {
   /** @format uuid */
-  id?: string;
+  id: string;
   /** @format uuid */
-  userId?: string;
-  name?: string | null;
-  description?: string | null;
-  verificationStatus?: string | null;
+  userId: string;
+  name: string;
+  description: string;
+  verificationStatus: string;
   legalDocumentUrl?: string | null;
   /** @format date-time */
-  createdAt?: string;
+  createdAt: string;
 }
 
 export interface ProblemDetails {
@@ -92,15 +92,15 @@ export interface ProblemDetails {
 
 export interface RequestedItemDto {
   /** @format uuid */
-  id?: string;
+  id: string;
   /** @format uuid */
-  categoryId?: string;
-  categoryName?: string | null;
+  categoryId: string;
+  categoryName: string;
   /** @format int32 */
-  quantityNeeded?: number;
+  quantityNeeded: number;
   /** @format int32 */
-  quantityReceived?: number;
-  condition?: string | null;
+  quantityReceived: number;
+  condition: string;
 }
 
 export interface CharityRequestsListParams {

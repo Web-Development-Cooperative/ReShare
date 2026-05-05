@@ -6,11 +6,12 @@ import { InputBase } from '@shared/ui/inputs';
 import { UniList } from '@shared/ui/others';
 import { BgBorderDefault, PaddingWrapper } from '@shared/ui/wrappers';
 
-import { MESSAGE_ARRAY } from '../lib/messagesPage.consts';
 import { LinkChat } from './linkChat/LinkChat';
+import { useMessagesPage } from '../lib/useMessagesPage.hook';
 import styles from './MessagesPage.module.css';
 
 const MessagesPage = () => {
+	const { messages } = useMessagesPage();
 	return (
 		<div className={styles['messages-page']}>
 			<div className={styles['title-container']}>
@@ -30,7 +31,7 @@ const MessagesPage = () => {
 					</PaddingWrapper>
 					<UniList
 						className={styles.chats}
-						items={MESSAGE_ARRAY}
+						items={messages || []}
 						renderItem={(item) => <LinkChat item={item} />}
 					/>
 				</BgBorderDefault>

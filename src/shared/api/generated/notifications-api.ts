@@ -12,24 +12,24 @@
 
 export interface NotificationDto {
   /** @format uuid */
-  id?: string;
+  id: string;
   /** @format uuid */
-  userId?: string;
-  type?: string | null;
-  title?: string | null;
-  body?: string | null;
-  isRead?: boolean;
+  userId: string;
+  type: string;
+  title: string;
+  body: string;
+  isRead: boolean;
   payload?: any;
   /** @format date-time */
-  createdAt?: string;
+  createdAt: string;
   /** @format date-time */
   readAt?: string | null;
 }
 
 export interface NotificationsPageDto {
-  items?: NotificationDto[] | null;
+  items: NotificationDto[];
   /** @format int32 */
-  unreadCount?: number;
+  unreadCount: number;
 }
 
 export interface ProblemDetails {
