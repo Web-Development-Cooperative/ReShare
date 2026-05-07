@@ -10,7 +10,9 @@ const useRenderStepOne = ({
 	errors,
 	setErrors,
 }: ComponentProps<RenderStepOneProps>) => {
-	const { data } = useGetCategoriesQuery();
+	const { data } = useGetCategoriesQuery(undefined, {
+		refetchOnMountOrArgChange: false,
+	});
 	const optionsCategory = data?.map((c) => ({
 		value: c.id || '',
 		label: c.name || '',

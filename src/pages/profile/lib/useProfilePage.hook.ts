@@ -5,7 +5,9 @@ import { useGetMyProfileQuery } from '@entities/users';
 import type { Metric } from '../model/profilePage.types';
 
 const useProfilePage = () => {
-	const { data } = useGetMyProfileQuery();
+	const { data } = useGetMyProfileQuery(undefined, {
+		refetchOnMountOrArgChange: false,
+	});
 
 	const [openReview, setOpenReview] = useState(false);
 	const [openEditProfile, setOpenEditProfile] = useState(false);

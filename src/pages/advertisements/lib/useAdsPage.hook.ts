@@ -23,14 +23,34 @@ const useAdsPage = () => {
 		return result;
 	}, [searchParams]);
 
-	const { data, isLoading, isError } = useGetListingsQuery({
-		categoryId: filterState['category'] ?? '',
-		condition: filterState['condition'] ?? '',
-		transferType: filterState['type'] ?? '',
-		pageNumber: 1,
-		pageSize: 50,
+	const searchQuery = searchParams.get('search') ?? '';
+
+	const onSearchChange = (value: string) => {
+		setSearchParams((prev) => {
+			const next = new URLSearchParams(prev);
+			if (value) {
+				next.set('search', value.toLowerCase());
+			} else {
+				next.delete('search');
+			}
+			return next;
+		});
+	};
+
+	const { data, isLoading, isError } = useGetListingsQuery(
+		{
+			categoryId: filterState['category'] ?? '',
+			condition: filterState['condition'] ?? '',
+			transferType: filterState['type'] ?? '',
+			searchQuery: searchQuery || undefined,
+			pageNumber: 1,
+			pageSize: 50,
+		},
+		{ refetchOnMountOrArgChange: false },
+	);
+	const { data: categoriesData } = useGetCategoriesQuery(undefined, {
+		refetchOnMountOrArgChange: false,
 	});
-	const { data: categoriesData } = useGetCategoriesQuery();
 
 	const onChangeOption = (val: string, filterType: Record<'id', string>) => {
 		setSearchParams((prev) => {
@@ -114,6 +134,8 @@ const useAdsPage = () => {
 		allFilters,
 		filterState,
 		onChangeOption,
+		searchQuery,
+		onSearchChange,
 	};
 };
 
