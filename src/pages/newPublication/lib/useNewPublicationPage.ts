@@ -114,7 +114,9 @@ const useNewPublicationPage = () => {
 			transferType: formData.transferType,
 			transferMethod: formData.transferMethod,
 			city: formData.location?.split(',')[0] || '',
-			weightGrams: formData.weightGrams ? +formData.weightGrams : 0,
+			weightGrams: formData.weightGrams
+				? +formData.weightGrams * 1000
+				: 0,
 			district: formData.district,
 			latitude: formData.latitude ?? null,
 			longitude: formData.longitude ?? null,
@@ -125,15 +127,17 @@ const useNewPublicationPage = () => {
 			const { id } = await createListing(dto).unwrap();
 
 			if (formData.photos && formData.photos.length > 0) {
-				const uploadPromises = formData.photos.map(async (file, index) => {
-					const formDataFile = new FormData();
-					formDataFile.append('file', file);
-					const { url } = await uploadFile(formDataFile).unwrap();
-					await addListingPhoto({
-						id,
-						photo: { url, displayOrder: index },
-					}).unwrap();
-				});
+				const uploadPromises = formData.photos.map(
+					async (file, index) => {
+						const formDataFile = new FormData();
+						formDataFile.append('file', file);
+						const { url } = await uploadFile(formDataFile).unwrap();
+						await addListingPhoto({
+							id,
+							photo: { url, displayOrder: index },
+						}).unwrap();
+					},
+				);
 				await Promise.all(uploadPromises);
 			}
 

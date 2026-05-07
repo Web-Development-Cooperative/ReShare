@@ -16,7 +16,6 @@ import map from '@shared/assets/img/Map.jpg';
 import {
 	img,
 	imgAlt,
-	metrics,
 	title,
 	tags,
 	description,
@@ -33,7 +32,7 @@ import { useAdPage } from '../lib/useAdPage.hooks';
 import styles from './AdPage.module.css';
 
 const AdPage = () => {
-	const { ad: data, donor, settingsButtons } = useAdPage();
+	const { ad: data, donor, allMetrics, settingsButtons } = useAdPage();
 
 	return (
 		<div className={styles.ad}>
@@ -92,7 +91,7 @@ const AdPage = () => {
 						</div>
 						<UniList
 							className={styles['goal-metrics-container']}
-							items={metrics}
+							items={allMetrics}
 							renderItem={(item) => (
 								<div className={styles['metrics-container']}>
 									<Heading24>
