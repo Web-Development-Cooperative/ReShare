@@ -25,7 +25,7 @@ const useAdsPage = () => {
 
 	const searchQuery = searchParams.get('search') ?? '';
 	const currentPage = parseInt(searchParams.get('page') ?? '1', 10);
-	const PAGE_SIZE = 1;
+	const PAGE_SIZE = 20;
 
 	const onSearchChange = (value: string) => {
 		setSearchParams((prev) => {

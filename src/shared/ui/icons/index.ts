@@ -31,3 +31,4 @@ export { Handshake } from './handshake/Handshake';
 export { Team } from './team/Team';
 export { Garage } from './garage/Garage';
 export { Hanger } from './hanger/Hanger';
+export { ArrowDown } from './arrowDown/ArrowDown';
