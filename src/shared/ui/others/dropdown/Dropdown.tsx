@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { InputBase } from '@shared/ui/inputs/inputBase/InputBase';
-import { UniList } from '@shared/ui/others';
 import { UIText14Medium } from '@shared/ui/paragraphs';
+import { UniList } from '@shared/ui/others';
+import { ArrowDown } from '@shared/ui/icons';
 
 import useDropdown, { type Option } from './lib/useDropdown';
 import styles from './Dropdown.module.css';
@@ -67,7 +68,7 @@ export const Dropdown: React.FC<Props> = ({
 				disabled={disabled}
 				rightIcon={
 					renderValueText() === '' ? (
-						'V'
+						<ArrowDown />
 					) : (
 						<p
 							onClick={(e) => {
