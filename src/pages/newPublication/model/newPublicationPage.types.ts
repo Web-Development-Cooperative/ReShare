@@ -6,7 +6,6 @@ import type {
 } from '@shared/api/generated/listings-api';
 
 type ListingFormData = {
-	// Шаг 1
 	transferType: TransferType;
 	photos: File[];
 	title: string;
@@ -14,8 +13,8 @@ type ListingFormData = {
 	condition: ItemCondition;
 	description: string;
 	tags: string[];
+	weightGrams: string;
 
-	// Шаг 2
 	location: string;
 	district: string;
 	latitude: number | null;
