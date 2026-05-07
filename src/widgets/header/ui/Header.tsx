@@ -51,7 +51,9 @@ const Header = () => {
 						</ButtonBase>
 					</LinkBase>
 				</PaddingWrapper>
-				<Histogram />
+				<LinkBase to={ROUTES.LEADERBOARD}>
+					<Histogram />
+				</LinkBase>
 				<Heart />
 				<Bell />
 				<LinkBase to={ROUTES.MESSAGES}>
@@ -86,7 +88,7 @@ const Header = () => {
 				<div className={styles['mobile-menu-content']}>
 					<nav className={styles['mobile-nav']}>
 						<LinkBase
-							to="#"
+							to={ROUTES.LEADERBOARD}
 							onClick={handleLinkClick}
 							className={styles['mobile-link']}
 						>

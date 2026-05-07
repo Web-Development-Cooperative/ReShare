@@ -26,3 +26,8 @@ export { Apple } from './apple/Apple';
 export { Check } from './check/Check';
 export { Camera } from './camera/Camera';
 export { VectorShare } from './vectorShare/VectorShare';
+export { Users } from './users/Users';
+export { Handshake } from './handshake/Handshake';
+export { Team } from './team/Team';
+export { Garage } from './garage/Garage';
+export { Hanger } from './hanger/Hanger';
