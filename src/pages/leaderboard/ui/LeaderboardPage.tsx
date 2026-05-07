@@ -14,7 +14,7 @@ import {
 	Team,
 } from '@shared/ui/icons';
 
-import { statCards, leaderboard } from '../model/leaderboardPage.consts';
+import { useLeaderboardPage } from '../lib/useLeaderboardPage.hook';
 import styles from './LeaderboardPage.module.css';
 
 import type { FC, ReactNode } from 'react';
@@ -32,6 +32,7 @@ const iconMap: Record<StatCard['icon'], ReactNode> = {
 };
 
 const LeaderboardPage: FC = () => {
+	const { cards, leaderboard, isLoading } = useLeaderboardPage();
 	return (
 		<div className={styles.page}>
 			<div className={styles.hero}>
@@ -52,7 +53,7 @@ const LeaderboardPage: FC = () => {
 
 			<UniList
 				className={styles.statsGrid}
-				items={statCards}
+				items={isLoading ? [] : cards}
 				renderItem={(card) => (
 					<BgBorderDefault
 						key={card.id}
