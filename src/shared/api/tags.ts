@@ -18,4 +18,6 @@ export const apiTags = {
 	Listings: 'Listings',
 	// Рейтинг
 	Leaderboard: 'Leaderboard',
+	// Файлы
+	Files: 'Files',
 } as const;

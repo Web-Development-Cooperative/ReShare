@@ -5,10 +5,13 @@ import {
 	useUpdateListingStatusMutation,
 } from '@entities/listings';
 import { useCreateConversationMutation } from '@entities/messages';
+import { useGetUserProfileQuery } from '@entities/users';
 import { notification } from '@shared/lib/toast.helper';
 import { ListingStatus } from '@shared/api/generated/listings-api';
 import { getCookieValue } from '@shared/api';
 import { ROUTES } from '@shared/model/routes';
+
+import { metrics } from '../model/adPage.consts';
 
 import type { SettingsButtonsType } from '../model/adPage.types';
 
@@ -43,6 +46,9 @@ const useAdPage = () => {
 	const navigate = useNavigate();
 
 	const { data, isLoading } = useGetListingQuery(adId || '123');
+	const { data: donor } = useGetUserProfileQuery(data?.donor?.id || '123', {
+		skip: !data?.donor?.id,
+	});
 
 	const isMyAd = data?.donor?.id === getMyId().myId;
 	const settingsButtons: SettingsButtonsType = isMyAd
@@ -135,10 +141,23 @@ const useAdPage = () => {
 				},
 			];
 
+	const allMetrics = metrics.map((metric) => {
+		const metricName = metric.id;
+		if (data?.[metricName as keyof typeof data]) {
+			return {
+				...metric,
+				value: String(data[metricName as keyof typeof data]),
+			};
+		}
+		return metric;
+	});
+
 	return {
 		ad: data,
+		donor,
 		isLoading,
 		settingsButtons,
+		allMetrics,
 	};
 };
 

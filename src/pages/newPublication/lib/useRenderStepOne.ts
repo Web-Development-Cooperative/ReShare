@@ -80,6 +80,13 @@ const useRenderStepOne = ({
 			setErrors((prev) => ({ ...prev, title: undefined }));
 		}
 	};
+	const updateWeight = (e: ChangeEvent<HTMLInputElement>) => {
+		if (isNaN(+e.target.value)) return;
+		updateFormData('weightGrams', e.target.value);
+		if (errors.weightGrams) {
+			setErrors((prev) => ({ ...prev, weightGrams: undefined }));
+		}
+	};
 	const updateCategory = (val: string | number) => {
 		updateFormData('categoryId', val.toString());
 		if (errors.categoryId) {
@@ -105,6 +112,7 @@ const useRenderStepOne = ({
 		removePhoto,
 		addPhoto,
 		updateTitle,
+		updateWeight,
 		updateCategory,
 		updateCondition,
 		updateDescription,

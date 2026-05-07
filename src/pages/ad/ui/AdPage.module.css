@@ -55,6 +55,7 @@
 	overflow-x: auto;
 }
 .mini-photo {
+	aspect-ratio: 7/6;
 	max-width: 76px;
 	max-height: 61px;
 	object-fit: cover;

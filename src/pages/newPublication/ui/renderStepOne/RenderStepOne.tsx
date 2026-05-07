@@ -25,6 +25,7 @@ const RenderStepOne: RenderStepOneProps = ({
 		removePhoto,
 		addPhoto,
 		updateTitle,
+		updateWeight,
 		optionsCategory,
 		updateCategory,
 		updateCondition,
@@ -96,6 +97,17 @@ const RenderStepOne: RenderStepOneProps = ({
 					onChange={updateTitle}
 					stateStyle={errors.title ? 'error' : 'default'}
 					helper={errors.title}
+				/>
+			</div>
+
+			<div className={styles.section}>
+				<h3>Вес(кг) *</h3>
+				<InputBase
+					placeholder="Введите вес вещи"
+					value={formData.weightGrams || ''}
+					onChange={updateWeight}
+					stateStyle={errors.weightGrams ? 'error' : 'default'}
+					helper={errors.weightGrams}
 				/>
 			</div>
 

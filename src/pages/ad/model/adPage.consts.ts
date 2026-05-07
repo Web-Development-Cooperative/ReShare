@@ -4,27 +4,27 @@ const img = 'https://placehold.co/600x400?text=Main+Ad';
 const imgAlt = 'Фото объявления';
 const metrics = [
 	{
-		id: 1,
-		title: 'кг',
-		value: '200',
+		id: 'wasteSavedG',
+		title: 'г',
+		value: '0',
 		description: 'Будет спасено от захоронения',
 	},
 	{
-		id: 2,
-		title: 'кг CO2',
-		value: '200',
+		id: 'co2SavedG',
+		title: 'г CO2',
+		value: '0',
 		description: 'Не попадет в атмосферу',
 	},
 	{
-		id: 3,
+		id: 'waterSavedM3',
 		title: 'м3 воды',
-		value: '46,3',
+		value: '0',
 		description: 'будет сохранено',
 	},
 	{
-		id: 4,
+		id: 'energySavedMWh',
 		title: 'МВт•ч энергии',
-		value: '3,5',
+		value: '0',
 		description: 'будет сэкономлено',
 	},
 ];
@@ -40,7 +40,6 @@ const transMethod = 'Доставка, личная встреча';
 const avatarUrl = avatar;
 const fio = 'Аполлинария В.';
 const rating = 4.3;
-const compTrans = 2010;
 const year = 2010;
 const location = 'Екатеринбург, Верх-Исетский район, ул. Татищева 94';
 const date = '20.10.2010';
@@ -57,7 +56,6 @@ export {
 	avatarUrl,
 	fio,
 	rating,
-	compTrans,
 	year,
 	location,
 	date,
