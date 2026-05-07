@@ -18,6 +18,7 @@ const NewPublicationPage = lazy(() => import('@pages/newPublication'));
 const MyAdsPage = lazy(() => import('@pages/myAds'));
 const MyApplicationPage = lazy(() => import('@pages/myApplication'));
 const MyArchivePage = lazy(() => import('@pages/myArchive'));
+const LeaderboardPage = lazy(() => import('@pages/leaderboard'));
 
 const router = createBrowserRouter([
 	{
@@ -142,6 +143,14 @@ const router = createBrowserRouter([
 				element: (
 					<Limbo>
 						<NewPublicationPage />
+					</Limbo>
+				),
+			},
+			{
+				path: ROUTES.LEADERBOARD,
+				element: (
+					<Limbo>
+						<LeaderboardPage />
 					</Limbo>
 				),
 			},

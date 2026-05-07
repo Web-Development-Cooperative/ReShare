@@ -14,6 +14,7 @@ const ROUTES = {
 	MESSAGES: '/messages',
 	CHAT: '/messages/:chatId',
 	NEW_PUBLICATION: '/new-publication',
+	LEADERBOARD: '/leaderboard',
 } as const;
 
 const ADAPTER_ROUTES_BREADCRUMBS = {
@@ -32,6 +33,7 @@ const ADAPTER_ROUTES_BREADCRUMBS = {
 	'/messages': 'Сообщения',
 	'/messages/:chatId': 'Чат',
 	'/new-publication': 'Новая публикация',
+	'/leaderboard': 'Эковклад сообщества',
 } as const;
 
 export { ROUTES, ADAPTER_ROUTES_BREADCRUMBS };
