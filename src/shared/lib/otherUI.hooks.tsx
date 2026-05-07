@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
+import { ROUTES } from '@shared/model/routes';
 import { EyeOpen, EyeSlash } from '@shared/ui/icons';
 
 import type { AuthFormProps } from '@shared/model/otherUI.types';
@@ -13,6 +14,9 @@ const useAuthForm = (typeForm: Parameters<AuthFormProps>[0]['typeForm']) => {
 
 	const title = typeForm === 'login' ? 'Войти в аккаунт' : 'Создайте аккаунт';
 	const textButton = typeForm === 'login' ? 'Войти' : 'Зарегистрироваться';
+	const textButtonSecondary =
+		typeForm === 'login' ? 'Зарегистрироваться' : 'Войти';
+	const link = typeForm === 'login' ? ROUTES.REG : ROUTES.LOGIN;
 	const inputPasswordType = inputPasswordState ? 'password' : 'text';
 
 	const iconEye = inputPasswordState ? (
@@ -20,7 +24,14 @@ const useAuthForm = (typeForm: Parameters<AuthFormProps>[0]['typeForm']) => {
 	) : (
 		<EyeOpen onClick={onChangeInputState} />
 	);
-	return { title, textButton, inputPasswordType, iconEye };
+	return {
+		title,
+		textButton,
+		textButtonSecondary,
+		inputPasswordType,
+		link,
+		iconEye,
+	};
 };
 
 const useAdCard = (img: string | File) => {

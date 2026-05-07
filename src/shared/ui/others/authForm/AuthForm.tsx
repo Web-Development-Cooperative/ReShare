@@ -4,6 +4,7 @@ import { Apple, Google } from '@shared/ui/icons';
 import { TextDivider } from '@shared/ui/others';
 import { InputBase } from '@shared/ui/inputs';
 import { useAuthForm } from '@shared/lib/otherUI.hooks';
+import { LinkBase } from '@shared/ui/links';
 
 import styles from './AuthForm.module.css';
 
@@ -17,8 +18,14 @@ const AuthForm: AuthFormProps = ({
 	onSubmit,
 	...props
 }) => {
-	const { title, textButton, inputPasswordType, iconEye } =
-		useAuthForm(typeForm);
+	const {
+		title,
+		textButton,
+		textButtonSecondary,
+		inputPasswordType,
+		link,
+		iconEye,
+	} = useAuthForm(typeForm);
 	return (
 		<div className={styles['auth-form']} {...props}>
 			<div className={styles['text-content']}>
@@ -90,6 +97,16 @@ const AuthForm: AuthFormProps = ({
 			<TextDivider label="Или" />
 
 			<div className={styles['social-buttons']}>
+				<LinkBase to={link}>
+					<ButtonBase
+						style={{ width: '100%' }}
+						onClick={() => {}}
+						color="outline"
+						size="large"
+					>
+						<UIText14SB>{textButtonSecondary}</UIText14SB>
+					</ButtonBase>
+				</LinkBase>
 				<ButtonBase color="outline">
 					<div>
 						<Google />
