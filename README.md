@@ -51,6 +51,7 @@ src/
 | `/profile/my-applications` | Мои заявки на вещи | Авторизованные |
 | `/profile/my-archive` | Архив завершённых объявлений | Авторизованные |
 | `/profile/my-eco` | Эковклад пользователя | Авторизованные |
+| `/leaderboard` | Общая эко-статистика сообщества | Авторизованные |
 
 Маршруты делятся на публичные (доступны гостям) и защищённые (требуют авторизации). Редирект управляется через `loader`-функции `authProvider` / `guestProvider` в React Router.
 
@@ -110,6 +111,7 @@ VITE_NOTIFICATIONS_SERVICE_PORT=5006
 VITE_CHARITY_SERVICE_PORT=5007
 VITE_DISPUTES_SERVICE_PORT=5008
 VITE_FILES_SERVICE_PORT=5009
+VITE_ANALYTICS_SERVICE_PORT=5010
 ```
 
 Установи зависимости:
