@@ -11,6 +11,8 @@ import {
 import { Heart, Leaf, Share } from '@shared/ui/icons';
 import { Avatar, Rating, UniList } from '@shared/ui/others';
 import { BgBorderDefault, BgIcone } from '@shared/ui/wrappers';
+import { InputBase, TextareaBase } from '@shared/ui/inputs';
+import { Dropdown } from '@shared/ui/others/dropdown/Dropdown';
 import map from '@shared/assets/img/Map.jpg';
 
 import {
@@ -32,7 +34,25 @@ import { useAdPage } from '../lib/useAdPage.hooks';
 import styles from './AdPage.module.css';
 
 const AdPage = () => {
-	const { ad: data, donor, allMetrics, settingsButtons } = useAdPage();
+	const {
+		ad: data,
+		donor,
+		allMetrics,
+		settingsButtons,
+		isEditMode,
+		editForm,
+		editErrors,
+		handleEditFormChange,
+		handleSaveEdit,
+		handleCancelEdit,
+		isSaving,
+	} = useAdPage();
+
+	const transferMethodOptions = [
+		{ value: 'InPerson', label: 'Лично' },
+		{ value: 'Delivery', label: 'Доставка' },
+		{ value: 'Both', label: 'Лично или доставка' },
+	];
 
 	return (
 		<div className={styles.ad}>
@@ -109,38 +129,120 @@ const AdPage = () => {
 					className={styles['second-data']}
 					colorType="surface-1"
 				>
-					<h1>{data?.title || title}</h1>
-					<UniList
-						className={styles['tags-list']}
-						items={
-							data?.tags?.length
-								? data?.tags?.map((tag) => ({
-										id: tag,
-										tag: tag,
-									}))
-								: tags
-						}
-						renderItem={(item) => (
-							<div className={styles['tag-container']}>
-								<div className={styles['tag']}>
-									<UIText14Medium>{item.tag}</UIText14Medium>
-								</div>
-								<UIText14Reg>•</UIText14Reg>
+					{isEditMode ? (
+						<>
+							<InputBase
+								textLabel="Название"
+								value={editForm.title}
+								onChange={(e) =>
+									handleEditFormChange(
+										'title',
+										e.target.value,
+									)
+								}
+								stateStyle={
+									editErrors.title ? 'error' : 'default'
+								}
+								helper={editErrors.title}
+							/>
+							<TextareaBase
+								textLabel="Описание"
+								value={editForm.description}
+								onChange={(e) =>
+									handleEditFormChange(
+										'description',
+										e.target.value,
+									)
+								}
+								stateStyle={
+									editErrors.description ? 'error' : 'default'
+								}
+								helper={editErrors.description}
+							/>
+							<div>
+								<UIText14SB>Способ передачи</UIText14SB>
+								<Dropdown
+									options={transferMethodOptions}
+									value={editForm.transferMethod}
+									onChange={(val) =>
+										handleEditFormChange(
+											'transferMethod',
+											val,
+										)
+									}
+									placeholder="Выберите способ"
+								/>
+								{editErrors.transferMethod && (
+									<UIText12Reg>
+										{editErrors.transferMethod}
+									</UIText12Reg>
+								)}
 							</div>
-						)}
-					/>
-					<div className={styles.description}>
-						<h3>Описание</h3>
-						<Paragraph16Reg>
-							{data?.description ?? description}
-						</Paragraph16Reg>
-					</div>
-					<div className={styles['trans-method']}>
-						<h3>Способы передачи</h3>
-						<Paragraph16Reg>
-							{data?.transferMethod ?? transMethod}
-						</Paragraph16Reg>
-					</div>
+							<InputBase
+								textLabel="Город"
+								value={editForm.city}
+								onChange={(e) =>
+									handleEditFormChange('city', e.target.value)
+								}
+								stateStyle={
+									editErrors.city ? 'error' : 'default'
+								}
+								helper={editErrors.city}
+							/>
+							<InputBase
+								textLabel="Вес (г)"
+								min={0}
+								value={editForm.weightGrams}
+								onChange={(e) => {
+									const value = e.target.value;
+									if (value.includes('.')) return;
+									if (isNaN(+value)) return;
+									handleEditFormChange('weightGrams', value);
+								}}
+								stateStyle={
+									editErrors.weightGrams ? 'error' : 'default'
+								}
+								helper={editErrors.weightGrams}
+							/>
+						</>
+					) : (
+						<>
+							<h1>{data?.title || title}</h1>
+							<UniList
+								className={styles['tags-list']}
+								items={
+									data?.tags?.length
+										? data?.tags?.map((tag) => ({
+												id: tag,
+												tag: tag,
+											}))
+										: tags
+								}
+								renderItem={(item) => (
+									<div className={styles['tag-container']}>
+										<div className={styles['tag']}>
+											<UIText14Medium>
+												{item.tag}
+											</UIText14Medium>
+										</div>
+										<UIText14Reg>•</UIText14Reg>
+									</div>
+								)}
+							/>
+							<div className={styles.description}>
+								<h3>Описание</h3>
+								<Paragraph16Reg>
+									{data?.description ?? description}
+								</Paragraph16Reg>
+							</div>
+							<div className={styles['trans-method']}>
+								<h3>Способы передачи</h3>
+								<Paragraph16Reg>
+									{data?.transferMethod ?? transMethod}
+								</Paragraph16Reg>
+							</div>
+						</>
+					)}
 					<BgBorderDefault
 						className={styles['avatar-container']}
 						colorType="white"
@@ -176,20 +278,41 @@ const AdPage = () => {
 						</div>
 					</BgBorderDefault>
 					<div className={styles['settings-buttons']}>
-						{settingsButtons.map((button) => (
-							<ButtonBase
-								key={button.id}
-								color={button.color}
-								onClick={button.onClick}
-							>
-								<UIText14SB>{button.text}</UIText14SB>
-							</ButtonBase>
-						))}
+						{isEditMode ? (
+							<>
+								<ButtonBase
+									color="brand"
+									onClick={handleSaveEdit}
+									disabled={isSaving}
+								>
+									<UIText14SB>Сохранить изменения</UIText14SB>
+								</ButtonBase>
+								<ButtonBase
+									color="shaded"
+									onClick={handleCancelEdit}
+									disabled={isSaving}
+								>
+									<UIText14SB>Отмена</UIText14SB>
+								</ButtonBase>
+							</>
+						) : (
+							settingsButtons.map((button) => (
+								<ButtonBase
+									key={button.id}
+									color={button.color}
+									onClick={button.onClick}
+								>
+									<UIText14SB>{button.text}</UIText14SB>
+								</ButtonBase>
+							))
+						)}
 					</div>
 					<div className={styles.location}>
 						<h3>Местоположение</h3>
 						<Paragraph16Reg>
-							{data?.location?.city || location}
+							{isEditMode
+								? editForm.city
+								: data?.location?.city || location}
 						</Paragraph16Reg>
 						<img src={map} />
 					</div>

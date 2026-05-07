@@ -8,4 +8,14 @@ type SettingsButtonType = {
 };
 type SettingsButtonsType = Array<SettingsButtonType>;
 
-export type { SettingsButtonsType };
+type EditFormData = {
+	title: string;
+	description: string;
+	transferMethod: string;
+	city: string;
+	weightGrams: string;
+};
+
+type EditFormErrors = Partial<Record<keyof EditFormData, string>>;
+
+export type { SettingsButtonsType, EditFormData, EditFormErrors };

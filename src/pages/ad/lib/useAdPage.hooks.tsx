@@ -1,19 +1,27 @@
 import { useNavigate, useParams } from 'react-router';
+import { useState } from 'react';
 
+import { useValidation } from '@shared/lib/useValidation.hook';
 import {
 	useGetListingQuery,
 	useUpdateListingStatusMutation,
+	useUpdateListingMutation,
 } from '@entities/listings';
 import { useCreateConversationMutation } from '@entities/messages';
 import { useGetUserProfileQuery } from '@entities/users';
 import { notification } from '@shared/lib/toast.helper';
-import { ListingStatus } from '@shared/api/generated/listings-api';
+import {
+	ItemCondition,
+	ListingStatus,
+	TransferMethod,
+	TransferType,
+} from '@shared/api/generated/listings-api';
 import { getCookieValue } from '@shared/api';
 import { ROUTES } from '@shared/model/routes';
 
 import { metrics } from '../model/adPage.consts';
 
-import type { SettingsButtonsType } from '../model/adPage.types';
+import type { SettingsButtonsType, EditFormData } from '../model/adPage.types';
 
 const getMyId = () => {
 	const token = getCookieValue('accessToken');
@@ -41,9 +49,30 @@ const getMyId = () => {
 
 const useAdPage = () => {
 	const [updateListingStatus] = useUpdateListingStatusMutation();
+	const [updateListing, { isLoading: isSaving }] = useUpdateListingMutation();
 	const [createConversation] = useCreateConversationMutation();
 	const { adId } = useParams<{ adId: string }>();
 	const navigate = useNavigate();
+
+	const [isEditMode, setIsEditMode] = useState(false);
+	const [editForm, setEditForm] = useState<EditFormData>({
+		title: '',
+		description: '',
+		transferMethod: '',
+		city: '',
+		weightGrams: '',
+	});
+	const {
+		errors: editErrors,
+		validate: validateEdit,
+		clearError,
+	} = useValidation<EditFormData>({
+		title: { required: true, message: 'Обязательное поле' },
+		description: {},
+		transferMethod: { required: true, message: 'Обязательное поле' },
+		city: { required: true, message: 'Обязательное поле' },
+		weightGrams: { required: true, message: 'Обязательное поле' },
+	});
 
 	const { data, isLoading } = useGetListingQuery(adId || '123', {
 		refetchOnMountOrArgChange: false,
@@ -54,6 +83,64 @@ const useAdPage = () => {
 	});
 
 	const isMyAd = data?.donor?.id === getMyId().myId;
+
+	const handleStartEdit = () => {
+		setEditForm({
+			title: data?.title ?? '',
+			description: data?.description ?? '',
+			transferMethod: data?.transferMethod ?? '',
+			city: data?.location?.city ?? '',
+			weightGrams:
+				data?.weightGrams != null ? String(data.weightGrams) : '',
+		});
+		setIsEditMode(true);
+	};
+
+	const handleCancelEdit = () => {
+		setIsEditMode(false);
+	};
+
+	const handleEditFormChange = (field: keyof EditFormData, value: string) => {
+		setEditForm((prev) => ({ ...prev, [field]: value }));
+		clearError(field);
+	};
+
+	const handleSaveEdit = async () => {
+		const isValid = validateEdit(editForm);
+		if (!isValid) {
+			notification.error('Пожалуйста, заполните все обязательные поля', {
+				toastId: 'edit-validation',
+			});
+			return;
+		}
+
+		if (!data || !adId) return;
+
+		try {
+			await updateListing({
+				id: adId,
+				data: {
+					title: editForm.title,
+					description: editForm.description,
+					transferMethod: editForm.transferMethod as TransferMethod,
+					city: editForm.city,
+					categoryId: data.category?.id ?? '',
+					condition: data.condition as ItemCondition,
+					transferType: data.transferType as TransferType,
+					weightGrams: editForm.weightGrams
+						? +editForm.weightGrams
+						: 0,
+					district: data.location.district ?? null,
+					tags: data.tags ?? null,
+				},
+			}).unwrap();
+			notification.success('Изменения сохранены!');
+			setIsEditMode(false);
+		} catch {
+			notification.error('Не удалось сохранить изменения');
+		}
+	};
+
 	const settingsButtons: SettingsButtonsType = isMyAd
 		? [
 				{
@@ -89,7 +176,7 @@ const useAdPage = () => {
 					id: 2,
 					color: 'shaded',
 					text: 'Редактировать объявление',
-					onClick: () => {},
+					onClick: handleStartEdit,
 				},
 			]
 		: [
@@ -159,8 +246,15 @@ const useAdPage = () => {
 		ad: data,
 		donor,
 		isLoading,
+		isSaving,
 		settingsButtons,
 		allMetrics,
+		isEditMode,
+		editForm,
+		editErrors,
+		handleEditFormChange,
+		handleSaveEdit,
+		handleCancelEdit,
 	};
 };
 
