@@ -110,6 +110,7 @@ const useNewPublicationPage = () => {
 			transferType: formData.transferType,
 			transferMethod: formData.transferMethod,
 			city: formData.location?.split(',')[0] || '',
+			weightGrams: 0,
 			district: formData.district,
 			latitude: formData.latitude ?? null,
 			longitude: formData.longitude ?? null,

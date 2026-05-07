@@ -56,6 +56,10 @@ export interface CategoryDetailsDto {
   isActive: boolean;
   /** @format int32 */
   displayOrder: number;
+  /** @format int32 */
+  co2SavedPer100GramsG: number;
+  /** @format int32 */
+  wasteSavedPer100GramsG: number;
   /** @format date-time */
   createdAt: string;
   /** @format date-time */
@@ -96,6 +100,10 @@ export interface CreateCategoryRequest {
   iconUrl?: string | null;
   /** @format int32 */
   displayOrder: number;
+  /** @format int32 */
+  co2SavedPer100GramsG: number;
+  /** @format int32 */
+  wasteSavedPer100GramsG: number;
 }
 
 export interface CreateListingDto {
@@ -103,6 +111,8 @@ export interface CreateListingDto {
   description: string;
   /** @format uuid */
   categoryId: string;
+  /** @format int32 */
+  weightGrams: number;
   condition: ItemCondition;
   transferType: TransferType;
   transferMethod: TransferMethod;
@@ -143,6 +153,12 @@ export interface ListingDto {
   tags: string[];
   /** @format int32 */
   viewCount: number;
+  /** @format int32 */
+  weightGrams: number;
+  /** @format int32 */
+  co2SavedG: number;
+  /** @format int32 */
+  wasteSavedG: number;
   /** @format date-time */
   createdAt: string;
   /** @format date-time */
@@ -170,6 +186,12 @@ export interface ListingPreviewDto {
   donor?: DonorDto | null;
   /** @format int32 */
   viewCount: number;
+  /** @format int32 */
+  weightGrams: number;
+  /** @format int32 */
+  co2SavedG: number;
+  /** @format int32 */
+  wasteSavedG: number;
   /** @format date-time */
   createdAt: string;
 }
@@ -220,6 +242,10 @@ export interface UpdateCategoryRequest {
   iconUrl?: string | null;
   /** @format int32 */
   displayOrder: number;
+  /** @format int32 */
+  co2SavedPer100GramsG: number;
+  /** @format int32 */
+  wasteSavedPer100GramsG: number;
 }
 
 export type CategoriesListData = CategoryDetailsDto[];
