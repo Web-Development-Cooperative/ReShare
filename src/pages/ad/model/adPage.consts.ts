@@ -40,7 +40,6 @@ const transMethod = 'Доставка, личная встреча';
 const avatarUrl = avatar;
 const fio = 'Аполлинария В.';
 const rating = 4.3;
-const compTrans = 2010;
 const year = 2010;
 const location = 'Екатеринбург, Верх-Исетский район, ул. Татищева 94';
 const date = '20.10.2010';
@@ -57,7 +56,6 @@ export {
 	avatarUrl,
 	fio,
 	rating,
-	compTrans,
 	year,
 	location,
 	date,

@@ -5,6 +5,7 @@ import {
 	useUpdateListingStatusMutation,
 } from '@entities/listings';
 import { useCreateConversationMutation } from '@entities/messages';
+import { useGetUserProfileQuery } from '@entities/users';
 import { notification } from '@shared/lib/toast.helper';
 import { ListingStatus } from '@shared/api/generated/listings-api';
 import { getCookieValue } from '@shared/api';
@@ -43,6 +44,9 @@ const useAdPage = () => {
 	const navigate = useNavigate();
 
 	const { data, isLoading } = useGetListingQuery(adId || '123');
+	const { data: donor } = useGetUserProfileQuery(data?.donor?.id || '123', {
+		skip: !data?.donor?.id,
+	});
 
 	const isMyAd = data?.donor?.id === getMyId().myId;
 	const settingsButtons: SettingsButtonsType = isMyAd
@@ -137,6 +141,7 @@ const useAdPage = () => {
 
 	return {
 		ad: data,
+		donor,
 		isLoading,
 		settingsButtons,
 	};

@@ -24,7 +24,6 @@ import {
 	avatarUrl,
 	fio,
 	rating,
-	compTrans,
 	year,
 	location,
 	date,
@@ -34,7 +33,7 @@ import { useAdPage } from '../lib/useAdPage.hooks';
 import styles from './AdPage.module.css';
 
 const AdPage = () => {
-	const { ad: data, settingsButtons } = useAdPage();
+	const { ad: data, donor, settingsButtons } = useAdPage();
 
 	return (
 		<div className={styles.ad}>
@@ -54,18 +53,23 @@ const AdPage = () => {
 					<div className={styles['photos-wrapper']}>
 						<img
 							className={styles['main-photo']}
-							// src={data?.photos?.[0]?.url || img}
-							src={img}
-							alt={data?.title || imgAlt}
+							src={
+								data?.photos?.find((f) => f.displayOrder === 0)
+									?.url ?? img
+							}
+							alt={data?.title ?? imgAlt}
 						/>
-						{/* TODO - Добавить остальные фото */}
 						<UniList
 							className={styles['all-photos']}
-							items={[{ id: 1 }, { id: 2 }, { id: 3 }]}
+							items={
+								data?.photos?.filter(
+									(f) => f.displayOrder !== 0,
+								) || []
+							}
 							renderItem={(item) => (
 								<img
 									className={styles['mini-photo']}
-									src={`https://placehold.co/600x400?text=Ad+${item.id}`}
+									src={item.url ?? img}
 								/>
 							)}
 						/>
@@ -129,13 +133,13 @@ const AdPage = () => {
 					<div className={styles.description}>
 						<h3>Описание</h3>
 						<Paragraph16Reg>
-							{data?.description || description}
+							{data?.description ?? description}
 						</Paragraph16Reg>
 					</div>
 					<div className={styles['trans-method']}>
 						<h3>Способы передачи</h3>
 						<Paragraph16Reg>
-							{data?.transferMethod || transMethod}
+							{data?.transferMethod ?? transMethod}
 						</Paragraph16Reg>
 					</div>
 					<BgBorderDefault
@@ -143,29 +147,30 @@ const AdPage = () => {
 						colorType="white"
 					>
 						<Avatar
-							src={data?.donor?.avatarUrl || avatarUrl}
+							src={data?.donor?.avatarUrl ?? avatarUrl}
 							size="medium"
 							shape="circle"
 						/>
 						<div className={styles['avatar-info']}>
 							<UIText14Reg>
-								{data?.donor?.firstName && data?.donor?.lastName
-									? `${data.donor.firstName} ${data.donor.lastName}`
+								{donor?.firstName && donor?.lastName
+									? `${donor.firstName} ${donor.lastName}`
 									: fio}
 							</UIText14Reg>
 							<div className={styles['avatar-tags']}>
 								<Rating
-									rating={data?.donor?.rating || rating}
+									rating={donor?.rating ?? rating}
 									size="small"
 									right
 								/>
 								<UIText12Reg>
-									{data?.donor?.completedTransactions ||
-										compTrans}{' '}
+									{(donor?.ecoStats.itemsReceived || 0) +
+										(donor?.ecoStats.itemsGifted || 0)}{' '}
 									завершенных сделок
 								</UIText12Reg>
 								<UIText12Reg>
-									На ShareSphere с {data?.donor?.year || year}{' '}
+									На ShareSphere с{' '}
+									{donor?.createdAt?.split('-')[0] ?? year}{' '}
 									года
 								</UIText12Reg>
 							</div>

@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router';
 import {
 	useCreateListingMutation,
 	useUpdateListingStatusMutation,
+	useAddListingPhotoMutation,
 } from '@entities/listings';
+import { useUploadFileMutation } from '@entities/files';
 import { ListingStatus } from '@shared/api/generated/listings-api';
 import { notification } from '@shared/lib/toast.helper';
 
@@ -21,6 +23,8 @@ const useNewPublicationPage = () => {
 	const [createListing, { isLoading: isPublishing }] =
 		useCreateListingMutation();
 	const [updateListingStatus] = useUpdateListingStatusMutation();
+	const [addListingPhoto] = useAddListingPhotoMutation();
+	const [uploadFile] = useUploadFileMutation();
 	const [currentStep, setCurrentStep] = useState<Step>(1);
 	const [formData, setFormData] = useState<Partial<ListingFormData>>({});
 	const [errors, setErrors] = useState<
@@ -119,11 +123,25 @@ const useNewPublicationPage = () => {
 
 		try {
 			const { id } = await createListing(dto).unwrap();
+
+			if (formData.photos && formData.photos.length > 0) {
+				const uploadPromises = formData.photos.map(async (file, index) => {
+					const formDataFile = new FormData();
+					formDataFile.append('file', file);
+					const { url } = await uploadFile(formDataFile).unwrap();
+					await addListingPhoto({
+						id,
+						photo: { url, displayOrder: index },
+					}).unwrap();
+				});
+				await Promise.all(uploadPromises);
+			}
+
 			await updateListingStatus({
 				id,
 				status: { status: ListingStatus.Active },
 			}).unwrap();
-			// TODO: загрузить formData.photos в хранилище и вызвать addListingPhoto для каждого
+
 			notification.success('Объявление опубликовано!');
 		} catch {
 			notification.error('Не удалось опубликовать объявление');
