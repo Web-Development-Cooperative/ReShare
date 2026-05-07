@@ -45,9 +45,12 @@ const useAdPage = () => {
 	const { adId } = useParams<{ adId: string }>();
 	const navigate = useNavigate();
 
-	const { data, isLoading } = useGetListingQuery(adId || '123');
+	const { data, isLoading } = useGetListingQuery(adId || '123', {
+		refetchOnMountOrArgChange: false,
+	});
 	const { data: donor } = useGetUserProfileQuery(data?.donor?.id || '123', {
 		skip: !data?.donor?.id,
+		refetchOnMountOrArgChange: false,
 	});
 
 	const isMyAd = data?.donor?.id === getMyId().myId;

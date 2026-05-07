@@ -11,10 +11,13 @@ import {
 import { items } from '../model/myArchivePage.consts';
 
 const useMyArchivePage = () => {
-	const { data, isLoading, isError } = useGetMyListingsQuery({
-		pageNumber: 1,
-		pageSize: 50,
-	});
+	const { data, isLoading, isError } = useGetMyListingsQuery(
+		{
+			pageNumber: 1,
+			pageSize: 50,
+		},
+		{ refetchOnMountOrArgChange: false },
+	);
 
 	const activeAds = useMemo(() => {
 		const listingItems = data?.items?.length ? data.items : items;

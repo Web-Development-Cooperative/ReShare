@@ -1,10 +1,12 @@
 import { useGetMyProfileQuery, useGetUserReviewsQuery } from '@entities/users';
 
 const useRatingPopup = () => {
-	const { data: profileData } = useGetMyProfileQuery();
+	const { data: profileData } = useGetMyProfileQuery(undefined, {
+		refetchOnMountOrArgChange: false,
+	});
 	const { data: reviewsData } = useGetUserReviewsQuery(
 		{ id: profileData?.id ?? 'zxc' },
-		{ skip: !profileData },
+		{ skip: !profileData, refetchOnMountOrArgChange: false },
 	);
 
 	console.log(reviewsData);

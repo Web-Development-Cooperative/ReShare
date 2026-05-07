@@ -22,16 +22,22 @@ const useChatPage = () => {
 
 	const { data } = useGetMessagesQuery(
 		{ conversationId: chatId || '' },
-		{ skip: !chatId },
+		{ skip: !chatId, refetchOnMountOrArgChange: false },
 	);
-	const { data: allMessage } = useGetConversationsQuery({});
-	const { data: myProfile } = useGetMyProfileQuery();
+	const { data: allMessage } = useGetConversationsQuery(
+		{},
+		{ refetchOnMountOrArgChange: false },
+	);
+	const { data: myProfile } = useGetMyProfileQuery(undefined, {
+		refetchOnMountOrArgChange: false,
+	});
 	const { data: otherProfile } = useGetUserProfileQuery(
 		allMessage?.items
 			.find((item) => item.id === chatId)
 			?.participants.find((p) => p.id !== myProfile?.id)?.id || '42',
 		{
 			skip: !myProfile?.id || !chatId || !allMessage?.items?.length,
+			refetchOnMountOrArgChange: false,
 		},
 	);
 
