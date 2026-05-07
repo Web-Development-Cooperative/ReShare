@@ -6,3 +6,4 @@ export { TextDivider } from './textDivider/TextDivider';
 export { AuthForm } from './authForm/AuthForm';
 export { StepsHorizontal } from './stepsHorizontal/StepsHorizontal';
 export { AdCard } from './adCard/AdCard';
+export { PaginationBar } from './paginationBar/PaginationBar';

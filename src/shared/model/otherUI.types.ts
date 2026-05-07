@@ -112,6 +112,18 @@ type AllAdCardProps = {
 };
 type IAdCard = FC<AllAdCardProps>;
 
+type PaginationBarProps = {
+	minPage?: number;
+	maxPage: number;
+	name: string;
+	totalElements: number;
+	cardinality: number;
+	currentPage: number;
+	onPageChange: (_value: number) => void;
+	onPageInc: () => void;
+	onPageDec: () => void;
+};
+
 export {
 	type TagProps,
 	type AvatarProps,
@@ -121,4 +133,5 @@ export {
 	type AuthFormProps,
 	type StepsHorizontalProps,
 	type IAdCard,
+	type PaginationBarProps,
 };

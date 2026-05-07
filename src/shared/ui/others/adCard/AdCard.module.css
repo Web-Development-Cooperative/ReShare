@@ -52,7 +52,13 @@
 	gap: 8px;
 	margin: 16px;
 }
-
+.card-name {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 .description {
 	color: var(--text-secondary);
 }

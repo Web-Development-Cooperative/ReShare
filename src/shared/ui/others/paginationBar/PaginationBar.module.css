@@ -1,0 +1,40 @@
+.pagination-wrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	align-self: stretch;
+	justify-content: space-between;
+	column-gap: 50px;
+}
+.pagination,
+.pages {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	column-gap: 0.625rem;
+
+	height: clamp(1.5rem, 1.182rem + 1.59vw, 2.375rem);
+
+	& button {
+		max-width: 40px;
+	}
+}
+.page {
+	height: clamp(1.5rem, 1.182rem + 1.59vw, 2.375rem);
+	aspect-ratio: 1/1;
+}
+.svg_rotate180 {
+	transform: rotateZ(180deg);
+
+	& > path {
+		fill: var(--text-light-primary);
+	}
+}
+
+@media (max-width: 583px) {
+	.pagination-wrapper {
+		flex-direction: column;
+		align-items: flex-start;
+		row-gap: 0.625rem;
+	}
+}

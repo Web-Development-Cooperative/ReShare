@@ -2,7 +2,7 @@ import { ButtonBase } from '@shared/ui/buttons/buttonBase/ButtonBase';
 import { Loupe } from '@shared/ui/icons/loupe/Loupe';
 import { Settings } from '@shared/ui/icons/settings/Settings';
 import { InputBase } from '@shared/ui/inputs/inputBase/InputBase';
-import { UniList, AdCard } from '@shared/ui/others';
+import { UniList, AdCard, PaginationBar } from '@shared/ui/others';
 import { UIText14SB } from '@shared/ui/paragraphs';
 import { BgBorderDefault } from '@shared/ui/wrappers';
 import { notification } from '@shared/lib/toast.helper';
@@ -23,6 +23,13 @@ const AdsPage = () => {
 		onChangeOption,
 		searchQuery,
 		onSearchChange,
+		currentPage,
+		totalPages,
+		totalElements,
+		cardinality,
+		onPageChange,
+		onPageInc,
+		onPageDec,
 	} = useAdsPage();
 
 	let content = (
@@ -37,14 +44,14 @@ const AdsPage = () => {
 		content = <BgBorderDefault colorType="surface-1"></BgBorderDefault>;
 	}
 
-	if (isError) {
+	if (isError && !isLoading) {
 		notification.error('Ошибка загрузки объявлений. Попробуйте снова.', {
 			toastId: 'load-ads-error',
 		});
 		content = <div>Не удалось загрузить объявления.</div>;
 	}
 
-	if (!allAds.length) {
+	if (!allAds.length && !isLoading) {
 		notification.info('Пока нет объявлений.', {
 			toastId: 'no-active-ads',
 		});
@@ -89,6 +96,16 @@ const AdsPage = () => {
 				/>
 			)}
 			<BgBorderDefault colorType="surface-1">{content}</BgBorderDefault>
+			<PaginationBar
+				maxPage={totalPages}
+				name="объявлений"
+				totalElements={totalElements}
+				cardinality={cardinality}
+				currentPage={currentPage}
+				onPageChange={onPageChange}
+				onPageInc={onPageInc}
+				onPageDec={onPageDec}
+			/>
 		</div>
 	);
 };

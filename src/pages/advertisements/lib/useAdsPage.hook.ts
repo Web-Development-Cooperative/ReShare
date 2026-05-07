@@ -9,7 +9,7 @@ import {
 	TransferType,
 } from '@shared/api/generated/listings-api';
 
-import { items, filters } from '../model/adsPage.consts';
+import { filters } from '../model/adsPage.consts';
 
 const useAdsPage = () => {
 	const [showFilters, setShowFilters] = useState(false);
@@ -24,6 +24,8 @@ const useAdsPage = () => {
 	}, [searchParams]);
 
 	const searchQuery = searchParams.get('search') ?? '';
+	const currentPage = parseInt(searchParams.get('page') ?? '1', 10);
+	const PAGE_SIZE = 1;
 
 	const onSearchChange = (value: string) => {
 		setSearchParams((prev) => {
@@ -33,9 +35,22 @@ const useAdsPage = () => {
 			} else {
 				next.delete('search');
 			}
+			next.set('page', '1');
 			return next;
 		});
 	};
+
+	const setPage = (page: number) => {
+		setSearchParams((prev) => {
+			const next = new URLSearchParams(prev);
+			next.set('page', String(page));
+			return next;
+		});
+	};
+
+	const onPageChange = (page: number) => setPage(page);
+	const onPageInc = () => setPage(currentPage + 1);
+	const onPageDec = () => setPage(Math.max(1, currentPage - 1));
 
 	const { data, isLoading, isError } = useGetListingsQuery(
 		{
@@ -43,10 +58,10 @@ const useAdsPage = () => {
 			condition: filterState['condition'] ?? '',
 			transferType: filterState['type'] ?? '',
 			searchQuery: searchQuery || undefined,
-			pageNumber: 1,
-			pageSize: 50,
+			pageNumber: currentPage,
+			pageSize: PAGE_SIZE,
 		},
-		{ refetchOnMountOrArgChange: false },
+		{ refetchOnMountOrArgChange: true },
 	);
 	const { data: categoriesData } = useGetCategoriesQuery(undefined, {
 		refetchOnMountOrArgChange: false,
@@ -60,6 +75,7 @@ const useAdsPage = () => {
 			} else {
 				next.delete(filterType.id);
 			}
+			next.set('page', '1');
 			return next;
 		});
 	};
@@ -81,7 +97,7 @@ const useAdsPage = () => {
 	}, [categoriesData]);
 
 	const allAds = useMemo(() => {
-		const listingItems = data?.items?.length ? data.items : items;
+		const listingItems = data?.items?.length ? data.items : [];
 
 		return listingItems
 			.filter((item) => item.status !== ListingStatus.Completed)
@@ -93,7 +109,9 @@ const useAdsPage = () => {
 					item.thumbnailUrl ??
 					'https://placehold.co/600x400?text=No+Photo',
 				title: item.title ?? 'Без названия',
-				author: 'Вы',
+				author: item.donor
+					? `${item.donor.firstName} ${item.donor.lastName}`
+					: 'Неизвестный автор',
 				description: item.city
 					? `Город: ${item.city}`
 					: 'Город не указан',
@@ -136,6 +154,15 @@ const useAdsPage = () => {
 		onChangeOption,
 		searchQuery,
 		onSearchChange,
+		currentPage,
+		totalPages: data?.totalPages ?? 1,
+		totalElements: data?.totalCount ?? 0,
+		cardinality:
+			(data?.items?.length || 0) +
+			(data?.pageSize || 0) * (+currentPage - 1),
+		onPageChange,
+		onPageInc,
+		onPageDec,
 	};
 };
 
