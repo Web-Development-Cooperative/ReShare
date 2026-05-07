@@ -21,6 +21,8 @@ const AdsPage = () => {
 		allFilters,
 		filterState,
 		onChangeOption,
+		searchQuery,
+		onSearchChange,
 	} = useAdsPage();
 
 	let content = (
@@ -57,6 +59,8 @@ const AdsPage = () => {
 					className={styles['fat-input']}
 					placeholder="Поиск по доступным обновлениям"
 					leftIcon={<Loupe />}
+					value={searchQuery}
+					onChange={(e) => onSearchChange(e.target.value)}
 				/>
 				<ButtonBase
 					color="shaded"
