@@ -35,7 +35,7 @@ const AdCard: IAdCard = ({
 				/>
 			</div>
 			<div className={styles.cardInfo}>
-				<h4>{title}</h4>
+				<h4 className={styles['card-name']}>{title}</h4>
 				<div className={styles.author}>
 					<div className={styles.authorAvatar}>
 						<img
