@@ -1,0 +1,53 @@
+.avatar {
+	position: relative;
+	aspect-ratio: 1/1;
+	border: 1px solid var(--border-default);
+
+	background-color: var(--very-pale-blue);
+}
+.circle {
+	border-radius: 50%;
+}
+.square {
+	border-radius: 6px;
+}
+.huge {
+	width: 96px;
+}
+.extra-large {
+	width: 64px;
+}
+.large {
+	width: 48px;
+}
+.medium {
+	width: 32px;
+}
+.small {
+	width: 24px;
+}
+.tiny {
+	width: 16px;
+}
+.square.small {
+	border-radius: 4px;
+}
+.square.tiny {
+	border-radius: 2px;
+}
+
+/* status dot */
+.status-dot {
+	position: absolute;
+	bottom: -5px;
+	right: -5px;
+	/* aspect-ratio: 1/1;
+	width: 12px; */
+
+	border: 2px solid var(--border-color-white);
+	border-radius: 50%;
+
+	& > path {
+		fill: var(--bg-color-positive);
+	}
+}

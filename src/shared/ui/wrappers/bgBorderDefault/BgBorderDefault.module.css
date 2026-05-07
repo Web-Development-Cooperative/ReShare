@@ -1,0 +1,11 @@
+.bg-border {
+	padding: clamp(0.5rem, 0.273rem + 0.97vw, 1rem);
+	border-radius: 8px;
+	border: 1px solid var(--border-default);
+}
+.white {
+	background-color: var(--bg-default);
+}
+.surface-1 {
+	background-color: var(--bg-surface-1);
+}

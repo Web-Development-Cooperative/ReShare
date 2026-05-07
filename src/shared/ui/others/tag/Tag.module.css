@@ -1,0 +1,284 @@
+.tag {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	column-gap: 6px;
+
+	border-radius: 4px;
+	border: 1px solid var(--border-default);
+}
+/* sizes */
+.large {
+	padding: 4px 12px;
+}
+.medium {
+	padding: 0 8px;
+}
+.small {
+	padding: 0 4px;
+}
+/* colors */
+.white {
+	background-color: var(--bg-default);
+
+	& > p {
+		color: var(--text-primary);
+	}
+
+	& > svg > path {
+		fill: var(--text-primary);
+	}
+}
+/* green */
+.green.filled {
+	background-color: var(--bg-color-positive);
+
+	& > p {
+		color: var(--text-primary-on-color);
+	}
+
+	& > svg > path {
+		fill: var(--text-primary-on-color);
+	}
+}
+.green.subtle {
+	border-color: var(--border-subtle-positive);
+	background-color: var(--bg-subtle-positive);
+
+	& > p {
+		color: var(--text-positive);
+	}
+
+	& > svg > path {
+		fill: var(--text-positive);
+	}
+}
+.green.outline {
+	border-color: var(--border-subtle-positive);
+	background-color: transparent !important;
+
+	& > p {
+		color: var(--text-positive);
+	}
+
+	& > svg > path {
+		fill: var(--text-positive);
+	}
+}
+/* blue */
+.blue.filled {
+	background-color: var(--bg-color-blue);
+
+	& > p {
+		color: var(--text-primary-on-color);
+	}
+
+	& > svg > path {
+		fill: var(--text-primary-on-color);
+	}
+}
+.blue.subtle {
+	border-color: var(--border-subtle-blue);
+	background-color: var(--bg-subtle-blue);
+
+	& > p {
+		color: var(--text-brand);
+	}
+
+	& > svg > path {
+		fill: var(--text-brand);
+	}
+}
+.blue.outline {
+	border-color: var(--border-subtle-blue);
+	background-color: transparent !important;
+
+	& > p {
+		color: var(--text-brand);
+	}
+
+	& > svg > path {
+		fill: var(--text-brand);
+	}
+}
+/* red */
+.red.filled {
+	background-color: var(--bg-color-negative);
+
+	& > p {
+		color: var(--text-primary-on-color);
+	}
+
+	& > svg > path {
+		fill: var(--text-primary-on-color);
+	}
+}
+.red.subtle {
+	border-color: var(--border-subtle-negative);
+	background-color: var(--bg-subtle-negative);
+
+	& > p {
+		color: var(--text-negative);
+	}
+
+	& > svg > path {
+		fill: var(--text-negative);
+	}
+}
+.red.outline {
+	border-color: var(--border-subtle-negative);
+	background-color: transparent !important;
+
+	& > p {
+		color: var(--text-negative);
+	}
+
+	& > svg > path {
+		fill: var(--text-negative);
+	}
+}
+/* black */
+.black.filled {
+	background-color: var(--bg-default-inverse);
+
+	& > p {
+		color: var(--text-primary-on-color);
+	}
+
+	& > svg > path {
+		fill: var(--text-primary-on-color);
+	}
+}
+.black.subtle {
+	border-color: var(--border-default);
+	background-color: var(--bg-surface-2);
+
+	& > p {
+		color: var(--text-primary);
+	}
+
+	& > svg > path {
+		fill: var(--text-primary);
+	}
+}
+.black.outline {
+	border-color: var(--border-default);
+	background-color: transparent !important;
+
+	& > p {
+		color: var(--text-primary);
+	}
+
+	& > svg > path {
+		fill: var(--text-primary);
+	}
+}
+/* teal */
+.teal.filled {
+	background-color: var(--bg-color-teal);
+
+	& > p {
+		color: var(--text-primary-on-color);
+	}
+
+	& > svg > path {
+		fill: var(--text-primary-on-color);
+	}
+}
+.teal.subtle {
+	border-color: var(--border-subtle-teal);
+	background-color: var(--bg-subtle-teal);
+
+	& > p {
+		color: var(--text-teal);
+	}
+
+	& > svg > path {
+		fill: var(--text-teal);
+	}
+}
+.teal.outline {
+	border-color: var(--border-subtle-teal);
+	background-color: transparent !important;
+
+	& > p {
+		color: var(--text-teal);
+	}
+
+	& > svg > path {
+		fill: var(--text-teal);
+	}
+}
+/* purple */
+.purple.filled {
+	background-color: var(--bg-color-violet);
+
+	& > p {
+		color: var(--text-primary-on-color);
+	}
+
+	& > svg > path {
+		fill: var(--text-primary-on-color);
+	}
+}
+.purple.subtle {
+	border-color: var(--border-subtle-violet);
+	background-color: var(--bg-subtle-violet);
+
+	& > p {
+		color: var(--text-violet);
+	}
+
+	& > svg > path {
+		fill: var(--text-violet);
+	}
+}
+.purple.outline {
+	border-color: var(--border-subtle-violet);
+	background-color: transparent !important;
+
+	& > p {
+		color: var(--text-violet);
+	}
+
+	& > svg > path {
+		fill: var(--text-violet);
+	}
+}
+/* yellow */
+.yellow.filled {
+	background-color: var(--bg-color-warning);
+
+	& > p {
+		color: var(--text-primary);
+	}
+
+	& > svg > path {
+		fill: var(--text-primary);
+	}
+}
+.yellow.subtle {
+	border-color: var(--border-subtle-warning);
+	background-color: var(--bg-subtle-warning);
+
+	& > p {
+		color: var(--text-warning);
+	}
+
+	& > svg > path {
+		fill: var(--text-warning);
+	}
+}
+.yellow.outline {
+	border-color: var(--border-subtle-warning);
+	background-color: transparent !important;
+
+	& > p {
+		color: var(--text-warning);
+	}
+
+	& > svg > path {
+		fill: var(--text-warning);
+	}
+}

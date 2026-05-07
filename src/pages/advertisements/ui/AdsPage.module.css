@@ -1,0 +1,41 @@
+.main {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	margin: 16px clamp(0.313rem, -0.793rem + 3.72vw, 2rem);
+}
+.finderContainer {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+}
+.fat-input {
+	min-width: 144px;
+	width: 50%;
+	max-width: 100%;
+}
+.cardList {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(221px, 1fr));
+	gap: 32px 16px;
+	border-radius: 8px;
+}
+.filtersPanel {
+	display: flex;
+	gap: 16px;
+	flex-wrap: wrap;
+	background-color: var(--bg-surface-1);
+	border: 1px solid var(--border-default);
+	border-radius: 8px;
+	padding: 16px;
+}
+
+@media (max-width: 700px) {
+	.finderContainer {
+		justify-content: space-between;
+	}
+	.fat-input {
+		flex: 1;
+		width: unset;
+	}
+}

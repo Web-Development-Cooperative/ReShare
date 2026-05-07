@@ -1,0 +1,46 @@
+.new-publication-page {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	row-gap: 32px;
+
+	width: clamp(18.75rem, 12.764rem + 25.54vw, 35.75rem);
+	margin: 16px auto;
+	padding: 16px 0;
+}
+.header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	column-gap: 16px;
+}
+.header-title {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	row-gap: 4px;
+}
+.buttons {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	column-gap: 16px;
+	row-gap: 8px;
+
+	&.last {
+		flex-direction: column;
+		align-items: stretch;
+
+		padding: 32px;
+	}
+}
+.buttons button {
+	flex: 1;
+}
+.buttons a {
+	display: flex;
+}

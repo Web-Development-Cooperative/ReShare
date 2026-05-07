@@ -1,0 +1,135 @@
+.profile-page {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	row-gap: 16px;
+
+	padding: 16px clamp(0.313rem, -0.793rem + 3.72vw, 2rem);
+}
+.main-info-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	column-gap: 16px;
+}
+.main-info {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	flex-grow: 1;
+	row-gap: 16px;
+}
+.row-top,
+.row-bottom,
+.row-bottom-two {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	column-gap: 16px;
+}
+.row-bottom-two {
+	display: none;
+}
+.buttons-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	column-gap: 16px;
+
+	margin-left: auto;
+}
+.rating,
+.stars {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+}
+.rating {
+	column-gap: 8px;
+}
+.reviews {
+	color: var(--text-colored-brand);
+}
+.secondary-info-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(333px, 1fr));
+	column-gap: 16px;
+	row-gap: 10px;
+
+	padding: 32px 0;
+}
+.nav-list {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	column-gap: clamp(0.75rem, 0.409rem + 1.45vw, 1.5rem);
+
+	width: fit-content;
+	padding: 7px 0;
+	border-bottom: 1px solid var(--border-default);
+}
+.nav-item {
+	position: relative;
+
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: -8px;
+		left: 0;
+		width: 0%;
+		height: 1px;
+
+		background-color: var(--text-primary);
+		opacity: 0;
+
+		transition:
+			opacity var(--time-to-do) var(--type-effect),
+			width var(--time-to-do) var(--type-effect);
+	}
+}
+.activ-link {
+	&::after {
+		width: 100%;
+		opacity: 1;
+	}
+}
+
+@media (max-width: 1024px) {
+	.row-top {
+		flex-direction: column;
+		align-items: flex-start;
+		row-gap: 8px;
+	}
+	.buttons-container {
+		margin-left: unset;
+	}
+}
+@media (max-width: 563px) {
+	.buttons-container p {
+		display: none;
+	}
+	.row-bottom {
+		display: none;
+	}
+	.row-bottom-two {
+		display: flex;
+	}
+}
+@media (max-width: 440px) {
+	.row-bottom-two {
+		flex-wrap: wrap;
+	}
+	.row-bottom-two > p:first-of-type {
+		display: none;
+	}
+	.secondary-info-container {
+		grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+	}
+}

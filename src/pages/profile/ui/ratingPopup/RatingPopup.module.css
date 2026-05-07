@@ -1,0 +1,73 @@
+.rating-popup {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+}
+.header {
+	display: flex;
+	flex-direction: column;
+	row-gap: 8px;
+
+	margin: 8px;
+	padding-bottom: 24px;
+}
+.body {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	row-gap: 32px;
+}
+.data,
+.overall-rating-descr,
+.comment {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+.data,
+.comment {
+	row-gap: 16px;
+}
+.overall-rating-descr {
+	row-gap: 8px;
+}
+.rating-descr {
+	color: var(--text-tertiary);
+}
+.comments {
+	/* TODO... */
+}
+.comment {
+	max-width: 480px;
+}
+.author {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	column-gap: 16px;
+}
+.name-time {
+	display: flex;
+	flex-direction: column;
+	row-gap: 2px;
+}
+.time {
+	color: var(--text-secondary);
+}
+.purchase-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	column-gap: 12px;
+}
+.purchase-name {
+	color: var(--text-secondary);
+}
+.message {
+	color: var(--text-black);
+}

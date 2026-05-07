@@ -1,0 +1,5 @@
+.paragraph {
+	font: var(--heading-36-bold);
+	letter-spacing: -2.2%;
+	color: var(--text-black);
+}

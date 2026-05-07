@@ -1,0 +1,89 @@
+.page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 32px;
+
+	padding: 32px clamp(0.313rem, -0.793rem + 3.72vw, 2rem);
+}
+.hero {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	text-align: center;
+
+	max-width: 640px;
+}
+.heroTitle {
+	color: var(--text-positive);
+}
+.statsGrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 16px;
+	width: 100%;
+}
+.statCard {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 16px;
+}
+.statCardHeader {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+}
+.statCardMeta {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+.trendPositive {
+	color: var(--text-positive);
+}
+.trendNegative {
+	color: var(--text-negative);
+}
+
+.tableSection {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	width: 100%;
+}
+.tableTitle {
+	font-size: 20px;
+	font-weight: 600;
+	text-align: center;
+	margin: 0;
+}
+.table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.tableHead th {
+	text-align: left;
+	padding: 8px 12px;
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--text-secondary);
+	border-bottom: 1px solid var(--border-default);
+}
+.tableRow td {
+	padding: 12px;
+	font-size: 14px;
+	border-bottom: 1px solid var(--border-default);
+	vertical-align: middle;
+}
+.donorCell {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+.rank {
+	font-size: 13px;
+	color: var(--text-secondary);
+	min-width: 20px;
+}

@@ -1,0 +1,20 @@
+.login-page {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: space-between;
+	row-gap: 32px;
+
+	height: 100dvh;
+
+	padding: 16px;
+}
+.footer-text {
+	align-self: center;
+
+	margin-bottom: 16px;
+}
+.footer-link {
+	display: inline-block;
+	color: var(--text-colored-brand);
+}

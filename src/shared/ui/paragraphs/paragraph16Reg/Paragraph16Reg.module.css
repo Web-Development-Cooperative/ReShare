@@ -1,0 +1,5 @@
+.paragraph {
+	font: var(--running-text-paragraph-16-reg);
+	letter-spacing: -1.1%;
+	color: var(--text-black);
+}

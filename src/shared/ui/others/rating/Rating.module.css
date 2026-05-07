@@ -1,0 +1,15 @@
+.rating,
+.stars {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+}
+.rating {
+	column-gap: 8px;
+}
+.stars > li {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
