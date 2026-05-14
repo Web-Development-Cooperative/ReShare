@@ -61,7 +61,7 @@ const useAdsPage = () => {
 			pageNumber: currentPage,
 			pageSize: PAGE_SIZE,
 		},
-		{ refetchOnMountOrArgChange: true },
+		{ refetchOnMountOrArgChange: false },
 	);
 	const { data: categoriesData } = useGetCategoriesQuery(undefined, {
 		refetchOnMountOrArgChange: false,

@@ -6,54 +6,36 @@
 
 	row-gap: 16px;
 }
-.name-container {
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-	justify-content: flex-start;
-	row-gap: 8px;
+.avatar-wrapper {
+	position: relative;
+	align-self: center;
+}
+.avatar-edit-btn {
+	position: absolute;
+	bottom: 4px;
+	right: 4px;
 
-	padding-top: 16px;
-}
-.wrapper {
 	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: flex-start;
-
-	& > h3 {
-		color: var(--text-black);
-	}
-
-	& > p {
-		color: var(--text-black);
-	}
-}
-.phones-container {
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-	justify-content: flex-start;
-	row-gap: 8px;
-	& > h3 {
-		color: var(--text-black);
-	}
-}
-.phones {
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-	justify-content: flex-start;
-	row-gap: 6px;
-}
-.phone {
-	display: flex;
-	flex-direction: row;
 	align-items: center;
-	justify-content: flex-start;
-	column-gap: 16px;
+	justify-content: center;
 
-	& > p {
-		color: var(--text-black);
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	border: none;
+	cursor: pointer;
+
+	background-color: var(--bg-default, #fff);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+
+	transition: background-color 0.15s;
+
+	&:hover:not(:disabled) {
+		background-color: var(--bg-hover, #f0f0f0);
+	}
+
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.5;
 	}
 }

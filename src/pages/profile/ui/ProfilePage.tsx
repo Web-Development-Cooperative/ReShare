@@ -143,7 +143,10 @@ const ProfilePage = () => {
 			)}
 			{openEditProfile && (
 				<BasePopup setIsOpen={setOpenEditProfile} withCross>
-					<EditProfilePopup />
+					<EditProfilePopup
+						data={data}
+						onSuccess={() => setOpenEditProfile(false)}
+					/>
 				</BasePopup>
 			)}
 		</>

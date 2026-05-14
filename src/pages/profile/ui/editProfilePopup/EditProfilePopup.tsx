@@ -1,56 +1,100 @@
-import img from '@shared/assets/img/baseAvatarMale.png';
+import { Camera } from '@shared/ui/icons';
 import { ButtonBase } from '@shared/ui/buttons';
-import { Avatar, Tag, UniList } from '@shared/ui/others';
-import { UIText14Medium, UIText14Reg, UIText14SB } from '@shared/ui/paragraphs';
-import { PaddingWrapper } from '@shared/ui/wrappers';
-import { InputBase } from '@shared/ui/inputs';
+import { Avatar } from '@shared/ui/others';
+import { UIText14SB } from '@shared/ui/paragraphs';
+import { InputBase, TextareaBase } from '@shared/ui/inputs';
 
+import { useEditProfilePopup } from '../../lib/useEditProfilePopup.hook';
+import { AvatarCropOverlay } from './AvatarCropOverlay';
 import styles from './EditProfilePopup.module.css';
-import { PHONES } from '../../model/profilePage.consts';
 
-const EditProfilePopup = () => {
+import type { UserProfileDto } from '@shared/api/generated/users-api';
+
+type Props = {
+	data?: UserProfileDto;
+	onSuccess?: () => void;
+};
+
+const EditProfilePopup = ({ data, onSuccess }: Props) => {
+	const {
+		form,
+		errors,
+		isLoading,
+		avatarPreview,
+		cropSrc,
+		avatarInputRef,
+		handleAvatarClick,
+		handleAvatarChange,
+		handleCropConfirm,
+		handleCropCancel,
+		handleChange,
+		handleSave,
+	} = useEditProfilePopup(data, onSuccess);
+
+	if (cropSrc) {
+		return (
+			<AvatarCropOverlay
+				imageSrc={cropSrc}
+				onConfirm={handleCropConfirm}
+				onCancel={handleCropCancel}
+			/>
+		);
+	}
+
 	return (
 		<div className={styles['edit-profile']}>
-			<Avatar shape="circle" size="huge" src={img} />
-			<div className={styles['name-container']}>
-				<div className={styles.wrapper}>
-					<h3>Имя</h3>
-					<UIText14Reg>
-						Как вы хотите, чтобы к вам обращались?
-					</UIText14Reg>
-				</div>
-				<InputBase placeholder="Введите имя" />
-			</div>
-			<div className={styles['phones-container']}>
-				<h3>Телефоны</h3>
-				<UniList
-					className={styles.phones}
-					items={PHONES}
-					renderItem={(item) => (
-						<div className={styles.phone}>
-							<UIText14Reg>{item.phone}</UIText14Reg>
-							<Tag
-								color={item.status ? 'green' : 'red'}
-								size="medium"
-								tagStyle="outline"
-							>
-								<UIText14Medium>
-									{item.status
-										? 'Подтвержден'
-										: 'Не подтвержден'}
-								</UIText14Medium>
-							</Tag>
-						</div>
-					)}
+			<div className={styles['avatar-wrapper']}>
+				<Avatar shape="circle" size="huge" src={avatarPreview} />
+				<button
+					className={styles['avatar-edit-btn']}
+					type="button"
+					onClick={handleAvatarClick}
+					disabled={isLoading}
+				>
+					<Camera />
+				</button>
+				<input
+					ref={avatarInputRef}
+					type="file"
+					accept="image/*"
+					style={{ display: 'none' }}
+					onChange={handleAvatarChange}
 				/>
-				<ButtonBase color="outline">
-					<PaddingWrapper y={0} x={8}>
-						<UIText14SB>Добавить номер</UIText14SB>
-					</PaddingWrapper>
-				</ButtonBase>
 			</div>
-			<ButtonBase color="brand">
-				<UIText14SB>Сохранить</UIText14SB>
+
+			<InputBase
+				textLabel="Имя"
+				placeholder="Введите имя"
+				value={form.firstName}
+				onChange={(e) => handleChange('firstName', e.target.value)}
+				stateStyle={errors.firstName ? 'error' : 'default'}
+				helper={errors.firstName}
+			/>
+			<InputBase
+				textLabel="Фамилия"
+				placeholder="Введите фамилию"
+				value={form.lastName}
+				onChange={(e) => handleChange('lastName', e.target.value)}
+				stateStyle={errors.lastName ? 'error' : 'default'}
+				helper={errors.lastName}
+			/>
+			<TextareaBase
+				textLabel="О себе"
+				placeholder="Расскажите о себе"
+				value={form.bio ?? ''}
+				onChange={(e) => handleChange('bio', e.target.value)}
+			/>
+			<InputBase
+				textLabel="Город"
+				placeholder="Введите город"
+				value={form.city ?? ''}
+				onChange={(e) => handleChange('city', e.target.value)}
+			/>
+
+			<ButtonBase color="brand" onClick={handleSave} disabled={isLoading}>
+				<UIText14SB>
+					{isLoading ? 'Сохранение...' : 'Сохранить'}
+				</UIText14SB>
 			</ButtonBase>
 		</div>
 	);
