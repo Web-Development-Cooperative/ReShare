@@ -2,7 +2,6 @@ import { Outlet } from 'react-router';
 
 import { clsx } from 'clsx';
 
-import img from '@shared/assets/img/baseAvatarMale.png';
 import { ButtonBase } from '@shared/ui/buttons';
 import { Pencil, VectorShare } from '@shared/ui/icons';
 import { Avatar, Rating, UniList } from '@shared/ui/others';
@@ -37,7 +36,11 @@ const ProfilePage = () => {
 		<>
 			<div className={styles['profile-page']}>
 				<div className={styles['main-info-container']}>
-					<Avatar shape="square" size="huge" src={img} />
+					<Avatar
+						shape="square"
+						size="huge"
+						src={data?.avatarUrl ?? undefined}
+					/>
 					<div className={styles['main-info']}>
 						<div className={styles['row-top']}>
 							<h2>
@@ -140,7 +143,10 @@ const ProfilePage = () => {
 			)}
 			{openEditProfile && (
 				<BasePopup setIsOpen={setOpenEditProfile} withCross>
-					<EditProfilePopup />
+					<EditProfilePopup
+						data={data}
+						onSuccess={() => setOpenEditProfile(false)}
+					/>
 				</BasePopup>
 			)}
 		</>

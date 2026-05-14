@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { Tag, UniList } from '@shared/ui/others';
+import { Avatar, Tag, UniList } from '@shared/ui/others';
 import { Paragraph14Reg, UIText14Medium } from '@shared/ui/paragraphs';
 import { LinkBase } from '@shared/ui/links';
 import { useAdCard } from '@shared/lib/otherUI.hooks';
@@ -15,6 +15,7 @@ const AdCard: IAdCard = ({
 	img,
 	title,
 	author,
+	authorAvatarUrl,
 	description,
 	tags,
 	state = 'default',
@@ -37,12 +38,11 @@ const AdCard: IAdCard = ({
 			<div className={styles.cardInfo}>
 				<h4 className={styles['card-name']}>{title}</h4>
 				<div className={styles.author}>
-					<div className={styles.authorAvatar}>
-						<img
-							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVRDk6EeQc7RhnJmF4SNjI91DDsfv5JJNRjQ&s"
-							alt="Аватар автора"
-						/>
-					</div>
+					<Avatar
+						src={authorAvatarUrl ?? undefined}
+						size="medium"
+						shape="circle"
+					/>
 					<Paragraph14Reg className={styles.author}>
 						{author}
 					</Paragraph14Reg>
