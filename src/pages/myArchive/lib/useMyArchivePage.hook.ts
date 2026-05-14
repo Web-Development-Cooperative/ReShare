@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { useGetMyListingsQuery } from '@entities/listings';
 import { useGetMyProfileQuery } from '@entities/users';
@@ -11,12 +11,13 @@ import {
 
 import { items } from '../model/myArchivePage.consts';
 
+const PAGE_SIZE = 8;
+
 const useMyArchivePage = () => {
+	const [page, setPage] = useState(1);
+
 	const { data, isLoading, isError } = useGetMyListingsQuery(
-		{
-			pageNumber: 1,
-			pageSize: 50,
-		},
+		{ pageNumber: 1, pageSize: 10000 },
 		{ refetchOnMountOrArgChange: false },
 	);
 	const { data: myProfile } = useGetMyProfileQuery(undefined, {
@@ -58,6 +59,13 @@ const useMyArchivePage = () => {
 			}));
 	}, [data?.items, myProfile]);
 
+	const totalPages = Math.max(1, Math.ceil(activeAds.length / PAGE_SIZE));
+	const pagedAds = activeAds.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+	const onPageChange = (p: number) => setPage(p);
+	const onPageInc = () => setPage((p) => Math.min(p + 1, totalPages));
+	const onPageDec = () => setPage((p) => Math.max(p - 1, 1));
+
 	useEffect(() => {
 		if (isLoading) {
 			notification.loading('Загрузка объявлений...', {
@@ -69,7 +77,18 @@ const useMyArchivePage = () => {
 		}
 	}, [isLoading]);
 
-	return { activeAds, isLoading, isError };
+	return {
+		activeAds: pagedAds,
+		isLoading,
+		isError,
+		currentPage: page,
+		totalPages,
+		totalElements: activeAds.length,
+		cardinality: (page - 1) * PAGE_SIZE + pagedAds.length,
+		onPageChange,
+		onPageInc,
+		onPageDec,
+	};
 };
 
 export { useMyArchivePage };
