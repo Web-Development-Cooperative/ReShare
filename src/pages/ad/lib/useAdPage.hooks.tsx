@@ -242,8 +242,35 @@ const useAdPage = () => {
 		return metric;
 	});
 
+	const photos =
+		data?.photos && data.photos.length > 0
+			? [...data.photos]
+					.sort(
+						(a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0),
+					)
+					.map((p, i) => ({ ...p, id: String(i) }))
+			: [];
+
+	const [currentIndex, setCurrentIndex] = useState(0);
+
+	const handlePrev = () =>
+		setCurrentIndex((i) => (i - 1 + photos.length) % photos.length);
+	const handleNext = () => setCurrentIndex((i) => (i + 1) % photos.length);
+
+	const handleShare = async () => {
+		const url = window.location.href;
+		await navigator.clipboard.writeText(url);
+		notification.success('Ссылка скопирована в буфер обмена');
+	};
+
 	return {
 		ad: data,
+		photos,
+		handlePrev,
+		handleNext,
+		handleShare,
+		currentIndex,
+		setCurrentIndex,
 		donor,
 		isLoading,
 		isSaving,
