@@ -1,4 +1,6 @@
 .avatar {
+	flex-shrink: 0;
+
 	position: relative;
 	aspect-ratio: 1/1;
 	border: 1px solid var(--border-default);
@@ -7,9 +9,17 @@
 }
 .circle {
 	border-radius: 50%;
+
+	& > img {
+		border-radius: 50%;
+	}
 }
 .square {
 	border-radius: 6px;
+
+	& > img {
+		border-radius: 6px;
+	}
 }
 .huge {
 	width: 96px;

@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from 'react';
 
 import { useGetMyListingsQuery } from '@entities/listings';
+import { useGetMyProfileQuery } from '@entities/users';
 import { notification } from '@shared/lib/toast.helper';
 import { TransferTypeRu } from '@shared/model/translates.consts';
 import {
@@ -18,6 +19,9 @@ const useMyApplicationPage = () => {
 		},
 		{ refetchOnMountOrArgChange: false },
 	);
+	const { data: profile } = useGetMyProfileQuery(undefined, {
+		refetchOnMountOrArgChange: false,
+	});
 
 	const activeAds = useMemo(() => {
 		const listingItems = data?.items?.length ? data.items : items;
@@ -36,7 +40,8 @@ const useMyApplicationPage = () => {
 					item.thumbnailUrl ??
 					'https://placehold.co/600x400?text=No+Photo',
 				title: item.title ?? 'Без названия',
-				author: 'Вы',
+				author: `${profile?.firstName ?? 'Пользователь'} ${profile?.lastName ?? ''}`,
+				authorAvatarUrl: profile?.avatarUrl ?? undefined,
 				description: item.city
 					? `Город: ${item.city}`
 					: 'Город не указан',
@@ -55,7 +60,7 @@ const useMyApplicationPage = () => {
 					},
 				],
 			}));
-	}, [data?.items]);
+	}, [data?.items, profile]);
 
 	useEffect(() => {
 		if (isLoading) {
