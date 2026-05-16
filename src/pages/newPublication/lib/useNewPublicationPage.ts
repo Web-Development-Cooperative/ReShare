@@ -120,7 +120,7 @@ const useNewPublicationPage = () => {
 			district: formData.district,
 			latitude: formData.latitude ?? null,
 			longitude: formData.longitude ?? null,
-			tags: formData.tags,
+			tags: formData.tags?.filter(Boolean) || [],
 		};
 
 		try {
