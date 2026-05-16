@@ -61,7 +61,7 @@ const useAdsPage = () => {
 			pageNumber: currentPage,
 			pageSize: PAGE_SIZE,
 		},
-		{ refetchOnMountOrArgChange: true },
+		{ refetchOnMountOrArgChange: false },
 	);
 	const { data: categoriesData } = useGetCategoriesQuery(undefined, {
 		refetchOnMountOrArgChange: false,
@@ -112,6 +112,7 @@ const useAdsPage = () => {
 				author: item.donor
 					? `${item.donor.firstName} ${item.donor.lastName}`
 					: 'Неизвестный автор',
+				authorAvatarUrl: item.donor?.avatarUrl ?? undefined,
 				description: item.city
 					? `Город: ${item.city}`
 					: 'Город не указан',

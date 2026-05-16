@@ -1,4 +1,4 @@
-import { AdCard, UniList } from '@shared/ui/others';
+import { AdCard, PaginationBar, UniList } from '@shared/ui/others';
 import { BgBorderDefault } from '@shared/ui/wrappers';
 import { notification } from '@shared/lib/toast.helper';
 
@@ -6,7 +6,18 @@ import { useMyArchivePage } from '../lib/useMyArchivePage.hook';
 import styles from './MyArchivePage.module.css';
 
 const MyArchivePage = () => {
-	const { activeAds, isLoading, isError } = useMyArchivePage();
+	const {
+		activeAds,
+		isLoading,
+		isError,
+		currentPage,
+		totalPages,
+		totalElements,
+		cardinality,
+		onPageChange,
+		onPageInc,
+		onPageDec,
+	} = useMyArchivePage();
 	if (isLoading) {
 		return (
 			<BgBorderDefault colorType="surface-1">
@@ -38,13 +49,25 @@ const MyArchivePage = () => {
 	}
 
 	return (
-		<BgBorderDefault colorType="surface-1">
-			<UniList
-				className={styles['ads-list']}
-				items={activeAds}
-				renderItem={(item) => <AdCard {...item} />}
+		<>
+			<BgBorderDefault colorType="surface-1">
+				<UniList
+					className={styles['ads-list']}
+					items={activeAds}
+					renderItem={(item) => <AdCard {...item} />}
+				/>
+			</BgBorderDefault>
+			<PaginationBar
+				maxPage={totalPages}
+				name="объявлений"
+				totalElements={totalElements}
+				cardinality={cardinality}
+				currentPage={currentPage}
+				onPageChange={onPageChange}
+				onPageInc={onPageInc}
+				onPageDec={onPageDec}
 			/>
-		</BgBorderDefault>
+		</>
 	);
 };
 

@@ -28,9 +28,6 @@ const NewPublicationPage = () => {
 		navigate,
 	} = useNewPublicationPage();
 
-	console.log(formData);
-	console.log(errors);
-
 	return (
 		<div className={styles['new-publication-page']}>
 			<div className={styles.header}>

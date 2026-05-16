@@ -18,7 +18,7 @@ const LinkChat: FC<Record<'item', ConversationDto>> = ({ item }) => {
 		>
 			<Avatar
 				shape="square"
-				size="large"
+				size="medium"
 				statusDot={true}
 				src={
 					item.participants.find((p) => p.id !== user?.id)

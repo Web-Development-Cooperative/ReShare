@@ -1,8 +1,5 @@
-import { useState } from 'react';
-
 import clsx from 'clsx';
 
-import img from '@shared/assets/img/baseAvatarMale.png';
 import { ROUTES } from '@shared/model/routes';
 import { ButtonBase } from '@shared/ui/buttons';
 import {
@@ -18,19 +15,12 @@ import { Avatar } from '@shared/ui/others';
 import { UIText14SB } from '@shared/ui/paragraphs';
 import { PaddingWrapper } from '@shared/ui/wrappers';
 
+import { useHeader } from '../lib/useHeader.hook';
 import styles from './Header.module.css';
 
 const Header = () => {
-	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-	const toggleMenu = () => {
-		setIsMobileMenuOpen((prev) => !prev);
-	};
-
-	// Функция для закрытия меню при клике на ссылку (удобно для UX)
-	const handleLinkClick = () => {
-		setIsMobileMenuOpen(false);
-	};
+	const { profile, isMobileMenuOpen, toggleMenu, handleLinkClick } =
+		useHeader();
 
 	return (
 		<div className={styles.header}>
@@ -60,7 +50,11 @@ const Header = () => {
 					<Chat />
 				</LinkBase>
 				<LinkBase to={ROUTES.PROFILE}>
-					<Avatar shape="circle" size="medium" src={img}></Avatar>
+					<Avatar
+						shape="circle"
+						size="medium"
+						src={profile?.avatarUrl ?? undefined}
+					></Avatar>
 				</LinkBase>
 			</div>
 			<div className={styles['mobile-menu']}>
@@ -123,7 +117,7 @@ const Header = () => {
 							<Avatar
 								shape="circle"
 								size="small"
-								src={img}
+								src={profile?.avatarUrl ?? undefined}
 								alt="Profile"
 							/>{' '}
 							Профиль

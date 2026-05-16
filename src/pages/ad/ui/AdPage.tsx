@@ -8,7 +8,7 @@ import {
 	UIText14Reg,
 	UIText14SB,
 } from '@shared/ui/paragraphs';
-import { Heart, Leaf, Share } from '@shared/ui/icons';
+import { ArrowLeft, ArrowRight, Heart, Leaf, Share } from '@shared/ui/icons';
 import { Avatar, Rating, UniList } from '@shared/ui/others';
 import { BgBorderDefault, BgIcone } from '@shared/ui/wrappers';
 import { InputBase, TextareaBase } from '@shared/ui/inputs';
@@ -36,6 +36,12 @@ import styles from './AdPage.module.css';
 const AdPage = () => {
 	const {
 		ad: data,
+		photos,
+		handlePrev,
+		handleNext,
+		handleShare,
+		currentIndex,
+		setCurrentIndex,
 		donor,
 		allMetrics,
 		settingsButtons,
@@ -58,7 +64,7 @@ const AdPage = () => {
 		<div className={styles.ad}>
 			<div className={styles.topButtons}>
 				<BackButton />
-				<ButtonBase color="outline">
+				<ButtonBase color="outline" onClick={handleShare}>
 					<Share />
 					<UIText14SB>Поделиться</UIText14SB>
 				</ButtonBase>
@@ -70,25 +76,52 @@ const AdPage = () => {
 			<div className={styles['main-info-wrapper']}>
 				<div className={styles['first-data']}>
 					<div className={styles['photos-wrapper']}>
-						<img
-							className={styles['main-photo']}
-							src={
-								data?.photos?.find((f) => f.displayOrder === 0)
-									?.url ?? img
-							}
-							alt={data?.title ?? imgAlt}
-						/>
+						<div className={styles['carousel']}>
+							<ButtonBase
+								className={styles['carousel-btn']}
+								style={{ left: '8px' }}
+								onClick={handlePrev}
+								disabled={photos.length <= 1}
+								aria-label="Предыдущее фото"
+							>
+								<ArrowLeft />
+							</ButtonBase>
+							<img
+								className={styles['main-photo']}
+								src={photos[currentIndex]?.url ?? img}
+								alt={data?.title ?? imgAlt}
+							/>
+							<ButtonBase
+								className={styles['carousel-btn']}
+								style={{ right: '8px' }}
+								onClick={handleNext}
+								disabled={photos.length <= 1}
+								aria-label="Следующее фото"
+							>
+								<ArrowRight />
+							</ButtonBase>
+							{photos.length > 1 && (
+								<div className={styles['carousel-dots']}>
+									{photos.map((_, i) => (
+										<ButtonBase
+											key={i}
+											className={`${styles['carousel-dot']}${i === currentIndex ? ` ${styles['carousel-dot-active']}` : ''}`}
+											onClick={() => setCurrentIndex(i)}
+											aria-label={`Фото ${i + 1}`}
+										/>
+									))}
+								</div>
+							)}
+						</div>
 						<UniList
 							className={styles['all-photos']}
-							items={
-								data?.photos?.filter(
-									(f) => f.displayOrder !== 0,
-								) || []
-							}
-							renderItem={(item) => (
+							items={photos}
+							renderItem={(item, index) => (
 								<img
-									className={styles['mini-photo']}
+									className={`${styles['mini-photo']}${index === currentIndex ? ` ${styles['mini-photo-active']}` : ''}`}
 									src={item.url ?? img}
+									alt={`Фото ${index + 1}`}
+									onClick={() => setCurrentIndex(index)}
 								/>
 							)}
 						/>

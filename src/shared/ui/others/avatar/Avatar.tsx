@@ -1,6 +1,7 @@
 import { clsx } from 'clsx';
 
 import { StatusDot } from '@shared/ui/icons';
+import fallbackImage from '@shared/assets/img/baseAvatarMale.png';
 
 import styles from './Avatar.module.css';
 import { useAvatar } from './lib/useAvatar';
@@ -21,7 +22,7 @@ const Avatar: AvatarProps = ({
 	return (
 		<div className={clsx(styles.avatar, styles[shape], styles[size])}>
 			<img
-				src={imgSrc}
+				src={imgSrc ?? fallbackImage}
 				alt={alt}
 				onError={onError || handleError}
 				{...props}

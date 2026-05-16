@@ -107,6 +107,7 @@ type AllAdCardProps = {
 	img: string | File;
 	title: string;
 	author: string;
+	authorAvatarUrl?: string;
 	description: string;
 	tags: ({ id: string | number } & Record<string, string | number>)[];
 };

@@ -1,6 +1,7 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { useGetMyListingsQuery } from '@entities/listings';
+import { useGetMyProfileQuery } from '@entities/users';
 import { notification } from '@shared/lib/toast.helper';
 import { TransferTypeRu } from '@shared/model/translates.consts';
 import {
@@ -10,14 +11,18 @@ import {
 
 import { items } from '../model/myAdsPage.consts';
 
+const PAGE_SIZE = 8;
+
 const useMyAdsPage = () => {
+	const [page, setPage] = useState(1);
+
 	const { data, isLoading, isError } = useGetMyListingsQuery(
-		{
-			pageNumber: 1,
-			pageSize: 50,
-		},
+		{ pageNumber: 1, pageSize: 10000 },
 		{ refetchOnMountOrArgChange: false },
 	);
+	const { data: myProfile } = useGetMyProfileQuery(undefined, {
+		refetchOnMountOrArgChange: false,
+	});
 
 	const activeAds = useMemo(() => {
 		const listingItems = data?.items?.length ? data.items : items;
@@ -36,7 +41,8 @@ const useMyAdsPage = () => {
 					item.thumbnailUrl ??
 					'https://placehold.co/600x400?text=No+Photo',
 				title: item.title ?? 'Без названия',
-				author: 'Вы',
+				author: `${myProfile?.firstName ?? 'Без имени'} ${myProfile?.lastName ?? ''}`.trim(),
+				authorAvatarUrl: myProfile?.avatarUrl ?? undefined,
 				description: item.city
 					? `Город: ${item.city}`
 					: 'Город не указан',
@@ -55,7 +61,14 @@ const useMyAdsPage = () => {
 					},
 				],
 			}));
-	}, [data?.items]);
+	}, [data?.items, myProfile]);
+
+	const totalPages = Math.max(1, Math.ceil(activeAds.length / PAGE_SIZE));
+	const pagedAds = activeAds.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+	const onPageChange = (p: number) => setPage(p);
+	const onPageInc = () => setPage((p) => Math.min(p + 1, totalPages));
+	const onPageDec = () => setPage((p) => Math.max(p - 1, 1));
 
 	useEffect(() => {
 		if (isLoading) {
@@ -68,7 +81,18 @@ const useMyAdsPage = () => {
 		}
 	}, [isLoading]);
 
-	return { activeAds, isLoading, isError };
+	return {
+		activeAds: pagedAds,
+		isLoading,
+		isError,
+		currentPage: page,
+		totalPages,
+		totalElements: activeAds.length,
+		cardinality: (page - 1) * PAGE_SIZE + pagedAds.length,
+		onPageChange,
+		onPageInc,
+		onPageDec,
+	};
 };
 
 export { useMyAdsPage };

@@ -39,7 +39,7 @@ export const usersApi = baseApi.injectEndpoints({
 				method: 'PUT',
 				body: data,
 			}),
-			invalidatesTags: [apiTags.User],
+			invalidatesTags: [apiTags.Listings, apiTags.User],
 		}),
 
 		// Обновление аватара
@@ -49,7 +49,7 @@ export const usersApi = baseApi.injectEndpoints({
 				method: 'PUT',
 				body: data,
 			}),
-			invalidatesTags: [apiTags.User],
+			invalidatesTags: [apiTags.Listings, apiTags.User],
 		}),
 
 		// Отзывы пользователя
@@ -75,7 +75,7 @@ export const usersApi = baseApi.injectEndpoints({
 				method: 'POST',
 				body: review,
 			}),
-			invalidatesTags: [apiTags.User],
+			invalidatesTags: [apiTags.Listings, apiTags.User],
 		}),
 
 		// Лидерборд пользователей
