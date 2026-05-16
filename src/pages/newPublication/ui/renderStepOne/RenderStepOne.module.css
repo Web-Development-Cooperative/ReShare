@@ -47,3 +47,16 @@
 	column-gap: 16px;
 	row-gap: 8px;
 }
+.tagsList {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+.tag {
+	padding: 4px 10px;
+	border-radius: 999px;
+	background: var(--bg-input-outlined);
+	border: 1px solid var(--border-default-contast);
+	font-size: 13px;
+	color: var(--text-secondary);
+}

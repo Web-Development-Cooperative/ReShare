@@ -107,6 +107,14 @@ const useRenderStepOne = ({
 			setErrors((prev) => ({ ...prev, description: undefined }));
 		}
 	};
+	const updateTags = (e: ChangeEvent<HTMLInputElement>) => {
+		const raw = e.target.value;
+		const parsed = raw.slice(-2) === ', ' ? raw.slice(0, -2) : raw;
+		updateFormData(
+			'tags',
+			parsed.split(',').map((t) => t.trim()),
+		);
+	};
 
 	return {
 		optionsCategory,
@@ -118,6 +126,7 @@ const useRenderStepOne = ({
 		updateCategory,
 		updateCondition,
 		updateDescription,
+		updateTags,
 	};
 };
 

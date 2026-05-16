@@ -30,6 +30,7 @@ const RenderStepOne: RenderStepOneProps = ({
 		updateCategory,
 		updateCondition,
 		updateDescription,
+		updateTags,
 	} = useRenderStepOne({
 		formData,
 		updateFormData,
@@ -157,6 +158,29 @@ const RenderStepOne: RenderStepOneProps = ({
 					stateStyle={errors.description ? 'error' : 'default'}
 					helper={errors.description}
 				/>
+			</div>
+
+			<div className={styles.section}>
+				<h3>Теги</h3>
+				<InputBase
+					placeholder="Например: одежда, книги, электроника"
+					value={formData.tags?.join(', ') || ''}
+					onChange={updateTags}
+					stateStyle="default"
+					helper="Введите теги через запятую"
+				/>
+				{formData.tags && formData.tags.length && (
+					<div className={styles.tagsList}>
+						{(formData.tags.slice(-1)[0] !== ''
+							? formData.tags
+							: formData.tags.slice(0, -1)
+						).map((tag, i) => (
+							<span key={i} className={styles.tag}>
+								{tag}
+							</span>
+						))}
+					</div>
+				)}
 			</div>
 		</>
 	);
