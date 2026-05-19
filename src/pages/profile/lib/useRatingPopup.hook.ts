@@ -9,8 +9,6 @@ const useRatingPopup = () => {
 		{ skip: !profileData, refetchOnMountOrArgChange: false },
 	);
 
-	console.log(reviewsData);
-
 	return { reviewsData };
 };
 

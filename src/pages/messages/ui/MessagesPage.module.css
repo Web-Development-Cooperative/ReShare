@@ -33,6 +33,9 @@
 
 	width: clamp(10.938rem, 7.813rem + 13.33vw, 17.813rem);
 }
+.sidebarHidden {
+	display: none;
+}
 .wrapper {
 	padding: clamp(0.5rem, 0.273rem + 0.97vw, 1rem)
 		clamp(0.25rem, 0.023rem + 0.97vw, 0.75rem) !important;

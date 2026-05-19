@@ -10,7 +10,9 @@
 		"test": "vitest",
 		"gen:api": "tsx scripts/generate-api.ts",
 		"preview": "vite preview",
-		"prepare": "husky"
+		"prepare": "husky",
+		"typecheck": "npx tsc -b --noEmit",
+		"build:verify": "npm run typecheck && npm run lint && npm run build"
 	},
 	"dependencies": {
 		"@microsoft/signalr": "^10.0.0",
