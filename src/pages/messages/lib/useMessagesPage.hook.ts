@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useMatch } from 'react-router';
 
 import { messagesApi, useGetConversationsQuery } from '@entities/messages';
 import { useGetMyProfileQuery } from '@entities/users';
@@ -11,6 +12,18 @@ const useMessagesPage = () => {
 	const { data: messages } = useGetConversationsQuery({});
 	const { data: user } = useGetMyProfileQuery();
 	const dispatch = useAppDispatch();
+	const isChatOpen = !!useMatch('/messages/:chatId');
+
+	const [isMobile, setIsMobile] = useState(window.innerWidth < 856);
+
+	useEffect(() => {
+		const handleResize = () => setIsMobile(window.innerWidth < 856);
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
+
+	// Логика скрытия: если мобильный И открыт чат -> скрываем сайдбар
+	const shouldHideSidebar = isMobile && isChatOpen;
 
 	// Вступаем во все загруженные разговоры, чтобы сервер слал события.
 	// Зависимость — строка из ID, а не массив объектов, чтобы обновление
@@ -85,7 +98,7 @@ const useMessagesPage = () => {
 		};
 	}, [dispatch, user?.id]);
 
-	return { messages: messages?.items, user };
+	return { messages: messages?.items, user, shouldHideSidebar };
 };
 
 export { useMessagesPage };

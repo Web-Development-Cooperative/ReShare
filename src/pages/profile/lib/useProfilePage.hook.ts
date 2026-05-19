@@ -38,8 +38,6 @@ const useProfilePage = () => {
 		[data],
 	);
 
-	console.log(data);
-
 	return {
 		data,
 		openReview,
