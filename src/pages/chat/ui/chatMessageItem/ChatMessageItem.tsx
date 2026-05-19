@@ -6,7 +6,6 @@ import styles from './ChatMessageItem.module.css';
 import type { ChatMessageItemProps } from '../../model/chatPage.types';
 
 const ChatMessageItem: ChatMessageItemProps = ({ message }) => {
-	console.log(message);
 	return (
 		<div className={styles.message}>
 			<Avatar

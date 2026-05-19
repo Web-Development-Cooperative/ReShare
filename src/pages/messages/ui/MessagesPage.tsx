@@ -11,7 +11,7 @@ import { useMessagesPage } from '../lib/useMessagesPage.hook';
 import styles from './MessagesPage.module.css';
 
 const MessagesPage = () => {
-	const { messages } = useMessagesPage();
+	const { messages, shouldHideSidebar } = useMessagesPage();
 	return (
 		<div className={styles['messages-page']}>
 			<div className={styles['title-container']}>
@@ -20,7 +20,11 @@ const MessagesPage = () => {
 			</div>
 			<div className={styles.main}>
 				<BgBorderDefault
-					className={styles.sidebar}
+					className={
+						shouldHideSidebar
+							? styles.sidebarHidden
+							: styles.sidebar
+					}
 					colorType="surface-1"
 				>
 					<PaddingWrapper y={0} x={0} className={styles.wrapper}>
