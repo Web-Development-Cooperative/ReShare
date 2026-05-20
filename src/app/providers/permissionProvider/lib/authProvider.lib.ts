@@ -10,6 +10,8 @@ const createAuthProvider = (): AuthProvider => {
 	return async () => {
 		const authenticated = await isAuthenticated();
 
+		console.log(authenticated, 'authProvider');
+
 		if (!authenticated) {
 			return redirect(ROUTES.LOGIN);
 		}

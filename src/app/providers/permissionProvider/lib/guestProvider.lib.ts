@@ -10,6 +10,8 @@ const createGuestProvider = (): GuestProvider => {
 	return async () => {
 		const authenticated = await isAuthenticated();
 
+		console.log(authenticated, 'guestProvider');
+
 		if (authenticated) {
 			return redirect(ROUTES.ADS);
 		}

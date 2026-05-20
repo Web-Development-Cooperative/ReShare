@@ -31,6 +31,7 @@ const baseQueryWithoutAuth = fetchBaseQuery({
 
 		// Получаем токен из cookies
 		const token = getCookieValue('accessToken');
+		console.log(token, 'accessToken - baseQueryWithoutAuth');
 		if (token) {
 			headers.set('Authorization', `Bearer ${token}`);
 		}
