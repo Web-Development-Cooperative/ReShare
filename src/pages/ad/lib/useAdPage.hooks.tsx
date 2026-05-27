@@ -83,6 +83,9 @@ const useAdPage = () => {
 	});
 
 	const isMyAd = data?.donor?.id === getMyId().myId;
+	const isInactiveAd =
+		data?.status === ListingStatus.Completed ||
+		data?.status === ListingStatus.Cancelled;
 
 	const handleStartEdit = () => {
 		setEditForm({
@@ -141,95 +144,97 @@ const useAdPage = () => {
 		}
 	};
 
-	const settingsButtons: SettingsButtonsType = isMyAd
-		? [
-				{
-					id: 1,
-					color: 'brand',
-					text: 'Снять с публикации',
-					onClick: async () => {
-						try {
-							await updateListingStatus({
-								id: adId || '123',
-								status: { status: ListingStatus.Reserved },
-							})
-								.unwrap()
-								.then(() => {
-									updateListingStatus({
-										id: adId || '123',
-										status: {
-											status: ListingStatus.Completed,
-										},
+	const settingsButtons: SettingsButtonsType = isInactiveAd
+		? []
+		: isMyAd
+			? [
+					{
+						id: 1,
+						color: 'brand',
+						text: 'Снять с публикации',
+						onClick: async () => {
+							try {
+								await updateListingStatus({
+									id: adId || '123',
+									status: { status: ListingStatus.Reserved },
+								})
+									.unwrap()
+									.then(() => {
+										updateListingStatus({
+											id: adId || '123',
+											status: {
+												status: ListingStatus.Completed,
+											},
+										});
 									});
-								});
-							notification.success(
-								'Объявление снято с публикации!',
-							);
-						} catch {
-							notification.error(
-								'Не удалось снять объявление с публикации',
-							);
-						}
+								notification.success(
+									'Объявление снято с публикации!',
+								);
+							} catch {
+								notification.error(
+									'Не удалось снять объявление с публикации',
+								);
+							}
+						},
 					},
-				},
-				{
-					id: 2,
-					color: 'shaded',
-					text: 'Редактировать объявление',
-					onClick: handleStartEdit,
-				},
-			]
-		: [
-				{
-					id: 1,
-					color: 'brand',
-					text: 'Написать сообщение',
-					onClick: async () => {
-						if (!data?.donor?.id || !adId) {
-							notification.error(
-								`Не удалось отправить сообщение. ID ${!data?.donor?.id ? 'автора' : 'объявления'} не найден.`,
-							);
-							return;
-						}
-						try {
-							await createConversation({
-								recipientId: data?.donor?.id,
-								listingId: adId,
-								initialMessage: '',
-							})
-								.unwrap()
-								.then(({ conversationId }) => {
-									if (!conversationId) {
-										throw new Error(
-											'Не удалось получить ID созданного чата',
+					{
+						id: 2,
+						color: 'shaded',
+						text: 'Редактировать объявление',
+						onClick: handleStartEdit,
+					},
+				]
+			: [
+					{
+						id: 1,
+						color: 'brand',
+						text: 'Написать сообщение',
+						onClick: async () => {
+							if (!data?.donor?.id || !adId) {
+								notification.error(
+									`Не удалось отправить сообщение. ID ${!data?.donor?.id ? 'автора' : 'объявления'} не найден.`,
+								);
+								return;
+							}
+							try {
+								await createConversation({
+									recipientId: data?.donor?.id,
+									listingId: adId,
+									initialMessage: '',
+								})
+									.unwrap()
+									.then(({ conversationId }) => {
+										if (!conversationId) {
+											throw new Error(
+												'Не удалось получить ID созданного чата',
+											);
+										}
+										navigate(
+											ROUTES.CHAT.replace(
+												':chatId',
+												conversationId,
+											),
 										);
-									}
-									navigate(
-										ROUTES.CHAT.replace(
-											':chatId',
-											conversationId,
-										),
-									);
-								});
-							notification.success('Чат создан!');
-						} catch {
-							notification.error('Не удалось создать чат!');
-						}
+									});
+								notification.success('Чат создан!');
+							} catch {
+								notification.error('Не удалось создать чат!');
+							}
+						},
 					},
-				},
-				{
-					id: 2,
-					color: 'shaded',
-					text: 'Запросить бронь',
-					onClick: () => {},
-				},
-				{
-					id: 3,
-					color: 'shaded',
-					text: 'Пожаловаться на объявление',
-					onClick: () => {},
-				},
-			];
+					{
+						id: 2,
+						color: 'shaded',
+						text: 'Запросить бронь',
+						onClick: () => {},
+					},
+					{
+						id: 3,
+						color: 'shaded',
+						text: 'Пожаловаться на объявление',
+						onClick: () => {},
+					},
+				];
 
 	const allMetrics = metrics.map((metric) => {
 		const metricName = metric.id;
@@ -274,6 +279,7 @@ const useAdPage = () => {
 		donor,
 		isLoading,
 		isSaving,
+		isInactiveAd,
 		settingsButtons,
 		allMetrics,
 		isEditMode,

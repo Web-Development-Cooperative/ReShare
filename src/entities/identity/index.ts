@@ -1,1 +1,1 @@
-export { useRegisterMutation, useLoginMutation } from './api/identity.api';
+export { useRegisterMutation, useLoginMutation, useLogoutMutation } from './api/identity.api';

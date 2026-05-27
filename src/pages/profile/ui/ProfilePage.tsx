@@ -3,7 +3,7 @@ import { Outlet } from 'react-router';
 import { clsx } from 'clsx';
 
 import { ButtonBase } from '@shared/ui/buttons';
-import { Pencil, VectorShare } from '@shared/ui/icons';
+import { ArrowRight, Pencil } from '@shared/ui/icons';
 import { Avatar, Rating, UniList } from '@shared/ui/others';
 import {
 	Paragraph16Reg,
@@ -30,6 +30,7 @@ const ProfilePage = () => {
 		ecoMetrics,
 		setOpenEditProfile,
 		setOpenReview,
+		handleLogout,
 	} = useProfilePage();
 
 	return (
@@ -60,8 +61,8 @@ const ProfilePage = () => {
 										Редактировать профиль
 									</UIText14SB>
 								</ButtonBase>
-								<ButtonBase color="outline">
-									<VectorShare />
+							<ButtonBase color="outline" onClick={handleLogout}>
+									<ArrowRight />
 								</ButtonBase>
 							</div>
 						</div>

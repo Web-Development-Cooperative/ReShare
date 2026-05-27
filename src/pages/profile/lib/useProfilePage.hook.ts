@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 
 import { useGetMyProfileQuery } from '@entities/users';
+import { useLogoutMutation } from '@entities/identity';
 
 import type { Metric } from '../model/profilePage.types';
 
@@ -8,9 +9,14 @@ const useProfilePage = () => {
 	const { data } = useGetMyProfileQuery(undefined, {
 		refetchOnMountOrArgChange: false,
 	});
+	const [logout] = useLogoutMutation();
 
 	const [openReview, setOpenReview] = useState(false);
 	const [openEditProfile, setOpenEditProfile] = useState(false);
+
+	const handleLogout = async () => {
+		await logout();
+	};
 
 	const ecoMetrics: Array<Metric> = useMemo(
 		() => [
@@ -45,6 +51,7 @@ const useProfilePage = () => {
 		setOpenReview,
 		openEditProfile,
 		setOpenEditProfile,
+		handleLogout,
 	};
 };
 

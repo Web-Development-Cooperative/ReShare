@@ -52,6 +52,7 @@ const AdPage = () => {
 		handleSaveEdit,
 		handleCancelEdit,
 		isSaving,
+		isInactiveAd,
 	} = useAdPage();
 
 	const transferMethodOptions = [
@@ -240,6 +241,11 @@ const AdPage = () => {
 						</>
 					) : (
 						<>
+							{isInactiveAd && (
+								<div className={styles['closed-badge']}>
+									<UIText14SB>Объявление закрыто</UIText14SB>
+								</div>
+							)}
 							<h1>{data?.title || title}</h1>
 							<UniList
 								className={styles['tags-list']}
