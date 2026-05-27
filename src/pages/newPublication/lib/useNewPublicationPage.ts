@@ -126,27 +126,31 @@ const useNewPublicationPage = () => {
 		try {
 			const { id } = await createListing(dto).unwrap();
 
-			if (formData.photos && formData.photos.length > 0) {
-				const uploadPromises = formData.photos.map(
-					async (file, index) => {
-						const formDataFile = new FormData();
-						formDataFile.append('file', file);
-						const { url } = await uploadFile(formDataFile).unwrap();
-						await addListingPhoto({
-							id,
-							photo: { url, displayOrder: index },
-						}).unwrap();
-					},
-				);
-				await Promise.all(uploadPromises);
-			}
-
 			await updateListingStatus({
 				id,
 				status: { status: ListingStatus.Active },
 			}).unwrap();
-
 			notification.success('Объявление опубликовано!');
+
+			if (formData.photos && formData.photos.length > 0) {
+				try {
+					const uploadPromises = formData.photos.map(
+						async (file, index) => {
+							const formDataFile = new FormData();
+							formDataFile.append('file', file);
+							const { url } =
+								await uploadFile(formDataFile).unwrap();
+							await addListingPhoto({
+								id,
+								photo: { url, displayOrder: index },
+							}).unwrap();
+						},
+					);
+					await Promise.all(uploadPromises);
+				} catch {
+					notification.error('Фотографии загружены не успешно');
+				}
+			}
 		} catch {
 			notification.error('Не удалось опубликовать объявление');
 		}
