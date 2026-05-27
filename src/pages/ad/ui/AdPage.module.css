@@ -182,6 +182,16 @@
 	justify-content: flex-start;
 	row-gap: 24px;
 }
+.closed-badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 4px 12px;
+	border-radius: 8px;
+	background-color: var(--color-state-error-muted, #fde8e8);
+	color: var(--color-state-error, #d32f2f);
+	align-self: flex-start;
+}
+
 .tags-list {
 	display: flex;
 	flex-direction: row;
