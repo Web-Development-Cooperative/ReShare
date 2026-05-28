@@ -3,6 +3,7 @@ import { useState } from 'react';
 import type { ChangeEvent, ComponentProps } from 'react';
 import type { TransferMethod } from '@shared/api/generated/listings-api';
 import type { RenderStepTwoProps } from '../model/newPublicationPage.types';
+import type { Address } from '@shared/model/otherUI.types';
 
 const useRenderStepTwo = ({
 	updateFormData,
@@ -14,29 +15,37 @@ const useRenderStepTwo = ({
 	const toggleSavedAddress = () => {
 		setSavedAddress((prev) => !prev);
 	};
-	// const toggleContactType = (e: ChangeEvent<HTMLInputElement>) => {
-	// 	const value = e.target.value as 'messages' | 'calls_and_messages';
-	// 	updateFormData('contactType', value);
 
-	// 	if (value === 'messages') updateFormData('contact', 'messages-only');
-	// 	else updateFormData('contact', '');
-
-	// 	if (errors.contactType) {
-	// 		setErrors((prev) => ({ ...prev, contactType: undefined }));
+	// const updateAddress = (e: ChangeEvent<HTMLInputElement>) => {
+	// 	updateFormData('location', e.target.value);
+	// 	if (errors.location) {
+	// 		setErrors((prev) => ({ ...prev, location: undefined }));
 	// 	}
 	// };
-	const updateAddress = (e: ChangeEvent<HTMLInputElement>) => {
-		updateFormData('location', e.target.value);
+	const updateAddress = (address: Address | null) => {
+		const location = address
+			? `${address.location}${address.route ? `, ${address.route}` : ''}`
+			: '';
+
+			console.log(address);
+		updateFormData('location', location);
 		if (errors.location) {
 			setErrors((prev) => ({ ...prev, location: undefined }));
 		}
 	};
-	// const updateContact = (e: ChangeEvent<HTMLInputElement>) => {
-	// 	updateFormData('contact', e.target.value);
-	// 	if (errors.contact) {
-	// 		setErrors((prev) => ({ ...prev, contact: undefined }));
-	// 	}
-	// };
+	const updateCoords = (coords: Array<number> | null) => {
+		if (coords) {
+			updateFormData('latitude', coords[0]);
+			updateFormData('longitude', coords[1]);
+		} else {
+			updateFormData('latitude', '');
+			updateFormData('longitude', '');
+		}
+		if (errors.location) {
+			setErrors((prev) => ({ ...prev, location: undefined }));
+		}
+	};
+
 	const toggleDeliveryType = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value as TransferMethod;
 		updateFormData('transferMethod', value);
@@ -47,9 +56,8 @@ const useRenderStepTwo = ({
 	return {
 		savedAddress,
 		toggleSavedAddress,
-		// toggleContactType,
 		updateAddress,
-		// updateContact,
+		updateCoords,
 		toggleDeliveryType,
 	};
 };

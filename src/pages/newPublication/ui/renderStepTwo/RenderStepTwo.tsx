@@ -1,4 +1,5 @@
 import { InputBase, Radio, Toggle } from '@shared/ui/inputs';
+import { GeoMap } from '@shared/ui/others';
 import { TransferMethod } from '@shared/api/generated/listings-api';
 
 import { useRenderStepTwo } from '../../lib/useRenderStepTwo';
@@ -15,9 +16,8 @@ const RenderStepTwo: RenderStepTwoProps = ({
 	const {
 		savedAddress,
 		toggleSavedAddress,
-		// toggleContactType,
 		updateAddress,
-		// updateContact,
+		updateCoords,
 		toggleDeliveryType,
 	} = useRenderStepTwo({
 		formData,
@@ -35,12 +35,25 @@ const RenderStepTwo: RenderStepTwoProps = ({
 					value={formData.location || ''}
 					stateStyle={errors.location ? 'error' : 'default'}
 					helper={errors.location}
-					onChange={updateAddress}
+					// onChange={updateAddress}
 				/>
 				<Toggle
 					label="Сохранить адрес для будущих объявлений"
 					checked={savedAddress}
 					onChange={toggleSavedAddress}
+				/>
+				<GeoMap
+					initialCoordinates={
+						formData.longitude && formData.latitude
+							? [formData.latitude, formData.longitude]
+							: null
+					}
+					initialAddress={{
+						location: formData.location?.split(',')[0].trim() ?? '',
+						route: formData.location?.split(',')[1]?.trim() ?? '',
+					}}
+					setInitialCoordinates={updateCoords}
+					setInitialAddress={updateAddress}
 				/>
 			</div>
 
@@ -49,30 +62,13 @@ const RenderStepTwo: RenderStepTwoProps = ({
 				<Radio
 					name="contactType"
 					value="messages"
-					// checked={formData.contactType === 'messages'}
-					// onChange={toggleContactType}
-					// error={!!errors.contactType}
 					label="Только сообщения"
 				/>
 				<Radio
 					name="contactType"
-					// checked={formData.contactType === 'calls_and_messages'}
 					value="calls_and_messages"
-					// onChange={toggleContactType}
-					// error={!!errors.contactType}
 					label="Звонки и сообщения"
 				/>
-				{/* {formData.contactType == 'calls_and_messages' && (
-					<InputBase
-						type="tel"
-						name="phone"
-						textLabel="Контакт"
-						value={formData.contact || ''}
-						stateStyle={errors.contact ? 'error' : 'default'}
-						helper={errors.contact}
-						onChange={updateContact}
-					/>
-				)} */}
 			</div>
 
 			<div className={styles.section}>

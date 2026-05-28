@@ -125,6 +125,17 @@ type PaginationBarProps = {
 	onPageDec: () => void;
 };
 
+type Coordinates = Array<number>;
+type Address = { location: string; route: string };
+type GeoMapProps = {
+	initialCoordinates?: Coordinates | null;
+	setInitialCoordinates?: (_coords: Coordinates | null) => void;
+	initialAddress?: Address | null;
+	setInitialAddress?: (_address: Address | null) => void;
+	zoom?: number;
+};
+type IGeoMap = FC<GeoMapProps>;
+
 export {
 	type TagProps,
 	type AvatarProps,
@@ -135,4 +146,8 @@ export {
 	type StepsHorizontalProps,
 	type IAdCard,
 	type PaginationBarProps,
+	type Coordinates,
+	type Address,
+	type GeoMapProps,
+	type IGeoMap,
 };
